@@ -1,33 +1,28 @@
 from .db import db
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 
 
-class Sound(db.Model, UserMixin):
-    __tablename__ = 'users'
+
+class Sound(db.Model):
+    __tablename__ = 'sounds'
 
     id = db.Column(db.Integer, primary_key=True)
     sound_url = db.Column(db.String(800), nullable=False)
     name = db.Column(db.String, nullable=False)
     owner_id = db.Column(db.Integer)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    is_public = db.Column(db.Boolean)
+    target_volume = db.Column(db.Integer)
+    fade_speed = db.Column(db.Integer)
+    is_looped = db.Column(db.Boolean)
 
-    @property
-    def password(self):
-        return self.hashed_password
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
 
     def to_dict(self):
         return {
             "id": self.id,
-            "username": self.username,
-            "email": self.email
+            "sound_url": self.sound_url,
+            "name": self.name,
+            "owner_id": self.owner_id,
+            "is_public": self.is_public,
+            "target_volume": self.target_volume,
+            "fade_speed": self.fade_speed,
+            "is_looped": self.is_looped,
         }
