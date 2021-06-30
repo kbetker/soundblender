@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import Sound from "./components/Sound"
+import HomePage from "./components/HomePage"
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <HomePage />
       <NavBar />
       <Switch>
         <Route path="/login" exact={true}>
