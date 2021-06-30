@@ -12,7 +12,7 @@ body{
     /* width: 100vh; */
     height: 120vh;
     animation-name: colorChange;
-    animation-duration: 10s;
+    animation-duration: 7s;
     animation-iteration-count:infinite;
 }
 .animated_background {
@@ -33,7 +33,7 @@ body{
     top: 0;
     z-index: 10;
     filter: hue-rotate(100deg);
-    animation-duration: 10s;
+    animation-duration: 7s;
     animation-iteration-count:infinite;
 }
 

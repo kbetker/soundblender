@@ -25,6 +25,12 @@ function Sound() {
 
         const formData = new FormData();
         formData.append("sound_url", sound_url);
+        formData.append("name", name);
+        formData.append("owner_id", owner_id);
+        formData.append("is_public", is_public);
+        formData.append("target_volume", target_volume);
+        formData.append("fade_speed", fade_speed);
+        formData.append("is_looped", is_looped);
 
         setImageLoading(true);
 
@@ -35,9 +41,11 @@ function Sound() {
         if (res.ok) {
             await res.json();
             setImageLoading(false);
-            history.push("/");
+            // history.push("/");
+            console.log(res)
         }
         else {
+            console.log("WAAAAAAAATTTT???????", res)
             setImageLoading(false);
             // a real app would probably use more advanced
             // error handling
@@ -88,24 +96,24 @@ function Sound() {
             ></input> */}
 
 
-            <input
+            {/* <input
                 type="number"
                 name="username"
                 onChange={(e) => setTarget_volume(e.target.value)}
                 value={target_volume}
                 // placeholder="User Name"
                 className="signup-form-input"
-            ></input>
+            ></input> */}
 
 
-            <input
+            {/* <input
                 type="number"
                 name="username"
                 onChange={(e) => setFade_speed(e.target.value)}
                 value={fade_speed}
                 placeholder="User Name"
                 className="signup-form-input"
-            ></input>
+            ></input> */}
             <input
                 type="file"
                 accept="image/*"

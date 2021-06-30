@@ -9,6 +9,7 @@ from app.forms import NewSound
 sound_routes = Blueprint('sound', __name__)
 
 
+
 # def validation_errors_to_error_messages(validation_errors):
 #     errorMessages = []
 #     for field in validation_errors:
@@ -47,15 +48,16 @@ def new_sound():
     newSound = Sound(
             sound_url=url,
             name=data['name'],
-            owner_id=current_user,
+            owner_id=data['owner_id'],
             is_public=data['is_public'],
             target_volume=data['target_volume'],
             fade_speed=data['fade_speed'],
-            is_looped=data['is_looped']
+            is_looped=True
         )
     db.session.add(newSound)
     db.session.commit()
-    return sound.to_dict()
+    print(newSound.to_dict())
+    return newSound.to_dict()
     # else:
     #     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
