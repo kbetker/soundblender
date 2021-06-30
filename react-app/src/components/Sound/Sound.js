@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
 
 function Sound() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const history = useHistory(); // so that we can redirect after the image upload is successful
+    // const [image, setImage] = useState(null);
+    const [imageLoading, setImageLoading] = useState(false);
 
-    const [sound_url, setSound_url] = useState('www.something....');
+
+    const [sound_url, setSound_url] = useState(null);
     const [name, setName] = useState('Your name here');
     const [owner_id, setId] = useState(user?.id);
     const [is_public, setIs_public] = useState(false);
@@ -14,25 +19,53 @@ function Sound() {
     const [fade_speed, setFade_speed] = useState(1);
     const [is_looped, setIs_looped] = useState(true);
 
-    const newSound = async(e) => {
+    const newSound = async (e) => {
         console.log("==================== on the very front ====================")
         e.preventDefault();
-        const data = await dispatch(addSound(sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped))
-        if(data.errors){
-            alert(data.errors)
+
+        const formData = new FormData();
+        formData.append("sound_url", sound_url);
+
+        setImageLoading(true);
+
+        const res = await fetch('/api/sound', {
+            method: "POST",
+            body: formData,
+        });
+        if (res.ok) {
+            await res.json();
+            setImageLoading(false);
+            history.push("/");
         }
+        else {
+            setImageLoading(false);
+            // a real app would probably use more advanced
+            // error handling
+            console.log("error");
+        }
+
+        // const data = await dispatch(addSound(sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped))
+        // if (data.errors) {
+        //     alert(data.errors)
+        // }
+
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setSound_url(file);
     }
 
     return (
         <form onSubmit={(e) => newSound(e)}>
-            <input
+            {/* <input
                 type="text"
                 name="username"
                 onChange={(e) => setSound_url(e.target.value)}
                 value={sound_url}
                 // placeholder="User Name"
                 className="signup-form-input"
-            ></input>
+            ></input> */}
 
 
             <input
@@ -73,6 +106,11 @@ function Sound() {
                 placeholder="User Name"
                 className="signup-form-input"
             ></input>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={updateImage}
+            />
             {/* <input
                 type="text"
                 name="username"
@@ -82,7 +120,7 @@ function Sound() {
                 className="signup-form-input"
             ></input> */}
 
-        <button type="submit">Submit</button>
+            <button type="submit">Submit</button>
         </form>
     )
 }
