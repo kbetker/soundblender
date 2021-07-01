@@ -8,22 +8,11 @@ const setSound = (sound) => ({
 
 
 
-export const addSound = (sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped) => async (dispatch) => {
+export const addSound = (formData) => async (dispatch) => {
     console.log("===================== in the thunk =====================")
-    const response = await fetch("/api/sound/", {
+    const response = await fetch("/api/sound", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            sound_url,
-            name,
-            owner_id,
-            is_public,
-            target_volume,
-            fade_speed,
-            is_looped
-        }),
+        body: formData,
     });
     const data = await response.json();
     if (data.errors) {

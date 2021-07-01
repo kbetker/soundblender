@@ -1,6 +1,7 @@
 body{
     padding: 0;
     margin: 0;
+    background-color: rgb(34, 34, 34);
 }
 
 .homepage_wrapper{

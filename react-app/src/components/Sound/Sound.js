@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
+import "./Sound.css"
 
 function Sound() {
     const dispatch = useDispatch()
@@ -12,13 +13,17 @@ function Sound() {
 
 
     const [sound_url, setSound_url] = useState(null);
-    const [name, setName] = useState('Your name here');
+    const [name, setName] = useState('');
     const [owner_id, setId] = useState(user?.id);
     const [is_public, setIs_public] = useState(false);
-    const [target_volume, setTarget_volume] = useState(1);
+    const [target_volume, setTarget_volume] = useState(100);
     const [fade_speed, setFade_speed] = useState(1);
     const [is_looped, setIs_looped] = useState(true);
+    console.log(is_looped)
 
+    useEffect(() => {
+
+    }, [is_looped])
     const newSound = async (e) => {
         console.log("==================== on the very front ====================")
         e.preventDefault();
@@ -29,28 +34,29 @@ function Sound() {
         formData.append("owner_id", owner_id);
         formData.append("is_public", is_public);
         formData.append("target_volume", target_volume);
-        formData.append("fade_speed", fade_speed);
+        formData.append("fade_speed", fade_speed * 1000);
         formData.append("is_looped", is_looped);
 
         setImageLoading(true);
-
-        const res = await fetch('/api/sound', {
-            method: "POST",
-            body: formData,
-        });
-        if (res.ok) {
-            await res.json();
-            setImageLoading(false);
-            // history.push("/");
-            console.log(res)
-        }
-        else {
-            console.log("WAAAAAAAATTTT???????", res)
-            setImageLoading(false);
-            // a real app would probably use more advanced
-            // error handling
-            console.log("error");
-        }
+        console.log(formData.is_looped)
+        const res = await dispatch(addSound(formData))
+        // const res = await fetch('/api/sound', {
+        //     method: "POST",
+        //     body: formData,
+        // });
+        // if (res.ok) {
+        //     await res.json();
+        //     setImageLoading(false);
+        //     // history.push("/");
+        //     console.log(res)
+        // }
+        // else {
+        //     console.log("WAAAAAAAATTTT???????", res)
+        //     setImageLoading(false);
+        //     // a real app would probably use more advanced
+        //     // error handling
+        //     console.log("error");
+        // }
 
         // const data = await dispatch(addSound(sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped))
         // if (data.errors) {
@@ -65,70 +71,52 @@ function Sound() {
     }
 
     return (
-        <form onSubmit={(e) => newSound(e)}>
-            {/* <input
-                type="text"
-                name="username"
-                onChange={(e) => setSound_url(e.target.value)}
-                value={sound_url}
-                // placeholder="User Name"
-                className="signup-form-input"
-            ></input> */}
-
-
-            <input
-                type="text"
-                name="username"
+        <form onSubmit={(e) => newSound(e)} className="new_sound_form">
+            <label for="name">Name your Sound</label>
+            <input type="text"
+                name="name"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
-                // placeholder="User Name"
-                className="signup-form-input"
+                className="new_sound_input"
             ></input>
-
-
-            {/* <input
-                type="text"
-                name="username"
-                onChange={(e) => setIs_public(e.target.value)}
-                value={is_public}
-                // placeholder="User Name"
-                className="signup-form-input"
-            ></input> */}
-
-
-            {/* <input
+            <label for="name">Set the volume <span className="in_seconds">( 0 - 100 )</span></label>
+            <input
                 type="number"
-                name="username"
+                name="Volume"
                 onChange={(e) => setTarget_volume(e.target.value)}
                 value={target_volume}
-                // placeholder="User Name"
-                className="signup-form-input"
-            ></input> */}
-
-
-            {/* <input
+                className="new_sound_input"
+            ></input>
+            <label for="name">Fade in/out <span className="in_seconds">(in seconds)</span></label>
+            <input
                 type="number"
                 name="username"
                 onChange={(e) => setFade_speed(e.target.value)}
                 value={fade_speed}
                 placeholder="User Name"
-                className="signup-form-input"
-            ></input> */}
-            <input
+                className="new_sound_input"
+            ></input>
+
+            <label>
+                Looped?:
+                <input
+                    name="isGoing"
+                    type="checkbox"
+                    checked={is_looped}
+                    onChange={(e) => { setIs_looped(e.target.checked) }} />
+            </label>
+
+            <div className="upload_buttons">
+                <div className="visible_button">Choose Sound</div>
+                <input
                 type="file"
                 accept="image/*"
                 onChange={updateImage}
+                className="select_image"
             />
-            {/* <input
-                type="text"
-                name="username"
-                onChange={(e) => setIs_looped(e.target.value)}
-                value={is_looped}
-                // placeholder="User Name"
-                className="signup-form-input"
-            ></input> */}
+            </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit" className="new_sound_submit">Submit</button>
         </form>
     )
 }

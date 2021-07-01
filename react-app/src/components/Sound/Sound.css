@@ -1,0 +1,122 @@
+.new_sound_form{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 300px;
+    justify-content: space-evenly;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: rgb(216, 216, 216);
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    margin: 10px auto;
+    background-color: rgb(58, 58, 58);
+    border-radius: 8px;
+    border: 1px solid rgb(0, 255, 0);
+    animation-name: colorChange;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+
+.new_sound_input{
+    height: 30px;
+    background-color: rgb(99, 99, 99);
+    color: white;
+    border: 1px solid rgb(0, 255, 0);
+    animation-name: colorChange;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+
+.new_sound_input:focus {
+    animation-name: shadowPulse;
+    animation-duration: 3s;
+    animation-iteration-count:infinite;
+}
+
+.new_sound_submit{
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    background-color: rgb(104, 103, 103);
+    color: rgb(216, 216, 216);
+    border: 1px solid rgb(0, 255, 0);
+    animation-name: colorChange;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+
+.visible_button{
+    width: 200px;
+    height: 27px;
+    background-color: rgb(104, 103, 103);
+    position: absolute;
+    /* font-weight: 400; */
+    top: 0;
+    z-index: 100;
+    /* opacity: 0.75; */
+    font-size: 14px;
+    width: 115px;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 255, 0);
+    animation-name: colorChange;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;}
+
+.select_image{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: rgb(54, 54, 54);
+    background-color: white;
+    width: 300px;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    margin-left: 3px;
+    border: 1px solid rgb(0, 255, 0);
+    animation-name: colorChange;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+.select_image:hover,.new_sound_submit:hover{
+    box-shadow: 0 0 12px rgb(255, 0, 0);
+    animation-name: shadowPulse;
+    animation-duration: 3s;
+    animation-iteration-count:infinite;
+
+}
+.upload_buttons{
+    position: relative;
+    width: 300px;
+    height: 40px;
+    /* background-color: lightblue; */
+    position: relative;
+}
+
+.in_seconds{
+    font-size: 16px;
+}
+
+
+@keyframes colorChange {
+    0%   {filter: hue-rotate(0deg);}
+    100%   {filter: hue-rotate(360deg);}
+  }
+
+  @keyframes shadowPulse {
+    0%     {box-shadow: 0 0 5px rgb(255, 0, 0);}
+    10%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
+    20%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
+    30%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
+    40%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
+    50%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
+    60%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
+    70%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
+    80%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
+    90%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
+    100%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
+  }
