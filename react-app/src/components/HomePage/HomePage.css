@@ -1,0 +1,44 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color: rgb(34, 34, 34);
+}
+
+.homepage_wrapper{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0;
+    background-color: rgb(0, 255, 0);
+    /* width: 100vh; */
+    height: 120vh;
+    animation-name: colorChange;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+.animated_background {
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    /* width: 100vh; */
+    height: 120vh;
+    image-rendering: pixelated;
+    mix-blend-mode: multiply;
+    position: relative;
+    top: 0;
+    z-index: 10;
+}
+
+.logo_gif{
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    filter: hue-rotate(100deg);
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+
+@keyframes colorChange {
+    0%   {filter: hue-rotate(0deg);}
+    100%   {filter: hue-rotate(360deg);}
+  }
