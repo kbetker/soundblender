@@ -25,6 +25,6 @@ def seed_collections():
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
-def undo_users():
-    db.session.execute('TRUNCATE users;')
+def undo_collections():
+    db.session.execute('TRUNCATE collections RESTART IDENTITY CASCADE;')
     db.session.commit()

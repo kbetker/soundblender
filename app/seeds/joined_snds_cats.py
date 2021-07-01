@@ -43,15 +43,6 @@ def seed_joined_snds_cats():
     name31 = Joined_Sound_Cat(sounds_id=31,  categories_id=15)
     name32 = Joined_Sound_Cat(sounds_id=32,  categories_id=16)
 
-    db.session.add(name)
-    db.session.add(name)
-    db.session.add(name)
-    db.session.add(name)
-    db.session.add(name)
-    db.session.add(name)
-    db.session.add(name)
-    db.session.add(name)
-
 
     db.session.add(name1)
     db.session.add(name2)
@@ -95,6 +86,6 @@ def seed_joined_snds_cats():
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
-def undo_users():
-    db.session.execute('TRUNCATE users;')
+def undo_joined_snds_cats():
+    db.session.execute('TRUNCATE joined_snds_cats RESTART IDENTITY CASCADE;')
     db.session.commit()
