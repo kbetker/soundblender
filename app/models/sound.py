@@ -12,6 +12,7 @@ class Sound(db.Model):
     is_public = db.Column(db.Boolean)
     target_volume = db.Column(db.Integer)
     fade_speed = db.Column(db.Integer)
+    arrangement= db.Column(db.Integer)
     is_looped = db.Column(db.Boolean)
 
 
@@ -24,5 +25,6 @@ class Sound(db.Model):
             "is_public": self.is_public,
             "target_volume": self.target_volume,
             "fade_speed": self.fade_speed,
-            "is_looped": self.is_looped,
+            "arrangement": self.arrangement,
+            "is_looped": self.is_looped
         }

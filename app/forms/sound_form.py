@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, DateField, DecimalField, IntegerField, BooleanField, SelectField, SubmitField, DateField, TextAreaField)
+from wtforms import (StringField, DecimalField, IntegerField, BooleanField, BooleanField)
 from wtforms.validators import DataRequired
 # , validators=[DataRequired()]
 class NewSound(FlaskForm):
@@ -9,4 +9,5 @@ class NewSound(FlaskForm):
     is_public = BooleanField("Allow Public to View?")
     target_volume = DecimalField("Set Volume")
     fade_speed = DecimalField("Set the speed to fade in and out")
-    is_looped = IntegerField("Loop Sound?")
+    arrangement = IntegerField("Arrangement")
+    is_looped = BooleanField("Loop Sound?")

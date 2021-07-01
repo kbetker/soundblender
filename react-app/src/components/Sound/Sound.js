@@ -16,9 +16,12 @@ function Sound() {
     const [name, setName] = useState('');
     const [owner_id, setId] = useState(user?.id);
     const [is_public, setIs_public] = useState(false);
-    const [target_volume, setTarget_volume] = useState(100);
+    const [target_volume, setTarget_volume] = useState(10);
     const [fade_speed, setFade_speed] = useState(1);
+    const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
+
+
     console.log(is_looped)
 
     useEffect(() => {
@@ -33,8 +36,9 @@ function Sound() {
         formData.append("name", name);
         formData.append("owner_id", owner_id);
         formData.append("is_public", is_public);
-        formData.append("target_volume", target_volume);
+        formData.append("target_volume", target_volume * 0.1);
         formData.append("fade_speed", fade_speed * 1000);
+        formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
         setImageLoading(true);
@@ -73,14 +77,14 @@ function Sound() {
     return (
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">
             <div className="close_new_sound">X</div>
-            <label for="name">Name your Sound</label>
+            <label for="name">Name Your Sound</label>
             <input type="text"
                 name="name"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
                 className="new_sound_input"
             ></input>
-            <label for="name">Set the volume <span className="in_seconds">( 0 - 100 )</span></label>
+            <label for="name">Target Volume <span className="note">( 0 - 10 )</span></label>
             <input
                 type="number"
                 name="Volume"
@@ -88,13 +92,22 @@ function Sound() {
                 value={target_volume}
                 className="new_sound_input"
             ></input>
-            <label for="name">Fade in/out <span className="in_seconds">(in seconds)</span></label>
+            <label for="name">Fade In/Out <span className="note">(in seconds)</span></label>
             <input
                 type="number"
                 name="username"
                 onChange={(e) => setFade_speed(e.target.value)}
                 value={fade_speed}
                 placeholder="User Name"
+                className="new_sound_input"
+            ></input>
+
+            <label for="name">Arrangement</label>
+            <input
+                type="number"
+                name="username"
+                onChange={(e) => setArrangement(e.target.value)}
+                value={arrangement}
                 className="new_sound_input"
             ></input>
 
@@ -110,11 +123,11 @@ function Sound() {
             <div className="upload_buttons">
                 <div className="visible_button">Choose Sound</div>
                 <input
-                type="file"
-                accept="image/*"
-                onChange={updateImage}
-                className="select_image"
-            />
+                    type="file"
+                    accept="image/*"
+                    onChange={updateImage}
+                    className="select_image"
+                />
             </div>
 
             <button type="submit" className="new_sound_submit">Submit</button>

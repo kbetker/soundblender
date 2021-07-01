@@ -36,14 +36,8 @@ def new_sound():
     data = form.data
 
     if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
         return upload, 400
-    print("WTFWTFWTFWTFWTWTFWTFWTFWTFWTFWTFWTFWTFWTFWTWFTWFTWTWF",upload)
     url = upload["url"]
-    print("=============================================================================", url)
-    # flask_login allows us to get the current user from the request
     # if form.validate_on_submit():
     newSound = Sound(
             sound_url=url,
@@ -52,6 +46,7 @@ def new_sound():
             is_public=data['is_public'],
             target_volume=data['target_volume'],
             fade_speed=data['fade_speed'],
+            arrangement=data['arrangement'],
             is_looped=True
         )
     db.session.add(newSound)
