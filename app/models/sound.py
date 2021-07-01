@@ -8,16 +8,14 @@ class Sound(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sound_url = db.Column(db.String(800), nullable=False)
     name = db.Column(db.String, nullable=False)
-    owner_id = db.Column(db.Integer)
+    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     is_public = db.Column(db.Boolean)
     target_volume = db.Column(db.Integer)
     fade_speed = db.Column(db.Integer)
     arrangement= db.Column(db.Integer)
     is_looped = db.Column(db.Boolean)
 
-    # user = db.relationship("User", back_populates="collections")
-
-
+    owner = db.relationship("User", backref="sounds")
 
     def to_dict(self):
         return {

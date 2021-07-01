@@ -8,8 +8,8 @@ class Joined_Sound_Cat(db.Model):
     sounds_id = db.Column(db.Integer, db.ForeignKey("sounds.id"), nullable=False)
     categories_id = db.Column(db.Integer, db.ForeignKey("categories.id"), nullable=False)
 
-    sound = db.relationship("Sound", back_populates="joined_snds_cats")
-    category = db.relationship("Category", back_populates="joined_snds_cats")
+    sound = db.relationship("Sound", backref="joined_snds_cats")
+    category = db.relationship("Category", backref="joined_snds_cats")
 
     def to_dict(self):
         return {

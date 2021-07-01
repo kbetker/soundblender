@@ -6,9 +6,9 @@ class Scene(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False)
     theme = db.Column(db.String(40), default="default")
-    collection_id = db.Column(db.Integer, db.ForeignKey("collection.id"), nullable=False)
+    collection_id = db.Column(db.Integer, db.ForeignKey("collections.id"), nullable=False)
 
-    collection = db.relationship("Collections", back_populates="scenes")
+    collection = db.relationship("Collection", backref="scenes")
 
     def to_dict(self):
         return {
