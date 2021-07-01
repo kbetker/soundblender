@@ -72,6 +72,7 @@ function Sound() {
 
     return (
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">
+            <div className="close_new_sound">X</div>
             <label for="name">Name your Sound</label>
             <input type="text"
                 name="name"

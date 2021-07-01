@@ -14,7 +14,19 @@
     border-radius: 8px;
     border: 1px solid rgb(0, 255, 0);
     animation-name: colorChange;
-    animation-duration: 7s;
+    animation-duration: 6s;
+    animation-iteration-count:infinite;
+    position:relative
+}
+.close_new_sound{
+    position: absolute;
+    color: red;
+    top: 3px;
+    right: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    animation-name: colorChange;
+    animation-duration: 14s;
     animation-iteration-count:infinite;
 }
 
@@ -108,15 +120,15 @@
   }
 
   @keyframes shadowPulse {
-    0%     {box-shadow: 0 0 5px rgb(255, 0, 0);}
-    10%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
-    20%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
-    30%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
-    40%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
-    50%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
-    60%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
-    70%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
-    80%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
-    90%    {box-shadow: 0 0 18px rgb(255, 0, 0);}
-    100%   {box-shadow: 0 0 5px rgb(255, 0, 0);}
+    0%     {box-shadow: 0 0 7px rgb(255, 0, 0);}
+    10%    {box-shadow: 0 0 13px rgb(255, 0, 0);}
+    20%   {box-shadow: 0 0 7px rgb(255, 0, 0);}
+    30%    {box-shadow: 0 0 13px rgb(255, 0, 0);}
+    40%   {box-shadow: 0 0 7px rgb(255, 0, 0);}
+    50%    {box-shadow: 0 0 13px rgb(255, 0, 0);}
+    60%   {box-shadow: 0 0 7px rgb(255, 0, 0);}
+    70%    {box-shadow: 0 0 13px rgb(255, 0, 0);}
+    80%   {box-shadow: 0 0 7px rgb(255, 0, 0);}
+    90%    {box-shadow: 0 0 13px rgb(255, 0, 0);}
+    100%   {box-shadow: 0 0 7px rgb(255, 0, 0);}
   }
