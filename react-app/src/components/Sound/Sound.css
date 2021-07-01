@@ -1,3 +1,8 @@
+.new_sound_form,.close_new_sound,.new_sound_input,.new_sound_submit,.visible_button,.select_image{
+    animation-name: colorChange;
+    animation-iteration-count:infinite;
+}
+
 .new_sound_form{
     display: flex;
     flex-direction: column;
@@ -13,9 +18,7 @@
     background-color: rgb(58, 58, 58);
     border-radius: 8px;
     border: 1px solid rgb(0, 255, 0);
-    animation-name: colorChange;
-    animation-duration: 6s;
-    animation-iteration-count:infinite;
+    animation-duration: 10s;
     position:relative
 }
 .close_new_sound{
@@ -25,9 +28,7 @@
     right: 6px;
     cursor: pointer;
     font-weight: 600;
-    animation-name: colorChange;
     animation-duration: 14s;
-    animation-iteration-count:infinite;
 }
 
 .new_sound_input{
@@ -35,14 +36,12 @@
     background-color: rgb(99, 99, 99);
     color: white;
     border: 1px solid rgb(0, 255, 0);
-    animation-name: colorChange;
-    animation-duration: 7s;
-    animation-iteration-count:infinite;
+    animation-duration: 9s;
 }
 
 .new_sound_input:focus {
-    animation-name: shadowPulse;
     animation-duration: 3s;
+    animation-name: shadowPulse;
     animation-iteration-count:infinite;
 }
 
@@ -53,9 +52,7 @@
     background-color: rgb(104, 103, 103);
     color: rgb(216, 216, 216);
     border: 1px solid rgb(0, 255, 0);
-    animation-name: colorChange;
-    animation-duration: 7s;
-    animation-iteration-count:infinite;
+    animation-duration: 6s;
 }
 
 .visible_button{
@@ -75,9 +72,8 @@
     align-items: center;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(0, 255, 0);
-    animation-name: colorChange;
     animation-duration: 7s;
-    animation-iteration-count:infinite;}
+}
 
 .select_image{
     font-family: 'Montserrat', sans-serif;
@@ -90,9 +86,8 @@
     z-index: 0;
     margin-left: 3px;
     border: 1px solid rgb(0, 255, 0);
-    animation-name: colorChange;
-    animation-duration: 7s;
-    animation-iteration-count:infinite;
+    animation-duration: 8s;
+
 }
 .select_image:hover,.new_sound_submit:hover{
     box-shadow: 0 0 12px rgb(255, 0, 0);
@@ -105,7 +100,6 @@
     position: relative;
     width: 300px;
     height: 40px;
-    /* background-color: lightblue; */
     position: relative;
 }
 
