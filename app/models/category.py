@@ -12,7 +12,7 @@ class Category(db.Model):
 
 
 
-    scene = db.relationship("Scene", back_populates="categories")
+    scene = db.relationship("Scene", backref="categories")
 
     def to_dict(self):
         return {

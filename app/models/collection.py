@@ -8,7 +8,7 @@ class Collection(db.Model):
     name = db.Column(db.String(40), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    user = db.relationship("User", back_populates="collections")
+    owner = db.relationship("User", backref="collections")
 
     def to_dict(self):
         return {

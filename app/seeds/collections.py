@@ -3,13 +3,21 @@ from app.models import db, Collection
 # Adds a demo user, you can add other users here if you want
 def seed_collections():
 
-    demo = User(username='Demo', email='demo@aa.io', password='password')
-    kbetker = User(username='kbetker', email='k@b.com', password='123')
-    demo2 = User(username='demo2', email='demo2@demo.com', password='123')
+
+    generalPurpose = Collection(name="General D&D Session", owner_id=2)
+    lostMines = Collection(name="Lost Mines of Phandelver", owner_id=2)
 
 
-    db.session.add(kbetker)
-    db.session.add(demo)
+    generalPurpose2 = Collection(name="General D&D Session", owner_id=1)
+    stormKing = Collection(name="Storm King’s Thunder", owner_id=1)
+
+
+
+    db.session.add(generalPurpose)
+    db.session.add(lostMines)
+
+    db.session.add(generalPurpose2)
+    db.session.add(stormKing)
 
     db.session.commit()
 
