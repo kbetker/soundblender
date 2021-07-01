@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
 import "./Sound.css"
+import HomePage from "../HomePage";
 
 function Sound() {
     const dispatch = useDispatch()
@@ -73,10 +74,14 @@ function Sound() {
         const file = e.target.files[0];
         setSound_url(file);
     }
+    const goHome = () => {
+        history.push("/")
+    }
 
     return (
+        <>
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">
-            <div className="close_new_sound">X</div>
+            <div className="close_new_sound" onClick={goHome}>X</div>
             <label for="name">Name Your Sound</label>
             <input type="text"
                 name="name"
@@ -132,6 +137,10 @@ function Sound() {
 
             <button type="submit" className="new_sound_submit">Submit</button>
         </form>
+        <div className="black_backer"></div>
+        <HomePage></HomePage>
+
+        </>
     )
 }
 export default Sound

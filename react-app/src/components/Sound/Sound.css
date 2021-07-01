@@ -1,12 +1,20 @@
 .new_sound_form,.close_new_sound,.new_sound_input,.new_sound_submit,.visible_button,.select_image{
     animation-name: colorChange;
     animation-iteration-count:infinite;
+    margin: 10px 0;
+}
+.black_backer{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 200vh;
+    z-index: 90;
+    position: absolute;
 }
 
 .new_sound_form{
     display: flex;
     flex-direction: column;
-    height: 500px;
+    /* height: 500px; */
     width: 300px;
     justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
@@ -19,7 +27,10 @@
     border-radius: 8px;
     border: 1px solid rgb(0, 255, 0);
     animation-duration: 10s;
-    position:relative
+    position:absolute;
+    left: 40%;
+    top: 10%;
+    z-index: 100;
 }
 .close_new_sound{
     position: absolute;
@@ -53,6 +64,7 @@
     color: rgb(216, 216, 216);
     border: 1px solid rgb(0, 255, 0);
     animation-duration: 6s;
+    z-index: 9000;
 }
 
 .visible_button{
