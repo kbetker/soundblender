@@ -15,6 +15,9 @@ class Sound(db.Model):
     arrangement= db.Column(db.Integer)
     is_looped = db.Column(db.Boolean)
 
+    # user = db.relationship("User", back_populates="collections")
+
+
 
     def to_dict(self):
         return {
