@@ -15,6 +15,21 @@ def users():
 @user_routes.route('/<int:id>')
 # @login_required
 def user(id):
-    sounds = Sound.query.filter(Sound.owner_id == id)
+    collections = Collection.query.filter(Collection.owner_id == id)\
+                .join(Scene, Scene.collection_id == 1)
+
     # user = User.query.get(id)
-    return {"users": [sound.to_dict() for sound in sounds]}
+    return {"collections": [collection.to_dict() for collection in collections]}
+
+# @user_routes.route('/<int:id>')
+# @login_required
+# def user(id):
+#     user = User.query.get(id)
+#     return user.to_dict()
+
+# userList = users.query\
+#     .join(friendships, users.id==friendships.user_id)\
+#     .add_columns(users.userId, users.name, users.email, friends.userId, friendId)\
+#     .filter(users.id == friendships.friend_id)\
+#     .filter(friendships.user_id == userID)\
+#     .paginate(page, 1, False)

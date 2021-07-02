@@ -14,5 +14,5 @@ class Collection(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "owner_id": self.description,
+            "owner_id": self.owner_id,
         }
