@@ -21,7 +21,7 @@ function HomePage(){
                         <LogoutButton></LogoutButton>
                         :
                         <>
-                            <Link to="/">Log in</Link>
+                            <Link to="/login">Log in</Link>
                             <div className="spacer">|</div>
                             <Link to="/sign-up">Sign Up</Link>
                             <div className="spacer">|</div>
