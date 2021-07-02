@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./HomePage.css"
 import background from "./background_animation-greyscale-Black_Background.gif"
-import logoGif from "./background_animation.gif"
+import logoGif from "./logoAnimationGreen.gif"
+import logo from "./homepageLogo.png"
 import LogoutButton from "../auth/LogoutButton"
 import { useSelector } from 'react-redux'
 
@@ -15,7 +16,10 @@ function HomePage(){
             <div>
                 <img src={background} className="animated_background"></img>
                 <div className="navBar">
-                    <div className="logo">Logo</div>
+                    <div className="logo-container">
+                        <img src={logoGif} className="logoGif"></img>
+                        <img src={logo} className="logo"></img>
+                    </div>
                     <div className="home-links-container">
                         {user ?
                         <LogoutButton></LogoutButton>
