@@ -39,14 +39,7 @@ body{
     margin: 20px 0;
 }
 
-.logo_gif{
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    filter: hue-rotate(100deg);
-    animation-duration: 7s;
-    animation-iteration-count:infinite;
-}
+
 
 @keyframes colorChange {
     0%   {filter: hue-rotate(0deg);}
@@ -55,39 +48,49 @@ body{
 
   .navBar{
       width: 100%;
-      background-color: rgb(24, 0, 0);
-      height: 250px;
+      background-color: black;
+      height: 200px;
       position: absolute;
       color: white;
-      top: 275px;
+      top: 300px;
       z-index: 5;
-      opacity: 0.8;
+      opacity: 0.;
       border-top:  1px solid rgb(0, 255, 0);
       border-bottom:  1px solid rgb(0, 255, 0);
       display: flex;
       justify-content: space-between;
       align-items: center;
   }
-  .logo{
-    color: rgb(0, 255, 0);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 80px;
-    margin-left: 50px;
-    /* font-weight: 600; */
+  .logo-container{
+    margin-top: 30px;
+    height: 100px;
 
+    /* position: relative; */
   }
+  .logo{
+      position: absolute;
+      top: 64px;
+      left: -100px;
+  }
+  .logo_gif{
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 10;
+}
+
 .home-links-container{
     display: flex;
     justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
+    font-size: 30px;
     margin-right: 30px;
     z-index: 5000;
 }
 a,a:active,a:visited,a:active{
     color: white;
     text-decoration: none;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 a:hover{
     text-decoration: none;
