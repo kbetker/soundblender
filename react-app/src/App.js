@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import LoginForm from "./components/auth/LoginForm";
-import SignUpForm from "./components/auth/SignUpForm";
+import Login from "./components/LogIn/Login";
+import SignUp from "./components/SignUp/index";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
-import User from "./components/User";
+import UserPage from "./components/UserPage";
 import { authenticate } from "./store/session";
 import Sound from "./components/Sound"
 import HomePage from "./components/HomePage"
@@ -30,26 +30,26 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar /> */}
-          <HomePage />
       <Switch>
         <Route path="/" exact={true}>
+          <HomePage />
         </Route>
         <Route path="/login" exact={true}>
-          <LoginForm />
+          <Login />
         </Route>
         <Route path="/sign-up" exact={true}>
-          <SignUpForm />
+          <SignUp />
         </Route>
         <Route path="/sound">
             <Sound></Sound>
         </Route>
 
+        <ProtectedRoute path="/users/:userId" exact={true}>
+          <UserPage />
+        </ProtectedRoute>
 
         <ProtectedRoute path="/users" exact={true}>
           <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true}>
-          <User />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function User() {
+function UserPage() {
   const [user, setUser] = useState({});
   // Notice we use useParams here instead of getting the params
   // From props.
@@ -21,19 +21,19 @@ function User() {
   if (!user) {
     return null;
   }
-
+  console.log("WTFWTFWTFWTFWTFWTFWTFWTFWTF", user)
   return (
-    <ul>
+    <ul style={{color: "white"}}>
       <li>
         <strong>User Id</strong> {userId}
       </li>
       <li>
-        <strong>Username</strong> {user.name}
+        <strong>Username</strong> {user.username}
       </li>
       <li>
-        <strong>Email</strong> {user.sound_url}
+        <strong>Email</strong> {user.email}
       </li>
     </ul>
   );
 }
-export default User;
+export default UserPage;
