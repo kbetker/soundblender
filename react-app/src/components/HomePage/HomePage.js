@@ -11,7 +11,7 @@ function HomePage(){
     const user = useSelector(state => state.session.user)
     console.log(user?.username)
     return(
-        <>wat?
+        <>
         <div className="homepage_wrapper">
             <div>
                 <img src={background} className="animated_background"></img>

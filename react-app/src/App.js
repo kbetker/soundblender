@@ -44,9 +44,9 @@ function App() {
             <Sound></Sound>
         </Route>
 
-        <ProtectedRoute path="/users/me" exact={true}>
+        <Route path="/users/:id" exact={true}>
           <UserPage />
-        </ProtectedRoute>
+        </Route>
 
         <Route path="/users" exact={true}>
           <UsersList/>
