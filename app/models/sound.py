@@ -1,3 +1,4 @@
+from app.models import Category
 from .db import db
 
 
@@ -15,7 +16,9 @@ class Sound(db.Model):
     arrangement= db.Column(db.Integer)
     is_looped = db.Column(db.Boolean)
 
+    categories = db.relationship("Category", secondary ="joined_snds_cats", back_populates="sounds")
     owner = db.relationship("User", backref="sounds")
+
 
     def to_dict(self):
         return {

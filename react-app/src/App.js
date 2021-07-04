@@ -44,13 +44,13 @@ function App() {
             <Sound></Sound>
         </Route>
 
-        <ProtectedRoute path="/users/:userId" exact={true}>
+        <ProtectedRoute path="/users/me" exact={true}>
           <UserPage />
         </ProtectedRoute>
 
-        <ProtectedRoute path="/users" exact={true}>
+        <Route path="/users" exact={true}>
           <UsersList/>
-        </ProtectedRoute>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
