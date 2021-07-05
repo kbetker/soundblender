@@ -13,13 +13,14 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const history = useHistory();
 
-
     const onLogin = async (e) => {
         e.preventDefault();
-        await dispatch(login(email, password));
+        const data = await dispatch(login(email, password));
         // if (data.errors) {
         //     setErrors(data.errors);
         // }
+        // console.log(data.id)
+        await history.push(`/users/${data.id}`)
     };
 
     const updateEmail = (e) => {
@@ -30,9 +31,9 @@ const LoginForm = () => {
         setPassword(e.target.value);
     };
 
-    if (user) {
-        return <Redirect to="/" />;
-    }
+    // if (user) {
+    //     return <Redirect to="/" />;
+    // }
 
     const goHome = () => {
         history.push("/")

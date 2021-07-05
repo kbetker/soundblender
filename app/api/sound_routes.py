@@ -18,6 +18,15 @@ sound_routes = Blueprint('sound', __name__)
 #     return errorMessages
 
 
+
+@sound_routes.route('/<int:id>')
+# @login_required
+def user(id):
+    sounds = Sound.query.filter(Sound.owner_id == id)
+    return  {"sounds": [sound.to_dict() for sound in sounds ]}
+
+
+
 @sound_routes.route("", methods=["POST"])
 @login_required
 def new_sound():
