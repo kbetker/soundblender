@@ -8,11 +8,13 @@ class Collection(db.Model):
     name = db.Column(db.String(40), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    owner = db.relationship("User", backref="collections")
+    owner = db.relationship("User", backref="collections", uselist=False)
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
-            "owner_id": self.description,
+            "owner_id": self.owner_id,
+            "scenes": [s.to_dict() for s in self.scenes]
+
         }

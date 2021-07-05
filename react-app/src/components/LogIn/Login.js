@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
@@ -8,18 +8,19 @@ import HomePage from "../HomePage";
 const LoginForm = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
 
-
     const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
-        if (data.errors) {
-            setErrors(data.errors);
-        }
+        // if (data.errors) {
+        //     setErrors(data.errors);
+        // }
+        // console.log(data.id)
+        await history.push(`/users/${data.id}`)
     };
 
     const updateEmail = (e) => {
@@ -30,9 +31,9 @@ const LoginForm = () => {
         setPassword(e.target.value);
     };
 
-    if (user) {
-        return <Redirect to="/" />;
-    }
+    // if (user) {
+    //     return <Redirect to="/" />;
+    // }
 
     const goHome = () => {
         history.push("/")

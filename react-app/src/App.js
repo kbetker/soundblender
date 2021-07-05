@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Login from "./components/LogIn/Login";
 import SignUp from "./components/SignUp/index";
-import NavBar from "./components/NavBar";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
+// import NavBar from "./components/NavBar";
+// import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import UserPage from "./components/UserPage";
 import { authenticate } from "./store/session";
@@ -21,7 +21,7 @@ function App() {
       await dispatch(authenticate());
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
@@ -44,13 +44,13 @@ function App() {
             <Sound></Sound>
         </Route>
 
-        <ProtectedRoute path="/users/:userId" exact={true}>
+        <Route path="/users/:id" exact={true}>
           <UserPage />
-        </ProtectedRoute>
+        </Route>
 
-        <ProtectedRoute path="/users" exact={true}>
+        <Route path="/users" exact={true}>
           <UsersList/>
-        </ProtectedRoute>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

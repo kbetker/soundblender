@@ -11,8 +11,9 @@ class Category(db.Model):
     arrangment = db.Column(db.Integer, default=0)
 
 
+    sounds = db.relationship("Sound", secondary ="joined_snds_cats", back_populates="categories")
+    scene = db.relationship("Scene", backref="categories", uselist=False)
 
-    scene = db.relationship("Scene", backref="categories")
 
     def to_dict(self):
         return {
@@ -20,5 +21,6 @@ class Category(db.Model):
             "name": self.name,
             "color": self.color,
             "scene_id": self.scene_id,
-            "arrangment": self.arrangment
+            "arrangment": self.arrangment,
+            "sounds": [s.to_dict() for s in self.sounds]
         }

@@ -8,7 +8,7 @@ class Scene(db.Model):
     theme = db.Column(db.String(40), default="default")
     collection_id = db.Column(db.Integer, db.ForeignKey("collections.id"), nullable=False)
 
-    collection = db.relationship("Collection", backref="scenes")
+    collection = db.relationship("Collection", backref="scenes", uselist=False)
 
     def to_dict(self):
         return {
@@ -16,4 +16,5 @@ class Scene(db.Model):
             "name": self.name,
             "theme": self.theme,
             "collection_id": self.collection_id,
+            "categories": [c.to_dict() for c in self.categories]
         }

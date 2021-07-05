@@ -5,7 +5,6 @@ import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
     const user = useSelector((state) => state.session)
-    // console.log(user.user.email)
     return (
         <nav>
             <ul>

@@ -1,32 +1,43 @@
-from app.models import db, Category
+from app.models import db, Category, Sound
+
 
 def seed_categories():
     #demo
+    sounds = Sound.query.all()
     name1 = Category(name="ambience", color="red", scene_id=1, arrangment=0)
     name2 = Category(name="music", color="green", scene_id=1, arrangment=1)
-
+    name1.sounds.extend(sounds[0:2])
+    name2.sounds.extend(sounds[2:4])
     name3 = Category(name="ambience", color="red", scene_id=2, arrangment=0)
     name4 = Category(name="music", color="green", scene_id=2, arrangment=1)
-
+    name3.sounds.extend(sounds[4:6])
+    name4.sounds.extend(sounds[6:8])
     name5 = Category(name="ambience", color="red", scene_id=3, arrangment=0)
     name6 = Category(name="music", color="green", scene_id=3, arrangment=1)
-
+    name5.sounds.extend(sounds[8:10])
+    name6.sounds.extend(sounds[10:12])
     name7 = Category(name="ambience", color="red", scene_id=4, arrangment=0)
     name8 = Category(name="music", color="green", scene_id=4, arrangment=1)
-
+    name7.sounds.extend(sounds[12:14])
+    name8.sounds.extend(sounds[14:16])
 
     # me
     name9 = Category(name="ambience", color="red", scene_id=5, arrangment=0)
     name10 = Category(name="music", color="green", scene_id=5, arrangment=1)
-
+    name9.sounds.extend(sounds[16:18])
+    name10.sounds.extend(sounds[18:20])
     name11 = Category(name="ambience", color="red", scene_id=6, arrangment=0)
     name12 = Category(name="music", color="green", scene_id=6, arrangment=1)
-
+    name11.sounds.extend(sounds[20:22])
+    name12.sounds.extend(sounds[22:24])
     name13 = Category(name="ambience", color="red", scene_id=7, arrangment=0)
     name14 = Category(name="music", color="green", scene_id=7, arrangment=1)
-
+    name13.sounds.extend(sounds[24:26])
+    name14.sounds.extend(sounds[26:28])
     name15 = Category(name="ambience", color="red", scene_id=8, arrangment=0)
     name16 = Category(name="music", color="green", scene_id=8, arrangment=1)
+    name15.sounds.extend(sounds[28:30])
+    name16.sounds.extend(sounds[30:32])
 
     db.session.add(name1)
     db.session.add(name2)
