@@ -149,10 +149,10 @@ a.contentLink:hover{
     position: absolute;
     top: -7px;
     right: 15px;
-    background-color: rgba(0, 0, 0, 20%);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 90%);
+    background-color: rgba(0, 0, 0, 40%);
+    box-shadow: 0 0 10px black;
     border-radius: 20px;
-    animation:clockwise 14s linear infinite;
+    animation:clockwise 7s linear infinite;
     margin: 0;
     padding: 0;
 }

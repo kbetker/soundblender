@@ -104,6 +104,7 @@ function UserPage() {
                             <Link to={!editMode ? `/sound/${el.id}` : "#"} className="contentLink" key={`soundKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>
+                                {editMode && <img src={gear} className="linkEditGear" draggable="false"></img>}
                             </Link>
                         )}
 
