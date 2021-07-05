@@ -24,11 +24,11 @@ function HomePage(){
                         <LogoutButton></LogoutButton>
                         :
                         <>
-                            <Link to="/login">Log in</Link>
+                            <Link to="/login" className="homeLinks">Log in</Link>
                             <div className="spacer">|</div>
-                            <Link to="/sign-up">Sign Up</Link>
+                            <Link to="/sign-up"  className="homeLinks">Sign Up</Link>
                             <div className="spacer">|</div>
-                            <Link to="/">Demo</Link>
+                            <Link to="/"  className="homeLinks">Demo</Link>
                         </>
 
                     }

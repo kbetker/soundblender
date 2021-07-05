@@ -17,6 +17,7 @@ body{
     animation-name: colorChange;
     animation-duration: 7s;
     animation-iteration-count:infinite;
+    animation-timing-function: linear;
 }
 .animated_background {
     /* background-size: cover; */
@@ -87,16 +88,18 @@ body{
     margin-right: 30px;
     z-index: 5000;
 }
-a,a:active,a:visited,a:active{
+a.homeLinks,a.homeLinks:active,a.homeLinks:visited,a.homeLinks:active{
     color: white;
     text-decoration: none;
-    /* margin: 0 10px; */
+    margin: 0 10px;
+    border-bottom: 1px solid rgb(0, 0, 0);
 }
-a:hover{
+a.homeLinks:hover{
     text-decoration: none;
     text-shadow: 0 0 20px rgb(0, 255, 0);
     animation-name: shadowPulse;
     animation-iteration-count:infinite;
+    border-bottom: 1px solid rgb(0, 255, 0);
 }
 .spacer{
     color: rgb(0, 255, 0);

@@ -1,11 +1,35 @@
 .userPageContainer{
     display: grid;
-    grid-template-rows: 100px 86vh;
+    grid-template-rows: 15px 50px 86vh;
+}
+.blackBar{
+    height: 15px;
+    background-color: rgb(0, 0, 0);
 }
 .userPageHeader{
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(36, 36, 36);
     color: white;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 10px black inset;
 }
+.userPageLogo-container{
+    position: relative;
+}
+.userPageLogo{
+    height: 50px;
+    filter: saturate(0);
+    mix-blend-mode: screen;
+}
+
+.userPageLogo-anim{
+    position: absolute;
+    left: 35px;
+    height: 50px;
+    mix-blend-mode: lighten;
+    filter: saturate(0);
+}
+
 .userpageBody{
     background-color: rgb(41, 41, 41);
     display: flex;
@@ -24,11 +48,10 @@
 }
 
 .userContentBox{
-    /* width: 90%; */
     background-color: rgb(59, 59, 59);
     border: 1px solid white;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     display: flex;
     justify-content: flex-start;
     flex-wrap:wrap;
@@ -37,24 +60,99 @@
     overflow-y: auto;
 }
 
-.contentLink{
-    /* background-color: greenyellow; */
-    width: 90px;
-    /* height: 90px; */
+.contentName{
+    margin-top: 4px;
+}
+
+
+.contentImg{
+    width: 45px;
+    height: 66px;
+}
+.homeButton{
     display: flex;
-    margin: 3px 4px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 300px;
+    font-family: 'Montserrat', sans-serif;
+    /* background-color: blue; */
+}
+.gears{
+    /* background-color: red; */
+    width: 50px;
+    height: 50px;
+    position: relative;
+    filter: brightness(0.7);
+    cursor: pointer;
+    /* background-color: cadetblue; */
+}
+.gears:hover{
+    filter: brightness(1);
+}
+.gear1{
+    width: 30px;
+    position: absolute;
+    top: 15px;
+    left: -1px;
+}
+.gear2{
+    width: 25px;
+    position: absolute;
+    top: 3px;
+    right: 0;
+}
+
+.ccw{
+    animation:clockwise 14s linear infinite;
+}
+.cw{
+    animation:counterClockwise 14s linear infinite;
+}
+
+@keyframes clockwise { 100% {
+    transform:rotate(360deg);
+}}
+
+@keyframes counterClockwise { 100% {
+    transform:rotate(-360deg);
+}}
+
+
+a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
+    width: 90px;
+    display: flex;
+    margin: 6px 8px;
     flex-direction: column;
     align-items: center;
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-
+    color: white;
+    text-decoration: none;
+    position: relative;
 }
-.contentLink:hover{
+a.contentLink:hover{
     filter: brightness(1.2);
 }
 
-.contentImg{
-    width: 45px;
-    height: 66px;
+.logOut{
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(161, 161, 161);
+    text-decoration: none;
+}
+.logOut:hover{
+    color: white;
+}
+.linkEditGear{
+    width: 20px;
+    position: absolute;
+    top: -7px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 20%);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 90%);
+    border-radius: 20px;
+    animation:clockwise 14s linear infinite;
+    margin: 0;
+    padding: 0;
 }

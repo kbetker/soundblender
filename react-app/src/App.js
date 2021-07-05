@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import Login from "./components/LogIn/Login";
 import SignUp from "./components/SignUp/index";
 // import NavBar from "./components/NavBar";
-// import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import UserPage from "./components/UserPage";
 import { authenticate } from "./store/session";
@@ -44,9 +44,9 @@ function App() {
             <Sound></Sound>
         </Route>
 
-        <Route path="/users/:id" exact={true}>
+        <ProtectedRoute path="/users/:id" exact={true}>
           <UserPage />
-        </Route>
+        </ProtectedRoute>
 
         <Route path="/users" exact={true}>
           <UsersList/>
