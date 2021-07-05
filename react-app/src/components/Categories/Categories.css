@@ -1,8 +1,10 @@
 .categoryContainer{
-    width: 400px;
+    /* width: 400px; */
     /* height: 40px; */
     background-color: grey;
     /* border: 1px solid green; */
+    flex-wrap:wrap;
+
 }
 .categoryName{
     font-family: 'Montserrat', sans-serif;

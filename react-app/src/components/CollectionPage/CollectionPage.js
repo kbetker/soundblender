@@ -22,6 +22,7 @@ function CollectionPage() {
     const { id } = useParams();
     // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
+    const [currentScene, setCurrentScene] = useState("1")
 
     useEffect(() => {
         dispatch(getUserCollection(id))
@@ -30,10 +31,6 @@ function CollectionPage() {
     const collection = useSelector(state => state.collection)
     const sceneLength =collection?.collection?.scenes.length
 
-    window.addEventListener("resize", (e) =>{
-        console.log(windoWith, "windowWithd????????")
-        setWindowWidth(window.innerWidth)
-    })
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -48,6 +45,40 @@ function CollectionPage() {
         e.preventDefault()
         editMode ? setEditMode(false) : setEditMode(true)
     }
+
+    console.log(currentScene, "+++++++++++ BEFORE FUNCTION ++++++++++")
+    function changeSceneFunc(direction){
+        console.log(currentScene, "+++++++++++ Right in side ++++++++++")
+        function changeScene(){
+            let currentDiv = document.getElementById(currentScene)
+            if(currentDiv){
+            currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+            }
+        }
+
+        if(direction === "none"){
+            changeScene()
+        } else if (direction === "right"){
+                if(parseInt(currentScene) + 1 > sceneLength) {
+                    setCurrentScene("1")
+                } else {
+                    setCurrentScene(`${parseInt(currentScene) + 1}`)
+                }
+                changeScene()
+        } else {
+            if(parseInt(currentScene) - 1 <= 0 ) {
+                setCurrentScene(`${sceneLength}`)
+            } else {
+                setCurrentScene(`${parseInt(currentScene) - 1}`)
+            }
+            changeScene()
+        }
+    }
+
+    window.addEventListener("resize", (e) =>{
+        setWindowWidth(window.innerWidth)
+        changeSceneFunc("none")
+    })
 
     return(
         <>
@@ -84,22 +115,15 @@ function CollectionPage() {
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
-                            {collection?.collection?.scenes.map(scene =>
-                                <Scene scene={scene} key={`sceneKey-${scene.id}`}></Scene>
+                            {collection?.collection?.scenes.map((scene, index) =>
+                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`}></Scene>
                             )}
                         </div>
                      </div>
 
-                     <div className="nexPrevScene">V</div>
+                     <div className="nexPrevScene"  onClick={() => changeSceneFunc("right")}>V</div>
                 </div>
-
-
-
         </div>
-
-
-
-
         </>
 
 

@@ -6,7 +6,7 @@
     /* overflow-x: scroll; */
     /* margin: 0 40px; */
     height: 90vh;
-    background-color: indianred;
+    /* background-color: indianred; */
 }
 
 .scenePages{
@@ -19,7 +19,7 @@
     /* background-color: red; */
 }
 .scenePage{
-    background-color: rosybrown;
+    /* background-color: rosybrown; */
     display: flex;
     justify-items: center;
     align-items: center;
@@ -29,14 +29,21 @@
     /* width: 100vw; */
     padding: 20px;
     border: 1px solid white;
+    height: 80vh;
+    /* display: flex; */
 }
 .sceneName{
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
     color: white;
+    margin-bottom: 30px;
+}
+.eachScene{
+    display: flex;
 }
 .nexPrevScene{
     background-color: rgba(0, 0, 0, 70%);
     width: 40px;
     height: 100%;
+    cursor: pointer;
 }
