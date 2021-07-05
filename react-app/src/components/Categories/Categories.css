@@ -1,6 +1,6 @@
 .categoryContainer{
     width: 400px;
-    height: 40px;
+    /* height: 40px; */
     background-color: grey;
     /* border: 1px solid green; */
 }

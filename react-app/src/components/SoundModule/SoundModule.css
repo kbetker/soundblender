@@ -1,0 +1,94 @@
+body{
+    background-color: rgb(49, 49, 49);
+  }
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  .soundModule_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content:  center;
+    background-color: rgb(75, 75, 75);
+    /* height: 80px; */
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid;
+    border-radius: 8px;
+    width: 372px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .slider_and_controls{
+    display: flex;
+  }
+
+  .title{
+    align-self: flex-end;
+  }
+
+  .slider__container{
+    width: 273px;
+    height: 45px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    left: -20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .knob_color{
+    width: 5px;
+    height: 100%;
+    mix-blend-mode:soft-light;
+  }
+  .playStopBtns{
+    display: flex;
+    justify-content: center;
+    width: 79px;
+  }
+
+  .slider__knob{
+    height: 28px;
+    width: 75px;
+    position: absolute;
+    left: 0;
+    top: 3px;
+    z-index: 10;
+    cursor: move;
+    margin: 0 auto;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 50%);
+  }
+
+  .redLight{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .redLightOn{
+    position: absolute;
+    top: -4px;
+  }
+  .redLightOff{
+    position: absolute;
+    top: 5px;
+  }
+  .container{
+    display: flex;
+    justify-content: space-around;
+
+  }
+
+  .slider__container{
+    margin: 0 20px;
+  }

@@ -1,13 +1,32 @@
 .ScenePageBody{
     display: flex;
-    justify-content: center;
+    /* justify-content: center;
+    align-items: center; */
+    /* width: 100vw; */
+    /* overflow-x: scroll; */
+    /* margin: 0 40px; */
+    height: 90vh;
+    background-color: indianred;
+}
+
+.scenePages{
+    display: flex;
+    justify-items: center;
     align-items: center;
-    width: 100vw;
-    overflow-x: auto;
+    /* background-color: indigo; */
+    /* width: 100vw; */
+    overflow-x: scroll;
+    /* background-color: red; */
+}
+.scenePage{
+    background-color: rosybrown;
+    display: flex;
+    justify-items: center;
+    align-items: center;
 }
 
 .sceneContainer{
-    width: 50vw;
+    /* width: 100vw; */
     padding: 20px;
     border: 1px solid white;
 }
@@ -15,4 +34,9 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
     color: white;
+}
+.nexPrevScene{
+    background-color: rgba(0, 0, 0, 70%);
+    width: 40px;
+    height: 100%;
 }

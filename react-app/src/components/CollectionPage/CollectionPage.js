@@ -13,18 +13,27 @@ import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import gear from "../UserPage/Gear.png"
 import { logout } from "../../store/session";
 import Scene from "../Scene"
+import { useRef } from "react";
 
 function CollectionPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const [editMode, setEditMode] = useState(false)
     const { id } = useParams();
+    // const windoWith = useRef(window.innerWidth)
+    const [windoWith, setWindowWidth] = useState(window.innerWidth)
 
     useEffect(() => {
         dispatch(getUserCollection(id))
     }, [dispatch, id]);
 
     const collection = useSelector(state => state.collection)
+    const sceneLength =collection?.collection?.scenes.length
+
+    window.addEventListener("resize", (e) =>{
+        console.log(windoWith, "windowWithd????????")
+        setWindowWidth(window.innerWidth)
+    })
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -70,13 +79,19 @@ function CollectionPage() {
                     </div>
 
             </div>
-                    <div className="ScenePageBody">
-                    {collection?.collection?.scenes.map(scene =>
-                        <Scene scene={scene} key={`sceneKey-${scene.id}`}></Scene>
-                    )}
+                <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
+                    <div className="nexPrevScene">V</div>
 
+                    <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
+                        <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
+                            {collection?.collection?.scenes.map(scene =>
+                                <Scene scene={scene} key={`sceneKey-${scene.id}`}></Scene>
+                            )}
+                        </div>
+                     </div>
 
-                    </div>
+                     <div className="nexPrevScene">V</div>
+                </div>
 
 
 
