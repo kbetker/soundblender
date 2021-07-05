@@ -22,7 +22,7 @@ function CollectionPage() {
     const { id } = useParams();
     // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
-    const [currentScene, setCurrentScene] = useState("1")
+    const currentScene = useRef("1")
 
     useEffect(() => {
         dispatch(getUserCollection(id))
@@ -46,11 +46,11 @@ function CollectionPage() {
         editMode ? setEditMode(false) : setEditMode(true)
     }
 
-    console.log(currentScene, "+++++++++++ BEFORE FUNCTION ++++++++++")
+    // console.log(currentScene.current, "+++++++++++ BEFORE FUNCTION ++++++++++")
     function changeSceneFunc(direction){
-        console.log(currentScene, "+++++++++++ Right in side ++++++++++")
+        // console.log(currentScene.current, "+++++++++++ Right in side ++++++++++")
         function changeScene(){
-            let currentDiv = document.getElementById(currentScene)
+            let currentDiv = document.getElementById(currentScene.current)
             if(currentDiv){
             currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
             }
@@ -59,17 +59,17 @@ function CollectionPage() {
         if(direction === "none"){
             changeScene()
         } else if (direction === "right"){
-                if(parseInt(currentScene) + 1 > sceneLength) {
-                    setCurrentScene("1")
+                if(parseInt(currentScene.current) + 1 > sceneLength) {
+                    currentScene.current = "1"
                 } else {
-                    setCurrentScene(`${parseInt(currentScene) + 1}`)
+                    currentScene.current = `${parseInt(currentScene.current) + 1}`
                 }
                 changeScene()
         } else {
-            if(parseInt(currentScene) - 1 <= 0 ) {
-                setCurrentScene(`${sceneLength}`)
+            if(parseInt(currentScene.current) - 1 <= 0 ) {
+                currentScene.current = `${sceneLength}`
             } else {
-                setCurrentScene(`${parseInt(currentScene) - 1}`)
+                currentScene.current = `${parseInt(currentScene.current) - 1}`
             }
             changeScene()
         }
@@ -111,7 +111,7 @@ function CollectionPage() {
 
             </div>
                 <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
-                    <div className="nexPrevScene">V</div>
+                    <div className="nexPrevScene" onClick={() => changeSceneFunc("left")}>V</div>
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
