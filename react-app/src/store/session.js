@@ -28,7 +28,6 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (email, password) => async (dispatch) => {
-    console.log("============ in the log in ================")
     const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
@@ -84,7 +83,6 @@ export const signUp = (username, email, password) => async (dispatch) => {
 const initialState = {user: null}
 
 export default function reducer(state = initialState, action) {
-    console.log("============ in the reducer ================", state)
 
     switch (action.type) {
         case SET_USER:

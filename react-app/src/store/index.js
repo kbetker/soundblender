@@ -2,15 +2,16 @@ import {createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session"
 import soundReducer from "./sound";
+import userInfoReducer from "./userPage"
 
 const rootReducer = combineReducers({
     session,
     newSound: soundReducer,
+    userInfo: userInfoReducer,
 });
 
 
 let enhancer;
-console.log("============ in store index ================")
 
 if (process.env.NODE_ENV === 'production') {
     enhancer = applyMiddleware(thunk);

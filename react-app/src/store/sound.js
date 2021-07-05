@@ -9,7 +9,6 @@ const setSound = (sound) => ({
 
 
 export const addSound = (formData) => async (dispatch) => {
-    console.log("===================== in the thunk =====================")
     const response = await fetch("/api/sound", {
         method: "POST",
         body: formData,

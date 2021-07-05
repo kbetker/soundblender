@@ -10,41 +10,40 @@ function Sound() {
     const user = useSelector(state => state.session.user)
     const history = useHistory(); // so that we can redirect after the image upload is successful
     // const [image, setImage] = useState(null);
-    const [imageLoading, setImageLoading] = useState(false);
+    // const [imageLoading, setImageLoading] = useState(false);
 
 
     const [sound_url, setSound_url] = useState(null);
     const [name, setName] = useState('');
-    const [owner_id, setId] = useState(user?.id);
-    const [is_public, setIs_public] = useState(false);
+    // const [owner_id, setId] = useState(user?.id);
+    // const [is_public, setIs_public] = useState(false);
     const [target_volume, setTarget_volume] = useState(10);
     const [fade_speed, setFade_speed] = useState(1);
     const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
 
 
-    console.log(is_looped)
+
 
     useEffect(() => {
 
     }, [is_looped])
     const newSound = async (e) => {
-        console.log("==================== on the very front ====================")
         e.preventDefault();
 
         const formData = new FormData();
         formData.append("sound_url", sound_url);
         formData.append("name", name);
-        formData.append("owner_id", owner_id);
-        formData.append("is_public", is_public);
+        formData.append("owner_id", user?.id);
+        formData.append("is_public", false);
         formData.append("target_volume", target_volume * 0.1);
         formData.append("fade_speed", fade_speed * 1000);
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
-        setImageLoading(true);
+        // setImageLoading(true);
         console.log(formData.is_looped)
-        const res = await dispatch(addSound(formData))
+        await dispatch(addSound(formData))
         // const res = await fetch('/api/sound', {
         //     method: "POST",
         //     body: formData,
@@ -56,11 +55,9 @@ function Sound() {
         //     console.log(res)
         // }
         // else {
-        //     console.log("WAAAAAAAATTTT???????", res)
         //     setImageLoading(false);
         //     // a real app would probably use more advanced
         //     // error handling
-        //     console.log("error");
         // }
 
         // const data = await dispatch(addSound(sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped))

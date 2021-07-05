@@ -9,16 +9,15 @@ import { useSelector } from 'react-redux'
 
 function HomePage(){
     const user = useSelector(state => state.session.user)
-    console.log(user?.username)
     return(
         <>
         <div className="homepage_wrapper">
             <div>
-                <img src={background} className="animated_background"></img>
+                <img src={background} className="animated_background" alt="animated background"></img>
                 <div className="navBar">
                     <div className="logo-container">
-                        <img src={logoGif} className="logoGif"></img>
-                        <img src={logo} className="logo"></img>
+                        <img src={logoGif} className="logoGif" alt="Hompage Logo Animation"></img>
+                        <img src={logo} className="logo" alt="Homepage Logo"></img>
                     </div>
                     <div className="home-links-container">
                         {user ?
