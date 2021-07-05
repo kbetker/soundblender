@@ -152,7 +152,18 @@ a.contentLink:hover{
     background-color: rgba(0, 0, 0, 40%);
     box-shadow: 0 0 10px black;
     border-radius: 20px;
-    animation:clockwise 7s linear infinite;
     margin: 0;
     padding: 0;
+
+}
+.linkEditGear{
+    animation:counterClockwise 7s linear infinite;
+
+}
+.contentLink:nth-child(2n+0) > .linkEditGear{
+    animation:clockwise 7s linear infinite;
+}
+
+.contentLink:nth-child(2n+3) > .linkEditGear{
+    animation:counterClockwise 7s linear infinite;
 }

@@ -1,0 +1,18 @@
+.ScenePageBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    overflow-x: auto;
+}
+
+.sceneContainer{
+    width: 50vw;
+    padding: 20px;
+    border: 1px solid white;
+}
+.sceneName{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    color: white;
+}

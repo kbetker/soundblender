@@ -53,21 +53,21 @@ function UserPage() {
             <div className="userPageHeader">
 
                     <div className="userPageLogo-container">
-                        <img className="userPageLogo" src={homepageLogo}></img>
-                        <img className="userPageLogo-anim" src={logoAnimation}></img>
+                        <img className="userPageLogo" src={homepageLogo} alt=""></img>
+                        <img className="userPageLogo-anim" src={logoAnimation} alt=""></img>
                     </div>
                     <div className="homeButton">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div className="gears" onClick={(e) =>editModeFunc(e)}>
                             {editMode ?
                                 <>
-                                    <img src={gear} className="gear1" draggable="false"></img>
-                                    <img src={gear} className="gear2"  draggable="false"></img>
+                                    <img src={gear} className="gear1" draggable="false" alt=""></img>
+                                    <img src={gear} className="gear2"  draggable="false" alt=""></img>
                                 </>
                                 :
                                 <>
-                                    <img src={gear} className="gear1 cw"  draggable="false"></img>
-                                    <img src={gear} className="gear2 ccw"  draggable="false"></img>
+                                    <img src={gear} className="gear1 cw"  draggable="false" alt=""></img>
+                                    <img src={gear} className="gear2 ccw"  draggable="false" alt=""></img>
                                 </>}
                         </div>
                     </div>
@@ -80,17 +80,16 @@ function UserPage() {
                     <div className="contentTitle">My Collections</div>
                     <div className="userContentBox">
                         {collections?.collections.map(el =>
-                            <Link to={!editMode ? `/collections/${el.id}` : `#`} className="contentLink" key={`collectionKey-${el.id}`}>
+                            <Link to={!editMode ? `/collection/${el.id}` : `#`} className="contentLink" key={`collectionKey-${el.id}`}>
 
-                                <img src={collection_img} className="contentImg" alt="Content Link" draggable="false"></img>
-                                <div key={`collectionKey-${el.id}`} className="contentName">
-                                    {el.name}
-                                    {editMode && <img src={gear} className="linkEditGear" draggable="false"></img>}
-                                    </div>
+                                <img src={collection_img} className="contentImg" draggable="false" alt={`collectionImg-${el.id}`}></img>
+                                <div key={`collectionKey-${el.id}`} className="contentName">{el.name} </div>
+                                    {editMode && <img src={gear} className="linkEditGear" draggable="false" alt={`editGear-${el.id}`}></img>}
+
                             </Link>
                         )}
 
-                            <Link to="collections/new" className="contentLink">
+                            <Link to="collection/new" className="contentLink">
                                 <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
                                 <div className="contentName">New Collection</div>
                             </Link>
@@ -104,7 +103,7 @@ function UserPage() {
                             <Link to={!editMode ? `/sound/${el.id}` : "#"} className="contentLink" key={`soundKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>
-                                {editMode && <img src={gear} className="linkEditGear" draggable="false"></img>}
+                                {editMode && <img src={gear} className="linkEditGear" draggable="false" alt=""></img>}
                             </Link>
                         )}
 

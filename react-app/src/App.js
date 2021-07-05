@@ -8,8 +8,9 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import UserPage from "./components/UserPage";
 import { authenticate } from "./store/session";
-import Sound from "./components/Sound"
+import SoundForm from "./components/SoundForm"
 import HomePage from "./components/HomePage"
+import CollectionPage from "./components/CollectionPage";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -34,6 +35,9 @@ function App() {
         <Route path="/" exact={true}>
           <HomePage />
         </Route>
+        <Route path="/collection/:id" exact={true}>
+          <CollectionPage />
+        </Route>
         <Route path="/login" exact={true}>
           <Login />
         </Route>
@@ -41,7 +45,7 @@ function App() {
           <SignUp />
         </Route>
         <Route path="/sound">
-            <Sound></Sound>
+            <SoundForm />
         </Route>
 
         <ProtectedRoute path="/users/:id" exact={true}>

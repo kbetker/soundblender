@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session"
 import soundReducer from "./sound";
 import userInfoReducer from "./userPage"
+import userCollectionReducer from "./collection";
 
 const rootReducer = combineReducers({
     session,
     newSound: soundReducer,
     userInfo: userInfoReducer,
+    collection: userCollectionReducer,
 });
 
 

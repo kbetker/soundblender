@@ -5,7 +5,7 @@ import { addSound } from "../../store/sound"
 import "./Sound.css"
 import HomePage from "../HomePage";
 
-function Sound() {
+function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const history = useHistory(); // so that we can redirect after the image upload is successful
@@ -140,4 +140,4 @@ function Sound() {
         </>
     )
 }
-export default Sound
+export default SoundForm
