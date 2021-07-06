@@ -1,73 +1,66 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom";
-import { addSound } from "../../store/sound"
-import "./Sound.css"
 import UserPage from "../UserPage"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory, useParams } from "react-router-dom";
+import { editUserSound } from "../../store/sound"
+// import { getUserInfo } from "../../store/userPage";
+import "../SoundForm/Sound.css"
+// import { getUserSounds } from "../../store/sound";
 
 function SoundForm() {
     const dispatch = useDispatch()
+    const { soundId }  = useParams();
+    const history = useHistory();
     const user = useSelector(state => state.session.user)
-    const history = useHistory(); // so that we can redirect after the image upload is successful
-    // const [image, setImage] = useState(null);
-    // const [imageLoading, setImageLoading] = useState(false);
+
+    // useEffect(() => {
+    //     dispatch(getUserSounds(user.id))
+    // }, [dispatch, user.id]);
+
+    // useEffect(() => {
+    //     dispatch(getUserInfo(user.id))
+    // }, [dispatch, user.id]);
+
+    const sounds = useSelector(state => state.newSound.sounds)
+    const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(soundId))
 
 
-    const [sound_url, setSound_url] = useState(null);
-    const [name, setName] = useState('');
+    const [sound_url, setSound_url] = useState(soundToEdit?.sound_url);
+    const [name, setName] = useState(soundToEdit?.name);
     // const [owner_id, setId] = useState(user?.id);
     // const [is_public, setIs_public] = useState(false);
-    const [target_volume, setTarget_volume] = useState(10);
-    const [fade_speed, setFade_speed] = useState(1);
-    const [arrangement, setArrangement] = useState(0);
-    const [is_looped, setIs_looped] = useState(true);
-
+    const [target_volume, setTarget_volume] = useState(soundToEdit?.target_volume);
+    const [fade_speed, setFade_speed] = useState(soundToEdit?.fade_speed);
+    const [arrangement, setArrangement] = useState(soundToEdit?.arrangement);
+    const [is_looped, setIs_looped] = useState(soundToEdit?.is_looped);
 
 
 
     useEffect(() => {
 
-    }, [is_looped])
+    }, [is_looped])// ??? not sure what I'm doing with this
+
     const newSound = async (e) => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.append("sound_url", sound_url);
         formData.append("name", name);
         formData.append("owner_id", user?.id);
         formData.append("is_public", false);
-        formData.append("target_volume", target_volume);
-        formData.append("fade_speed", fade_speed);
+        formData.append("target_volume", target_volume * 0.1);
+        formData.append("fade_speed", fade_speed * 1000);
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
         // setImageLoading(true);
-        // console.log(formData.is_looped)
-        const data = await dispatch(addSound(formData))
+        const data = await dispatch(editUserSound(formData, soundId))
+
         if(data.errors){
             alert(data.errors)
         } else {
             history.push(`/users/${user.id}`)
         }
-        // const res = await fetch('/api/sound', {
-        //     method: "POST",
-        //     body: formData,
-        // });
-        // if (res.ok) {
-        //     await res.json();
-        //     setImageLoading(false);
-        //     // history.push("/");
-        //     console.log(res)
-        // }
-        // else {
-        //     setImageLoading(false);
-        //     // a real app would probably use more advanced
-        //     // error handling
-        // }
-
-        // const data = await dispatch(addSound(sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped))
-        // if (data.errors) {
-        //     alert(data.errors)
-        // }
 
     }
 
@@ -75,15 +68,20 @@ function SoundForm() {
         const file = e.target.files[0];
         setSound_url(file);
     }
+
     const goHome = () => {
         history.push(`/users/${user.id}`)
+    }
+
+    const goToDelete = () => {
+        history.push(`/sound/${soundId}/delete`)
     }
 
     return (
         <>
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">
             <div className="close_new_sound" onClick={goHome}>X</div>
-            <label>Name Your Sound</label>
+            <label>EDIT Your Sound</label>
             <input type="text"
                 name="name"
                 onChange={(e) => setName(e.target.value)}
@@ -126,17 +124,10 @@ function SoundForm() {
                     onChange={(e) => { setIs_looped(e.target.checked) }} />
             </label>
 
-            <div className="upload_buttons">
-                <div className="visible_button">Choose Sound</div>
-                <input
-                    type="file"
-                    accept="audio/*"
-                    onChange={updateImage}
-                    className="select_image"
-                />
-            </div>
 
             <button type="submit" className="new_sound_submit">Submit</button>
+            <button className="new_sound_submit" onClick={() => goToDelete()}>Delete</button>
+
         </form>
         <div className="black_backer"></div>
         <UserPage></UserPage>

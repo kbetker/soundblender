@@ -8,6 +8,7 @@
     margin: 0 7px;
     padding: 5px;
     box-shadow: 0 0 4px black inset;
+    position: relative;
 
 }
 .categoryName{
@@ -15,4 +16,15 @@
     font-size: 18px;
     color: white;
     margin-left: 7px;
+    /* position: relative; */
+    /* top: -17px; */
+    /* background-color: rgb(66, 66, 66); */
+    /* white-space:unset; */
+    /* width: 50%; */
+    /* white-space: nowrap; */
+    /* padding: 5px; */
+    /* box-shadow: 0 0 4px black inset; */
+    /* border-radius: 10px; */
+    /* margin-bottom: -10px; */
+
 }

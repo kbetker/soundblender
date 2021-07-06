@@ -11,6 +11,8 @@ import { authenticate } from "./store/session";
 import SoundForm from "./components/SoundForm"
 import HomePage from "./components/HomePage"
 import CollectionPage from "./components/CollectionPage";
+import SoundEditForm from "./components/SoundEditForm";
+import SoundDelete from "./components/SoundDelete";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -44,9 +46,19 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUp />
         </Route>
-        <Route path="/sound">
+
+        <Route path="/sound/:soundId/edit"  exact={true}>
+            <SoundEditForm />
+        </Route>
+
+        <Route path="/sound/:soundId/delete"  exact={true}>
+            <SoundDelete />
+        </Route>
+
+        <Route path="/sound"  exact={true}>
             <SoundForm />
         </Route>
+
 
         <ProtectedRoute path="/users/:id" exact={true}>
           <UserPage />

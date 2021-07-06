@@ -9,8 +9,9 @@ import redLightOff from "./images/redLightOff.png"
 import btnPlaying_img from "./images/PlayBtn.png"
 import btnStopping_img from "./images/Both_btn.png"
 import btnStopped_img from "./images/Stop_Btn.png"
+import { useSelector } from 'react-redux';
 
-
+import gear from '../UserPage/Gear.png'
 // import button_press2 from "./images/button_press2.png"
 // import button_press from "./images/button_press.png"
 // import Button_Off from "./images/Button_Off.png"
@@ -36,6 +37,7 @@ function SoundModule({mySoundObj, color, currentscene}) {
 
     const [redLightOn, setRedLightOn] = useState(false)
 
+    const editMode = useSelector(state => state.editMode.editMode)
 
     function setVolume() {
         soundVolume.current = knobPOS.current
@@ -164,7 +166,7 @@ function SoundModule({mySoundObj, color, currentscene}) {
                 // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
                 Xold = (e.clientX + addToClientX());
                 knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX()) / 2
-                console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())
+                // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())
                 setVolume()
                 if ((e.clientX + addToClientX()) <= 20 + leftMarkerPos) {
                     stopDrag()
@@ -196,7 +198,10 @@ function SoundModule({mySoundObj, color, currentscene}) {
     return (
         <>
             <div className="soundModule_wrapper" style={{ border: `1px solid ${color}` }}>
-                <div className="title">{soundObj.name}</div>
+                <div className="title">
+                    {soundObj.name}
+                    {editMode && <img src={gear} className="soundEditGear" draggable="false" alt=""></img>}
+                </div>
                 <div className="slider_and_controls">
                     <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>
                         <div ref={leftMarker}></div>

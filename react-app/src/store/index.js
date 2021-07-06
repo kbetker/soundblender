@@ -4,12 +4,14 @@ import session from "./session"
 import soundReducer from "./sound";
 import userInfoReducer from "./userPage"
 import userCollectionReducer from "./collection";
+import editMode from "./editMode";
 
 const rootReducer = combineReducers({
     session,
     newSound: soundReducer,
     userInfo: userInfoReducer,
     collection: userCollectionReducer,
+    editMode,
 });
 
 

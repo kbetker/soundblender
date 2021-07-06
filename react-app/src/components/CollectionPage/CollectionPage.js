@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getUserCollection } from "../../store/collection"
+import { setEditMode } from "../../store/editMode"
 // import { getUserSounds } from "../../store/sound";
 import "../UserPage/userPage.css"
 import "../Scene/Scene.css"
+import "./CollectionPage.css"
 // import collection_img from "../UserPage/collectionIcon.png"
 // import new_collection_img from "../UserPage/newCollectionIcon.png"
 // import mySoundPlay from "../UserPage/mySoundPlay.png"
@@ -20,7 +22,6 @@ import arrowL from "./arrowL.png"
 function CollectionPage() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const [editMode, setEditMode] = useState(false)
     const { id } = useParams();
     // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
@@ -32,6 +33,8 @@ function CollectionPage() {
 
     const collection = useSelector(state => state.collection)
     const sceneLength =collection?.collection?.scenes.length
+    const editMode = useSelector(state => state.editMode.editMode)
+    const user = useSelector(state => state.session.user)
 
 
     const onLogout = async (e) => {
@@ -40,12 +43,14 @@ function CollectionPage() {
       };
 
     const goHome = () => {
-        history.push('/users/1') //to do - change to current user
+        dispatch(setEditMode(false))
+        history.push(`/users/${user.id}`) //to do - change to current user
       }
 
       const editModeFunc = (e) => {
         e.preventDefault()
-        editMode ? setEditMode(false) : setEditMode(true)
+        editMode ? dispatch(setEditMode(false)) : dispatch(setEditMode(true))
+
     }
 
     // console.log(currentScene.current, "+++++++++++ BEFORE FUNCTION ++++++++++")
@@ -92,8 +97,8 @@ function CollectionPage() {
                         <img className="userPageLogo" src={homepageLogo} alt=""></img>
                         <img className="userPageLogo-anim" src={logoAnimation} alt=""></img>
                     </div>
-
-                    <div className="homeButton">
+                    <div className="collectionName">{collection.collection?.name}</div>
+                    <div className="collectionNav">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div> | </div>
                         <div className="logOut" onClick={goHome}>Home</div>
@@ -113,17 +118,17 @@ function CollectionPage() {
 
             </div>
                 <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
-                    <div className="nexPrevScene" onClick={() => changeSceneFunc("left")}><img src={arrowL}></img></div>
+                    <div className="prevScene" onClick={() => changeSceneFunc("left")}><img src={arrowL}></img></div>
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
                             {collection?.collection?.scenes.map((scene, index) =>
                                 <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
-                            )}
+                                )}
                         </div>
                      </div>
 
-                     <div className="nexPrevScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR}></img></div>
+                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR}></img></div>
                 </div>
         </div>
         </>

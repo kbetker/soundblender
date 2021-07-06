@@ -100,14 +100,14 @@ function UserPage() {
                     <div className="contentTitle">My Sounds</div>
                     <div className="userContentBox">
                         {sounds?.sounds.map(el =>
-                            <Link to={!editMode ? `/sound/${el.id}` : "#"} className="contentLink" key={`soundKey-${el.id}`}>
+                            <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>
                                 {editMode && <img src={gear} className="linkEditGear" draggable="false" alt=""></img>}
                             </Link>
                         )}
 
-                            <Link to="collections/new" className="contentLink">
+                            <Link to="/sound" className="contentLink">
                                 <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
                                 <div className="contentName">New Sound</div>
                             </Link>

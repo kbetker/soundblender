@@ -50,7 +50,7 @@ const LoginForm = () => {
                 <div className="close_new_sound" onClick={goHome}>X</div>
                 <div className="formTitle">Log In</div>
 
-                <label htmlFor="email">Email</label>
+                <label>Email</label>
 
                 <input
                     name="email"
@@ -61,7 +61,7 @@ const LoginForm = () => {
                     className="new_sound_input"
                 />
 
-                <label htmlFor="password">Password</label>
+                <label>Password</label>
                 <input
                     name="password"
                     type="password"

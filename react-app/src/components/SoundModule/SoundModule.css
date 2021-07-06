@@ -93,3 +93,22 @@ body{
   .slider__container{
     margin: 0 20px;
   }
+
+
+  .soundEditGear{
+    /* position: absolute; */
+    width: 20px;
+    background-color: rgba(0, 0, 0, 40%);
+    box-shadow: 0 0 10px black;
+    border-radius: 20px;
+    filter: brightness(80%);
+    margin-left: 8px;
+    position: relative;
+    top: 4px;
+    animation:clockwise 14s linear infinite;
+    cursor: pointer;
+}
+.soundEditGear:hover{
+    filter: brightness(100%);
+
+}
