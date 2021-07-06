@@ -14,6 +14,8 @@ import gear from "../UserPage/Gear.png"
 import { logout } from "../../store/session";
 import Scene from "../Scene"
 import { useRef } from "react";
+import arrowR from "./arrowR.png"
+import arrowL from "./arrowL.png"
 
 function CollectionPage() {
     const dispatch = useDispatch()
@@ -111,17 +113,17 @@ function CollectionPage() {
 
             </div>
                 <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
-                    <div className="nexPrevScene" onClick={() => changeSceneFunc("left")}>V</div>
+                    <div className="nexPrevScene" onClick={() => changeSceneFunc("left")}><img src={arrowL}></img></div>
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
                             {collection?.collection?.scenes.map((scene, index) =>
-                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`}></Scene>
+                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
                             )}
                         </div>
                      </div>
 
-                     <div className="nexPrevScene"  onClick={() => changeSceneFunc("right")}>V</div>
+                     <div className="nexPrevScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR}></img></div>
                 </div>
         </div>
         </>

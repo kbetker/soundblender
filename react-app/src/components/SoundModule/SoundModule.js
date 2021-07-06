@@ -18,13 +18,13 @@ import btnStopped_img from "./images/Stop_Btn.png"
 
 
 
-function SoundModule({mySoundObj, color}) {
+function SoundModule({mySoundObj, color, currentscene}) {
     const soundObj = mySoundObj
     const mySound = useRef();
     const playBtn = useRef()
     const stopBtn = useRef();
 
-    const knob = useRef()
+    const knob = useRef(0)
     const knobPOS = useRef(0)
     const leftMarker = useRef()
     const soundVolume = useRef(0)
@@ -39,6 +39,7 @@ function SoundModule({mySoundObj, color}) {
 
     function setVolume() {
         soundVolume.current = knobPOS.current
+        // console.log(knobPOS.current)
         let vol = soundVolume.current
         if (vol <= 0) vol = 0;
         if (vol >= 100) vol = 100;
@@ -135,31 +136,41 @@ function SoundModule({mySoundObj, color}) {
     })
 
 
+    // console.log(currentscene)
+    function addToClientX(){
+        let sum =0
+        for(let i = 1; i < parseInt(currentscene.current); i++){
+            sum = sum + window.innerWidth - 80
+        }
+        return sum
+    }
 
     useEffect(() => {
         let leftMarkerPos = leftMarker?.current?.getBoundingClientRect().left
         dragKnob(knob.current);
-
+        // let curr_scene = parseInt(currentscene)
         function dragKnob(theKnob) {
             let xDiff = 0, Xold = 0;
             function mouseDown(e) {
                 e.preventDefault();
-                Xold = e.clientX;
+                Xold = (e.clientX + addToClientX());
                 document.onmouseup = stopDrag;
                 document.onmousemove = knobIsDragging;
             }
 
             function knobIsDragging(e) {
                 e.preventDefault();
-                xDiff = Xold - e.clientX;
-                Xold = e.clientX;
-                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos) / 2
+                xDiff = Xold - (e.clientX + addToClientX());
+                // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
+                Xold = (e.clientX + addToClientX());
+                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX()) / 2
+                console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())
                 setVolume()
-                if (e.clientX <= 20 + leftMarkerPos) {
+                if ((e.clientX + addToClientX()) <= 20 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `-2px`;
                 }
-                else if (e.clientX > 260 + leftMarkerPos) {
+                else if ((e.clientX + addToClientX()) > 260 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `197px`;
                 }

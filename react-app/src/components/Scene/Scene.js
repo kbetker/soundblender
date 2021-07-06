@@ -2,7 +2,7 @@ import React from "react"
 import Categories from "../Categories/Categories"
 import "./Scene.css"
 
-function Scene({scene, id}){
+function Scene({scene, id, currentscene}){
     const scenes= scene?.categories
     // const windowWidth = window.innerWidth;
     // console.log(scenes.length)
@@ -12,7 +12,7 @@ function Scene({scene, id}){
             <div className="sceneName">Scene: {scene.name}</div>
             <div className="eachScene">
             {scenes.map(category =>
-                <Categories category={category} key={`categoryId-${category.id}`}></Categories>
+                <Categories category={category} key={`categoryId-${category.id}`} currentscene={currentscene}></Categories>
                         )
             }
             </div>

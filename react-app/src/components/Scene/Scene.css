@@ -6,6 +6,7 @@
     /* overflow-x: scroll; */
     /* margin: 0 40px; */
     height: 90vh;
+
     /* background-color: indianred; */
 }
 
@@ -15,7 +16,8 @@
     align-items: center;
     /* background-color: indigo; */
     /* width: 100vw; */
-    overflow-x: scroll;
+    overflow-x: hidden;
+
     /* background-color: red; */
 }
 .scenePage{
@@ -30,6 +32,10 @@
     padding: 20px;
     border: 1px solid white;
     height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 8px black inset;
+    background-color: rgb(42, 42, 42);
+
     /* display: flex; */
 }
 .sceneName{
@@ -42,8 +48,17 @@
     display: flex;
 }
 .nexPrevScene{
-    background-color: rgba(0, 0, 0, 70%);
+    background-color: black;
     width: 40px;
     height: 100%;
     cursor: pointer;
+    height: 85.5vh;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    opacity: 50%;
+}
+.nexPrevScene:hover{
+    background-color: rgb(85, 85, 85);
+    opacity: 100%;
 }
