@@ -21,9 +21,20 @@ sound_routes = Blueprint('sound', __name__)
 
 @sound_routes.route('/<int:id>')
 # @login_required
-def user(id):
+def getUserSounds(id):
     sounds = Sound.query.filter(Sound.owner_id == id)
     return  {"sounds": [sound.to_dict() for sound in sounds ]}
+
+
+@sound_routes.route('/<int:soundId>/delete', methods=["DELETE"])
+# @login_required
+def deleteuserSound(soundId):
+    print("===============================================", "wat", soundId)
+    Sound.query.filter(Sound.id == soundId).delete()
+    db.session.commit()
+    return  {"sound": "deleted"}
+
+
 
 
 
@@ -43,6 +54,7 @@ def new_sound():
     upload = upload_file_to_s3(sound)
     form = NewSound()
     data = form.data
+    print(data, "++++++++++++++++++++++++++++++ WAT ++++++++++++++++++++++++++++++")
 
     if "url" not in upload:
         return upload, 400
@@ -56,7 +68,7 @@ def new_sound():
             target_volume=data['target_volume'],
             fade_speed=data['fade_speed'],
             arrangement=data['arrangement'],
-            is_looped=True
+            is_looped=data['is_looped']
         )
     db.session.add(newSound)
     db.session.commit()
@@ -64,6 +76,36 @@ def new_sound():
     return newSound.to_dict()
     # else:
     #     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+
+
+@sound_routes.route("/<int:soundId>/edit", methods=["PUT"])
+# @login_required
+def edit_sound(soundId):
+
+    form = NewSound()
+    data = form.data
+    soundToEdit = Sound.query.filter(Sound.id == soundId).first()
+
+    # print(soundToEdit, "++++++++++++++++++++++++++++++ WAT ++++++++++++++++++++++++++++++")
+    soundToEdit.sound_url=data['sound_url']
+    soundToEdit.name=data['name']
+    soundToEdit.owner_id=data['owner_id']
+    soundToEdit.is_public=data['is_public']
+    soundToEdit.target_volume=data['target_volume']
+    soundToEdit.fade_speed=data['fade_speed']
+    soundToEdit.arrangement=data['arrangement']
+    soundToEdit.is_looped=data['is_looped']
+
+
+    db.session.commit()
+    # print(soundToEdit.to_dict())
+    return {"cool": "Beings"}
+    # else:
+    #
+
+
 
 
 

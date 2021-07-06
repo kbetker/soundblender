@@ -3,48 +3,48 @@ from app.models import db, Sound
 def seed_sounds():
 
     #demo sounds
-    name1 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name2 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name3 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name4 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name1 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name2 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name3 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name4 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
-    name5 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name6 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name7 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name8 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name5 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name6 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name7 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name8 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
-    name9 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name10 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name11 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name12 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name9 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name10 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name11 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name12 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
-    name13 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name14 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name15 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name16 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name13 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name14 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name15 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=1, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name16 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=1, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
 
 
     #my sounds
-    name17 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name18 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name19 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name20 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name17 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name18 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name19 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name20 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
-    name21 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name22 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name23 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name24 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name21 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name22 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name23 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name24 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
-    name25 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name26 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name27 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name28 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name25 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name26 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name27 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name28 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
-    name29 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=3000, arrangement=0, is_looped=True)
-    name30 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=2000, arrangement=0, is_looped=True)
-    name31 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=5000, arrangement=0, is_looped=True)
-    name32 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=4000, arrangement=0, is_looped=True)
+    name29 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=2, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
+    name30 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=2, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)
+    name31 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/CampForestNight.mp3", name="Ambient01", owner_id=2, is_public=False, target_volume=0.5, fade_speed=10, arrangement=0, is_looped=True)
+    name32 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/travel_2.mp3", name="Music02", owner_id=2, is_public=False, target_volume=1, fade_speed=100, arrangement=0, is_looped=True)
 
 
 

@@ -4,12 +4,15 @@ import { useDispatch } from "react-redux";
 import Login from "./components/LogIn/Login";
 import SignUp from "./components/SignUp/index";
 // import NavBar from "./components/NavBar";
-// import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import UserPage from "./components/UserPage";
 import { authenticate } from "./store/session";
-import Sound from "./components/Sound"
+import SoundForm from "./components/SoundForm"
 import HomePage from "./components/HomePage"
+import CollectionPage from "./components/CollectionPage";
+import SoundEditForm from "./components/SoundEditForm";
+import SoundDelete from "./components/SoundDelete";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -34,19 +37,32 @@ function App() {
         <Route path="/" exact={true}>
           <HomePage />
         </Route>
+        <Route path="/collection/:id" exact={true}>
+          <CollectionPage />
+        </Route>
         <Route path="/login" exact={true}>
           <Login />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUp />
         </Route>
-        <Route path="/sound">
-            <Sound></Sound>
+
+        <Route path="/sound/:soundId/edit"  exact={true}>
+            <SoundEditForm />
         </Route>
 
-        <Route path="/users/:id" exact={true}>
-          <UserPage />
+        <Route path="/sound/:soundId/delete"  exact={true}>
+            <SoundDelete />
         </Route>
+
+        <Route path="/sound"  exact={true}>
+            <SoundForm />
+        </Route>
+
+
+        <ProtectedRoute path="/users/:id" exact={true}>
+          <UserPage />
+        </ProtectedRoute>
 
         <Route path="/users" exact={true}>
           <UsersList/>

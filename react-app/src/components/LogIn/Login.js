@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 import HomePage from "../HomePage";
 
 
 const LoginForm = () => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
     // const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -50,7 +50,7 @@ const LoginForm = () => {
                 <div className="close_new_sound" onClick={goHome}>X</div>
                 <div className="formTitle">Log In</div>
 
-                <label htmlFor="email">Email</label>
+                <label>Email</label>
 
                 <input
                     name="email"
@@ -61,7 +61,7 @@ const LoginForm = () => {
                     className="new_sound_input"
                 />
 
-                <label htmlFor="password">Password</label>
+                <label>Password</label>
                 <input
                     name="password"
                     type="password"
