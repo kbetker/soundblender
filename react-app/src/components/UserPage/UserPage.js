@@ -11,6 +11,7 @@ import homepageLogo from "../HomePage/homepageLogo.gif"
 import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import gear from "./Gear.png"
 import { logout } from "../../store/session";
+import { setRedirectFunc } from "../../store/redirect";
 
 
 function UserPage() {
@@ -29,6 +30,10 @@ function UserPage() {
     useEffect(() => {
         dispatch(getUserSounds(id))
     }, [dispatch, id]);
+
+    useEffect(()=>{
+        dispatch(setRedirectFunc(`/users/${id}`))
+    }, [dispatch, id])
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -99,7 +104,7 @@ function UserPage() {
                 <div className="contentContainer">
                     <div className="contentTitle">My Sounds</div>
                     <div className="userContentBox">
-                        {sounds?.sounds.map(el =>
+                        {sounds?.sounds?.map(el =>
                             <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>

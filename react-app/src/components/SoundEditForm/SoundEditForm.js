@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
-import UserPage from "../UserPage"
+import FauxUserPage from "../FauxUserPage"
+import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import { editUserSound } from "../../store/sound"
@@ -130,7 +131,7 @@ function SoundForm() {
 
         </form>
         <div className="black_backer"></div>
-        <UserPage></UserPage>
+        <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
 
         </>
     )

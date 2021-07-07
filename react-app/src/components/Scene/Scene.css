@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(41, 41, 41);
+}
 .ScenePageBody{
     display: flex;
     /* justify-content: center;
@@ -36,6 +39,7 @@
     box-shadow: 0 0 8px black inset;
     background-color: rgb(42, 42, 42);
     position: relative;
+    /* overflow-y: scroll; */
 
     /* display: flex; */
 }

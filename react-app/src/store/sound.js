@@ -2,7 +2,7 @@ const ADD_SOUND = "sound/ADD_SOUND"
 const GET_SOUNDS = "sounds/GET_SOUNDS";
 const EDIT_SOUND = "sound/EDIT_SOUND";
 const DELETE_SOUND = "sound/DELETE_SOUND";
-
+const GET_SOUND = "sound/GET_SOUND";
 
 
 // action creators
@@ -26,10 +26,28 @@ export const deleteSound = (data) => ({
     payload: data
 })
 
+export const getSound = (data) => ({
+    type: GET_SOUND,
+    payload: data
+})
 
+export const getUserSounds = (id) => async (dispatch) => {
+    const response = await fetch(`/api/sound/s/${id}`);
+    const data = await response.json();
+    dispatch(getSounds(data))
+    return data;
+}
+
+
+export const getUserSound = (soundId) => async (dispatch) => {
+    const response = await fetch(`/api/sound/${soundId}`);
+    const data = await response.json();
+    dispatch(getSounds(data))
+
+    return data;
+}
 
 export const deleteUserSound = (soundId) => async (dispatch) => {
-    // console.log(formData, "================================================ THUNK ===========")
     const response = await fetch(`/api/sound/${soundId}/delete`, {
         method: "DELETE"
     });
@@ -40,10 +58,6 @@ export const deleteUserSound = (soundId) => async (dispatch) => {
     dispatch(setSound(data))
     return;
 }
-
-
-
-
 
 export const editUserSound = (formData, soundId) => async (dispatch) => {
     const response = await fetch(`/api/sound/${soundId}/edit`, {
@@ -60,17 +74,7 @@ export const editUserSound = (formData, soundId) => async (dispatch) => {
 
 
 
-export const getUserSounds = (id) => async (dispatch) => {
-    const response = await fetch(`/api/sound/${id}`);
-    const data = await response.json();
-    dispatch(getSounds(data))
-    return data;
-}
-
-
-
 export const addSound = (formData) => async (dispatch) => {
-    // console.log(formData, "================================================ THUNK ===========")
     const response = await fetch("/api/sound", {
         method: "POST",
         body: formData,
@@ -93,6 +97,8 @@ export default function soundReducer(state = initialState, action) {
             return {newSound: action.payload}
         case GET_SOUNDS:
             return {sounds: action.payload}
+        case GET_SOUND:
+            return {sound: action.payload}
         case EDIT_SOUND:
             return {editedSound: action.payload}
         case DELETE_SOUND:

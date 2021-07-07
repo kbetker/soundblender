@@ -10,6 +10,7 @@ from .api.sound_routes import sound_routes
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.collection_routes import collection_routes
+from .api.category_routes import categories_routes
 
 from .seeds import seed_commands
 
@@ -31,6 +32,7 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
+app.register_blueprint(categories_routes, url_prefix='/api/categories')
 app.register_blueprint(sound_routes, url_prefix='/api/sound')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')

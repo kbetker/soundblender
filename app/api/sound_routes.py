@@ -19,11 +19,17 @@ sound_routes = Blueprint('sound', __name__)
 
 
 
-@sound_routes.route('/<int:id>')
+@sound_routes.route('/s/<int:id>')
 # @login_required
 def getUserSounds(id):
     sounds = Sound.query.filter(Sound.owner_id == id)
     return  {"sounds": [sound.to_dict() for sound in sounds ]}
+
+@sound_routes.route('/<int:soundId>')
+# @login_required
+def getUserSound(soundId):
+    sound = Sound.query.get(soundId)
+    return  sound.to_dict()
 
 
 @sound_routes.route('/<int:soundId>/delete', methods=["DELETE"])

@@ -1,3 +1,4 @@
+
 .userPageContainer{
     display: grid;
     grid-template-rows: 15px 50px 86vh;
@@ -62,7 +63,7 @@
 
 .contentName{
     margin-top: 4px;
-
+    font-size: 14px;
 }
 
 

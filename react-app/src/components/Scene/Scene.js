@@ -19,7 +19,7 @@ function Scene({scene, id, currentscene}){
             </div>
             <div className="eachScene">
             {scenes.map(category =>
-                <Categories category={category} key={`categoryId-${category.id}`} currentscene={currentscene}></Categories>
+                <Categories category={category} key={`${category.id}`} currentscene={currentscene}></Categories>
                         )
             }
 

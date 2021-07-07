@@ -2,7 +2,6 @@
 import './SoundModule.css';
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import sliderBackground from "./images/sliderBackground.png"
 import slider_GreyMiddle from "./images/slider_GreyMiddle.png"
@@ -14,12 +13,11 @@ import btnStopped_img from "./images/Stop_Btn.png"
 import gear from '../UserPage/Gear.png'
 
 
-function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
-    console.log(categoryId, mySoundObj.id)
+function SoundModulePreview({ mySoundObj, color }) {
+    // const mySoundObj = mymySoundObj
     const mySound = useRef();
     const playBtn = useRef()
     const stopBtn = useRef();
-
     const knob = useRef(0)
     const knobPOS = useRef(0)
     const leftMarker = useRef()
@@ -40,7 +38,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
         let vol = soundVolume.current
         if (vol <= 0) vol = 0;
         if (vol >= 100) vol = 100;
-        mySound.current.volume = Math.round(vol) * .01;
+        mySound.current.volume = Number(Math.round(vol) * .01);
     }
 
 
@@ -134,13 +132,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
     // console.log(currentscene)
-    function addToClientX() {
-        let sum = 0
-        for (let i = 1; i < parseInt(currentscene.current); i++) {
-            sum = sum + window.innerWidth - 80
-        }
-        return sum
-    }
+
 
     useEffect(() => {
         let leftMarkerPos = leftMarker?.current?.getBoundingClientRect().left
@@ -150,24 +142,24 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             let xDiff = 0, Xold = 0;
             function mouseDown(e) {
                 e.preventDefault();
-                Xold = (e.clientX + addToClientX());
+                Xold = (e.clientX);
                 document.onmouseup = stopDrag;
                 document.onmousemove = knobIsDragging;
             }
 
             function knobIsDragging(e) {
                 e.preventDefault();
-                xDiff = Xold - (e.clientX + addToClientX());
+                xDiff = Xold - (e.clientX);
                 // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
-                Xold = (e.clientX + addToClientX());
-                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX()) / 2
-                // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())
+                Xold = (e.clientX);
+                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos) / 2
+                // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos)
                 setVolume()
-                if ((e.clientX + addToClientX()) <= 20 + leftMarkerPos) {
+                if ((e.clientX) <= 20 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `-2px`;
                 }
-                else if ((e.clientX + addToClientX()) > 260 + leftMarkerPos) {
+                else if ((e.clientX) > 260 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `197px`;
                 }
@@ -191,15 +183,11 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
     return (
-        <>
+
             <div className="soundModule_wrapper" style={{ border: `1px solid ${color}` }}>
                 <div className="title">
                     {mySoundObj.name}
-                    {editMode &&
-                        <Link to={`/category-sound/${categoryId}/${mySoundObj.id}`}>
-                            <img src={gear} className="soundEditGear" draggable="false" alt=""></img>
-                        </Link>
-                    }
+                    {editMode && <img src={gear} className="soundEditGear" draggable="false" alt=""></img>}
                 </div>
                 <div className="slider_and_controls">
                     <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>
@@ -224,8 +212,8 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 </div>
                 <audio ref={mySound} src={mySoundObj.sound_url} type="audio/mpeg"></audio>
             </div>
-        </>
+
     );
 }
 
-export default SoundModule;
+export default SoundModulePreview;

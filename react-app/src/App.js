@@ -13,6 +13,8 @@ import HomePage from "./components/HomePage"
 import CollectionPage from "./components/CollectionPage";
 import SoundEditForm from "./components/SoundEditForm";
 import SoundDelete from "./components/SoundDelete";
+import SoundPreview from "./components/SoundPreview";
+import CategorySound from "./components/CategorySound";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -47,17 +49,27 @@ function App() {
           <SignUp />
         </Route>
 
-        <Route path="/sound/:soundId/edit"  exact={true}>
+        <Route path="/sound/:soundId/edit" exact={true}>
             <SoundEditForm />
         </Route>
 
-        <Route path="/sound/:soundId/delete"  exact={true}>
+        <Route path="/sound/:soundId/delete" exact={true}>
             <SoundDelete />
+        </Route>
+
+        <Route path="/sound/:soundId" exact={true}>
+            <SoundPreview />
         </Route>
 
         <Route path="/sound"  exact={true}>
             <SoundForm />
         </Route>
+
+        <Route path="/category-sound/:catId/:soundId"  exact={true}>
+            <CategorySound />
+        </Route>
+
+
 
 
         <ProtectedRoute path="/users/:id" exact={true}>

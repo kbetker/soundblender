@@ -18,6 +18,7 @@ import Scene from "../Scene"
 import { useRef } from "react";
 import arrowR from "./arrowR.png"
 import arrowL from "./arrowL.png"
+import { setRedirectFunc } from "../../store/redirect";
 
 function CollectionPage() {
     const dispatch = useDispatch()
@@ -30,6 +31,10 @@ function CollectionPage() {
     useEffect(() => {
         dispatch(getUserCollection(id))
     }, [dispatch, id]);
+
+    useEffect(()=>{
+        dispatch(setRedirectFunc(`/collection/${id}`))
+    }, [dispatch, id])
 
     const collection = useSelector(state => state.collection)
     const sceneLength =collection?.collection?.scenes.length
@@ -53,9 +58,7 @@ function CollectionPage() {
 
     }
 
-    // console.log(currentScene.current, "+++++++++++ BEFORE FUNCTION ++++++++++")
     function changeSceneFunc(direction){
-        // console.log(currentScene.current, "+++++++++++ Right in side ++++++++++")
         function changeScene(){
             let currentDiv = document.getElementById(currentScene.current)
             if(currentDiv){
@@ -63,17 +66,17 @@ function CollectionPage() {
             }
         }
 
-        if(direction === "none"){
+        if(direction === "none"){ // "none" is passed when resizing the window so the current scene will stay in view
             changeScene()
         } else if (direction === "right"){
-                if(parseInt(currentScene.current) + 1 > sceneLength) {
+                if(parseInt(currentScene.current) + 1 > sceneLength) { //loops to begining
                     currentScene.current = "1"
                 } else {
                     currentScene.current = `${parseInt(currentScene.current) + 1}`
                 }
                 changeScene()
-        } else {
-            if(parseInt(currentScene.current) - 1 <= 0 ) {
+        } else { // "left" is the only other argument
+            if(parseInt(currentScene.current) - 1 <= 0 ) { // loops to end
                 currentScene.current = `${sceneLength}`
             } else {
                 currentScene.current = `${parseInt(currentScene.current) - 1}`

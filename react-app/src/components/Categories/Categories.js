@@ -8,7 +8,6 @@ import "./Categories.css"
 
 function Categories({ category, currentscene }) {
     const editMode = useSelector(state => state.editMode.editMode)
-
     return (
         <div className="categoryContainer" style={{ border: `1px solid ${category.color}` }}>
             <div className="categoryName">
@@ -17,7 +16,7 @@ function Categories({ category, currentscene }) {
             </div>
 
             {category.sounds.map(mySoundObj =>
-                <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene}></SoundModule>
+                <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModule>
             )}
         </div>
     )
