@@ -1,26 +1,20 @@
 // import logo from './images/logo.svg';
 import './SoundModule.css';
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from 'react-redux';
+
 import sliderBackground from "./images/sliderBackground.png"
 import slider_GreyMiddle from "./images/slider_GreyMiddle.png"
 import redLightOn_img from "./images/redLightOn2.png"
 import redLightOff from "./images/redLightOff.png"
-
 import btnPlaying_img from "./images/PlayBtn.png"
 import btnStopping_img from "./images/Both_btn.png"
 import btnStopped_img from "./images/Stop_Btn.png"
-import { useSelector } from 'react-redux';
-
 import gear from '../UserPage/Gear.png'
-// import button_press2 from "./images/button_press2.png"
-// import button_press from "./images/button_press.png"
-// import Button_Off from "./images/Button_Off.png"
 
 
-
-
-function SoundModule({mySoundObj, color, currentscene}) {
-    const soundObj = mySoundObj
+function SoundModule({ mySoundObj, color, currentscene }) {
+    // const mySoundObj = mymySoundObj
     const mySound = useRef();
     const playBtn = useRef()
     const stopBtn = useRef();
@@ -50,83 +44,83 @@ function SoundModule({mySoundObj, color, currentscene}) {
 
 
 
-    useEffect(()=>{
-    function fadeIn() {
-        if(isPlaying.current) return;
-        if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
-        if (knobPOS.current > 98) knobPOS.current = 98;
-        setRedLightOn(true)
-        setBtnStopped(false)
-        setBtnPlaying(true)
-        isPlaying.current =true
+    useEffect(() => {
+        function fadeIn() {
+            if (isPlaying.current) return;
+            if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
+            if (knobPOS.current > 98) knobPOS.current = 98;
+            setRedLightOn(true)
+            setBtnStopped(false)
+            setBtnPlaying(true)
+            isPlaying.current = true
 
-        if(!soundObj.is_looped){
-            mySound.current.addEventListener('ended', (event) => {
-                fadeOut();
-              })}
-
-        let fadeInToTarget = setInterval(() => {
-            knobPOS.current = knobPOS.current + (soundObj.fade_speed * 0.01)
-            // console.log(knobPOS.current, "WTFWTFWTFWTFWTFWTFWTFWTFWTFWTFWFTWTFWTFWTFWTFWTFWTFWTFWT")
-            knob.current.style.left = `${knobPOS.current * 0.8}%`;
-            setVolume()
-            if (knobPOS.current >= soundObj.target_volume * 100 || knobPOS.current >= 98) {
-                clearInterval(fadeInToTarget)
+            if (!mySoundObj.is_looped) {
+                mySound.current.addEventListener('ended', (event) => {
+                    fadeOut();
+                })
             }
-        }, 10)
 
-        knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
-            clearInterval(fadeInToTarget)
-        })
+            let fadeInToTarget = setInterval(() => {
+                knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
+                knob.current.style.left = `${knobPOS.current * 0.8}%`;
+                setVolume()
+                if (knobPOS.current >= mySoundObj.target_volume * 100 || knobPOS.current >= 98) {
+                    clearInterval(fadeInToTarget)
+                }
+            }, 10)
 
-        if (stopBtn.current) {
-            stopBtn.current.addEventListener("click", (e) => {
+            knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
                 clearInterval(fadeInToTarget)
             })
-        }
-    }
 
-
-
-    function fadeOut() {
-        if(btnStopping) return;
-        if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
-        if (knobPOS.current > 98) knobPOS.current = 98;
-        setBtnStopping(true)
-        setBtnPlaying(false)
-        let fadeOutToZero = setInterval(() => {
-            knobPOS.current = knobPOS.current - (soundObj.fade_speed * 0.01)
-            knob.current.style.left = `${knobPOS.current * 0.8}%`;
-            setVolume()
-            if (knobPOS.current <= 0) {
-                clearInterval(fadeOutToZero)
-                setRedLightOn(false)
-                setBtnPlaying(false)
-                setBtnStopped(true)
-                setBtnStopping(false)
-                mySound.current.pause()
-                mySound.current.currentTime= 0;
-                isPlaying.current = false
+            if (stopBtn.current) {
+                stopBtn.current.addEventListener("click", (e) => {
+                    clearInterval(fadeInToTarget)
+                })
             }
-        }, 10)
-
-        knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
-            if(!isPlaying.current) {
-                return;
-            } else {
-            clearInterval(fadeOutToZero)
-            setBtnStopping(false)
-            setBtnPlaying(true)
         }
-        })
-    }
+
+
+
+        function fadeOut() {
+            if (btnStopping) return;
+            if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
+            if (knobPOS.current > 98) knobPOS.current = 98;
+            setBtnStopping(true)
+            setBtnPlaying(false)
+            let fadeOutToZero = setInterval(() => {
+                knobPOS.current = knobPOS.current - (mySoundObj.fade_speed * 0.01)
+                knob.current.style.left = `${knobPOS.current * 0.8}%`;
+                setVolume()
+                if (knobPOS.current <= 0) {
+                    clearInterval(fadeOutToZero)
+                    setRedLightOn(false)
+                    setBtnPlaying(false)
+                    setBtnStopped(true)
+                    setBtnStopping(false)
+                    mySound.current.pause()
+                    mySound.current.currentTime = 0;
+                    isPlaying.current = false
+                }
+            }, 10)
+
+            knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
+                if (!isPlaying.current) {
+                    return;
+                } else {
+                    clearInterval(fadeOutToZero)
+                    setBtnStopping(false)
+                    setBtnPlaying(true)
+                }
+            })
+        }
 
 
         if (playBtn.current) {
             playBtn.current.addEventListener("click", (e) => {
                 fadeIn();
                 mySound.current.play()
-                mySound.current.loop = soundObj.is_looped;
+                mySound.current.loop = mySoundObj.is_looped;
             })
         }
 
@@ -139,9 +133,9 @@ function SoundModule({mySoundObj, color, currentscene}) {
 
 
     // console.log(currentscene)
-    function addToClientX(){
-        let sum =0
-        for(let i = 1; i < parseInt(currentscene.current); i++){
+    function addToClientX() {
+        let sum = 0
+        for (let i = 1; i < parseInt(currentscene.current); i++) {
             sum = sum + window.innerWidth - 80
         }
         return sum
@@ -196,16 +190,15 @@ function SoundModule({mySoundObj, color, currentscene}) {
 
 
     return (
-        <>
             <div className="soundModule_wrapper" style={{ border: `1px solid ${color}` }}>
                 <div className="title">
-                    {soundObj.name}
+                    {mySoundObj.name}
                     {editMode && <img src={gear} className="soundEditGear" draggable="false" alt=""></img>}
                 </div>
                 <div className="slider_and_controls">
                     <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>
                         <div ref={leftMarker}></div>
-                        <div id={`knob_line--container-${soundObj.id}`} className="knob_line--container">
+                        <div id={`knob_line--container-${mySoundObj.id}`} className="knob_line--container">
                             <div ref={knob} className="slider__knob" draggable="true" style={{ backgroundImage: `url(${slider_GreyMiddle})` }}>
                                 <div className="knob_color" style={{ backgroundColor: `${color}` }}></div>
                             </div>
@@ -223,9 +216,8 @@ function SoundModule({mySoundObj, color, currentscene}) {
                         </div>
                     </div>
                 </div>
-                <audio ref={mySound} src={soundObj.sound_url} type="audio/mpeg"></audio>
+                <audio ref={mySound} src={mySoundObj.sound_url} type="audio/mpeg"></audio>
             </div>
-        </>
     );
 }
 

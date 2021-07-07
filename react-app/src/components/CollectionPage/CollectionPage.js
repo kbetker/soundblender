@@ -94,8 +94,8 @@ function CollectionPage() {
             <div className="userPageHeader">
 
                     <div className="userPageLogo-container">
-                        <img className="userPageLogo" src={homepageLogo} alt=""></img>
-                        <img className="userPageLogo-anim" src={logoAnimation} alt=""></img>
+                        <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
+                        <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
                     <div className="collectionName">{collection.collection?.name}</div>
                     <div className="collectionNav">
@@ -118,7 +118,7 @@ function CollectionPage() {
 
             </div>
                 <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
-                    <div className="prevScene" onClick={() => changeSceneFunc("left")}><img src={arrowL}></img></div>
+                    <div className="prevScene" onClick={() => changeSceneFunc("left")} ><img src={arrowL} draggable="false"></img></div>
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
@@ -128,7 +128,7 @@ function CollectionPage() {
                         </div>
                      </div>
 
-                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR}></img></div>
+                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR} draggable="false"></img></div>
                 </div>
         </div>
         </>
