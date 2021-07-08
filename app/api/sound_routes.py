@@ -19,17 +19,22 @@ sound_routes = Blueprint('sound', __name__)
 
 
 
-@sound_routes.route('/<int:id>')
+@sound_routes.route('/s/<int:id>')
 # @login_required
 def getUserSounds(id):
     sounds = Sound.query.filter(Sound.owner_id == id)
     return  {"sounds": [sound.to_dict() for sound in sounds ]}
 
+@sound_routes.route('/<int:soundId>')
+# @login_required
+def getUserSound(soundId):
+    sound = Sound.query.get(soundId)
+    return  sound.to_dict()
+
 
 @sound_routes.route('/<int:soundId>/delete', methods=["DELETE"])
 # @login_required
 def deleteuserSound(soundId):
-    print("===============================================", "wat", soundId)
     Sound.query.filter(Sound.id == soundId).delete()
     db.session.commit()
     return  {"sound": "deleted"}
@@ -87,7 +92,7 @@ def edit_sound(soundId):
     form = NewSound()
     data = form.data
     soundToEdit = Sound.query.filter(Sound.id == soundId).first()
-
+    print("==============================", "wat model:", soundToEdit.target_volume, "input: ", data['target_volume'])
     # print(soundToEdit, "++++++++++++++++++++++++++++++ WAT ++++++++++++++++++++++++++++++")
     soundToEdit.sound_url=data['sound_url']
     soundToEdit.name=data['name']

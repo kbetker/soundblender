@@ -1,0 +1,27 @@
+.fauxUserPageContainer{
+    display: grid;
+    grid-template-rows: 15px 50px 86vh;
+    filter: blur(3px) brightness(80%);
+}
+.soundPreviewWrapper{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(155, 0, 0, 30%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.soundPreview{
+    position: relative;
+}
+.fauxUserPage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5;
+    width: 100vw;
+    height: 100vh;
+}

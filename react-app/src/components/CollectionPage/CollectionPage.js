@@ -18,6 +18,7 @@ import Scene from "../Scene"
 import { useRef } from "react";
 import arrowR from "./arrowR.png"
 import arrowL from "./arrowL.png"
+import { setRedirectFunc } from "../../store/redirect";
 
 function CollectionPage() {
     const dispatch = useDispatch()
@@ -31,6 +32,10 @@ function CollectionPage() {
         dispatch(getUserCollection(id))
     }, [dispatch, id]);
 
+    useEffect(()=>{
+        dispatch(setRedirectFunc(`/collection/${id}`))
+    }, [dispatch, id])
+
     const collection = useSelector(state => state.collection)
     const sceneLength =collection?.collection?.scenes.length
     const editMode = useSelector(state => state.editMode.editMode)
@@ -39,6 +44,7 @@ function CollectionPage() {
 
     const onLogout = async (e) => {
         await dispatch(logout());
+        dispatch(setEditMode(false))
         history.push('/')
       };
 
@@ -53,9 +59,7 @@ function CollectionPage() {
 
     }
 
-    // console.log(currentScene.current, "+++++++++++ BEFORE FUNCTION ++++++++++")
     function changeSceneFunc(direction){
-        // console.log(currentScene.current, "+++++++++++ Right in side ++++++++++")
         function changeScene(){
             let currentDiv = document.getElementById(currentScene.current)
             if(currentDiv){
@@ -63,17 +67,17 @@ function CollectionPage() {
             }
         }
 
-        if(direction === "none"){
+        if(direction === "none"){ // "none" is passed when resizing the window so the current scene will stay in view
             changeScene()
         } else if (direction === "right"){
-                if(parseInt(currentScene.current) + 1 > sceneLength) {
+                if(parseInt(currentScene.current) + 1 > sceneLength) { //loops to begining
                     currentScene.current = "1"
                 } else {
                     currentScene.current = `${parseInt(currentScene.current) + 1}`
                 }
                 changeScene()
-        } else {
-            if(parseInt(currentScene.current) - 1 <= 0 ) {
+        } else { // "left" is the only other argument
+            if(parseInt(currentScene.current) - 1 <= 0 ) { // loops to end
                 currentScene.current = `${sceneLength}`
             } else {
                 currentScene.current = `${parseInt(currentScene.current) - 1}`
@@ -94,8 +98,8 @@ function CollectionPage() {
             <div className="userPageHeader">
 
                     <div className="userPageLogo-container">
-                        <img className="userPageLogo" src={homepageLogo} alt=""></img>
-                        <img className="userPageLogo-anim" src={logoAnimation} alt=""></img>
+                        <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
+                        <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
                     <div className="collectionName">{collection.collection?.name}</div>
                     <div className="collectionNav">
@@ -118,7 +122,7 @@ function CollectionPage() {
 
             </div>
                 <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
-                    <div className="prevScene" onClick={() => changeSceneFunc("left")}><img src={arrowL}></img></div>
+                    <div className="prevScene" onClick={() => changeSceneFunc("left")} ><img src={arrowL} draggable="false"></img></div>
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
@@ -128,7 +132,7 @@ function CollectionPage() {
                         </div>
                      </div>
 
-                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR}></img></div>
+                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR} draggable="false"></img></div>
                 </div>
         </div>
         </>
