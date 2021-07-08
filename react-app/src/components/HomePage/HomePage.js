@@ -13,7 +13,7 @@ function HomePage(){
         <>
         <div className="homepage_wrapper">
             <div>
-                <img src={background} className="animated_background" alt="animated background"></img>
+
                 <div className="navBar">
                     <div className="logo-container">
                         <img src={logoGif} className="logoGif" alt="Hompage Logo Animation"></img>
@@ -34,6 +34,7 @@ function HomePage(){
                     }
                     </div>
                 </div>
+                <img src={background} className="animated_background" alt="animated background"></img>
             </div>
         </div>
        </>

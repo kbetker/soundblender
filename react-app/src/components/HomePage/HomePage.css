@@ -62,6 +62,11 @@ body{
       justify-content: space-between;
       align-items: center;
   }
+
+
+
+
+
   .logo-container{
     margin-top: 30px;
     height: 100px;
@@ -104,3 +109,17 @@ a.homeLinks:hover{
 .spacer{
     color: rgb(0, 255, 0);
 }
+
+@media screen and (max-width:1190px) {
+    .home-links-container{
+        margin-top: 70px;
+    }
+    .logo-container{
+        margin-bottom: 80px;
+    }
+    .logo{
+        position: absolute;
+        top: 24px;
+        left: -100px;
+    }
+  }
