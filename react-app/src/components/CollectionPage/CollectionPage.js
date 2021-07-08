@@ -44,6 +44,7 @@ function CollectionPage() {
 
     const onLogout = async (e) => {
         await dispatch(logout());
+        dispatch(setEditMode(false))
         history.push('/')
       };
 

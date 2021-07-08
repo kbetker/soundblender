@@ -13,6 +13,7 @@ function SoundForm() {
     const { soundId }  = useParams();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
+    const redirect = useSelector(state => state.redirectPage.page)
 
     // useEffect(() => {
     //     dispatch(getUserSounds(user.id))
@@ -26,10 +27,10 @@ function SoundForm() {
     const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(soundId))
 
 
-    const [sound_url, setSound_url] = useState(soundToEdit?.sound_url);
-    const [name, setName] = useState(soundToEdit?.name);
     // const [owner_id, setId] = useState(user?.id);
     // const [is_public, setIs_public] = useState(false);
+    const [sound_url, setSound_url] = useState(soundToEdit?.sound_url);
+    const [name, setName] = useState(soundToEdit?.name);
     const [target_volume, setTarget_volume] = useState(soundToEdit?.target_volume);
     const [fade_speed, setFade_speed] = useState(soundToEdit?.fade_speed);
     const [arrangement, setArrangement] = useState(soundToEdit?.arrangement);
@@ -37,9 +38,19 @@ function SoundForm() {
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     setSound_url(soundToEdit?.sound_url);
+    //     setName(soundToEdit?.name);
+    //     setTarget_volume(soundToEdit?.target_volume);
+    //     setFade_speed(soundToEdit?.fade_speed);
+    //     setArrangement(soundToEdit?.arrangement);
+    //     setIs_looped(soundToEdit?.is_looped);
 
-    }, [is_looped])// ??? not sure what I'm doing with this
+
+    // }, [soundToEdit])// ??? not sure what I'm doing with this
+
+
+
 
     const newSound = async (e) => {
         e.preventDefault();
@@ -49,8 +60,8 @@ function SoundForm() {
         formData.append("name", name);
         formData.append("owner_id", user?.id);
         formData.append("is_public", false);
-        formData.append("target_volume", target_volume * 0.1);
-        formData.append("fade_speed", fade_speed * 1000);
+        formData.append("target_volume", target_volume);
+        formData.append("fade_speed", fade_speed);
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
@@ -60,7 +71,7 @@ function SoundForm() {
         if(data.errors){
             alert(data.errors)
         } else {
-            history.push(`/users/${user.id}`)
+            history.push(redirect)
         }
 
     }

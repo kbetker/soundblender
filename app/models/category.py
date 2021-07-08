@@ -8,7 +8,7 @@ class Category(db.Model):
     name = db.Column(db.String(40), nullable=False)
     color = db.Column(db.String, default="white")
     scene_id = db.Column(db.Integer, db.ForeignKey("scenes.id"), nullable=False)
-    arrangment = db.Column(db.Integer, default=0)
+    arrangement = db.Column(db.Integer, default=0)
 
 
     sounds = db.relationship("Sound", secondary ="joined_snds_cats", back_populates="categories")
@@ -21,6 +21,6 @@ class Category(db.Model):
             "name": self.name,
             "color": self.color,
             "scene_id": self.scene_id,
-            "arrangment": self.arrangment,
+            "arrangement": self.arrangement,
             "sounds": [s.to_dict() for s in self.sounds]
         }

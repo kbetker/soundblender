@@ -15,6 +15,8 @@ import SoundEditForm from "./components/SoundEditForm";
 import SoundDelete from "./components/SoundDelete";
 import SoundPreview from "./components/SoundPreview";
 import CategorySound from "./components/CategorySound";
+import CategoryEdit from "./components/CategoryEdit";
+import CategoryNew from "./components/CategoryNew";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -65,11 +67,18 @@ function App() {
             <SoundForm />
         </Route>
 
+
+        <Route path="/category/:catId/edit" exact={true}>
+            <CategoryEdit />
+        </Route>
+
+        <Route path="/category/new/:sceneId" exact={true}>
+            <CategoryNew />
+        </Route>
+
         <Route path="/category-sound/:catId/:soundId"  exact={true}>
             <CategorySound />
         </Route>
-
-
 
 
         <ProtectedRoute path="/users/:id" exact={true}>

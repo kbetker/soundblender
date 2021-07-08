@@ -11,9 +11,10 @@ function SoundDelete() {
     const { soundId } = useParams();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
+    const redirect = useSelector(state => state.redirectPage.page)
 
     const goHome = () => {
-        history.push(`/users/${user.id}`)
+       history.push(`/users/${user.id}`)
     }
 
     const deleteSound = (e) => {
@@ -22,7 +23,7 @@ function SoundDelete() {
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {
-            history.push(`/users/${user.id}`)
+            history.push(redirect)
         }
     }
 
@@ -34,7 +35,7 @@ function SoundDelete() {
                 <button type="submit" className="delete_sound_submit">Yes. Delete.</button>
             </form>
             <div className="black_backer"></div>
-            <UserPage></UserPage>
+            <div className="fauxUserPageContainer"><UserPage></UserPage></div>
         </>
 
 

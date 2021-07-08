@@ -35,7 +35,6 @@ def getUserSound(soundId):
 @sound_routes.route('/<int:soundId>/delete', methods=["DELETE"])
 # @login_required
 def deleteuserSound(soundId):
-    print("===============================================", "wat", soundId)
     Sound.query.filter(Sound.id == soundId).delete()
     db.session.commit()
     return  {"sound": "deleted"}
@@ -93,7 +92,7 @@ def edit_sound(soundId):
     form = NewSound()
     data = form.data
     soundToEdit = Sound.query.filter(Sound.id == soundId).first()
-
+    print("==============================", "wat model:", soundToEdit.target_volume, "input: ", data['target_volume'])
     # print(soundToEdit, "++++++++++++++++++++++++++++++ WAT ++++++++++++++++++++++++++++++")
     soundToEdit.sound_url=data['sound_url']
     soundToEdit.name=data['name']

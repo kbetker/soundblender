@@ -15,7 +15,6 @@ import gear from '../UserPage/Gear.png'
 
 
 function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
-    console.log(categoryId, mySoundObj.id)
     const mySound = useRef();
     const playBtn = useRef()
     const stopBtn = useRef();

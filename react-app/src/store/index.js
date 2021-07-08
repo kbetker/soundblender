@@ -6,6 +6,7 @@ import userInfoReducer from "./userPage"
 import userCollectionReducer from "./collection";
 import editMode from "./editMode";
 import redirectPage from "./redirect";
+import category from "./category";
 
 const rootReducer = combineReducers({
     session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     collection: userCollectionReducer,
     editMode,
     redirectPage,
+    category
 });
 
 

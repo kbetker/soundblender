@@ -19,7 +19,6 @@ const LoginForm = () => {
         // if (data.errors) {
         //     setErrors(data.errors);
         // }
-        // console.log(data.id)
         await history.push(`/users/${data.id}`)
     };
 

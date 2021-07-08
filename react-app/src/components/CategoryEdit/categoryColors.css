@@ -1,0 +1,93 @@
+.colorsContainer{
+    width:300px;
+    /* background-color: red; */
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.category_form{
+    display: flex;
+    flex-direction: column;
+    /* height: 500px; */
+    width: 300px;
+    justify-content: space-evenly;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: rgb(216, 216, 216);
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    margin: 10px auto;
+    background-color: rgb(58, 58, 58);
+    border-radius: 8px;
+    /* border: 1px solid rgb(0, 255, 0); */
+    position:absolute;
+    left: 40%;
+    top: 10%;
+    z-index: 100;
+}
+
+.close_category{
+    position: absolute;
+    color: rgb(214, 214, 214);
+    top: 3px;
+    right: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.category_input{
+    height: 30px;
+    background-color: rgb(99, 99, 99);
+    color: white;
+    /* border: 1px solid rgb(0, 255, 0); */
+}
+
+/* .new_sound_input:focus {
+
+} */
+
+.category_button{
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    background-color: rgb(104, 103, 103);
+    color: rgb(216, 216, 216);
+    /* border: 1px solid rgb(0, 255, 0); */
+    z-index: 9000;
+    margin: 10px 0;
+}
+
+.category_delete_button{
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    background-color: rgb(87, 35, 35);
+    color: rgb(240, 130, 130);
+    /* border: 1px solid rgb(0, 255, 0); */
+    z-index: 9000;
+    margin: 10px 0;
+}
+
+
+.category_input{
+    height: 30px;
+    background-color: rgb(99, 99, 99);
+    color: white;
+}
+
+
+
+.color{
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid grey;
+    z-index: 1;
+}
+.color:hover{
+    border: 1px solid rgb(255, 255, 255);
+    z-index: 5;
+    box-shadow: 0 0 15px black;
+}
