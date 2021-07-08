@@ -63,7 +63,6 @@ body{
       color: white;
       top: 300px;
       z-index: 5;
-      opacity: 0.;
       border-top:  1px solid rgb(0, 255, 0);
       border-bottom:  1px solid rgb(0, 255, 0);
       display: flex;
