@@ -18,6 +18,10 @@ function Categories({ category, currentscene }) {
         history.push(`/category/${category.id}/edit`)
     }
 
+    const addSound = () =>{
+        history.push(`/category/${category.id}/addSound`)
+    }
+
     return (
         <div className="categoryContainer" style={{ border: `1px solid ${category.color}`, order: `${category.arrangement}` }}>
             <div className="categoryName">
@@ -28,6 +32,12 @@ function Categories({ category, currentscene }) {
             {category.sounds.map(mySoundObj =>
                 <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModule>
             )}
+             {editMode &&
+                <div className="NewSoundModule_wrapper" onClick={addSound}>
+                    <img src={gear} className="NewSoundGear" draggable="false" alt="" onClick={editCategory}></img>
+                    <div>Add Sound</div>
+                </div>
+            }
         </div>
     )
 }

@@ -15,17 +15,43 @@ def deleteSoundRelation(catId, soundId):
     category.sounds.remove(sound)
     db.session.commit()
     return  {"Removed?": "Maybe??"}
+
+@categories_routes.route('/<int:catId>/<int:soundId>/addsound', methods=["POST"])
+@login_required
+def addSoundRelation(catId, soundId):
+    sound = Sound.query.get(soundId)
+    category = Category.query.get(catId)
+    category.sounds.append(sound)
+    db.session.commit()
+    return  {"Removed?": "Maybe??"}
+
+
+
 # append
 # remove or delete
 # extend adds more than one
 
+# @categories_routes.route('/<int:catId>/delete', methods=["DELETE"])
+# # @login_required
+# def deleteCategory(catId):
+#     Category.query.filter(Category.id == catId).delete()
+#     db.session.commit()
+#     return  {"category": "deleted"}
+
+
 @categories_routes.route('/<int:catId>/delete', methods=["DELETE"])
 # @login_required
 def deleteCategory(catId):
+    category = Category.query.get(catId)
+    sounds = [s.id for s in category.sounds]
+    for sound in sounds:
+        category.sounds.remove(Sound.query.get(sound))
+    db.session.commit()
     Category.query.filter(Category.id == catId).delete()
-    print("========================= wat ========================")
     db.session.commit()
     return  {"category": "deleted"}
+
+
 
 
 

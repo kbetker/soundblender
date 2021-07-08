@@ -18,6 +18,7 @@ import CategorySound from "./components/CategorySound";
 import CategoryEdit from "./components/CategoryEdit";
 import CategoryNew from "./components/CategoryNew";
 import CategoryDelete from "./components/CategoryDelete/CategoryDelete";
+import AddSoundToCategory from "./components/AddSoundToCategory";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -71,6 +72,10 @@ function App() {
 
         <Route path="/category/:catId/edit" exact={true}>
             <CategoryEdit />
+        </Route>
+
+        <Route path="/category/:catId/addSound" exact={true}>
+            <AddSoundToCategory />
         </Route>
 
         <Route path="/category/:catId/delete" exact={true}>
