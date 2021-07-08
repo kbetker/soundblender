@@ -1,6 +1,6 @@
 .categoryContainer{
-    /* width: 400px; */
-    /* height: 40px; */
+    width: 400px;
+    min-height: 100px;
     background-color: rgb(66, 66, 66);
     /* border: 1px solid green; */
     flex-wrap:wrap;

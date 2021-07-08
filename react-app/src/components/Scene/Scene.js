@@ -29,7 +29,7 @@ function Scene({scene, id, currentscene}){
         <div className="sceneContainer" style={{width: `${window.innerWidth-122}px`}} id={id}>
             <div className="sceneName">
                 <div>
-                    Scene: {scene.name}
+                    {scene.name}
                     {editMode && <img src={gear} className="sceneEditGear" draggable="false" alt="" onClick={editScene} ></img>}
                 </div>
                 {editMode &&

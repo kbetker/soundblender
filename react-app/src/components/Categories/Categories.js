@@ -1,24 +1,27 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import SoundModule from "../SoundModule"
 import "../CollectionPage/CollectionPage.css"
 import "../UserPage/userPage.css"
 import gear from "../UserPage/Gear.png"
 import "./Categories.css"
 import { useHistory } from "react-router-dom"
+import { setEditMode } from "../../store/editMode"
 
 function Categories({ category, currentscene }) {
     const editMode = useSelector(state => state.editMode.editMode)
     const history = useHistory()
+    const dispatch = useDispatch()
 
-    const editCategory = () => {
+    const editCategory = async () => {
+        await dispatch(setEditMode(false))
         history.push(`/category/${category.id}/edit`)
     }
 
     return (
-        <div className="categoryContainer" style={{ border: `1px solid ${category.color}` }}>
+        <div className="categoryContainer" style={{ border: `1px solid ${category.color}`, order: `${category.arrangement}` }}>
             <div className="categoryName">
-                Category: {category.name}
+               {category.name}
                 {editMode && <img src={gear} className="categoryEditGear" draggable="false" alt="" onClick={editCategory}></img>}
             </div>
 

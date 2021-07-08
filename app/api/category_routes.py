@@ -9,7 +9,7 @@ categories_routes = Blueprint('categories', __name__)
 
 @categories_routes.route('/<int:catId>/<int:soundId>', methods=["DELETE"])
 @login_required
-def getUserSounds(catId, soundId):
+def deleteSoundRelation(catId, soundId):
     sound = Sound.query.get(soundId)
     category = Category.query.get(catId)
     category.sounds.remove(sound)
@@ -18,6 +18,15 @@ def getUserSounds(catId, soundId):
 # append
 # remove or delete
 # extend adds more than one
+
+@categories_routes.route('/<int:catId>/delete', methods=["DELETE"])
+# @login_required
+def deleteCategory(catId):
+    Category.query.filter(Category.id == catId).delete()
+    print("========================= wat ========================")
+    db.session.commit()
+    return  {"category": "deleted"}
+
 
 
 @categories_routes.route('/<int:catId>')

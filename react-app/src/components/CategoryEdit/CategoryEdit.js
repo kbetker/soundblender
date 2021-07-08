@@ -18,11 +18,6 @@ function SoundForm() {
     const redirect = useSelector(state => state.redirectPage.page)
     const category = useSelector(state => state.category.category)
 
-    useEffect(()=>{
-        dispatch(getCategoryFunc(catId))
-    }, [dispatch, catId])
-
-
 
     // const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(catId))
 
@@ -33,6 +28,14 @@ function SoundForm() {
     const [name, setName] = useState(category?.name);
     const [color, setColor] = useState(category?.color);
     const [arrangement, setArrangement] = useState(category?.arrangement);
+
+
+    useEffect(async ()=>{
+      const data = await dispatch(getCategoryFunc(catId))
+      setName(data.name)
+      setColor(data.color)
+      setArrangement(data.arrangement)
+    }, [dispatch, catId])
 
 
     const editCategory = async (e) => {
@@ -59,12 +62,12 @@ function SoundForm() {
     //     setSound_url(file);
     // }
 
-    const goHome = () => {
-        history.push(`/users/${user.id}`)
+    const goBack = () => {
+        history.push(redirect)
     }
 
     const goToDelete = () => {
-        history.push(`/sound/${catId}/delete`)
+        history.push(`/category/${catId}/delete`)
     }
 
     useEffect(()=>{
@@ -81,7 +84,7 @@ function SoundForm() {
     return (
         <>
         <div className="category_form" style={{border: `1px solid ${color}`}}>
-            <div className="close_category" onClick={goHome}>X</div>
+            <div className="close_category" onClick={goBack}>X</div>
             <label>Edit Name</label>
             <input type="text"
                 name="name"
@@ -105,11 +108,6 @@ function SoundForm() {
 
 
                 <CategoryColors></CategoryColors>
-
-
-
-
-
 
                 {/* <input
                 type="text"
