@@ -28,6 +28,7 @@ body{
     margin-left: 8px;
     animation:clockwise 14s linear infinite;
     cursor: pointer;
+
 }
 
 .newSceneWrapper:hover{
@@ -41,7 +42,7 @@ body{
 }
 .addNewSceneText{
     cursor: pointer;
-    border-bottom: 1px solid rgba(0, 0, 0, 40%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0%);
 
 }
 .addNewSceneText:hover{
@@ -67,6 +68,7 @@ body{
     font-size: 28px;
     font-weight: 400;
     cursor: pointer;
+    order: 66;
   }
 
 
@@ -91,18 +93,20 @@ body{
     display: flex;
     justify-items: center;
     align-items: center;
+
 }
 
 .sceneContainer{
     /* width: 100vw; */
     padding: 20px;
-    border: 1px solid white;
+    border: 1px solid rgb(187, 187, 187);
     height: 80vh;
     border-radius: 10px;
     box-shadow: 0 0 8px black inset;
     background-color: rgb(42, 42, 42);
     position: relative;
-    /* overflow-y: scroll; */
+    /* overflow-y: scroll;
+    box-sizing: border-box; */
 
     /* display: flex; */
 }

@@ -97,7 +97,7 @@ function CollectionPage() {
             <div className="blackBar"></div>
             <div className="userPageHeader">
 
-                    <div className="userPageLogo-container">
+                    <div className="userPageLogo-container hideSmall">
                         <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
                         <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
