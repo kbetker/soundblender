@@ -16,8 +16,8 @@ function HomePage(){
 
                 <div className="navBar">
                     <div className="logo-container">
-                        <img src={logoGif} className="logoGif" alt="Hompage Logo Animation"></img>
-                        <img src={logo} className="logo" alt="Homepage Logo"></img>
+                        <img src={logoGif} className="logoGif" alt="Hompage Logo Animation" draggable={false}></img>
+                        <img src={logo} className="logo" alt="Homepage Logo" draggable={false}></img>
                     </div>
                     <div className="home-links-container">
                         {user ?
@@ -34,7 +34,7 @@ function HomePage(){
                     }
                     </div>
                 </div>
-                <img src={background} className="animated_background" alt="animated background"></img>
+                <img src={background} className="animated_background" alt="animated background" draggable={false}></img>
             </div>
         </div>
        </>

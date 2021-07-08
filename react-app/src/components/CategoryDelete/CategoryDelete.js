@@ -1,5 +1,4 @@
 import React from "react"
-import UserPage from "../UserPage"
 import FauxUserPage from "../FauxUserPage"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";

@@ -6,10 +6,6 @@ import SoundModulePreview from "../SoundModulePreview/SoundModulePreview";
 import FauxUserPage from "../FauxUserPage";
 import "../UserPage/userPage.css"
 
-import homepageLogo from "../HomePage/homepageLogo.gif"
-import logoAnimation from "../HomePage/logoAnimationGreen.gif"
-import gear from "../UserPage/Gear.png"
-
 
 function SoundPreview(){
     const { soundId }  = useParams();
@@ -27,7 +23,7 @@ function SoundPreview(){
                 {mySoundObj.sounds?.target_volume && <SoundModulePreview mySoundObj={mySoundObj.sounds} color="white" key={`soundKey-${mySoundObj.id}`}></SoundModulePreview>}
                 </div>
             </div>
-                <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
+            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
     </>
     )
 

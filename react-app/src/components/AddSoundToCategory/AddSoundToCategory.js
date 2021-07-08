@@ -4,11 +4,7 @@ import FauxUserPage from "../FauxUserPage"
 import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { newCategoryFunc } from "../../store/category"
-// import { getUserInfo } from "../../store/userPage";
 import "../SoundForm/Sound.css"
-// import { getCategoryFunc } from "../../store/category";
-import CategoryColors from "../CategoryEdit/categoryColors";
 import { getUserSounds } from "../../store/sound";
 
 function SoundForm() {
@@ -19,18 +15,18 @@ function SoundForm() {
     const sounds = useSelector(state => state.newSound.sounds)
     const user = useSelector(state => state.session.user)
     const [soundId, setSoundId] = useState(0);
-    // console.log(sounds)
-    useEffect(async ()=>{
+
+    useEffect(()=>{
+        async function fetchSounds(){
         const data = await dispatch(getUserSounds(user.id))
         if(data.errors){
             alert(data.errors)
-        }
-    }, [])
-
+        }}
+        fetchSounds()
+    }, [dispatch, user.id])
 
 
     const addSound = async () => {
-
         const data = await fetch(`/api/categories/${catId}/${soundId}/addsound`, {
             method: "POST",
         });
@@ -46,10 +42,6 @@ function SoundForm() {
     const goBack = () => {
         history.push(redirect)
     }
-
-    useEffect(()=>{
-        //todo fetch - data to useState
-    }, [])
 
     return (
         <>

@@ -1,17 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import HomePage from "../HomePage";
 import FauxUserPage from "../FauxUserPage";
 import "../SoundDelete/SoundDelete.css"
 
 
 const CategorySound = () => {
-    const dispatch = useDispatch();
-    // const user = useSelector(state => state.session.user)
-    // const [errors, setErrors] = useState([]);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const history = useHistory();
     const {catId, soundId} = useParams();
     const user = useSelector(state => state.session.user)

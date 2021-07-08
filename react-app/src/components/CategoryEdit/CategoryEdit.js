@@ -14,7 +14,7 @@ function SoundForm() {
     const dispatch = useDispatch()
     const { catId }  = useParams();
     const history = useHistory();
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
     const category = useSelector(state => state.category.category)
 
@@ -30,12 +30,17 @@ function SoundForm() {
     const [arrangement, setArrangement] = useState(category?.arrangement);
 
 
-    useEffect(async ()=>{
-      const data = await dispatch(getCategoryFunc(catId))
-      setName(data.name)
-      setColor(data.color)
-      setArrangement(data.arrangement)
+    useEffect(()=>{
+        async function setAttributes(){
+            const data = await dispatch(getCategoryFunc(catId))
+            setName(data.name)
+            setColor(data.color)
+            setArrangement(data.arrangement)
+          }
+          setAttributes()
     }, [dispatch, catId])
+
+
 
 
     const editCategory = async (e) => {
