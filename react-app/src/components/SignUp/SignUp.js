@@ -21,6 +21,7 @@ const SignUpForm = () => {
         alert(data.erros)
       } else {
         console.log(data)
+        // debugger
         history.push(`/users/${data.id}`)
       }
 

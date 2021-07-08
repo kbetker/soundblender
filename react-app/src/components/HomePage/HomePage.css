@@ -31,13 +31,13 @@ body{
     top: -100px;
     z-index: 1;
     display: flex;
-    opacity: 90%;
+    opacity: 80%;
 }
 .dmbackground{
     mix-blend-mode: multiply;
     position: absolute;
-    top: -260px;
-    left: -200px;
+    top: -330px;
+    left: -215px;
     /* width: 130vw; */
 }
 
@@ -63,7 +63,6 @@ body{
       color: white;
       top: 300px;
       z-index: 5;
-      opacity: 0.;
       border-top:  1px solid rgb(0, 255, 0);
       border-bottom:  1px solid rgb(0, 255, 0);
       display: flex;

@@ -1,7 +1,7 @@
 .colorsContainer{
-    width:300px;
+    width:510px;
     /* background-color: red; */
-    height: 150px;
+    height: 210px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     /* height: 500px; */
-    width: 300px;
+    width: 510px;
     justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
@@ -23,7 +23,7 @@
     border-radius: 8px;
     /* border: 1px solid rgb(0, 255, 0); */
     position:absolute;
-    left: 40%;
+    left: 30%;
     top: 10%;
     z-index: 100;
 }
