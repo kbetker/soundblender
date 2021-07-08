@@ -27,10 +27,18 @@ body{
     width: 220vh;
     image-rendering: pixelated;
     mix-blend-mode: multiply;
-    position: relative;
+    position: absolute;
     top: -100px;
     z-index: 1;
     display: flex;
+    opacity: 90%;
+}
+.dmbackground{
+    mix-blend-mode: multiply;
+    position: absolute;
+    top: -260px;
+    left: -200px;
+    /* width: 130vw; */
 }
 
 .formTitle{
@@ -93,7 +101,7 @@ body{
     margin-right: 30px;
     z-index: 5000;
 }
-a.homeLinks,a.homeLinks:active,a.homeLinks:visited,a.homeLinks:active{
+a.homeLinks,a.homeLinks:active,a.homeLinks:visited,a.homeLinks:active,.demoHomeLink{
     color: white;
     text-decoration: none;
     margin: 0 10px;
@@ -106,6 +114,15 @@ a.homeLinks:hover{
     animation-iteration-count:infinite;
     border-bottom: 1px solid rgb(0, 255, 0);
 }
+.demoHomeLink{
+    cursor: pointer;
+}
+.demoHomeLink:hover{
+    border-bottom: 1px solid rgb(0, 255, 0);
+
+}
+
+
 .spacer{
     color: rgb(0, 255, 0);
 }

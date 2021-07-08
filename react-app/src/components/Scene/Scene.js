@@ -1,11 +1,10 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import Categories from "../Categories/Categories"
 import "./Scene.css"
 import gear from "../UserPage/Gear.png"
 import "../CollectionPage/CollectionPage.css"
-import { useHistory, Link } from "react-router-dom"
-import setEditMode from "../../store/editMode"
+import { useHistory } from "react-router-dom"
 
 function Scene({scene, id, currentscene}){
     const scenes= scene?.categories

@@ -122,7 +122,7 @@ function CollectionPage() {
 
             </div>
                 <div className="ScenePageBody" style={{width: `${windoWith}px`}}>
-                    <div className="prevScene" onClick={() => changeSceneFunc("left")} ><img src={arrowL} draggable="false"></img></div>
+                    <div className="prevScene" onClick={() => changeSceneFunc("left")} ><img src={arrowL} draggable="false" alt="sceneLeft"></img></div>
 
                     <div className="scenePages" style={{width: `${windoWith - 80}px`}}>
                         <div className="scenePage"style={{width: `${(windoWith * sceneLength)}px`}} >
@@ -132,7 +132,7 @@ function CollectionPage() {
                         </div>
                      </div>
 
-                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR} draggable="false"></img></div>
+                     <div className="nextScene"  onClick={() => changeSceneFunc("right")}><img src={arrowR} draggable="false"  alt="sceneRight"></img></div>
                 </div>
         </div>
         </>

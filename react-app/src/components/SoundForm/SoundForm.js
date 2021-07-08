@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
 import "./Sound.css"
-import UserPage from "../UserPage"
+import FauxUserPage from "../FauxUserPage";
 
 function SoundForm() {
     const dispatch = useDispatch()
@@ -139,7 +139,7 @@ function SoundForm() {
             <button type="submit" className="new_sound_submit">Submit</button>
         </form>
         <div className="black_backer"></div>
-        <UserPage></UserPage>
+        <FauxUserPage></FauxUserPage>
 
         </>
     )

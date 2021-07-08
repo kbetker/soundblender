@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import FauxUserPage from "../FauxUserPage"
 import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import { editUserSound } from "../../store/sound"
-// import { getUserInfo } from "../../store/userPage";
 import "../SoundForm/Sound.css"
-// import { getUserSounds } from "../../store/sound";
 
 function SoundForm() {
     const dispatch = useDispatch()
@@ -15,42 +13,15 @@ function SoundForm() {
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
 
-    // useEffect(() => {
-    //     dispatch(getUserSounds(user.id))
-    // }, [dispatch, user.id]);
-
-    // useEffect(() => {
-    //     dispatch(getUserInfo(user.id))
-    // }, [dispatch, user.id]);
-
     const sounds = useSelector(state => state.newSound.sounds)
     const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(soundId))
 
-
-    // const [owner_id, setId] = useState(user?.id);
-    // const [is_public, setIs_public] = useState(false);
-    const [sound_url, setSound_url] = useState(soundToEdit?.sound_url);
+    const sound_url = soundToEdit?.sound_url
     const [name, setName] = useState(soundToEdit?.name);
     const [target_volume, setTarget_volume] = useState(soundToEdit?.target_volume);
     const [fade_speed, setFade_speed] = useState(soundToEdit?.fade_speed);
     const [arrangement, setArrangement] = useState(soundToEdit?.arrangement);
     const [is_looped, setIs_looped] = useState(soundToEdit?.is_looped);
-
-
-
-    // useEffect(() => {
-    //     setSound_url(soundToEdit?.sound_url);
-    //     setName(soundToEdit?.name);
-    //     setTarget_volume(soundToEdit?.target_volume);
-    //     setFade_speed(soundToEdit?.fade_speed);
-    //     setArrangement(soundToEdit?.arrangement);
-    //     setIs_looped(soundToEdit?.is_looped);
-
-
-    // }, [soundToEdit])// ??? not sure what I'm doing with this
-
-
-
 
     const newSound = async (e) => {
         e.preventDefault();
@@ -65,7 +36,6 @@ function SoundForm() {
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
-        // setImageLoading(true);
         const data = await dispatch(editUserSound(formData, soundId))
 
         if(data.errors){
@@ -76,10 +46,6 @@ function SoundForm() {
 
     }
 
-    const updateImage = (e) => {
-        const file = e.target.files[0];
-        setSound_url(file);
-    }
 
     const goHome = () => {
         history.push(`/users/${user.id}`)
