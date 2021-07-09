@@ -44,6 +44,8 @@ function HomePage(){
                             <Link to="/sign-up"  className="homeLinks">Sign Up</Link>
                             <div className="spacer">|</div>
                             <div onClick={onLogin} className="demoHomeLink">Demo</div>
+                            <div className="spacer">|</div>
+                            <div onClick={onLogin} className="demoHomeLink">About</div>
                         </>
 
                     }

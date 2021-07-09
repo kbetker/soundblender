@@ -57,55 +57,55 @@ function App() {
           <UserPage />
         </ProtectedRoute>
 
-        <Route path="/collection/:collectionId" exact={true}>
+        <ProtectedRoute path="/collection/:collectionId" exact={true}>
           <CollectionPage />
-        </Route>
+        </ProtectedRoute>
 
 
 
-        <Route path="/scenes/:collectionId/new" exact={true}>
+        <ProtectedRoute path="/scenes/:collectionId/new" exact={true}>
           <SceneNew />
-        </Route>
+        </ProtectedRoute>
 
-        <Route path="/scenes/:sceneId/edit" exact={true}>
+        <ProtectedRoute path="/scenes/:sceneId/edit" exact={true}>
           <SceneEdit />
-        </Route>
+        </ProtectedRoute>
 
-        <Route path="/scenes/:sceneId/delete" exact={true}>
+        <ProtectedRoute path="/scenes/:sceneId/delete" exact={true}>
           <SceneDelete />
-        </Route>
+        </ProtectedRoute>
 
 
 
-        <Route path="/category/:catId/edit" exact={true}>
+        <ProtectedRoute path="/category/:catId/edit" exact={true}>
             <CategoryEdit />
-        </Route>
-        <Route path="/category/:catId/addSound" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/category/:catId/addSound" exact={true}>
             <AddSoundToCategory />
-        </Route>
-        <Route path="/category/:catId/delete" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/category/:catId/delete" exact={true}>
             <CategoryDelete />
-        </Route>
-        <Route path="/category/new/:sceneId" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/category/new/:sceneId" exact={true}>
             <CategoryNew />
-        </Route>
-        <Route path="/category-sound/:catId/:soundId"  exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/category-sound/:catId/:soundId"  exact={true}>
             <CategorySound />
-        </Route>
+        </ProtectedRoute>
 
 
-        <Route path="/sound/:soundId/edit" exact={true}>
+        <ProtectedRoute path="/sound/:soundId/edit" exact={true}>
             <SoundEditForm />
-        </Route>
-        <Route path="/sound/:soundId/delete" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/sound/:soundId/delete" exact={true}>
             <SoundDelete />
-        </Route>
-        <Route path="/sound/:soundId" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/sound/:soundId" exact={true}>
             <SoundPreview />
-        </Route>
-        <Route path="/sound"  exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/sound"  exact={true}>
             <SoundForm />
-        </Route>
+        </ProtectedRoute>
 
 
 
