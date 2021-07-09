@@ -46,6 +46,16 @@ function UserPage() {
 
     const collections = useSelector(state => state.userInfo.info)
     const sounds = useSelector(state => state.newSound.sounds)
+    const user = useSelector(state => state.session)
+
+
+    useEffect(()=>{
+        if(user?.user?.id != id){
+            history.push(`/users/${user.user.id}`)
+        }
+    }, [user])
+    // if(user.id !== id) history.push(`/users/${user.id}`);
+    // console.log(user)
     // const user = useSelector(state => state.session.user)
     // useEffect(()=>{
     //   if(collections.collections){
@@ -94,7 +104,7 @@ function UserPage() {
                             </Link>
                         )}
 
-                            <Link to="collection/new" className="contentLink">
+                            <Link to="/collection/new" className="contentLink">
                                 <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
                                 <div className="contentName">New Collection</div>
                             </Link>

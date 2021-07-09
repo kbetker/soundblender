@@ -22,99 +22,104 @@ import AddSoundToCategory from "./components/AddSoundToCategory";
 import SceneNew from "./components/SceneNew";
 import SceneEdit from "./components/SceneEdit"
 import SceneDelete from "./components/SceneDelete";
+import CollectionNew from "./components/CollectionNew"
 
 function App() {
-  // const [authenticated, setAuthenticated] = useState(false);
-  const dispatch = useDispatch();
-  const [loaded, setLoaded] = useState(false);
+    // const [authenticated, setAuthenticated] = useState(false);
+    const dispatch = useDispatch();
+    const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    (async() => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            setLoaded(true);
+        })();
+    }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
+    if (!loaded) {
+        return null;
+    }
 
-  return (
-    <BrowserRouter>
-      {/* <NavBar /> */}
-      <Switch>
-        <Route path="/" exact={true}>
-          <HomePage />
-        </Route>
-        <Route path="/login" exact={true}>
-          <Login />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUp />
-        </Route>
+    return (
+        <BrowserRouter>
+            {/* <NavBar /> */}
+            <Switch>
+                {/* =================== Auth ================================== */}
+                <Route path="/" exact={true}>
+                    <HomePage />
+                </Route>
 
-        <ProtectedRoute path="/users/:id" exact={true}>
-          <UserPage />
-        </ProtectedRoute>
+                <Route path="/login" exact={true}>
+                    <Login />
+                </Route>
 
-        <Route path="/collection/:collectionId" exact={true}>
-          <CollectionPage />
-        </Route>
+                <Route path="/sign-up" exact={true}>
+                    <SignUp />
+                </Route>
+                {/* =================== User Homepage ================================== */}
+                <ProtectedRoute path="/users/:id" exact={true}>
+                    <UserPage />
+                </ProtectedRoute>
+                {/* =================== Collections ================================== */}
+                <ProtectedRoute path="/collection/new" exact={true}>
+                    <CollectionNew />
+                </ProtectedRoute>
 
+                <ProtectedRoute path="/collection/:collectionId" exact={true}>
+                    <CollectionPage />
+                </ProtectedRoute>
+                {/* =================== Scenes ================================== */}
+                <ProtectedRoute path="/scenes/:collectionId/new" exact={true}>
+                    <SceneNew />
+                </ProtectedRoute>
 
+                <ProtectedRoute path="/scenes/:sceneId/edit" exact={true}>
+                    <SceneEdit />
+                </ProtectedRoute>
 
-        <Route path="/scenes/:collectionId/new" exact={true}>
-          <SceneNew />
-        </Route>
+                <ProtectedRoute path="/scenes/:sceneId/delete" exact={true}>
+                    <SceneDelete />
+                </ProtectedRoute>
+                {/* =================== Categories ================================== */}
+                <ProtectedRoute path="/category/:catId/edit" exact={true}>
+                    <CategoryEdit />
+                </ProtectedRoute>
 
-        <Route path="/scenes/:sceneId/edit" exact={true}>
-          <SceneEdit />
-        </Route>
+                <ProtectedRoute path="/category/:catId/addSound" exact={true}>
+                    <AddSoundToCategory />
+                </ProtectedRoute>
 
-        <Route path="/scenes/:sceneId/delete" exact={true}>
-          <SceneDelete />
-        </Route>
+                <ProtectedRoute path="/category/:catId/delete" exact={true}>
+                    <CategoryDelete />
+                </ProtectedRoute>
 
+                <ProtectedRoute path="/category/new/:sceneId" exact={true}>
+                    <CategoryNew />
+                </ProtectedRoute>
 
+                <ProtectedRoute path="/category-sound/:catId/:soundId" exact={true}>
+                    <CategorySound />
+                </ProtectedRoute>
+                {/* =================== Sounds ================================== */}
+                <ProtectedRoute path="/sound/:soundId/edit" exact={true}>
+                    <SoundEditForm />
+                </ProtectedRoute>
 
-        <Route path="/category/:catId/edit" exact={true}>
-            <CategoryEdit />
-        </Route>
-        <Route path="/category/:catId/addSound" exact={true}>
-            <AddSoundToCategory />
-        </Route>
-        <Route path="/category/:catId/delete" exact={true}>
-            <CategoryDelete />
-        </Route>
-        <Route path="/category/new/:sceneId" exact={true}>
-            <CategoryNew />
-        </Route>
-        <Route path="/category-sound/:catId/:soundId"  exact={true}>
-            <CategorySound />
-        </Route>
+                <ProtectedRoute path="/sound/:soundId/delete" exact={true}>
+                    <SoundDelete />
+                </ProtectedRoute>
 
+                <ProtectedRoute path="/sound/:soundId" exact={true}>
+                    <SoundPreview />
+                </ProtectedRoute>
 
-        <Route path="/sound/:soundId/edit" exact={true}>
-            <SoundEditForm />
-        </Route>
-        <Route path="/sound/:soundId/delete" exact={true}>
-            <SoundDelete />
-        </Route>
-        <Route path="/sound/:soundId" exact={true}>
-            <SoundPreview />
-        </Route>
-        <Route path="/sound"  exact={true}>
-            <SoundForm />
-        </Route>
+                <ProtectedRoute path="/sound" exact={true}>
+                    <SoundForm />
+                </ProtectedRoute>
 
-
-
-
-
-
-      </Switch>
-    </BrowserRouter>
-  );
+            </Switch>
+        </BrowserRouter>
+    );
 }
 
 export default App;
