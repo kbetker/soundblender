@@ -22,8 +22,8 @@ export const addNewScene = (formData) => async (dispatch) => {
     return data;
 }
 
-export const editNewScene = (formData, sceneId) => async (dispatch) => {
-    const response = await fetch(`/api/scenes/sceneId/new`, {
+export const editUserScene = (formData, sceneId) => async (dispatch) => {
+    const response = await fetch(`/api/scenes/${sceneId}/edit`, {
         method: "PUT",
         body: formData,
     })
@@ -37,6 +37,8 @@ const initialState = {scene: null}
 export default function scene(state = initialState, action) {
     switch (action.type) {
         case NEW_SCENE:
+            return {scene: action.payload}
+        case EDIT_SCENE:
             return {scene: action.payload}
         default:
             return state;

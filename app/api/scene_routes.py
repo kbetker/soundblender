@@ -14,7 +14,6 @@ def addScene():
     form = NewScene()
     data = form.data
     # if form.validate_on_submit():
-    print("data WTFWTFWTFWTFWTFWTFWTFWTFWTFWTFWTFWTFWTFWFWTFWTFWFT", data)
     newScene= Scene(
             name=data['name'],
             theme=data['theme'],
@@ -24,3 +23,19 @@ def addScene():
     db.session.commit()
     print(newScene.to_dict())
     return form.data
+
+
+@scene_routes.route("/<int:sceneId>/edit", methods=["PUT"])
+# @login_required
+def edit_category(sceneId):
+
+    form = NewScene()
+    data = form.data
+
+    sceneToEdit = Scene.query.filter(Scene.id == sceneId).first()
+    sceneToEdit.name=data['name']
+    sceneToEdit.theme=data['theme']
+    sceneToEdit.collection_id=data['collection_id']
+
+    db.session.commit()
+    return {"cool": "Beings"}

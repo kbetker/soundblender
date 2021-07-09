@@ -4,13 +4,14 @@ import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
-import { addNewScene } from "../../store/scene";
+import { editUserScene } from "../../store/scene";
 // import { getUserSounds } from "../../store/sound";
 
 function SceneEdit() {
     // const dispatch = useDispatch()
     const { sceneId } = useParams();
     const history = useHistory();
+    const dispatch = useDispatch()
     const redirect = useSelector(state => state.redirectPage.page)
     const scenes = useSelector(state => state.collection)
     const [name, setName] = useState('')
@@ -22,27 +23,26 @@ function SceneEdit() {
         setName(sceneToEdit?.name)
         setTheme(sceneToEdit?.theme)
         setCollection_id(scenes.collection?.id)
-        console.log(name, theme, collection_id)
-    }, [name, theme, collection_id])
+    }, [])
 
     // console.log("===========>", scenes, "<==========")
     // const [name, setName] = useState('');
     // const dispatch = useDispatch()
 
-    // const addScene = async () => {
-    //     const formData = new FormData()
-    //     formData.append("name", name)
-    //     formData.append("collection_id", collectionId)
-    //     formData.append("theme", "theme")
+    const editScene = async () => {
+        const formData = new FormData()
+        formData.append("name", name)
+        formData.append("collection_id", collection_id)
+        formData.append("theme", "theme")
 
-    //     const data = await dispatch(addNewScene(formData))
+        const data = await dispatch(editUserScene(formData, sceneId))
 
-    //     if (data.errors) {
-    //          alert(data.errors);
-    //     } else {
-    //         history.push(redirect)
-    //     }
-    // };
+        if (data.errors) {
+             alert(data.errors);
+        } else {
+            history.push(redirect)
+        }
+    };
 
 
     const goBack = () => {
@@ -63,7 +63,7 @@ function SceneEdit() {
                 ></input>
 
 
-                {/* <button onClick={() => addScene()} className="category_button">Add Scene</button> */}
+                <button onClick={() => editScene()} className="new_sound_submit">Update</button>
             </div>
 
             <div className="black_backer"></div>
