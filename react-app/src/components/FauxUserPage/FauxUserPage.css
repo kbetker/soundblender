@@ -13,6 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 .soundPreview{
     position: relative;
@@ -24,4 +25,15 @@
     z-index: -5;
     width: 100vw;
     height: 100vh;
+}
+
+.close_soundPreview{
+    position: absolute;
+    color: rgb(214, 214, 214);
+    top: -13px;
+    right: -16px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
 }
