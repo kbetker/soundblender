@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
 import { editUserScene } from "../../store/scene";
+import "./SceneEdit.css"
 // import { getUserSounds } from "../../store/sound";
 
 function SceneEdit() {
@@ -44,6 +45,9 @@ function SceneEdit() {
         }
     };
 
+    const goToDelete = () => {
+        history.push(`/scenes/${sceneId}/delete`)
+    }
 
     const goBack = () => {
     history.push(redirect)
@@ -64,6 +68,8 @@ function SceneEdit() {
 
 
                 <button onClick={() => editScene()} className="new_sound_submit">Update</button>
+                <button className="scene_delete_button" onClick={(e) => goToDelete(e)} >Delete</button>
+
             </div>
 
             <div className="black_backer"></div>

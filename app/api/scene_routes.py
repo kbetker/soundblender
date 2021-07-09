@@ -39,3 +39,11 @@ def edit_category(sceneId):
 
     db.session.commit()
     return {"cool": "Beings"}
+
+
+@scene_routes.route('/<int:sceneId>/delete', methods=["DELETE"])
+# @login_required
+def deleteuserScene(sceneId):
+    Scene.query.filter(Scene.id == sceneId).delete()
+    db.session.commit()
+    return  {"sound": "deleted"}

@@ -21,6 +21,7 @@ import CategoryDelete from "./components/CategoryDelete/CategoryDelete";
 import AddSoundToCategory from "./components/AddSoundToCategory";
 import SceneNew from "./components/SceneNew";
 import SceneEdit from "./components/SceneEdit"
+import SceneDelete from "./components/SceneDelete";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -68,6 +69,10 @@ function App() {
 
         <Route path="/scenes/:sceneId/edit" exact={true}>
           <SceneEdit />
+        </Route>
+
+        <Route path="/scenes/:sceneId/delete" exact={true}>
+          <SceneDelete />
         </Route>
 
 
