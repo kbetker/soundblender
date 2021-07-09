@@ -31,7 +31,7 @@ body{
     top: -100px;
     z-index: 1;
     display: flex;
-    opacity: 80%;
+
 }
 .dmbackground{
     mix-blend-mode: multiply;

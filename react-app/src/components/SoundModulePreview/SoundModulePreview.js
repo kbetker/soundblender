@@ -42,6 +42,12 @@ function SoundModulePreview({ mySoundObj, color }) {
     }
 
 
+    let closePreview;
+
+    useEffect(()=>{
+        closePreview = document.querySelector('.close_soundPreview')
+    })
+
 
     useEffect(() => {
         function fadeIn() {
@@ -67,6 +73,8 @@ function SoundModulePreview({ mySoundObj, color }) {
                     clearInterval(fadeInToTarget)
                 }
             }, 10)
+
+            closePreview.addEventListener("click", (e)=>{clearInterval(fadeInToTarget)})
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
                 clearInterval(fadeInToTarget)
@@ -103,7 +111,7 @@ function SoundModulePreview({ mySoundObj, color }) {
                 }
             }, 10)
 
-            knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
+            const handleFadoutInterval = () =>{
                 if (!isPlaying.current) {
                     return;
                 } else {
@@ -111,6 +119,10 @@ function SoundModulePreview({ mySoundObj, color }) {
                     setBtnStopping(false)
                     setBtnPlaying(true)
                 }
+            }
+            closePreview.addEventListener("click", (e)=>{ handleFadoutInterval()})
+            knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
+                handleFadoutInterval()
             })
         }
 

@@ -105,7 +105,7 @@ function CollectionPage() {
                     <div className="collectionNav">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div> | </div>
-                        <div className="logOut" onClick={goHome}>Home</div>
+                        <div className="goHome" onClick={goHome}>Home</div>
                         <div className="gears" onClick={(e) =>editModeFunc(e)}>
                             {editMode ?
                                 <>

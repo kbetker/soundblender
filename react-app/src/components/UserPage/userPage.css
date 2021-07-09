@@ -137,13 +137,13 @@ a.contentLink:hover{
     filter: brightness(1.2);
 }
 
-.logOut{
+.logOut,.goHome{
     font-size: 24px;
     cursor: pointer;
     color: rgb(161, 161, 161);
     text-decoration: none;
 }
-.logOut:hover{
+.logOut:hover,.goHome:hover{
     color: white;
 }
 .linkEditGear{
