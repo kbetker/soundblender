@@ -101,9 +101,33 @@ body{
     position: relative;
     /* overflow-y: scroll;
     box-sizing: border-box; */
-
     /* display: flex; */
 }
+
+.noScenesOuterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noScenesContainer{
+    /* width: 100vw; */
+    padding: 20px;
+    border: 1px solid rgb(187, 187, 187);
+    height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 8px black inset;
+    background-color: rgb(42, 42, 42);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow-y: scroll;
+    box-sizing: border-box; */
+}
+
+
+
 .sceneName{
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
@@ -160,4 +184,16 @@ body{
 .sceneEditGear:hover{
     filter: brightness(100%);
 
+}
+
+.firstScene{
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+}
+.firstScene:hover{
+    border-bottom: 1px solid white;
+}
+.addCategoryPrompt{
+    font-size: 19px;
 }

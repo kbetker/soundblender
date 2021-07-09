@@ -1,7 +1,7 @@
 from app.models import db, Sound
 
 def seed_sounds():
-
+    #apothecary https://soundblender.s3.amazonaws.com/3fa7a68bd7524b1cae499ef531d16a6c.mp3
     #demo sounds
     name1 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/dryCaveLoop.mp3", name="Ambient02", owner_id=1, is_public=False, target_volume=0.6, fade_speed=50, arrangement=0, is_looped=True)
     name2 = Sound(sound_url="http://kevinbetker.com/App_Academy/soundblender/MP3s/fight_big1.mp3", name="Music01", owner_id=1, is_public=False, target_volume=0.9, fade_speed=10, arrangement=0, is_looped=True)

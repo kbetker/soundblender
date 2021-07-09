@@ -23,6 +23,8 @@ import SceneNew from "./components/SceneNew";
 import SceneEdit from "./components/SceneEdit"
 import SceneDelete from "./components/SceneDelete";
 import CollectionNew from "./components/CollectionNew"
+import CollectionEdit from "./components/CollectionEdit"
+import CollectionDelete from "./components/CollectionDelete";
 
 function App() {
     // const [authenticated, setAuthenticated] = useState(false);
@@ -44,6 +46,8 @@ function App() {
         <BrowserRouter>
             {/* <NavBar /> */}
             <Switch>
+
+
                 {/* =================== Auth ================================== */}
                 <Route path="/" exact={true}>
                     <HomePage />
@@ -56,18 +60,32 @@ function App() {
                 <Route path="/sign-up" exact={true}>
                     <SignUp />
                 </Route>
+
+
                 {/* =================== User Homepage ================================== */}
                 <ProtectedRoute path="/users/:id" exact={true}>
                     <UserPage />
                 </ProtectedRoute>
+
+
                 {/* =================== Collections ================================== */}
                 <ProtectedRoute path="/collection/new" exact={true}>
                     <CollectionNew />
                 </ProtectedRoute>
 
+                <ProtectedRoute path="/collection/:collectionId/edit" exact={true}>
+                    <CollectionEdit />
+                </ProtectedRoute>
+
+                <ProtectedRoute path="/collection/:collectionId/delete" exact={true}>
+                    <CollectionDelete />
+                </ProtectedRoute>
+
                 <ProtectedRoute path="/collection/:collectionId" exact={true}>
                     <CollectionPage />
                 </ProtectedRoute>
+
+
                 {/* =================== Scenes ================================== */}
                 <ProtectedRoute path="/scenes/:collectionId/new" exact={true}>
                     <SceneNew />
@@ -80,6 +98,8 @@ function App() {
                 <ProtectedRoute path="/scenes/:sceneId/delete" exact={true}>
                     <SceneDelete />
                 </ProtectedRoute>
+
+
                 {/* =================== Categories ================================== */}
                 <ProtectedRoute path="/category/:catId/edit" exact={true}>
                     <CategoryEdit />
@@ -100,6 +120,8 @@ function App() {
                 <ProtectedRoute path="/category-sound/:catId/:soundId" exact={true}>
                     <CategorySound />
                 </ProtectedRoute>
+
+
                 {/* =================== Sounds ================================== */}
                 <ProtectedRoute path="/sound/:soundId/edit" exact={true}>
                     <SoundEditForm />

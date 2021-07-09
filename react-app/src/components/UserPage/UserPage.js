@@ -95,7 +95,7 @@ function UserPage() {
                     <div className="contentTitle">My Collections</div>
                     <div className="userContentBox">
                         {collections?.collections.map(el =>
-                            <Link to={!editMode ? `/collection/${el.id}` : `#`} className="contentLink" key={`collectionKey-${el.id}`}>
+                            <Link to={!editMode ? `/collection/${el.id}` : `/collection/${el.id}/edit`} className="contentLink" key={`collectionKey-${el.id}`}>
 
                                 <img src={collection_img} className="contentImg" draggable="false" alt={`collectionImg-${el.id}`}></img>
                                 <div key={`collectionKey-${el.id}`} className="contentName">{el.name} </div>
