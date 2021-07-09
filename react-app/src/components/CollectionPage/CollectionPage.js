@@ -23,18 +23,18 @@ import { setRedirectFunc } from "../../store/redirect";
 function CollectionPage() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { id } = useParams();
+    const { collectionId } = useParams();
     // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
     const currentScene = useRef("1")
 
     useEffect(() => {
-        dispatch(getUserCollection(id))
-    }, [dispatch, id]);
+        dispatch(getUserCollection(collectionId))
+    }, [dispatch, collectionId]);
 
     useEffect(()=>{
-        dispatch(setRedirectFunc(`/collection/${id}`))
-    }, [dispatch, id])
+        dispatch(setRedirectFunc(`/collection/${collectionId}`))
+    }, [dispatch, collectionId])
 
     const collection = useSelector(state => state.collection)
     const sceneLength =collection?.collection?.scenes.length

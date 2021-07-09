@@ -19,6 +19,8 @@ import CategoryEdit from "./components/CategoryEdit";
 import CategoryNew from "./components/CategoryNew";
 import CategoryDelete from "./components/CategoryDelete/CategoryDelete";
 import AddSoundToCategory from "./components/AddSoundToCategory";
+import SceneNew from "./components/SceneNew";
+import SceneEdit from "./components/SceneEdit"
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -43,9 +45,6 @@ function App() {
         <Route path="/" exact={true}>
           <HomePage />
         </Route>
-        <Route path="/collection/:id" exact={true}>
-          <CollectionPage />
-        </Route>
         <Route path="/login" exact={true}>
           <Login />
         </Route>
@@ -53,51 +52,61 @@ function App() {
           <SignUp />
         </Route>
 
-        <Route path="/sound/:soundId/edit" exact={true}>
-            <SoundEditForm />
+        <ProtectedRoute path="/users/:id" exact={true}>
+          <UserPage />
+        </ProtectedRoute>
+
+        <Route path="/collection/:collectionId" exact={true}>
+          <CollectionPage />
         </Route>
 
-        <Route path="/sound/:soundId/delete" exact={true}>
-            <SoundDelete />
+
+
+        <Route path="/scenes/:collectionId/new" exact={true}>
+          <SceneNew />
         </Route>
 
-        <Route path="/sound/:soundId" exact={true}>
-            <SoundPreview />
+        <Route path="/scenes/:sceneId/edit" exact={true}>
+          <SceneEdit />
         </Route>
 
-        <Route path="/sound"  exact={true}>
-            <SoundForm />
-        </Route>
 
 
         <Route path="/category/:catId/edit" exact={true}>
             <CategoryEdit />
         </Route>
-
         <Route path="/category/:catId/addSound" exact={true}>
             <AddSoundToCategory />
         </Route>
-
         <Route path="/category/:catId/delete" exact={true}>
             <CategoryDelete />
         </Route>
-
         <Route path="/category/new/:sceneId" exact={true}>
             <CategoryNew />
         </Route>
-
         <Route path="/category-sound/:catId/:soundId"  exact={true}>
             <CategorySound />
         </Route>
 
 
-        <ProtectedRoute path="/users/:id" exact={true}>
-          <UserPage />
-        </ProtectedRoute>
-
-        <Route path="/users" exact={true}>
-          <UsersList/>
+        <Route path="/sound/:soundId/edit" exact={true}>
+            <SoundEditForm />
         </Route>
+        <Route path="/sound/:soundId/delete" exact={true}>
+            <SoundDelete />
+        </Route>
+        <Route path="/sound/:soundId" exact={true}>
+            <SoundPreview />
+        </Route>
+        <Route path="/sound"  exact={true}>
+            <SoundForm />
+        </Route>
+
+
+
+
+
+
       </Switch>
     </BrowserRouter>
   );
