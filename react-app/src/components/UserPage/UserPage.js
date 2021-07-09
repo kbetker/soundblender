@@ -104,7 +104,7 @@ function UserPage() {
                             </Link>
                         )}
 
-                            <Link to="collection/new" className="contentLink">
+                            <Link to="/collection/new" className="contentLink">
                                 <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
                                 <div className="contentName">New Collection</div>
                             </Link>
