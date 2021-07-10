@@ -30,8 +30,8 @@
 .close_soundPreview{
     position: absolute;
     color: rgb(214, 214, 214);
-    top: -13px;
-    right: -16px;
+    top: 2px;
+    right: 5px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;

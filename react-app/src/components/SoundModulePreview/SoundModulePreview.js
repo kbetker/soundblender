@@ -1,5 +1,5 @@
 // import logo from './images/logo.svg';
-import './SoundModule.css';
+import './SoundModulePreview.css';
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from 'react-redux';
 
@@ -22,12 +22,12 @@ function SoundModulePreview({ mySoundObj, color }) {
     const knobPOS = useRef(0)
     const leftMarker = useRef()
     const soundVolume = useRef(0)
-
+    // console.log(mySoundObj)
     const [btnPlaying, setBtnPlaying] = useState(false)
     const [btnStopping, setBtnStopping] = useState(false)
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
-
+    // console.log(mySoundObj)
     const [redLightOn, setRedLightOn] = useState(false)
 
     const editMode = useSelector(state => state.editMode.editMode)
@@ -192,37 +192,41 @@ function SoundModulePreview({ mySoundObj, color }) {
 
 
 
-
-
     return (
-
-            <div className="soundModule_wrapper" style={{ border: `1px solid ${color}` }}>
-                <div className="title">
-                    {mySoundObj.name}
-                    {editMode && <img src={gear} className="soundEditGear" draggable="false" alt=""></img>}
+            <div className="soundModule_wrapper_wrapper">
+                <div className="value_container">
+                    Target Volume: <span className="value">&nbsp;{mySoundObj.target_volume}</span> &nbsp;
+                    Fade Speed: <span className="value">&nbsp;{mySoundObj.fade_speed}</span> &nbsp;
+                    Looped?: <span className="value">&nbsp;{`${mySoundObj.is_looped}`}</span>
                 </div>
-                <div className="slider_and_controls">
-                    <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>
-                        <div ref={leftMarker}></div>
-                        <div id={`knob_line--container-${mySoundObj.id}`} className="knob_line--container">
-                            <div ref={knob} className="slider__knob" draggable="true" style={{ backgroundImage: `url(${slider_GreyMiddle})` }}>
-                                <div className="knob_color" style={{ backgroundColor: `${color}` }}></div>
+                <div className="soundModule_wrapper" style={{ border: `1px solid ${color}` }}>
+                    <div className="title">
+                        {mySoundObj.name}
+                        {editMode && <img src={gear} className="soundEditGear" draggable="false" alt=""></img>}
+                    </div>
+                    <div className="slider_and_controls">
+                        <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>
+                            <div ref={leftMarker}></div>
+                            <div id={`knob_line--container-${mySoundObj.id}`} className="knob_line--container">
+                                <div ref={knob} className="slider__knob" draggable="true" style={{ backgroundImage: `url(${slider_GreyMiddle})` }}>
+                                    <div className="knob_color" style={{ backgroundColor: `${color}` }}></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="playStopBtns">
+                            <div className="play">
+                                {btnPlaying && <img src={btnPlaying_img} ref={stopBtn} draggable="false" alt="Playing Button"></img>}
+                                {btnStopping && <img src={btnStopping_img} draggable="false" alt="Sound Stopping"></img>}
+                                {btnStopped && <img src={btnStopped_img} ref={playBtn} draggable="false" alt="Sound Stopped"></img>}
+                            </div>
+                            <div className="redLight">
+                                <img src={redLightOff} className="redLightOff" draggable="false" alt="Red Light Off"></img>
+                                {redLightOn && <img src={redLightOn_img} className="redLightOn" draggable="false" alt="Red Light On"></img>}
                             </div>
                         </div>
                     </div>
-                    <div className="playStopBtns">
-                        <div className="play">
-                            {btnPlaying && <img src={btnPlaying_img} ref={stopBtn} draggable="false" alt="Playing Button"></img>}
-                            {btnStopping && <img src={btnStopping_img} draggable="false" alt="Sound Stopping"></img>}
-                            {btnStopped && <img src={btnStopped_img} ref={playBtn} draggable="false" alt="Sound Stopped"></img>}
-                        </div>
-                        <div className="redLight">
-                            <img src={redLightOff} className="redLightOff" draggable="false" alt="Red Light Off"></img>
-                            {redLightOn && <img src={redLightOn_img} className="redLightOn" draggable="false" alt="Red Light On"></img>}
-                        </div>
-                    </div>
+                    <audio ref={mySound} src={mySoundObj.sound_url} type="audio/mpeg"></audio>
                 </div>
-                <audio ref={mySound} src={mySoundObj.sound_url} type="audio/mpeg"></audio>
             </div>
 
     );

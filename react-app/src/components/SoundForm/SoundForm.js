@@ -98,7 +98,9 @@ function SoundForm() {
                 value={target_volume}
                 className="new_sound_input"
             ></input>
-            <label>Fade In/Out <span className="note">(in seconds)</span></label>
+            <label>Fade In/Out
+                {/* <span className="note">(in seconds)</span> */}
+            </label>
             <input
                 type="number"
                 name="username"

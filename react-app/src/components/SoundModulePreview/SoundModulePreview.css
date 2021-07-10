@@ -5,6 +5,28 @@ body{
     display: flex;
     flex-direction: column;
   }
+
+  .soundModule_wrapper_wrapper{
+    background-color: rgb(49, 49, 49);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 1px solid rgb(116, 116, 116);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 12px;
+    box-shadow: 0 0 10px black;
+  }
+  .value{
+    font-weight: 600;
+    color: rgb(255, 0, 0);
+  }
+  .value_container{
+    margin-left: 8px;
+  }
+
   .soundModule_wrapper{
     display: flex;
     flex-direction: column;
