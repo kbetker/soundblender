@@ -1,21 +1,22 @@
 from flask import Flask
 from flask import Blueprint, jsonify, session, request
-from app.models import Sound, db
+from app.models import Sound, Category, db
 from flask_login import current_user, login_required
 from .s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 from app.forms import NewSound
+from wtforms.validators import DataRequired, Email, ValidationError
 
 sound_routes = Blueprint('sound', __name__)
 
 
 
-# def validation_errors_to_error_messages(validation_errors):
-#     errorMessages = []
-#     for field in validation_errors:
-#         for error in validation_errors[field]:
-#             errorMessages.append(f"{field} : {error}")
-#     return errorMessages
+def validation_errors_to_error_messages(validation_errors):
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f"{field} : {error}")
+    return errorMessages
 
 
 
@@ -32,12 +33,25 @@ def getUserSound(soundId):
     return  sound.to_dict()
 
 
+
+
+
+
+
 @sound_routes.route('/<int:soundId>/delete', methods=["DELETE"])
 # @login_required
 def deleteuserSound(soundId):
+    sound = Sound.query.get(soundId)
+    categories = [c.id for c in sound.categories]
+    for category in categories:
+        sound.categories.remove(Category.query.get(category))
+    db.session.commit()
     Sound.query.filter(Sound.id == soundId).delete()
     db.session.commit()
     return  {"sound": "deleted"}
+
+
+
 
 
 
@@ -52,7 +66,7 @@ def new_sound():
     sound = request.files["sound_url"]
 
     if not allowed_file(sound.filename):
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": "File type not permitted. Must be a .wav or .mp3."}, 400
 
     sound.filename = get_unique_filename(sound.filename)
 
@@ -92,8 +106,8 @@ def edit_sound(soundId):
     form = NewSound()
     data = form.data
     soundToEdit = Sound.query.filter(Sound.id == soundId).first()
-    print("==============================", "wat model:", soundToEdit.target_volume, "input: ", data['target_volume'])
-    # print(soundToEdit, "++++++++++++++++++++++++++++++ WAT ++++++++++++++++++++++++++++++")
+    if not soundToEdit:
+        return {'errors': ["Sound doesn't exist."]}
     soundToEdit.sound_url=data['sound_url']
     soundToEdit.name=data['name']
     soundToEdit.owner_id=data['owner_id']

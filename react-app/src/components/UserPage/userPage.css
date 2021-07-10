@@ -1,4 +1,27 @@
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
 
+.logInErrors{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 0, 0);
+    margin-bottom: 5px;
+    /* width: 300px; */
+    /* padding: 2px 20px; */
+    /* z-index: 999; */
+}
+
+.errs{
+    background-color: red;
+    height: 20px;
+}
 .userPageContainer{
     display: grid;
     grid-template-rows: 15px 50px 86vh;

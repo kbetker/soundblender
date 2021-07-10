@@ -74,11 +74,11 @@ export default function userCollectionReducer(state = initialState, action) {
         case GET_COLLECTION:
             return {collection: action.payload}
         case NEW_COLLECTION:
-            return {collection: action.payload}
+            return {newCollection: action.payload}
         case EDIT_COLLECTION:
-            return {collection: action.payload}
+            return {editeCollection: action.payload}
         case DELETE_COLLECTION:
-            return {collection: action.payload}
+            return {deletedCollection: action.payload}
         default:
             return state;
     }

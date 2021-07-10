@@ -25,6 +25,7 @@ import SceneDelete from "./components/SceneDelete";
 import CollectionNew from "./components/CollectionNew"
 import CollectionEdit from "./components/CollectionEdit"
 import CollectionDelete from "./components/CollectionDelete";
+import AboutPage from "./components/AboutPage";
 
 function App() {
     // const [authenticated, setAuthenticated] = useState(false);
@@ -46,7 +47,10 @@ function App() {
         <BrowserRouter>
             {/* <NavBar /> */}
             <Switch>
-
+                {/* =================== About ================================== */}
+                <Route path="/about" exact={true}>
+                    <AboutPage />
+                </Route>
 
                 {/* =================== Auth ================================== */}
                 <Route path="/" exact={true}>

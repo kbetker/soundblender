@@ -12,13 +12,16 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const history = useHistory();
+  const [errors, setErrors] = useState([]);
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data.errors){
-        alert(data.erros)
+        console.log(data.errors)
+        setErrors(data.errors)
       } else {
         console.log(data)
         // debugger
@@ -56,6 +59,7 @@ const goHome = () => {
     <form onSubmit={onSignUp} className="new_sound_form">
         <div className="close_new_sound" onClick={goHome}>X</div>
         <div className="formTitle">Sign Up</div>
+        {errors && errors.map((err, i) => <div className="logInErrors">{err}</div>)}
         <label>User Name</label>
         <input
           type="text"
@@ -63,6 +67,7 @@ const goHome = () => {
           onChange={updateUsername}
           value={username}
           className="new_sound_input"
+          required={true}
         ></input>
         <label>Email</label>
         <input
@@ -71,6 +76,7 @@ const goHome = () => {
           onChange={updateEmail}
           value={email}
           className="new_sound_input"
+          required={true}
         ></input>
 
         <label>Password</label>
@@ -80,6 +86,7 @@ const goHome = () => {
           onChange={updatePassword}
           value={password}
           className="new_sound_input"
+          required={true}
         ></input>
 
         <label>Repeat Password</label>

@@ -65,6 +65,7 @@ export const editUserSound = (formData, soundId) => async (dispatch) => {
         body: formData,
     });
     const data = await response.json();
+    // console.log(data.errors, "=================================")
     if (data.errors) {
         return data;
     }

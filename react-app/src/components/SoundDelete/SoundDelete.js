@@ -1,5 +1,5 @@
 import React from "react"
-import UserPage from "../UserPage"
+import FauxUserPage from "../FauxUserPage"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import { deleteUserSound } from "../../store/sound";
@@ -35,7 +35,7 @@ function SoundDelete() {
                 <button type="submit" className="delete_sound_submit">Yes. Delete.</button>
             </form>
             <div className="black_backer"></div>
-            <div className="fauxUserPageContainer"><UserPage></UserPage></div>
+            <div className="fauxUserPageContainer"><FauxUserPage></FauxUserPage></div>
         </>
 
 

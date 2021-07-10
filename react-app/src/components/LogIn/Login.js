@@ -8,7 +8,7 @@ import HomePage from "../HomePage";
 const LoginForm = () => {
     const dispatch = useDispatch();
     // const user = useSelector(state => state.session.user)
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
@@ -16,10 +16,12 @@ const LoginForm = () => {
     const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
-        // if (data.errors) {
-        //     setErrors(data.errors);
-        // }
+        if (data.errors) {
+            console.log(data.errors)
+            setErrors(data.errors);
+        } else {
         await history.push(`/users/${data.id}`)
+    }
     };
 
     const updateEmail = (e) => {
@@ -40,17 +42,12 @@ const LoginForm = () => {
 
     return (
         <>
-            <form onSubmit={onLogin} className="new_sound_form" style={{top: "225px"}}>
-                {/* <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
-      </div> */}
+            <form onSubmit={(e) => onLogin(e)} className="new_sound_form" style={{ top: "225px" }}>
                 <div className="close_new_sound" onClick={goHome}>X</div>
+
                 <div className="formTitle">Log In</div>
-
+              {errors && errors.map((err, i) => <div className="logInErrors">{err}</div>)}
                 <label>Email</label>
-
                 <input
                     name="email"
                     type="text"

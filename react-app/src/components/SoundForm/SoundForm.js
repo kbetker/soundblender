@@ -4,13 +4,14 @@ import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
 import "./Sound.css"
 import FauxUserPage from "../FauxUserPage";
+import loading from "./loader.png"
 
 function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const history = useHistory(); // so that we can redirect after the image upload is successful
     // const [image, setImage] = useState(null);
-    // const [imageLoading, setImageLoading] = useState(false);
+    const [soundLoading, setSoundLoading] = useState(false);
 
 
     const [sound_url, setSound_url] = useState(null);
@@ -30,6 +31,7 @@ function SoundForm() {
     }, [is_looped])
     const newSound = async (e) => {
         e.preventDefault();
+        setSoundLoading(true)
         const formData = new FormData();
         formData.append("sound_url", sound_url);
         formData.append("name", name);
@@ -44,6 +46,7 @@ function SoundForm() {
         // console.log(formData.is_looped)
         const data = await dispatch(addSound(formData))
         if(data.errors){
+            setArrangement(false)
             alert(data.errors)
         } else {
             history.push(`/users/${user.id}`)
@@ -81,6 +84,12 @@ function SoundForm() {
 
     return (
         <>
+
+         {soundLoading &&
+         <div className="black_fronter_backer">
+             <img src={loading} className="loading"></img>
+         </div>}
+
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">
             <div className="close_new_sound" onClick={goHome}>X</div>
             <label>Name Your Sound</label>
