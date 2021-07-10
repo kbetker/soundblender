@@ -3,31 +3,31 @@ from app.models import db, Scene
 # Adds a demo user, you can add other users here if you want
 def seed_scenes():
 
-    randomEncounter1 = Scene(name="Woodland Encounter", theme="default", collection_id=1)
-    planeOfFire = Scene(name="Plane of Fire", theme="", collection_id=1)
+    greatUpHeaval = Scene(name="A Great Upheaval", theme="default", collection_id=1)
+    savageFrontier = Scene(name="Savage Frontier", theme="default", collection_id=1)
 
-    cragmawCastle = Scene(name="Cragmaw Castle", theme="default", collection_id=2)
-    waveEchoCave = Scene(name="Wave Echo Cave", theme="default", collection_id=2)
+    # cragmawCastle = Scene(name="Cragmaw Castle", theme="default", collection_id=2)
+    # waveEchoCave = Scene(name="Wave Echo Cave", theme="default", collection_id=2)
 
-    randomEncounter2 = Scene(name="Desert", theme="default", collection_id=3)
-    feywild = Scene(name="Feywild", theme="default", collection_id=3)
+    # randomEncounter2 = Scene(name="Desert", theme="default", collection_id=3)
+    # feywild = Scene(name="Feywild", theme="default", collection_id=3)
 
-    greatUpheavel = Scene(name="The Great Upheavel", theme="default", collection_id=4)
-    savageFrontier = Scene(name="The Savage Frontier", theme="default", collection_id=4)
+    # greatUpheavel = Scene(name="The Great Upheavel", theme="default", collection_id=4)
+    # savageFrontier = Scene(name="The Savage Frontier", theme="default", collection_id=4)
 
 
 
-    db.session.add(randomEncounter1)
-    db.session.add(planeOfFire)
-
-    db.session.add(cragmawCastle)
-    db.session.add(waveEchoCave)
-
-    db.session.add(randomEncounter2)
-    db.session.add(feywild)
-
-    db.session.add(greatUpheavel)
+    db.session.add(greatUpHeaval)
     db.session.add(savageFrontier)
+
+    # db.session.add(cragmawCastle)
+    # db.session.add(waveEchoCave)
+
+    # db.session.add(randomEncounter2)
+    # db.session.add(feywild)
+
+    # db.session.add(greatUpheavel)
+    # db.session.add(savageFrontier)
 
 
     db.session.commit()

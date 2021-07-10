@@ -28,10 +28,11 @@ function Categories({ category, currentscene }) {
                {category.name}
                 {editMode && <img src={gear} className="categoryEditGear" draggable="false" alt="" onClick={editCategory}></img>}
             </div>
-
-            {category.sounds.map(mySoundObj =>
-                <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModule>
-            )}
+            <div className="soundModulewrapper">
+                {category.sounds.map(mySoundObj =>
+                    <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModule>
+                )}
+            </div>
              {editMode &&
                 <div className="NewSoundModule_wrapper" onClick={addSound}>
                     <img src={gear} className="NewSoundGear" draggable="false" alt="" onClick={editCategory}></img>

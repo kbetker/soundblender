@@ -16,10 +16,10 @@
 .categoryEditGear{
     /* position: absolute; */
     width: 20px;
-    background-color: rgba(0, 0, 0, 40%);
+    background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px black;
     border-radius: 20px;
-    filter: brightness(80%);
+    filter: brightness(0.8);
     margin-left: 8px;
     position: relative;
     top: 4px;
@@ -27,7 +27,7 @@
     cursor: pointer;
 }
 .categoryEditGear:hover{
-    filter: brightness(100%);
+    filter: brightness(1);
 
 }
 @media screen and (max-width: 1125px) {

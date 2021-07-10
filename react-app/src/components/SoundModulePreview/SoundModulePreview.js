@@ -69,7 +69,7 @@ function SoundModulePreview({ mySoundObj, color }) {
                 knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
                 setVolume()
-                if (knobPOS.current >= mySoundObj.target_volume * 100 || knobPOS.current >= 98) {
+                if (knobPOS.current >= mySoundObj.target_volume * 10 || knobPOS.current >= 98) {
                     clearInterval(fadeInToTarget)
                 }
             }, 10)

@@ -4,20 +4,20 @@ from app.models import db, Collection
 def seed_collections():
 
 
-    generalPurpose = Collection(name="General D&D Session", owner_id=2)
-    lostMines = Collection(name="Lost Mines of Phandelver", owner_id=2)
+    generalPurpose = Collection(name="Storm King's Thunder", owner_id=1)
+    # lostMines = Collection(name="Lost Mines of Phandelver", owner_id=2)
 
 
-    generalPurpose2 = Collection(name="General D&D Session", owner_id=1)
-    stormKing = Collection(name="Storm King’s Thunder", owner_id=1)
+    # generalPurpose2 = Collection(name="General D&D Session", owner_id=1)
+    # stormKing = Collection(name="Storm King’s Thunder", owner_id=1)
 
 
 
     db.session.add(generalPurpose)
-    db.session.add(lostMines)
+    # db.session.add(lostMines)
 
-    db.session.add(generalPurpose2)
-    db.session.add(stormKing)
+    # db.session.add(generalPurpose2)
+    # db.session.add(stormKing)
 
     db.session.commit()
 

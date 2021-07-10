@@ -33,7 +33,7 @@
   .NewSoundGear{
     width: 40px;
     border-radius: 20px;
-    filter: brightness(80%);
+    filter: brightness(0.8);
     margin: 0 15px;
     /* margin-left: 8px;
     position: relative; */

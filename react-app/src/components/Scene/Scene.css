@@ -21,10 +21,9 @@ body{
     position: relative;
     width: 75px;
     top: 6px;
-    /* background-color: rgba(0, 0, 0, 40%); */
     /* box-shadow: 0 0 10px black; */
     border-radius: 20px;
-    filter: brightness(80%);
+    filter: brightness(0.8);
     margin-left: 8px;
     animation:clockwise 14s linear infinite;
     cursor: pointer;
@@ -32,7 +31,7 @@ body{
 }
 
 .newSceneWrapper:hover{
-    filter: brightness(100%);
+    filter: brightness(1);
     background-color: rgb(65, 65, 65);
 
 }
@@ -42,7 +41,7 @@ body{
 }
 .addNewSceneText{
     cursor: pointer;
-    border-bottom: 1px solid rgba(0, 0, 0, 0%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
 
 }
 .addNewSceneText:hover{
@@ -151,12 +150,12 @@ body{
     align-self: center;
     display: flex;
     align-items: center;
-    opacity: 50%;
+    opacity: 0.5;
     box-sizing: border-box;
 }
 .nextScene:hover,.prevScene:hover{
     background-color: rgb(85, 85, 85);
-    opacity: 100%;
+    opacity: 1;
 }
 .nextScene{
     border-top-right-radius: 20px;
@@ -173,16 +172,16 @@ body{
     position: relative;
     width: 30px;
     top: 6px;
-    background-color: rgba(0, 0, 0, 40%);
+    background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px black;
     border-radius: 20px;
-    filter: brightness(80%);
+    filter: brightness(1);
     margin-left: 8px;
     animation:clockwise 14s linear infinite;
     cursor: pointer;
 }
 .sceneEditGear:hover{
-    filter: brightness(100%);
+    filter: brightness(1);
 
 }
 
