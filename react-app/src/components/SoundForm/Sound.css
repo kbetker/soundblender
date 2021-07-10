@@ -10,6 +10,52 @@
     z-index: 90;
     position: absolute;
 }
+.black_fronter_backer{
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    z-index: 190;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.loading{
+    animation:loading 0.5s linear infinite;
+}
+
+@keyframes loading {
+    0%   {
+        filter: hue-rotate(-360deg);
+        transform:rotate(0deg);
+    }
+    100%   {
+        filter: hue-rotate(360deg);
+        transform:rotate(-360deg);
+    }
+  }
+.errors{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(255, 0, 0);
+    /* background-color: gold; */
+    width: 300px;
+    padding: 2px 20px;
+    position: absolute;
+    top: 50px;
+    margin-left: 50px;
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+}
 
 .new_sound_form{
     display: flex;
@@ -118,6 +164,7 @@
 .note{
     font-size: 16px;
 }
+
 
 
 @keyframes colorChange {

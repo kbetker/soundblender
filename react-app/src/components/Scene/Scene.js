@@ -17,16 +17,20 @@ function Scene({scene, id, currentscene}){
     const editScene = () => history.push(`/scenes/${sceneId}/edit`)
     const newCategory = () => history.push(`/category/new/${sceneId}`)
     const newScene = () => history.push(`/scenes/${collectionId}/new`)
-
+    // console.log(scenes[0].name, "wwwwwaaaaattttttt")
 
     return(
         // <div className="ScenePageBody"> This div i up one in Categories
+        <>
+
         <div className="sceneContainer" style={{width: `${window.innerWidth-122}px`}} id={id}>
             <div className="sceneName">
                 <div>
                     {scene.name}
                     {editMode && <img src={gear} className="sceneEditGear" draggable="false" alt="" onClick={editScene} ></img>}
                 </div>
+                {(!editMode && scenes.length === 0) && <div className="addCategoryPrompt">Click the spinning gears above to add categories</div>}
+
                 {editMode &&
                 <div className="addNewSceneText" onClick={newScene}>
                     Add New Scene
@@ -48,6 +52,7 @@ function Scene({scene, id, currentscene}){
 
             </div>
         </div>
+        </>
     )}
 
 export default Scene

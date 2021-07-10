@@ -1,7 +1,7 @@
 .fauxUserPageContainer{
     display: grid;
     grid-template-rows: 15px 50px 86vh;
-    filter: blur(3px) brightness(80%);
+    filter: blur(3px) brightness(0.8);
 }
 .soundPreviewWrapper{
     width: 100vw;
@@ -30,8 +30,8 @@
 .close_soundPreview{
     position: absolute;
     color: rgb(214, 214, 214);
-    top: -13px;
-    right: -16px;
+    top: 2px;
+    right: 5px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;

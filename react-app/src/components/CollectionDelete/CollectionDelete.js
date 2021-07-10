@@ -1,14 +1,13 @@
 import React from "react"
-import FauxUserPage from "../FauxUserPage"
+import FauxUserPage from "../FauxUserPage";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { deleteUserSound } from "../../store/sound";
+import { deleteUserCollection } from "../../store/collection";
 import "../SoundForm/Sound.css"
-import "./SoundDelete.css"
 
-function SoundDelete() {
+function CollectionDelete() {
     const dispatch = useDispatch()
-    const { soundId } = useParams();
+    const { collectionId } = useParams();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
@@ -19,7 +18,8 @@ function SoundDelete() {
 
     const deleteSound = (e) => {
         e.preventDefault();
-        const data = dispatch(deleteUserSound(soundId))
+        const data = dispatch(deleteUserCollection(collectionId))
+        console.log(collectionId, "++++++++FRONT END++++++++++")
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {
@@ -44,4 +44,4 @@ function SoundDelete() {
     )
 
 }
-export default SoundDelete
+export default CollectionDelete

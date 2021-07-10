@@ -5,11 +5,11 @@ from app.models import db, User
 def seed_users():
 
     demo = User(username='Demo', email='demo@aa.io', password='password')
-    kbetker = User(username='kbetker', email='k@b.com', password='123')
+    kbetker = User(username='kbetker', email='k@b.com', password='ne14dnd')
 
 
-    db.session.add(kbetker)
     db.session.add(demo)
+    db.session.add(kbetker)
 
     db.session.commit()
 

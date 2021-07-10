@@ -21,10 +21,9 @@ body{
     position: relative;
     width: 75px;
     top: 6px;
-    /* background-color: rgba(0, 0, 0, 40%); */
     /* box-shadow: 0 0 10px black; */
     border-radius: 20px;
-    filter: brightness(80%);
+    filter: brightness(0.8);
     margin-left: 8px;
     animation:clockwise 14s linear infinite;
     cursor: pointer;
@@ -32,7 +31,7 @@ body{
 }
 
 .newSceneWrapper:hover{
-    filter: brightness(100%);
+    filter: brightness(1);
     background-color: rgb(65, 65, 65);
 
 }
@@ -42,7 +41,7 @@ body{
 }
 .addNewSceneText{
     cursor: pointer;
-    border-bottom: 1px solid rgba(0, 0, 0, 0%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
 
 }
 .addNewSceneText:hover{
@@ -101,9 +100,33 @@ body{
     position: relative;
     /* overflow-y: scroll;
     box-sizing: border-box; */
-
     /* display: flex; */
 }
+
+.noScenesOuterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noScenesContainer{
+    /* width: 100vw; */
+    padding: 20px;
+    border: 1px solid rgb(187, 187, 187);
+    height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 8px black inset;
+    background-color: rgb(42, 42, 42);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow-y: scroll;
+    box-sizing: border-box; */
+}
+
+
+
 .sceneName{
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
@@ -127,12 +150,12 @@ body{
     align-self: center;
     display: flex;
     align-items: center;
-    opacity: 50%;
+    opacity: 0.5;
     box-sizing: border-box;
 }
 .nextScene:hover,.prevScene:hover{
     background-color: rgb(85, 85, 85);
-    opacity: 100%;
+    opacity: 1;
 }
 .nextScene{
     border-top-right-radius: 20px;
@@ -149,15 +172,27 @@ body{
     position: relative;
     width: 30px;
     top: 6px;
-    background-color: rgba(0, 0, 0, 40%);
+    background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px black;
     border-radius: 20px;
-    filter: brightness(80%);
+    filter: brightness(1);
     margin-left: 8px;
     animation:clockwise 14s linear infinite;
     cursor: pointer;
 }
 .sceneEditGear:hover{
-    filter: brightness(100%);
+    filter: brightness(1);
 
+}
+
+.firstScene{
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+}
+.firstScene:hover{
+    border-bottom: 1px solid white;
+}
+.addCategoryPrompt{
+    font-size: 19px;
 }

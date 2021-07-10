@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import "./HomePage.css"
-import background from "./background_animation-greyscale-Black_Background.gif"
-import logoGif from "./logoAnimationGreen.gif"
-import logo from "./homepageLogo.png"
+import "../HomePage/HomePage.css"
+import "./About.css"
+import background from "../HomePage/background_animation-greyscale-Black_Background.gif"
+import github from "./githubLogo.png"
+import linkedin from "./linkedInLogo.png"
+
 import LogoutButton from "../auth/LogoutButton"
 import { useDispatch, useSelector } from 'react-redux'
-import dmBackground from "./dm.jpg"
+import dmBackground from "../HomePage/dm.jpg"
 import { login } from '../../store/session'
 
 function HomePage(){
@@ -29,12 +31,15 @@ function HomePage(){
         <div className="homepage_wrapper">
             <div>
 
-                <div className="navBar">
-                    <div className="logo-container">
-                        <img src={logoGif} className="logoGif" alt="Hompage Logo Animation" draggable={false}></img>
-                        <img src={logo} className="logo" alt="Homepage Logo" draggable={false}></img>
+                <div className="aboutNavBar">
+                    <div className="about-container">
+                    SoundBlender is a customizable soundboard where users can create audio environments to enhance roleplaying games, murder mysteries, or any other type of interactive story telling. Be sure to check out my GitHub link below for more information on this site, or LinkedIn for more information about me!
                     </div>
-                    <div className="home-links-container">
+                    <div className="imageContainer">
+                        <a href="https://github.com/kbetker/soundblender" target="_blank"><img src={github} className="linkedImages"></img></a>
+                        <a href="https://www.linkedin.com/in/kevin-betker-878505128/" target="_blank"><img src={linkedin} className="linkedImages"></img></a>
+                    </div>
+                    <div className="about-links-container">
                         {user ?
                         <LogoutButton></LogoutButton>
                         :
@@ -45,7 +50,7 @@ function HomePage(){
                             <div className="spacer">|</div>
                             <div onClick={onLogin} className="demoHomeLink">Demo</div>
                             <div className="spacer">|</div>
-                            <div onClick={()=>history.push(`/about`)} className="demoHomeLink">About</div>
+                            <div onClick={()=> history.push('/')} className="demoHomeLink">Home</div>
                         </>
 
                     }

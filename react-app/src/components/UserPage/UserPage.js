@@ -45,9 +45,20 @@ function UserPage() {
     }
 
     const collections = useSelector(state => state.userInfo.info)
+    const sortedCollections = collections?.collections?.sort(function(a, b){
+        if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
+        if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+        return 0
+    })
+
+
     const sounds = useSelector(state => state.newSound.sounds)
     const user = useSelector(state => state.session)
-
+    const sortedSounds = sounds?.sounds?.sort(function(a, b){
+        if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
+        if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+        return 0
+    })
 
     useEffect(()=>{
         if(user?.user?.id != id){
@@ -94,8 +105,8 @@ function UserPage() {
                 <div className="contentContainer">
                     <div className="contentTitle">My Collections</div>
                     <div className="userContentBox">
-                        {collections?.collections.map(el =>
-                            <Link to={!editMode ? `/collection/${el.id}` : `#`} className="contentLink" key={`collectionKey-${el.id}`}>
+                        {sortedCollections?.map(el =>
+                            <Link to={!editMode ? `/collection/${el.id}` : `/collection/${el.id}/edit`} className="contentLink" key={`collectionKey-${el.id}`}>
 
                                 <img src={collection_img} className="contentImg" draggable="false" alt={`collectionImg-${el.id}`}></img>
                                 <div key={`collectionKey-${el.id}`} className="contentName">{el.name} </div>
@@ -114,7 +125,7 @@ function UserPage() {
                 <div className="contentContainer">
                     <div className="contentTitle">My Sounds</div>
                     <div className="userContentBox">
-                        {sounds?.sounds?.map(el =>
+                        {sortedSounds?.map(el =>
                             <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>

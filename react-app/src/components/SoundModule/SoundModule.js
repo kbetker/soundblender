@@ -18,7 +18,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const mySound = useRef();
     const playBtn = useRef()
     const stopBtn = useRef();
-
     const knob = useRef(0)
     const knobPOS = useRef(0)
     const leftMarker = useRef()
@@ -77,7 +76,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
                 setVolume()
-                if (knobPOS.current >= mySoundObj.target_volume * 100 || knobPOS.current >= 98) {
+                if (knobPOS.current >= mySoundObj.target_volume * 10 || knobPOS.current >= 98) {
                     clearInterval(fadeInToTarget)
                 }
             }, 10)
@@ -214,7 +213,8 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
     return (
         <>
-            <div className="soundModule_wrapper" style={{ border: `1px solid ${color}` }}>
+             <div className="soundModule_wrapper" style={{ border: `1px solid ${color}`, order: `${mySoundObj.arrangement}`}}>
+            {/* <div className="soundModule_wrapper" style={{ border: `1px solid grey` }}> */}
                 <div className="title">
                     {mySoundObj.name}
                     {editMode &&
