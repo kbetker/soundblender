@@ -7,7 +7,8 @@ Have a listen here => [SoundBlender](https://soundblender.herokuapp.com/)
 SoundBlender is a customizable soundboard where users can create audio environments to enhance roleplaying games, murder mysteries, or any other type of interactive story telling.
 
 To begin, users can upload their Sounds and customize certain attributes, such as name, the initial volume, how fast it fades in, the order on the page, and if the Sound should be looped.  Users can then immediately preview their Sound and make adjustments if necessary.
-![image](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/createSound)
+![CreateSound](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/createSound.gif)
+
 
 Create a Collection - a Collection could be a specific campaign of D&D you're running for youre friends, or perhaps a book you read to your kids at night.
 [image]
