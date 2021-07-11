@@ -11,12 +11,17 @@ To begin, users can upload their Sounds and customize certain attributes, such a
 
 ## Create Collection
 Create a Collection - a Collection could be a specific campaign of D&D you're running for youre friends, or perhaps a book you read to your kids at night.
+
 ![CreateCollection](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/createCollection.gif)
 
+## Create Scene
 Inside the Collection, you would then create a Scene. An example of a Scene could be the players' first encounter with a band of goblins.
+
 ![CreateScene](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/crateScene.gif)
 
+## Create Category/add Sounds
 Scenes would then have Categories within. You may wish to separate the Music files from Ambience or group music files according to genre.
+
 ![CreateCategory](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/createCategories.gif)
 
 
