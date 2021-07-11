@@ -25,6 +25,8 @@ body{
     padding: 0;
     /* width: 100vh; */
     min-width: 1920px;
+    min-height: 1385px;
+
     /* min-height: 100vh; */
     image-rendering: pixelated;
     mix-blend-mode: multiply;
@@ -37,10 +39,10 @@ body{
 .dmbackground{
     mix-blend-mode: multiply;
     position: absolute;
-    top: -330px;
+    top: -250px;
     /* left: -115px; */
     /* width: 130vw; */
-    min-width: 100vw;
+    min-height: 1385px;
 }
 
 .formTitle{
