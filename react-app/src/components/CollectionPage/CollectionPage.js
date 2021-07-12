@@ -40,7 +40,9 @@ function CollectionPage() {
     const sceneLength = collection?.collection?.scenes?.length
     const editMode = useSelector(state => state.editMode.editMode)
     const user = useSelector(state => state.session.user)
+
     // if(collection.collection?.scenes.length === 0)history.push(`/scenes/${collection.collection?.id}/new`)
+
     const onLogout = async (e) => {
         await dispatch(logout());
         dispatch(setEditMode(false))
@@ -56,6 +58,10 @@ function CollectionPage() {
         e.preventDefault()
         editMode ? dispatch(setEditMode(false)) : dispatch(setEditMode(true))
 
+    }
+
+    if(collection.collection?.scenes[0]?.categories.length === 0){
+        dispatch(setEditMode(true))
     }
 
     function changeSceneFunc(direction) {
