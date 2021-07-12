@@ -4,7 +4,7 @@
     height: 450px;
     position: absolute;
     color: white;
-    top: 150px;
+    top: 30%;
     z-index: 5;
     border-top:  1px solid rgb(0, 255, 0);
     border-bottom:  1px solid rgb(0, 255, 0);

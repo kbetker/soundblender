@@ -70,7 +70,7 @@ body{
       height: 200px;
       position: absolute;
       color: white;
-      top: 300px;
+      top: 40%;
       z-index: 5;
       border-top:  1px solid rgb(0, 255, 0);
       border-bottom:  1px solid rgb(0, 255, 0);
