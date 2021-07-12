@@ -22,7 +22,7 @@ function SoundForm() {
     // useEffect(()=>{
     //     dispatch(getCategoryFunc(catId))
     // }, [dispatch, catId])
-    console.log(sceneId, "wtfwtfwtf")
+    // console.log(sceneId, "wtfwtfwtf")
 
     const [name, setName] = useState('');
     const [color, setColor] = useState('white');

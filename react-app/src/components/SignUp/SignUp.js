@@ -20,10 +20,10 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data.errors){
-        console.log(data.errors)
+        // console.log(data.errors)
         setErrors(data.errors)
       } else {
-        console.log(data)
+        // console.log(data)
         // debugger
         history.push(`/users/${data.id}`)
       }

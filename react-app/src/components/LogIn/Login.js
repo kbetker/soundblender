@@ -17,7 +17,7 @@ const LoginForm = () => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
         if (data.errors) {
-            console.log(data.errors)
+            // console.log(data.errors)
             setErrors(data.errors);
         } else {
         await history.push(`/users/${data.id}`)

@@ -29,7 +29,7 @@ export const deleteCollection = ( collection ) => ({
 
 
 export const deleteUserCollection = (collectionId) => async (dispatch) => {
-    console.log(collectionId, "++++++++THUNK++++++++")
+    // console.log(collectionId, "++++++++THUNK++++++++")
     const response = await fetch(`/api/collections/${collectionId}/delete`, {
         method: "DELETE"
     });

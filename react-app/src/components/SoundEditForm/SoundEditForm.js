@@ -26,7 +26,7 @@ function SoundForm() {
 
 
     const newSound = async (e) => {
-        console.log(errors)
+        // console.log(errors)
         e.preventDefault();
         const formData = new FormData();
         formData.append("sound_url", sound_url);
