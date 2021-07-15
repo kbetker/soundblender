@@ -3,6 +3,8 @@
     animation-iteration-count:infinite;
     margin: 10px 0;
 }
+
+
 .black_backer{
     background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
@@ -165,6 +167,31 @@
     font-size: 16px;
 }
 
+.modalEffect {
+    filter: blur(0) brightness(1);
+    transition: all 0.5s linear;
+}
+
+.darkblur{
+    filter: blur(4px) brightness(0.6);
+
+}
+
+.formEffect{
+    position: relative;
+    opacity: 0;
+    z-index: 99;
+    filter: blur(20px);
+    transition: all 0.5s ease-out;
+    transform: scale(150%);
+}
+.blurIn{
+    position: relative;
+    filter: blur(0px);
+    opacity: 1.0;
+    z-index: 99;
+    transform: scale(100%);
+}
 
 
 @keyframes colorChange {

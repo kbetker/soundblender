@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Login from "./components/LogIn/Login";
+// import Login from "./components/LogIn/Login";
 import SignUp from "./components/SignUp/index";
 // import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -57,9 +57,9 @@ function App() {
                     <HomePage />
                 </Route>
 
-                <Route path="/login" exact={true}>
+                {/* <Route path="/login" exact={true}>
                     <Login />
-                </Route>
+                </Route> */}
 
                 <Route path="/sign-up" exact={true}>
                     <SignUp />
