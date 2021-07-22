@@ -3,7 +3,14 @@
     animation-iteration-count:infinite;
     margin: 10px 0;
 }
-
+#theForm{
+    width: 100vw;
+    height: 100vh;
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .black_backer{
     background-color: rgba(0, 0, 0, 0.5);
@@ -77,7 +84,7 @@
     animation-duration: 10s;
     position:absolute;
     left: 40%;
-    top: 10%;
+    /* top: 10%; */
     z-index: 100;
 }
 .close_new_sound{

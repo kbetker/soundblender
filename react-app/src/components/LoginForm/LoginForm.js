@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
-import HomePage from "../HomePage";
+// import HomePage from "../HomePage";
 import { setModalState } from "../../store/modal";
 
 
@@ -41,7 +41,7 @@ const LoginForm = () => {
         if (theForm){
             theForm.classList.add("blurIn")
         }
-    })
+    }, [])
 
     const goHome = () => {
         // history.push("/")

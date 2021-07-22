@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import dmBackground from "./dm.jpg"
 import { login } from '../../store/session'
 import LoginForm from "../LoginForm"
+import SignUpForm from '../SignUp/SignUp'
 import { setModalState } from '../../store/modal'
 
 function HomePage() {
@@ -27,13 +28,14 @@ function HomePage() {
             await history.push(`/users/${data.id}`)
         }
     };
-    const setModalFunc = async () => {
-        await dispatch(setModalState("login"))
+    const setModalFunc = async (modalState) => {
+        await dispatch(setModalState(modalState))
     }
 
     return (
         <>
             {modal === "login" && <LoginForm />}
+            {modal === "signup" && <SignUpForm />}
             <div className={modal === "login" ? "modalEffect darkblur" : "modalEffect"}>
                 <div className="homepage_wrapper">
                     <div>
@@ -45,9 +47,9 @@ function HomePage() {
                             </div>
                             <div className="home-links-container">
                                 {user ? <LogoutButton></LogoutButton> : <>
-                                    <div onClick={()=> setModalFunc()} className="demoHomeLink">Log in</div>
+                                    <div onClick={()=> setModalFunc("login")} className="demoHomeLink">Log in</div>
                                     <div className="spacer">|</div>
-                                    <Link to="/sign-up" className="homeLinks">Sign Up</Link>
+                                    <div onClick={()=> setModalFunc("signup")} className="demoHomeLink">Sign Up</div>
                                     <div className="spacer">|</div>
                                     <div onClick={onLogin} className="demoHomeLink">Demo</div>
                                     <div className="spacer">|</div>

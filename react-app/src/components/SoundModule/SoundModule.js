@@ -188,7 +188,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             function knobIsDragging(e) {
                 e.preventDefault();
                 xDiff = Xold - (e.clientX + addToClientX());
-                // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
                 Xold = (e.clientX + addToClientX());
                 knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX()) / 2
                 // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())

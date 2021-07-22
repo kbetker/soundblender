@@ -4,6 +4,7 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { getUserInfo } from "../../store/userPage"
 import { getUserSounds } from "../../store/sound";
 import "./userPage.css"
+import "../HomePage/HomePage.css"
 import collection_img from "./collectionIcon.png"
 import new_collection_img from "./newCollectionIcon.png"
 import mySoundPlay from "./mySoundPlay.png"
@@ -105,6 +106,10 @@ function UserPage() {
                 <div className="contentContainer">
                     <div className="contentTitle">My Collections</div>
                     <div className="userContentBox">
+                            <Link to="/collection/new" className="contentLink">
+                                <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
+                                <div className="contentName">New Collection</div>
+                            </Link>
                         {sortedCollections?.map(el =>
                             <Link to={!editMode ? `/collection/${el.id}` : `/collection/${el.id}/edit`} className="contentLink" key={`collectionKey-${el.id}`}>
 
@@ -115,16 +120,17 @@ function UserPage() {
                             </Link>
                         )}
 
-                            <Link to="/collection/new" className="contentLink">
-                                <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
-                                <div className="contentName">New Collection</div>
-                            </Link>
+
                     </div>
                 </div>
 
                 <div className="contentContainer">
                     <div className="contentTitle">My Sounds</div>
                     <div className="userContentBox">
+                            <Link to="/sound" className="contentLink">
+                                <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
+                                <div className="contentName">New Sound</div>
+                            </Link>
                         {sortedSounds?.map(el =>
                             <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
@@ -132,11 +138,6 @@ function UserPage() {
                                 {editMode && <img src={gear} className="linkEditGear" draggable="false" alt=""></img>}
                             </Link>
                         )}
-
-                            <Link to="/sound" className="contentLink">
-                                <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
-                                <div className="contentName">New Sound</div>
-                            </Link>
                     </div>
                 </div>
 
