@@ -93,15 +93,18 @@ export const addSound = (formData) => async (dispatch) => {
 const initialState = {sound: null}
 
 export default function soundReducer(state = initialState, action) {
+    let newSound;
     switch (action.type) {
         case ADD_SOUND:
-            return {newSound: action.payload}
+            newSound = Object.assign({}, state);
+            newSound.sounds.sounds[state.sounds.sounds.length] = action.payload
+            return newSound
         case GET_SOUNDS:
             return {sounds: action.payload}
         case GET_SOUND:
             return {sound: action.payload}
         case EDIT_SOUND:
-            return {editedSound: action.payload}
+            return {sounds: action.payload}
         case DELETE_SOUND:
             return {deletedSound: action.payload}
         default:

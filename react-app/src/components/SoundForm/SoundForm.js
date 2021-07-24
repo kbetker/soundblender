@@ -5,30 +5,33 @@ import { addSound } from "../../store/sound"
 import "./Sound.css"
 import FauxUserPage from "../FauxUserPage";
 import loading from "./loader.png"
+import { setModalState } from "../../store/modal"
 
 function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-    const history = useHistory(); // so that we can redirect after the image upload is successful
-    // const [image, setImage] = useState(null);
+    const history = useHistory();
+
     const [soundLoading, setSoundLoading] = useState(false);
-
-
     const [sound_url, setSound_url] = useState(null);
     const [name, setName] = useState('');
-    // const [owner_id, setId] = useState(user?.id);
-    // const [is_public, setIs_public] = useState(false);
     const [target_volume, setTarget_volume] = useState(10);
     const [fade_speed, setFade_speed] = useState(1);
     const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
 
-
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
 
 
     useEffect(() => {
-
+        //was this useEffect supposed to do something?
     }, [is_looped])
+
     const newSound = async (e) => {
         e.preventDefault();
         setSoundLoading(true)
@@ -42,48 +45,38 @@ function SoundForm() {
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
-        // setImageLoading(true);
-        // console.log(formData.is_looped)
         const data = await dispatch(addSound(formData))
         if(data.errors){
             setArrangement(false)
             alert(data.errors)
+            setSoundLoading(false)
         } else {
-            history.push(`/users/${user.id}`)
+            setSoundLoading(false)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
+
+            // await history.push(`/users/${user.id}`)
         }
-        // const res = await fetch('/api/sound', {
-        //     method: "POST",
-        //     body: formData,
-        // });
-        // if (res.ok) {
-        //     await res.json();
-        //     setImageLoading(false);
-        //     // history.push("/");
-        //     console.log(res)
-        // }
-        // else {
-        //     setImageLoading(false);
-        //     // a real app would probably use more advanced
-        //     // error handling
-        // }
-
-        // const data = await dispatch(addSound(sound_url, name, owner_id, is_public, target_volume, fade_speed, is_looped))
-        // if (data.errors) {
-        //     alert(data.errors)
-        // }
-
     }
 
     const updateImage = (e) => {
         const file = e.target.files[0];
         setSound_url(file);
     }
+
     const goHome = () => {
-        history.push(`/users/${user.id}`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     return (
-        <>
+        <div className="formEffect" id="theForm">
 
          {soundLoading &&
          <div className="black_fronter_backer">
@@ -150,9 +143,9 @@ function SoundForm() {
             <button type="submit" className="new_sound_submit">Submit</button>
         </form>
         <div className="black_backer"></div>
-        <FauxUserPage></FauxUserPage>
+        {/* <FauxUserPage></FauxUserPage> */}
 
-        </>
+        </div>
     )
 }
 export default SoundForm

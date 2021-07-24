@@ -13,16 +13,23 @@ import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import gear from "./Gear.png"
 import { logout } from "../../store/session";
 import { setRedirectFunc } from "../../store/redirect";
+import { setModalState } from "../../store/modal"
+import SoundForm from "../SoundForm/SoundForm";
+import SoundEditForm from "../SoundEditForm/SoundEditForm";
+import SoundModulePreview from "../SoundModulePreview/SoundModulePreview";
+import SoundPreview from "../SoundPreview/SoundPreview";
+import SoundDelete from "../SceneDelete";
 
 
 function UserPage() {
     // const [user, setUser] = useState({});
-    // Notice we use useParams here instead of getting the params
-    // From props.
     const { id } = useParams();
+    const modal = useSelector(state => state.modal.modal)
     const dispatch = useDispatch()
     const history = useHistory()
     const [editMode, setEditMode] = useState(false)
+    const [editBySoundId, setEditBySoundId] = useState('')
+    const [currentSoundId, setCurrentSoundId] = useState('')
 
     useEffect(() => {
         dispatch(getUserInfo(id))
@@ -73,9 +80,27 @@ function UserPage() {
     //   if(collections.collections){
     //   console.log(collections?.collections)}
     // })
+    const setModalFunc = async (modalState) => {
+        await dispatch(setModalState(modalState))
+    }
+
+    function editSoundProp(id){
+        setEditBySoundId(id);
+        setModalFunc("editSound")
+    }
+
+    function currentSoundIdProp(id){
+       setCurrentSoundId(id);
+        setModalFunc("soundPreview")
+    }
 
     return (
-        <div className="userPageContainer">
+        <>
+         {modal === "newSound" && <SoundForm />}
+         {modal === "editSound" && <SoundEditForm editBySoundId={editBySoundId} />}
+         {modal === "soundPreview" && <SoundPreview currentSoundId={currentSoundId} />}
+         {modal === "soundDelete" && <SoundDelete currentSoundId={currentSoundId} />}
+        <div className={modal === "" ? "userPageContainer modalEffect" : "userPageContainer modalEffect darkblur"}>
             <div className="blackBar"></div>
             <div className="userPageHeader">
 
@@ -112,7 +137,6 @@ function UserPage() {
                             </Link>
                         {sortedCollections?.map(el =>
                             <Link to={!editMode ? `/collection/${el.id}` : `/collection/${el.id}/edit`} className="contentLink" key={`collectionKey-${el.id}`}>
-
                                 <img src={collection_img} className="contentImg" draggable="false" alt={`collectionImg-${el.id}`}></img>
                                 <div key={`collectionKey-${el.id}`} className="contentName">{el.name} </div>
                                     {editMode && <img src={gear} className="linkEditGear" draggable="false" alt={`editGear-${el.id}`}></img>}
@@ -127,16 +151,18 @@ function UserPage() {
                 <div className="contentContainer">
                     <div className="contentTitle">My Sounds</div>
                     <div className="userContentBox">
-                            <Link to="/sound" className="contentLink">
+                            <div onClick={()=> setModalFunc("newSound")} className="contentLink">
                                 <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
                                 <div className="contentName">New Sound</div>
-                            </Link>
+                            </div>
                         {sortedSounds?.map(el =>
-                            <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
+                            // <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
+                            <div onClick= {!editMode ? () => currentSoundIdProp(el.id) : () => editSoundProp(el.id)} className="contentLink" key={`collectionKey-${el.id}`}>
+                                                               {/* to do - change this  */}
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>
                                 {editMode && <img src={gear} className="linkEditGear" draggable="false" alt=""></img>}
-                            </Link>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -151,6 +177,7 @@ function UserPage() {
 
 
         </div>
+        </>
     );
 }
 export default UserPage;

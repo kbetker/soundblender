@@ -143,7 +143,7 @@
 }}
 
 
-a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
+.contentLink,a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
     width: 90px;
     display: flex;
     margin: 6px 8px;
@@ -156,7 +156,7 @@ a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
     text-decoration: none;
     position: relative;
 }
-a.contentLink:hover{
+a.contentLink:hover,.contentLink:hover{
     filter: brightness(1.2);
 }
 

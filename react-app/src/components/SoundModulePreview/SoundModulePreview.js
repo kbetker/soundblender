@@ -164,14 +164,15 @@ function SoundModulePreview({ mySoundObj, color }) {
                 xDiff = Xold - (e.clientX);
                 // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
                 Xold = (e.clientX);
-                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos) / 2
+                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos - 90) / 2
                 // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos)
+                // console.log(e.clientX)
                 setVolume()
-                if ((e.clientX) <= 20 + leftMarkerPos) {
+                if ((e.clientX) <= 120 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `-2px`;
                 }
-                else if ((e.clientX) > 260 + leftMarkerPos) {
+                else if ((e.clientX) > 360 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `197px`;
                 }
