@@ -26,7 +26,6 @@ function SceneEdit() {
         setCollection_id(scenes.collection?.id)
     }, [])
 
-    // console.log("===========>", scenes, "<==========")
     // const [name, setName] = useState('');
     // const dispatch = useDispatch()
 

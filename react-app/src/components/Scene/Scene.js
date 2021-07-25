@@ -17,7 +17,6 @@ function Scene({scene, id, currentscene}){
     const editScene = () => history.push(`/scenes/${sceneId}/edit`)
     const newCategory = () => history.push(`/category/new/${sceneId}`)
     const newScene = () => history.push(`/scenes/${collectionId}/new`)
-    // console.log(scenes[0].name, "wwwwwaaaaattttttt")
 
     return(
         // <div className="ScenePageBody"> This div i up one in Categories

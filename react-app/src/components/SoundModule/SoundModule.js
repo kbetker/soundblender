@@ -34,7 +34,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
     function setVolume() {
         soundVolume.current = knobPOS.current
-        // console.log(knobPOS.current)
         let vol = soundVolume.current
         if (vol <= 0) vol = 0;
         if (vol >= 100) vol = 100;
@@ -162,7 +161,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     })
 
 
-    // console.log(currentscene)
     function addToClientX() {
         let sum = 0
         for (let i = 1; i < parseInt(currentscene.current); i++) {
@@ -190,7 +188,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 xDiff = Xold - (e.clientX + addToClientX());
                 Xold = (e.clientX + addToClientX());
                 knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX()) / 2
-                // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())
                 setVolume()
                 if ((e.clientX + addToClientX()) <= 20 + leftMarkerPos) {
                     stopDrag()

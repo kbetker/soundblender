@@ -1,42 +1,62 @@
-import React from "react"
+import React, { useEffect } from "react"
 import FauxUserPage from "../FauxUserPage"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import { deleteUserSound } from "../../store/sound";
 import "../SoundForm/Sound.css"
 import "./SoundDelete.css"
+import { setModalState } from "../../store/modal";
 
-function SoundDelete() {
+
+function SoundDelete({currentSoundId}) {
     const dispatch = useDispatch()
-    const { soundId } = useParams();
+    // const { soundId } = useParams();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
 
     const goHome = () => {
-       history.push(`/users/${user.id}`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
+
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            setTimeout(() => {
+                theForm.classList.add("blurIn")
+            }, 50);
+        }
+    }, [])
 
     const deleteSound = (e) => {
         e.preventDefault();
-        const data = dispatch(deleteUserSound(soundId))
+        const data = dispatch(deleteUserSound(currentSoundId))
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {
-            history.push(redirect)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
         }
     }
 
     return (
-        <>
+        <div className="formEffect" id="theForm">
             <form onSubmit={(e) => deleteSound(e)} className="delete_sound_form">
                 <div className="close_new_sound" onClick={goHome}>X</div>
-                <label>Are you sure?</label>
+                <label>Are you sure? </label>
+                <label>This cannot be undone</label>
                 <button type="submit" className="delete_sound_submit">Yes. Delete.</button>
             </form>
-            <div className="black_backer"></div>
-            <div className="fauxUserPageContainer"><FauxUserPage></FauxUserPage></div>
-        </>
+            {/* <div className="black_backer"></div> */}
+            {/* <div className="fauxUserPageContainer"><FauxUserPage></FauxUserPage></div> */}
+        </div>
 
 
 

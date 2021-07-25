@@ -1,6 +1,7 @@
 const GET_COLLECTION = "user/GET_COLLECTION";
+const GET_ALL_COLLECTION = "user/GET_ALL_COLLECTION";
 const NEW_COLLECTION = "user/NEW_COLLECTION";
-const EDIT_COLLECTION = "user/NEW_COLLECTION";
+const EDIT_COLLECTION = "user/EDIT_COLLECTION";
 const DELETE_COLLECTION = "user/DELETE_COLLECTION";
 
 
@@ -9,6 +10,11 @@ const DELETE_COLLECTION = "user/DELETE_COLLECTION";
 // action creators
 export const getCollection = ( collection ) => ({
     type: GET_COLLECTION,
+    payload: collection
+})
+
+export const getAllCollection = ( collection ) => ({
+    type: GET_ALL_COLLECTION,
     payload: collection
 })
 
@@ -47,6 +53,15 @@ export const getUserCollection = (id) => async (dispatch) => {
     return data;
 }
 
+export const getAllUserCollection = (id) => async (dispatch) => {
+    const response = await fetch(`/api/collections/all/${id}`);
+    const data = await response.json();
+    dispatch(getAllCollection(data))
+    return data;
+}
+
+
+
 export const newUserCollection = (formData) => async (dispatch) => {
     const response = await fetch(`/api/collections/new`, {
         method: "POST",
@@ -68,15 +83,21 @@ export const editUserCollection = (formData, collectionId) => async (dispatch) =
 }
 
 
-const initialState = {info: null}
+const initialState = {collection: null}
 export default function userCollectionReducer(state = initialState, action) {
     switch (action.type) {
         case GET_COLLECTION:
             return {collection: action.payload}
+
+        case GET_ALL_COLLECTION:
+            return {collection: action.payload}
+
         case NEW_COLLECTION:
-            return {newCollection: action.payload}
+            return {collection: action.payload}
+
         case EDIT_COLLECTION:
-            return {editeCollection: action.payload}
+            return {collection: action.payload}
+
         case DELETE_COLLECTION:
             return {deletedCollection: action.payload}
         default:

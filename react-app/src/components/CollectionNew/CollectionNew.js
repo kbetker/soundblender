@@ -1,17 +1,20 @@
-import React, { useState } from "react"
-import FauxUserPage from "../FauxUserPage"
+import React, { useEffect, useState } from "react"
+// import FauxUserPage from "../FauxUserPage"
 import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
 import { newUserCollection } from "../../store/collection";
+import { setModalState } from "../../store/modal";
 // import { getUserSounds } from "../../store/sound";
 
 function CollectionNew() {
     // const dispatch = useDispatch()
     // const { collectionId } = useParams();
-    const history = useHistory();
-    const redirect = useSelector(state => state.redirectPage.page)
+
+    // const history = useHistory();
+    // const redirect = useSelector(state => state.redirectPage.page)
+
     const user = useSelector(state => state.session.user)
     const [name, setName] = useState('');
     const dispatch = useDispatch()
@@ -24,18 +27,33 @@ function CollectionNew() {
         if (data.errors) {
              alert(data.errors);
         } else {
-            history.push(redirect)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
         }
     };
 
-    const goBack = () => {
-    history.push(redirect)
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
+
+    const goHome = () => {
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     return (
-        <>
+        <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
-                <div className="close_new_sound" onClick={goBack}>X</div>
+                <div className="close_new_sound" onClick={goHome}>X</div>
 
                 <label>Collection Name</label>
                 <input type="text"
@@ -50,10 +68,10 @@ function CollectionNew() {
                 <button onClick={() => addCollection()} className="category_button">Add Collection</button>
             </div>
 
-            <div className="black_backer"></div>
-            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
+            {/* <div className="black_backer"></div>
+            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
 
-        </>
+        </div>
     )
 }
 export default CollectionNew

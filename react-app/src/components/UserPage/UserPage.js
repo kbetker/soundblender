@@ -18,7 +18,14 @@ import SoundForm from "../SoundForm/SoundForm";
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
 import SoundModulePreview from "../SoundModulePreview/SoundModulePreview";
 import SoundPreview from "../SoundPreview/SoundPreview";
-import SoundDelete from "../SceneDelete";
+import SoundDelete from "../SoundDelete";
+import CollectionEdit from "../CollectionEdit"
+import CollectionDelete from "../CollectionDelete"
+import CollectionNew from "../CollectionNew"
+import { getAllUserCollection } from "../../store/collection";
+
+
+
 
 
 function UserPage() {
@@ -28,8 +35,9 @@ function UserPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const [editMode, setEditMode] = useState(false)
-    const [editBySoundId, setEditBySoundId] = useState('')
     const [currentSoundId, setCurrentSoundId] = useState('')
+    const [currentCollectionId, setCurrentCollectionId] = useState('')
+
 
     useEffect(() => {
         dispatch(getUserInfo(id))
@@ -43,6 +51,10 @@ function UserPage() {
         dispatch(setRedirectFunc(`/users/${id}`))
     }, [dispatch, id])
 
+    useEffect(()=>{
+        dispatch(getAllUserCollection(id))
+    }, [dispatch, id])
+
     const onLogout = async (e) => {
         await dispatch(logout());
         history.push('/')
@@ -52,8 +64,8 @@ function UserPage() {
         editMode ? setEditMode(false) : setEditMode(true)
     }
 
-    const collections = useSelector(state => state.userInfo.info)
-    const sortedCollections = collections?.collections?.sort(function(a, b){
+    const collections = useSelector(state => state.collection.collection)
+    const sortedCollections = collections?.collection.sort(function(a, b){
         if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
         if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
         return 0
@@ -73,33 +85,40 @@ function UserPage() {
             history.push(`/users/${user.user.id}`)
         }
     }, [user])
-    // if(user.id !== id) history.push(`/users/${user.id}`);
-    // console.log(user)
-    // const user = useSelector(state => state.session.user)
-    // useEffect(()=>{
-    //   if(collections.collections){
-    //   console.log(collections?.collections)}
-    // })
+
     const setModalFunc = async (modalState) => {
         await dispatch(setModalState(modalState))
     }
 
     function editSoundProp(id){
-        setEditBySoundId(id);
+        setCurrentSoundId(id);
         setModalFunc("editSound")
     }
 
-    function currentSoundIdProp(id){
+    function previewSoundIdProp(id){
        setCurrentSoundId(id);
         setModalFunc("soundPreview")
     }
 
+    function editCollectionProp(id){
+        setCurrentCollectionId(id);
+        setModalFunc("collectionEdit")
+    }
+
+
+
     return (
         <>
          {modal === "newSound" && <SoundForm />}
-         {modal === "editSound" && <SoundEditForm editBySoundId={editBySoundId} />}
+         {modal === "editSound" && <SoundEditForm currentSoundId={currentSoundId} />}
          {modal === "soundPreview" && <SoundPreview currentSoundId={currentSoundId} />}
          {modal === "soundDelete" && <SoundDelete currentSoundId={currentSoundId} />}
+
+         {modal === "collectionEdit" && <CollectionEdit currentCollectionId={currentCollectionId} />}
+         {modal === "collectionDelete" && <CollectionDelete currentCollectionId={currentCollectionId} />}
+         {modal === "collectionNew" && <CollectionNew currentCollectionId={currentCollectionId} />}
+
+
         <div className={modal === "" ? "userPageContainer modalEffect" : "userPageContainer modalEffect darkblur"}>
             <div className="blackBar"></div>
             <div className="userPageHeader">
@@ -131,17 +150,18 @@ function UserPage() {
                 <div className="contentContainer">
                     <div className="contentTitle">My Collections</div>
                     <div className="userContentBox">
-                            <Link to="/collection/new" className="contentLink">
+                            <div onClick={()=> setModalFunc("collectionNew")} className="contentLink">
                                 <img src={new_collection_img} className="contentImg" alt="New Collection Link" draggable="false"></img>
                                 <div className="contentName">New Collection</div>
-                            </Link>
+                            </div>
                         {sortedCollections?.map(el =>
-                            <Link to={!editMode ? `/collection/${el.id}` : `/collection/${el.id}/edit`} className="contentLink" key={`collectionKey-${el.id}`}>
+                            // <Link to={!editMode ? `/collection/${el.id}` : `/collection/${el.id}/edit`} className="contentLink" key={`collectionKey-${el.id}`}>
+                            <div onClick= {!editMode ? () => history.push(`/collection/${el.id}`) : () => editCollectionProp(el.id)} className="contentLink" key={`collectionKey-${el.id}`}>
                                 <img src={collection_img} className="contentImg" draggable="false" alt={`collectionImg-${el.id}`}></img>
                                 <div key={`collectionKey-${el.id}`} className="contentName">{el.name} </div>
                                     {editMode && <img src={gear} className="linkEditGear" draggable="false" alt={`editGear-${el.id}`}></img>}
 
-                            </Link>
+                            </div>
                         )}
 
 
@@ -157,8 +177,7 @@ function UserPage() {
                             </div>
                         {sortedSounds?.map(el =>
                             // <Link to={!editMode ? `/sound/${el.id}` : `/sound/${el.id}/edit`} className="contentLink" key={`soundKey-${el.id}`}>
-                            <div onClick= {!editMode ? () => currentSoundIdProp(el.id) : () => editSoundProp(el.id)} className="contentLink" key={`collectionKey-${el.id}`}>
-                                                               {/* to do - change this  */}
+                            <div onClick= {!editMode ? () => previewSoundIdProp(el.id) : () => editSoundProp(el.id)} className="contentLink" key={`collectionKey-${el.id}`}>
                                 <img src={mySoundPlay} className="contentImg" alt="Content Link" draggable="false"></img>
                                 <div className="contentName">{el.name}</div>
                                 {editMode && <img src={gear} className="linkEditGear" draggable="false" alt=""></img>}

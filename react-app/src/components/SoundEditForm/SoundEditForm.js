@@ -7,7 +7,7 @@ import { editUserSound } from "../../store/sound"
 import "../SoundForm/Sound.css"
 import { setModalState } from "../../store/modal";
 
-function SoundEditForm({ editBySoundId }) {
+function SoundEditForm({ currentSoundId }) {
     const dispatch = useDispatch()
     const { soundId } = useParams();
     const history = useHistory();
@@ -15,7 +15,7 @@ function SoundEditForm({ editBySoundId }) {
     const redirect = useSelector(state => state.redirectPage.page)
 
     const sounds = useSelector(state => state.newSound.sounds)
-    const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(editBySoundId))
+    const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(currentSoundId))
 
     const sound_url = soundToEdit?.sound_url
     const [name, setName] = useState(soundToEdit?.name);
@@ -34,7 +34,6 @@ function SoundEditForm({ editBySoundId }) {
 
 
     const newSound = async (e) => {
-        // console.log(errors)
         e.preventDefault();
         const formData = new FormData();
         formData.append("sound_url", sound_url);
@@ -46,7 +45,7 @@ function SoundEditForm({ editBySoundId }) {
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
 
-        const data = await dispatch(editUserSound(formData, editBySoundId))
+        const data = await dispatch(editUserSound(formData, currentSoundId))
         if (data.errors) {
             setErrors(data.errors)
         }
@@ -56,13 +55,11 @@ function SoundEditForm({ editBySoundId }) {
             setTimeout(() => {
                 dispatch(setModalState(''))
             }, 500);
-
         }
     }
 
 
     const goHome = () => {
-        // history.push("/")
         let theForm = document.getElementById("theForm")
         theForm.classList.remove("blurIn")
         setTimeout(() => {
@@ -71,7 +68,11 @@ function SoundEditForm({ editBySoundId }) {
     }
 
     const goToDelete = () => {
-        history.push(`/sound/${editBySoundId}/delete`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState('soundDelete'))
+        }, 600);
     }
 
     return (

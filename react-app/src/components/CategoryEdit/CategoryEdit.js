@@ -45,7 +45,6 @@ function SoundForm() {
 
     const editCategory = async (e) => {
         e.preventDefault();
-        // console.log(name, color, arrangement)
         const formData = new FormData();
         formData.append("name", name);
         formData.append("arrangement", arrangement);

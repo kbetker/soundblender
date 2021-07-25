@@ -19,6 +19,7 @@ import { useRef } from "react";
 import arrowR from "./arrowR.png"
 import arrowL from "./arrowL.png"
 import { setRedirectFunc } from "../../store/redirect";
+import { getAllUserCollection } from "../../store/collection";
 
 function CollectionPage() {
     const dispatch = useDispatch()
@@ -27,19 +28,26 @@ function CollectionPage() {
     // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
     const currentScene = useRef("1")
+    const user = useSelector(state => state.session.user)
 
-    useEffect(() => {
-        dispatch(getUserCollection(collectionId))
-    }, [dispatch, collectionId]);
+    // useEffect(() => {
+    //     dispatch(getUserCollection(collectionId))
+    // }, [dispatch, collectionId]);
+
+    useEffect(()=>{
+        dispatch(getAllUserCollection(user.id))
+        // console.log(user.id, "wuuuuuuuut")
+    },[dispatch, user.id])
 
     useEffect(() => {
         dispatch(setRedirectFunc(`/collection/${collectionId}`))
     }, [dispatch, collectionId])
 
-    const collection = useSelector(state => state.collection)
-    const sceneLength = collection?.collection?.scenes?.length
+    const allCollections = useSelector(state => state.collection.collection)
+    const collection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
+    // console.log(collection.name, "WTFWTFWTFWTFWTFWTFWTFWTFWT")
+    const sceneLength = collection?.scenes?.length
     const editMode = useSelector(state => state.editMode.editMode)
-    const user = useSelector(state => state.session.user)
 
     // if(collection.collection?.scenes.length === 0)history.push(`/scenes/${collection.collection?.id}/new`)
 
@@ -60,9 +68,9 @@ function CollectionPage() {
 
     }
 
-    if(collection.collection?.scenes[0]?.categories.length === 0){
-        dispatch(setEditMode(true))
-    }
+    // if(collection[0]?.scenes.length === 0){
+    //     dispatch(setEditMode(true))
+    // }
 
     function changeSceneFunc(direction) {
         function changeScene() {
@@ -106,7 +114,7 @@ function CollectionPage() {
                         <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
                         <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
-                    <div className="collectionName">{collection.collection?.name}</div>
+                    <div className="collectionName">{collection?.name}</div>
                     <div className="collectionNav">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div> | </div>
@@ -134,12 +142,12 @@ function CollectionPage() {
 
 
 
-                            {collection.collection?.scenes?.length === 0 &&
+                            {collection?.scenes?.length === 0 &&
                                 <div>
                                     <div className="noScenesContainer" style={{ width: `${window.innerWidth - 122}px` }} id={1}>
                                         <div className="sceneName">
                                             <div>
-                                                <Link to={`/scenes/${collection.collection?.id}/new`} className="firstScene">
+                                                <Link to={`/scenes/${collection?.id}/new`} className="firstScene">
                                                     Click here to add a scene
                                                 </Link>
                                             </div>
@@ -152,7 +160,7 @@ function CollectionPage() {
 
 
 
-                            {collection?.collection?.scenes.map((scene, index) =>
+                            {collection?.scenes.map((scene, index) =>
                                 <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
                             )}
                         </div>

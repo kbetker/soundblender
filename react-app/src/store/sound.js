@@ -55,8 +55,8 @@ export const deleteUserSound = (soundId) => async (dispatch) => {
     if (data.errors) {
         return data;
     }
-    dispatch(setSound(data))
-    return;
+    dispatch(deleteSound(data))
+    return data;
 }
 
 export const editUserSound = (formData, soundId) => async (dispatch) => {
@@ -65,7 +65,6 @@ export const editUserSound = (formData, soundId) => async (dispatch) => {
         body: formData,
     });
     const data = await response.json();
-    // console.log(data.errors, "=================================")
     if (data.errors) {
         return data;
     }
@@ -106,7 +105,8 @@ export default function soundReducer(state = initialState, action) {
         case EDIT_SOUND:
             return {sounds: action.payload}
         case DELETE_SOUND:
-            return {deletedSound: action.payload}
+            newSound = Object.assign({}, state);
+            return {sounds: {sounds: state.sounds?.sounds?.filter(sound => sound.id !== action.payload.deleted)}}
         default:
             return state;
     }

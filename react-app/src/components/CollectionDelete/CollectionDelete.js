@@ -19,7 +19,6 @@ function CollectionDelete() {
     const deleteSound = (e) => {
         e.preventDefault();
         const data = dispatch(deleteUserCollection(collectionId))
-        // console.log(collectionId, "++++++++FRONT END++++++++++")
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {
