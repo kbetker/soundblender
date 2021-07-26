@@ -44,7 +44,9 @@ def addCollection():
     db.session.add(newCollection)
     db.session.commit()
     # print(newCollection.to_dict(), "================== wat =====================")
-    return newCollection.to_dict()
+    allCollections = Collection.query.filter(Collection.owner_id == data['owner_id'])
+    return  {"collection": [collection.to_dict() for collection in allCollections ]}
+    # return newCollection.to_dict()
 
 
 @collection_routes.route("/<int:collectionId>/edit", methods=["PUT"])
@@ -64,9 +66,11 @@ def edit_category(collectionId):
     # return {"Collection": "updated"}
 
 
-@collection_routes.route('/<int:collectionId>/delete', methods=["DELETE"])
+@collection_routes.route('/<int:collectionId>/<int:userId>/delete', methods=["DELETE"])
 # @login_required
-def deleteuserCollection(collectionId):
+def deleteuserCollection(collectionId, userId):
     Collection.query.filter(Collection.id == collectionId).delete()
     db.session.commit()
-    return  {"collection": "deleted"}
+    allCollections = Collection.query.filter(Collection.owner_id == userId)
+    return  {"collection": [collection.to_dict() for collection in allCollections ]}
+    # return  {"collection": "deleted"}

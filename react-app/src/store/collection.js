@@ -34,14 +34,14 @@ export const deleteCollection = ( collection ) => ({
 })
 
 
-export const deleteUserCollection = (collectionId) => async (dispatch) => {
+export const deleteUserCollection = (collectionId, userId) => async (dispatch) => {
     // console.log(collectionId, "++++++++THUNK++++++++")
-    const response = await fetch(`/api/collections/${collectionId}/delete`, {
+    const response = await fetch(`/api/collections/${collectionId}/${userId}/delete`, {
         method: "DELETE"
     });
-    const data = await response.json();
-    dispatch(deleteCollection(data))
-    return data;
+    const collection = await response.json();
+    dispatch(deleteCollection(collection))
+    return collection;
 }
 
 
@@ -99,7 +99,7 @@ export default function userCollectionReducer(state = initialState, action) {
             return {collection: action.payload}
 
         case DELETE_COLLECTION:
-            return {deletedCollection: action.payload}
+            return {collection: action.payload}
         default:
             return state;
     }
