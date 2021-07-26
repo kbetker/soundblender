@@ -13,7 +13,6 @@ function SoundEditForm({ currentSoundId }) {
     const history = useHistory();
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
-
     const sounds = useSelector(state => state.newSound.sounds)
     const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(currentSoundId))
 

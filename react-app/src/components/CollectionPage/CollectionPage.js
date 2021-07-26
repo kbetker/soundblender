@@ -20,6 +20,12 @@ import arrowR from "./arrowR.png"
 import arrowL from "./arrowL.png"
 import { setRedirectFunc } from "../../store/redirect";
 import { getAllUserCollection } from "../../store/collection";
+import { setModalState } from "../../store/modal";
+import { getUserInfo } from "../../store/userPage";
+import SoundEditForm from "../SoundEditForm/SoundEditForm";
+import SoundDelete from "../SoundDelete";
+import { getUserSounds } from "../../store/sound";
+import CategorySound from "../CategorySound/CategorySound";
 
 function CollectionPage() {
     const dispatch = useDispatch()
@@ -29,27 +35,55 @@ function CollectionPage() {
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
     const currentScene = useRef("1")
     const user = useSelector(state => state.session.user)
-
+    const modal = useSelector(state => state.modal.modal)
+    const [currentSoundId, setCurrentSoundId] = useState('')
     // useEffect(() => {
-    //     dispatch(getUserCollection(collectionId))
-    // }, [dispatch, collectionId]);
+        //     dispatch(getUserCollection(collectionId))
+        // }, [dispatch, collectionId]);
 
-    useEffect(()=>{
-        dispatch(getAllUserCollection(user.id))
-        // console.log(user.id, "wuuuuuuuut")
-    },[dispatch, user.id])
+        useEffect(() => {
+            dispatch(getUserInfo(user.id))
+        }, [dispatch, user.id]);
 
-    useEffect(() => {
-        dispatch(setRedirectFunc(`/collection/${collectionId}`))
-    }, [dispatch, collectionId])
+        useEffect(() => {
+            dispatch(getUserSounds(user.id))
+        }, [dispatch, user.id]);
+
+        useEffect(() => {
+            dispatch(getAllUserCollection(user.id))
+            // console.log(user.id, "wuuuuuuuut")
+        }, [dispatch, user.id, modal])
+
+        useEffect(() => {
+            dispatch(setRedirectFunc(`/collection/${collectionId}`))
+        }, [dispatch, collectionId])
+
+
+
+    //     useEffect(()=> {
+    //         if(modal.endsWith("editSound")){
+    //             let getNums = modal.split('-')
+    //             // console.log(getNums[0], "WUUUUUUUUUUUUUUUUUUUUUUUUUt")
+    //             setCurrentSoundId(parseInt(getNums[0]))
+    //         }
+    // }, [modal])
+
+    const getCurrentSound = () => {
+            let getNums = modal.split('-')
+            // setCurrentSoundId(parseInt(getNums[0]))
+        return parseInt(getNums[0])
+    }
+
+    const getCurrentCategory = () => {
+        let getNums = modal.split("-")
+        return parseInt(getNums[1])
+    }
 
     const allCollections = useSelector(state => state.collection.collection)
     const collection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
-    // console.log(collection.name, "WTFWTFWTFWTFWTFWTFWTFWTFWT")
     const sceneLength = collection?.scenes?.length
     const editMode = useSelector(state => state.editMode.editMode)
 
-    // if(collection.collection?.scenes.length === 0)history.push(`/scenes/${collection.collection?.id}/new`)
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -106,7 +140,17 @@ function CollectionPage() {
 
     return (
         <>
-            <div className="userPageContainer">
+            {/* {modal === "newSound" && <SoundForm />} */}
+            {modal.endsWith("editSound") && <SoundEditForm currentSoundId={getCurrentSound()} />}
+            {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getCurrentCategory()} currentSoundId={getCurrentSound()} />}
+            {/* {modal === "soundPreview" && <SoundPreview currentSoundId={currentSoundId} />} */}
+            {modal === "soundDelete" && <SoundDelete currentSoundId={currentSoundId} />}
+
+            {/* {modal === "collectionEdit" && <CollectionEdit currentCollectionId={currentCollectionId} />}
+            {modal === "collectionDelete" && <CollectionDelete currentCollectionId={currentCollectionId} />}
+            {modal === "collectionNew" && <CollectionNew currentCollectionId={currentCollectionId} />} */}
+
+            <div className={modal === "" ? "userPageContainer modalEffect" : "userPageContainer modalEffect darkblur"}>
                 <div className="blackBar"></div>
                 <div className="userPageHeader">
 

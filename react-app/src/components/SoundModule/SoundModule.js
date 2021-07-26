@@ -1,7 +1,7 @@
 // import logo from './images/logo.svg';
 import './SoundModule.css';
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import sliderBackground from "./images/sliderBackground.png"
@@ -12,6 +12,7 @@ import btnPlaying_img from "./images/PlayBtn.png"
 import btnStopping_img from "./images/Both_btn.png"
 import btnStopped_img from "./images/Stop_Btn.png"
 import gear from '../UserPage/Gear.png'
+import { setModalState } from '../../store/modal';
 
 
 function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
@@ -22,15 +23,18 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const knobPOS = useRef(0)
     const leftMarker = useRef()
     const soundVolume = useRef(0)
-
+    const dispatch = useDispatch()
     const [btnPlaying, setBtnPlaying] = useState(false)
     const [btnStopping, setBtnStopping] = useState(false)
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
     const [redLightOn, setRedLightOn] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
+    const modal = useSelector(state => state.modal.modal)
 
-
+    const setModalFunc = async (modalState) => {
+        await dispatch(setModalState(modalState))
+    }
 
     function setVolume() {
         soundVolume.current = knobPOS.current
@@ -81,12 +85,13 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             }, 10)
 
             // slightly improves the gap when looping. Inspired by Laxmikant: https://stackoverflow.com/users/2034794/laxmikant-dange
-            mySound.current.ontimeupdate = function () {
-                if ((mySound.current.currentTime / mySound.current.duration) > 0.9) {
-                    mySound.current.currentTime = 0;
-                    mySound.current.play()
-                }
-            }
+            // actually not seeing much of a difference - may mess with this later .......
+            // mySound.current.ontimeupdate = function () {
+            //     if ((mySound.current.currentTime / mySound.current.duration) > 0.9 && mySoundObj.is_looped) {
+            //         mySound.current.currentTime = 0;
+            //         mySound.current.play()
+            //     }
+            // }
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
                 clearInterval(fadeInToTarget)
@@ -149,6 +154,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             playBtn.current.addEventListener("click", (e) => {
                 fadeIn();
                 mySound.current.play()
+                console.log(mySoundObj.is_looped, "WTFWTFWTFWTFWTWFWFTWFTWTWFTFWTFW")
                 mySound.current.loop = mySoundObj.is_looped;
             })
         }
@@ -223,9 +229,9 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 <div className="title">
                     {mySoundObj.name}
                     {editMode &&
-                        <Link to={`/category-sound/${categoryId}/${mySoundObj.id}`}>
+                        <div onClick={()=> setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{display: 'inline-block'}}>
                             <img src={gear} className="soundEditGear" draggable="false" alt=""></img>
-                        </Link>
+                        </div>
                     }
                 </div>
                 <div className="slider_and_controls">

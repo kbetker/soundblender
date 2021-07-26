@@ -1,28 +1,41 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { setModalState } from "../../store/modal";
 import FauxUserPage from "../FauxUserPage";
 import "../SoundDelete/SoundDelete.css"
 
 
-const CategorySound = () => {
+const CategorySound = (ids) => {
     const history = useHistory();
-    const {catId, soundId} = useParams();
+    console.log(ids.currentCategoryId, ids.currentSoundId, "<===================================")
+    // const {catId, soundId} = useParams();
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
-
+    const dispatch = useDispatch()
 
     const removeSound = async (e) => {
         e.preventDefault();
-        const response = await fetch(`/api/categories/${catId}/${soundId}`, {method: "DELETE"});
+        const response = await fetch(`/api/categories/${ids.currentCategoryId}/${ids.currentSoundId}`, {method: "DELETE"});
         const data = await response.json();
         if(data.erros){
             alert(data.errors)
         } else{
-            history.push(redirect)
+                let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
+
         }
     };
 
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
 
 
 
@@ -30,12 +43,21 @@ const CategorySound = () => {
         history.push(`/users/${user?.id}`)
     }
 
+    // const editSound = () => {
+    //     // history.push(`/sound/${ids.currentSoundId}/edit`)
+    //     setModalState(`${ids.currentSoundId}-editSound`)
+    // }
+
     const editSound = () => {
-        history.push(`/sound/${soundId}/edit`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(`${ids.currentSoundId}-editSound`))
+        }, 600);
     }
 
     return (
-        <>
+        <div className="formEffect" id="theForm">
             <div className="new_sound_form" style={{top: "225px"}}>
                 {/* <div>  //to-do beetter error hanlding
         {errors.map((error) => (
@@ -49,9 +71,8 @@ const CategorySound = () => {
                 {/* <div className="formTitle">Remove Sound</div> */}
                 <button onClick={removeSound} className="new_sound_submit">Remove Sound</button>
             </div>
-            <div className="black_backer"></div>
-            <FauxUserPage></FauxUserPage>
-        </>
+
+        </div>
     );
 };
 

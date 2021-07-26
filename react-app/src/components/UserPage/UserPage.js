@@ -160,7 +160,6 @@ function UserPage() {
                                 <img src={collection_img} className="contentImg" draggable="false" alt={`collectionImg-${el.id}`}></img>
                                 <div key={`collectionKey-${el.id}`} className="contentName">{el.name} </div>
                                     {editMode && <img src={gear} className="linkEditGear" draggable="false" alt={`editGear-${el.id}`}></img>}
-
                             </div>
                         )}
 
@@ -185,7 +184,6 @@ function UserPage() {
                         )}
                     </div>
                 </div>
-
             </div>
 
 
