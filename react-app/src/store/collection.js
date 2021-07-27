@@ -8,40 +8,56 @@ const DELETE_COLLECTION = "user/DELETE_COLLECTION";
 
 
 // action creators
-export const getCollection = ( collection ) => ({
+export const getCollection = (collection) => ({
     type: GET_COLLECTION,
     payload: collection
 })
 
-export const getAllCollection = ( collection ) => ({
+export const getAllCollection = (collection) => ({
     type: GET_ALL_COLLECTION,
     payload: collection
 })
 
-export const newCollection = ( collection ) => ({
+export const newCollection = (collection) => ({
     type: NEW_COLLECTION,
     payload: collection
 })
 
-export const editCollection = ( collection ) => ({
+export const editCollection = (collection) => ({
     type: EDIT_COLLECTION,
     payload: collection
 })
 
-export const deleteCollection = ( collection ) => ({
+export const deleteCollection = (collection) => ({
     type: DELETE_COLLECTION,
     payload: collection
 })
 
 
-export const deleteUserCollection = (collectionId, userId) => async (dispatch) => {
-    // console.log(collectionId, "++++++++THUNK++++++++")
+export const deleteUserCollection = (collectionId, userId, scenesAray) => async (dispatch) => {
+
+    // delete all categories
+    const categoryDelete = await Promise.all(scenesAray.map(async scene => {
+        await Promise.all(scene.categories.map(async cat => {
+            const response = await fetch(`/api/categories/${cat.id}/delete`, { method: "DELETE" });
+            return response.json();
+        }))
+    }))
+
+    //delete all scenes
+    const sceneDelete = await Promise.all(scenesAray.map(async el => {
+        console.log(el.id, "WHAT THE EL!?!?!?!?")
+        const response = await fetch(`/api/scenes/${el.id}/delete`, { method: "DELETE" });
+        return response.json();
+    }))
+
+    //delete the collection
     const response = await fetch(`/api/collections/${collectionId}/${userId}/delete`, {
         method: "DELETE"
     });
     const collection = await response.json();
     dispatch(deleteCollection(collection))
-    return collection;
+    return [categoryDelete, sceneDelete, collection];
 }
 
 
@@ -83,23 +99,23 @@ export const editUserCollection = (formData, collectionId) => async (dispatch) =
 }
 
 
-const initialState = {collection: null}
+const initialState = { collection: null }
 export default function userCollectionReducer(state = initialState, action) {
     switch (action.type) {
         case GET_COLLECTION:
-            return {collection: action.payload}
+            return { collection: action.payload }
 
         case GET_ALL_COLLECTION:
-            return {collection: action.payload}
+            return { collection: action.payload }
 
         case NEW_COLLECTION:
-            return {collection: action.payload}
+            return { collection: action.payload }
 
         case EDIT_COLLECTION:
-            return {collection: action.payload}
+            return { collection: action.payload }
 
         case DELETE_COLLECTION:
-            return {collection: action.payload}
+            return { collection: action.payload }
         default:
             return state;
     }

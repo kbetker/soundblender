@@ -33,7 +33,8 @@ function SoundDelete({currentSoundId}) {
     }, [])
 
     const deleteSound = (e) => {
-        e.preventDefault();
+        e.preventDefault(currentSoundId);
+        console.log(currentSoundId, "DELETE THIS DUDE!!!!!!!!!")
         const data = dispatch(deleteUserSound(currentSoundId))
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)

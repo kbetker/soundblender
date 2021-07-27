@@ -12,6 +12,9 @@ function CollectionDelete({currentCollectionId}) {
     const history = useHistory();
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
+    const collections = useSelector(state => state.collection.collection.collection)
+    const collectionToEdit = collections.find(el => el.id === currentCollectionId)
+    // console.log(collectionToEdit.scenes, "<==============")
 
     const goHome = () => {
         let theForm = document.getElementById("theForm")
@@ -23,7 +26,7 @@ function CollectionDelete({currentCollectionId}) {
 
     const deleteSound = (e) => {
         e.preventDefault();
-        const data = dispatch(deleteUserCollection(currentCollectionId, user.id))
+        const data = dispatch(deleteUserCollection(currentCollectionId, user.id, collectionToEdit.scenes))
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {

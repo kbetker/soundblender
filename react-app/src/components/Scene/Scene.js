@@ -1,10 +1,11 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Categories from "../Categories/Categories"
 import "./Scene.css"
 import gear from "../UserPage/Gear.png"
 import "../CollectionPage/CollectionPage.css"
 import { useHistory, useParams } from "react-router-dom"
+import { setModalState } from "../../store/modal"
 
 function Scene({scene, id, currentscene}){
     const scenes= scene?.categories
@@ -13,10 +14,11 @@ function Scene({scene, id, currentscene}){
     const {collectionId} = useParams()
     // const dispatch = useDispatch()
     const history = useHistory()
+    const dispatch = useDispatch()
 
-    const editScene = () => history.push(`/scenes/${sceneId}/edit`)
-    const newCategory = () => history.push(`/category/new/${sceneId}`)
-    const newScene = () => history.push(`/scenes/${collectionId}/new`)
+    const editScene = () => dispatch(setModalState(`${sceneId}-${collectionId}-sceneEdit`))
+    const newCategory = () => dispatch(setModalState(`${sceneId}categoryNew`))
+    const newScene = () => dispatch(setModalState(`${collectionId}-sceneNew`))
 
     return(
         // <div className="ScenePageBody"> This div i up one in Categories

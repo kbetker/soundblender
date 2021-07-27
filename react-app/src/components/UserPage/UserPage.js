@@ -112,7 +112,7 @@ function UserPage() {
          {modal === "newSound" && <SoundForm />}
          {modal === "editSound" && <SoundEditForm currentSoundId={currentSoundId} />}
          {modal === "soundPreview" && <SoundPreview currentSoundId={currentSoundId} />}
-         {modal === "soundDelete" && <SoundDelete currentSoundId={currentSoundId} />}
+         {modal.endsWith("soundDelete") && <SoundDelete currentSoundId={currentSoundId} />}
 
          {modal === "collectionEdit" && <CollectionEdit currentCollectionId={currentCollectionId} />}
          {modal === "collectionDelete" && <CollectionDelete currentCollectionId={currentCollectionId} />}

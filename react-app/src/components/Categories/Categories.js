@@ -7,6 +7,7 @@ import gear from "../UserPage/Gear.png"
 import "./Categories.css"
 import { useHistory } from "react-router-dom"
 import { setEditMode } from "../../store/editMode"
+import { setModalState } from "../../store/modal"
 
 function Categories({ category, currentscene }) {
     const editMode = useSelector(state => state.editMode.editMode)
@@ -14,12 +15,14 @@ function Categories({ category, currentscene }) {
     const dispatch = useDispatch()
 
     const editCategory = async () => {
-        await dispatch(setEditMode(false))
-        history.push(`/category/${category.id}/edit`)
+        // await dispatch(setEditMode(false))
+        // history.push(`/category/${category.id}/edit`)
+        dispatch(setModalState(`NaN-${category.id}-categoryEdit`))
     }
 
     const addSound = () =>{
-        history.push(`/category/${category.id}/addSound`)
+        // history.push(`/category/${category.id}/addSound`)
+        dispatch(setModalState(`NaN-${category.id}-addSoundToCategory`))
     }
 
     return (
@@ -35,7 +38,7 @@ function Categories({ category, currentscene }) {
             </div>
              {editMode &&
                 <div className="NewSoundModule_wrapper" onClick={addSound}>
-                    <img src={gear} className="NewSoundGear" draggable="false" alt="" onClick={editCategory}></img>
+                    <img src={gear} className="NewSoundGear" draggable="false" alt="Add new Sound Icon"></img>
                     <div>Add Sound</div>
                 </div>
             }

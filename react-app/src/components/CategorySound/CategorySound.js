@@ -8,7 +8,7 @@ import "../SoundDelete/SoundDelete.css"
 
 const CategorySound = (ids) => {
     const history = useHistory();
-    console.log(ids.currentCategoryId, ids.currentSoundId, "<===================================")
+    // console.log(ids.currentCategoryId, ids.currentSoundId, "<===================================")
     // const {catId, soundId} = useParams();
     const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
@@ -40,7 +40,11 @@ const CategorySound = (ids) => {
 
 
     const goHome = () => {
-        history.push(`/users/${user?.id}`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     // const editSound = () => {
@@ -69,7 +73,7 @@ const CategorySound = (ids) => {
                 <button onClick={editSound} className="new_sound_submit">Edit Sound</button>
 
                 {/* <div className="formTitle">Remove Sound</div> */}
-                <button onClick={removeSound} className="new_sound_submit">Remove Sound</button>
+                <button onClick={removeSound} className="new_sound_submit" style={{fontSize: "24px"}}>Remove From Category</button>
             </div>
 
         </div>

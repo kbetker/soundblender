@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { getUserCollection } from "../../store/collection"
-import { setEditMode } from "../../store/editMode"
 // import { getUserSounds } from "../../store/sound";
 import "../UserPage/userPage.css"
 import "../Scene/Scene.css"
@@ -10,78 +9,77 @@ import "./CollectionPage.css"
 // import collection_img from "../UserPage/collectionIcon.png"
 // import new_collection_img from "../UserPage/newCollectionIcon.png"
 // import mySoundPlay from "../UserPage/mySoundPlay.png"
-import homepageLogo from "../HomePage/homepageLogo.gif"
-import logoAnimation from "../HomePage/logoAnimationGreen.gif"
-import gear from "../UserPage/Gear.png"
 import { logout } from "../../store/session";
-import Scene from "../Scene"
-import { useRef } from "react";
-import arrowR from "./arrowR.png"
-import arrowL from "./arrowL.png"
 import { setRedirectFunc } from "../../store/redirect";
 import { getAllUserCollection } from "../../store/collection";
+import { getUserCollection } from "../../store/collection"
+import { setEditMode } from "../../store/editMode"
 import { setModalState } from "../../store/modal";
+import { getUserSounds } from "../../store/sound";
 import { getUserInfo } from "../../store/userPage";
+
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
 import SoundDelete from "../SoundDelete";
-import { getUserSounds } from "../../store/sound";
+import AddSoundToCategory from "../AddSoundToCategory"
 import CategorySound from "../CategorySound/CategorySound";
+import CategoryEdit from "../CategoryEdit"
+import CategoryNew from "../CategoryNew"
+import CategoryDelete from "../CategoryDelete"
+import SceneNew from "../SceneNew/SceneNew";
+import SceneEdit from "../SceneEdit"
+import SceneDelete from "../SceneDelete"
+
+import logoAnimation from "../HomePage/logoAnimationGreen.gif"
+import homepageLogo from "../HomePage/homepageLogo.gif"
+import gear from "../UserPage/Gear.png"
+import Scene from "../Scene"
+import arrowR from "./arrowR.png"
+import arrowL from "./arrowL.png"
 
 function CollectionPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { collectionId } = useParams();
-    // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
     const currentScene = useRef("1")
     const user = useSelector(state => state.session.user)
     const modal = useSelector(state => state.modal.modal)
-    const [currentSoundId, setCurrentSoundId] = useState('')
-    // useEffect(() => {
-        //     dispatch(getUserCollection(collectionId))
-        // }, [dispatch, collectionId]);
 
-        useEffect(() => {
-            dispatch(getUserInfo(user.id))
-        }, [dispatch, user.id]);
+    useEffect(() => {
+        dispatch(getUserInfo(user.id))
+    }, [dispatch, user.id, modal]);
 
-        useEffect(() => {
-            dispatch(getUserSounds(user.id))
-        }, [dispatch, user.id]);
+    useEffect(() => {
+        dispatch(getUserSounds(user.id))
+    }, [dispatch, user.id]);
 
-        useEffect(() => {
-            dispatch(getAllUserCollection(user.id))
-            // console.log(user.id, "wuuuuuuuut")
-        }, [dispatch, user.id, modal])
+    useEffect(() => {
+        dispatch(getAllUserCollection(user.id))
+    }, [dispatch, user.id, modal])
 
-        useEffect(() => {
-            dispatch(setRedirectFunc(`/collection/${collectionId}`))
-        }, [dispatch, collectionId])
+    useEffect(() => {
+        dispatch(setRedirectFunc(`/collection/${collectionId}`))
+    }, [dispatch, collectionId])
 
 
-
-    //     useEffect(()=> {
-    //         if(modal.endsWith("editSound")){
-    //             let getNums = modal.split('-')
-    //             // console.log(getNums[0], "WUUUUUUUUUUUUUUUUUUUUUUUUUt")
-    //             setCurrentSoundId(parseInt(getNums[0]))
-    //         }
-    // }, [modal])
-
-    const getCurrentSound = () => {
-            let getNums = modal.split('-')
-            // setCurrentSoundId(parseInt(getNums[0]))
+    const getIdAt0 = () => {
+        let getNums = modal.split('-')
         return parseInt(getNums[0])
     }
 
-    const getCurrentCategory = () => {
+    const getIdAt1 = () => {
         let getNums = modal.split("-")
         return parseInt(getNums[1])
     }
 
     const allCollections = useSelector(state => state.collection.collection)
-    const collection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
-    const sceneLength = collection?.scenes?.length
+    const collectionToSort = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
+    const collection = collectionToSort?.scenes.sort(function(a, b){
+        if (a.id < b.id){return -1}
+        if (a.id > b.id){return 1}
+        return 0
+    })
+    const sceneLength = collection?.length
     const editMode = useSelector(state => state.editMode.editMode)
 
 
@@ -93,24 +91,30 @@ function CollectionPage() {
 
     const goHome = () => {
         dispatch(setEditMode(false))
-        history.push(`/users/${user.id}`) //to do - change to current user
+        history.push(`/users/${user.id}`)
     }
 
     const editModeFunc = (e) => {
         e.preventDefault()
         editMode ? dispatch(setEditMode(false)) : dispatch(setEditMode(true))
-
     }
 
-    // if(collection[0]?.scenes.length === 0){
-    //     dispatch(setEditMode(true))
-    // }
-
     function changeSceneFunc(direction) {
-        function changeScene() {
-            let currentDiv = document.getElementById(currentScene.current)
-            if (currentDiv) {
-                currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+
+        function changeScene(sceneNum) {
+            if (!sceneNum) {
+                let currentDiv = document.getElementById(currentScene.current)
+                if (currentDiv) {
+                    currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+                }
+            } else {
+                setTimeout(() => {
+                    let currentDiv = document.getElementById(sceneNum)
+                    if (currentDiv) {
+                        currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+                        dispatch(setModalState(''))
+                    }
+                }, 100);
             }
         }
 
@@ -123,13 +127,15 @@ function CollectionPage() {
                 currentScene.current = `${parseInt(currentScene.current) + 1}`
             }
             changeScene()
-        } else { // "left" is the only other argument
+        } else if (direction === "left") {
             if (parseInt(currentScene.current) - 1 <= 0) { // loops to end
                 currentScene.current = `${sceneLength}`
             } else {
                 currentScene.current = `${parseInt(currentScene.current) - 1}`
             }
             changeScene()
+        } else {
+            changeScene(direction)
         }
     }
 
@@ -138,18 +144,33 @@ function CollectionPage() {
         changeSceneFunc("none")
     })
 
+    // useEffect(()=>{
+    //     if(modal !== ''){
+    //             changeSceneFunc(modal)
+    //     }
+    // }, [modal])
+
     return (
         <>
-            {/* {modal === "newSound" && <SoundForm />} */}
-            {modal.endsWith("editSound") && <SoundEditForm currentSoundId={getCurrentSound()} />}
-            {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getCurrentCategory()} currentSoundId={getCurrentSound()} />}
-            {/* {modal === "soundPreview" && <SoundPreview currentSoundId={currentSoundId} />} */}
-            {modal === "soundDelete" && <SoundDelete currentSoundId={currentSoundId} />}
+            {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
+            {modal.endsWith("addSoundToCategory") && <AddSoundToCategory currentCategoryId={getIdAt1()} />}
 
-            {/* {modal === "collectionEdit" && <CollectionEdit currentCollectionId={currentCollectionId} />}
-            {modal === "collectionDelete" && <CollectionDelete currentCollectionId={currentCollectionId} />}
+            {modal.endsWith("editSound") && <SoundEditForm currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
+            {modal.endsWith("soundDelete") && <SoundDelete currentSoundId={getIdAt0()} />}
+
+            {modal.endsWith("categoryEdit") && <CategoryEdit currentCategoryId={getIdAt1()} />}
+            {modal.endsWith("categoryNew") && <CategoryNew currentSceneId={getIdAt0()} />}
+            {modal.endsWith("categoryDelete") && <CategoryDelete currentCategoryId={getIdAt1()} />}
+
+            {modal.endsWith("sceneNew") && <SceneNew currentCollectionId={getIdAt0()} />}
+            {modal.endsWith("sceneEdit") && <SceneEdit currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
+            {modal.endsWith("sceneDelete") && <SceneDelete currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
+
+
+
+
+            {/* {modal === "collectionDelete" && <CollectionDelete currentCollectionId={currentCollectionId} />}
             {modal === "collectionNew" && <CollectionNew currentCollectionId={currentCollectionId} />} */}
-
             <div className={modal === "" ? "userPageContainer modalEffect" : "userPageContainer modalEffect darkblur"}>
                 <div className="blackBar"></div>
                 <div className="userPageHeader">
@@ -186,14 +207,14 @@ function CollectionPage() {
 
 
 
-                            {collection?.scenes?.length === 0 &&
+                            {collection?.length === 0 &&
                                 <div>
                                     <div className="noScenesContainer" style={{ width: `${window.innerWidth - 122}px` }} id={1}>
                                         <div className="sceneName">
                                             <div>
-                                                <Link to={`/scenes/${collection?.id}/new`} className="firstScene">
+                                                <div onClick={() => dispatch(setModalState(`${collectionId}-sceneNew`))} className="firstScene">
                                                     Click here to add a scene
-                                                </Link>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="eachScene">
@@ -204,7 +225,7 @@ function CollectionPage() {
 
 
 
-                            {collection?.scenes.map((scene, index) =>
+                            {collection?.map((scene, index) =>
                                 <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
                             )}
                         </div>

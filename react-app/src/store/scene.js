@@ -39,13 +39,18 @@ export const editUserScene = (formData, sceneId) => async (dispatch) => {
     return data;
 }
 
-export const deleteUserScene = (sceneId) => async (dispatch) => {
+export const deleteUserScene = (sceneId, categoryArray) => async (dispatch) => {
+    const categoryDelete = await Promise.all(categoryArray.map(async el => {
+    const response = await fetch(`/api/categories/${el.id}/delete`, {method: "DELETE"});
+    return response.json();
+        }))
+
     const response = await fetch(`/api/scenes/${sceneId}/delete`, {
         method: "DELETE"
     })
     const data = await response.json();
     dispatch(newScene(data))
-    return data;
+    return [data, categoryDelete];
 }
 
 

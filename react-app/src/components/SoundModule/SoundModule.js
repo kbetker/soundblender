@@ -154,7 +154,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             playBtn.current.addEventListener("click", (e) => {
                 fadeIn();
                 mySound.current.play()
-                console.log(mySoundObj.is_looped, "WTFWTFWTFWTFWTWFWFTWFTWTWFTFWTFW")
                 mySound.current.loop = mySoundObj.is_looped;
             })
         }

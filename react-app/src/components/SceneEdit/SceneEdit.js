@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage"
-import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
-import "../SoundForm/Sound.css"
 import { editUserScene } from "../../store/scene";
+import { setModalState } from "../../store/modal";
 import "./SceneEdit.css"
-// import { getUserSounds } from "../../store/sound";
+import "../SoundForm/Sound.css"
 
-function SceneEdit() {
-    // const dispatch = useDispatch()
-    const { sceneId } = useParams();
-    const history = useHistory();
+function SceneEdit(ids) {
+
     const dispatch = useDispatch()
-    const redirect = useSelector(state => state.redirectPage.page)
-    const scenes = useSelector(state => state.collection)
+    const collections = useSelector(state => state.collection.collection.collection)
     const [name, setName] = useState('')
     const [theme, setTheme] = useState('')
     const [collection_id, setCollection_id] = useState(0)
 
     useEffect(()=>{
-        const sceneToEdit = scenes.collection.scenes.find(scene => scene.id === parseInt(sceneId))
+        let collectionScenes = collections?.find((el) => el.id === ids.currentCollectionId)
+        let sceneToEdit = collectionScenes.scenes.find((el) => el.id === ids.currentSceneId)
+        // console.log(sceneToEdit.categories, "WTFWTFWTFWTFWTF")
         setName(sceneToEdit?.name)
         setTheme(sceneToEdit?.theme)
-        setCollection_id(scenes.collection?.id)
+        setCollection_id(ids.currentCollectionId)
     }, [])
 
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
     // const [name, setName] = useState('');
     // const dispatch = useDispatch()
 
@@ -33,29 +35,41 @@ function SceneEdit() {
         const formData = new FormData()
         formData.append("name", name)
         formData.append("collection_id", collection_id)
-        formData.append("theme", "theme")
+        formData.append("theme", "default")
 
-        const data = await dispatch(editUserScene(formData, sceneId))
+        const data = await dispatch(editUserScene(formData, ids.currentSceneId))
 
         if (data.errors) {
              alert(data.errors);
         } else {
-            history.push(redirect)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
         }
     };
 
     const goToDelete = () => {
-        history.push(`/scenes/${sceneId}/delete`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(`${ids.currentSceneId}-${ids.currentCollectionId}-sceneDelete`))
+        }, 600);
     }
 
-    const goBack = () => {
-    history.push(redirect)
+    const goHome = () => {
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     return (
-        <>
+        <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
-                <div className="close_new_sound" onClick={goBack}>X</div>
+                <div className="close_new_sound" onClick={goHome}>X</div>
 
                 <label>Scene Name</label>
                 <input type="text"
@@ -71,10 +85,10 @@ function SceneEdit() {
 
             </div>
 
-            <div className="black_backer"></div>
-            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
+            {/* <div className="black_backer"></div>
+            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
 
-        </>
+        </div>
     )
 }
 export default SceneEdit

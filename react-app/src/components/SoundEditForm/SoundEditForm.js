@@ -7,7 +7,7 @@ import { editUserSound } from "../../store/sound"
 import "../SoundForm/Sound.css"
 import { setModalState } from "../../store/modal";
 
-function SoundEditForm({ currentSoundId }) {
+function SoundEditForm({currentSoundId}) {
     const dispatch = useDispatch()
     const { soundId } = useParams();
     const history = useHistory();
@@ -27,7 +27,9 @@ function SoundEditForm({ currentSoundId }) {
     useEffect(()=>{
         let theForm = document.getElementById("theForm")
         if (theForm){
-            theForm.classList.add("blurIn")
+            setTimeout(() => {
+                theForm.classList.add("blurIn")
+            }, 10);
         }
     }, [])
 
@@ -67,10 +69,11 @@ function SoundEditForm({ currentSoundId }) {
     }
 
     const goToDelete = () => {
+        console.log(currentSoundId, "CURRENT SOUND ID!!!!!!!!!!!")
         let theForm = document.getElementById("theForm")
         theForm.classList.remove("blurIn")
         setTimeout(() => {
-            dispatch(setModalState('soundDelete'))
+            dispatch(setModalState(`${currentSoundId}-soundDelete`))
         }, 600);
     }
 
