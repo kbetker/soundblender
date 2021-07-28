@@ -28,8 +28,36 @@
 }
 .categoryEditGear:hover{
     filter: brightness(1);
-
 }
+
+
+
+.quickSceneContainer{
+    /* background-color: red; */
+    /* height: 140px; */
+    /* display: flex; */
+    /* justify-content: space-evenly; */
+    padding: 5px;
+    margin: 0 40px;
+}
+.quickSceneComponent{
+    /* width: 130px; */
+    background-color: rgb(61, 61, 61);
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 10px;
+    border: solid 1px rgb(155, 155, 155);
+    border-radius: 10px;
+}
+.quickSceneTitle{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+
 @media screen and (max-width: 1125px) {
     .hideSmall{
         display: none;

@@ -201,6 +201,13 @@ function CollectionPage() {
                     </div>
 
                 </div>
+                {/* <div className="quickSceneContainer">
+                    <div className="quickSceneComponent">
+                        <div className="quickSceneTitle">Stop All</div>
+                        <img src={offButton}></img>
+                    </div>
+
+                </div> */}
                 <div className="ScenePageBody" style={{ width: `${windoWith}px` }}>
                     <div className="prevScene" onClick={() => changeSceneFunc("left")} ><img src={arrowL} draggable="false" alt="sceneLeft"></img></div>
 
