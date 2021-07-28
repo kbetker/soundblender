@@ -114,7 +114,6 @@ function CollectionPage() {
         function changeScene() {
 
                 let currentDiv = document.getElementById(currentScene.current)
-                console.log(currentScene.current, currentDiv, "WHYYYYYY")
                 if (currentDiv) {
                     currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
                 }

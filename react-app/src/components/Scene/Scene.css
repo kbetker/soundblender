@@ -92,11 +92,11 @@ body{
 .sceneContainer{
     /* width: 100vw; */
     padding: 20px;
-    border-top: 1px solid rgb(187, 187, 187);
-    border-bottom: 1px solid rgb(187, 187, 187);
-    min-height: 80vh;
-    border-radius: 10px;
-    box-shadow: 0 0 8px black inset;
+    border-top: 2px solid rgb(187, 187, 187);
+    /* border-bottom: 1px solid rgb(187, 187, 187); */
+    height: 80vh;
+    border-radius: 50px;
+    /* box-shadow: 0 0 8px black inset; */
     background-color: rgb(42, 42, 42);
     position: relative;
     /* overflow-y: scroll;
