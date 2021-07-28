@@ -28,9 +28,9 @@ function SceneNew({currentCollectionId}) {
         } else {
             let theForm = document.getElementById("theForm")
             theForm.classList.remove("blurIn")
-            setTimeout(() => {
-                dispatch(setModalState(``))
-            }, 500);
+            // setTimeout(() => {
+                dispatch(setModalState(`sceneFocus`))
+            // }, 500);
         }
     };
 

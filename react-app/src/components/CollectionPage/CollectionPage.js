@@ -57,6 +57,16 @@ function CollectionPage() {
         dispatch(getAllUserCollection(user.id))
     }, [dispatch, user.id, modal])
 
+    useEffect(()=>{
+        if(modal === "sceneFocus"){
+            currentScene.current = `${sceneLength + 1}`
+            dispatch(setModalState(''))
+            setTimeout(() => {
+                changeSceneFunc()
+            }, 530);
+        }
+    }, [modal])
+
     useEffect(() => {
         dispatch(setRedirectFunc(`/collection/${collectionId}`))
     }, [dispatch, collectionId])
@@ -101,22 +111,15 @@ function CollectionPage() {
 
     function changeSceneFunc(direction) {
 
-        function changeScene(sceneNum) {
-            if (!sceneNum) {
+        function changeScene() {
+
                 let currentDiv = document.getElementById(currentScene.current)
+                console.log(currentScene.current, currentDiv, "WHYYYYYY")
                 if (currentDiv) {
                     currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
                 }
-            } else {
-                setTimeout(() => {
-                    let currentDiv = document.getElementById(sceneNum)
-                    if (currentDiv) {
-                        currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
-                        dispatch(setModalState(''))
-                    }
-                }, 100);
             }
-        }
+
 
         if (direction === "none") { // "none" is passed when resizing the window so the current scene will stay in view
             changeScene()
@@ -135,7 +138,7 @@ function CollectionPage() {
             }
             changeScene()
         } else {
-            changeScene(direction)
+            changeScene()
         }
     }
 

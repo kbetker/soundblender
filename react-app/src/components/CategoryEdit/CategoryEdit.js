@@ -12,9 +12,7 @@ import { setModalState } from "../../store/modal";
 // import { getUserSounds } from "../../store/sound";
 
 function CategoryEdit({currentCategoryId}) {
-    console.log(currentCategoryId, "CURRENT CATEGORY ID IS WHAT??????????")
     const dispatch = useDispatch()
-    // const { catId }  = useParams();
     const history = useHistory();
     // const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)

@@ -46,7 +46,6 @@ export const deleteUserCollection = (collectionId, userId, scenesAray) => async 
 
     //delete all scenes
     const sceneDelete = await Promise.all(scenesAray.map(async el => {
-        console.log(el.id, "WHAT THE EL!?!?!?!?")
         const response = await fetch(`/api/scenes/${el.id}/delete`, { method: "DELETE" });
         return response.json();
     }))

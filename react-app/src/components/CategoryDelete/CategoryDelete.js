@@ -9,11 +9,6 @@ import "../SoundDelete/SoundDelete.css"
 
 function CategoryDelete({currentCategoryId}) {
     const dispatch = useDispatch()
-    console.log(currentCategoryId, "DELETE CURRENT CATEGORY ID ??????????????????")
-    // const { catId } = useParams();
-    const history = useHistory();
-    // const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
     const goHome = () => {
         let theForm = document.getElementById("theForm")
         theForm.classList.remove("blurIn")
