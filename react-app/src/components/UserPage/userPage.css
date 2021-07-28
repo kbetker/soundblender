@@ -24,7 +24,7 @@
 }
 .userPageContainer{
     display: grid;
-    grid-template-rows: 15px 50px 86vh;
+    grid-template-rows: 15px 50px 80vh;
 }
 .blackBar{
     height: 15px;

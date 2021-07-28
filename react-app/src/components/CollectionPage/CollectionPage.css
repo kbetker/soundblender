@@ -33,19 +33,30 @@
 
 
 .quickSceneContainer{
-    /* background-color: red; */
+    background-color: rgb(61, 61, 61);
+    min-height: 45px;
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid rgb(204, 204, 204);
+    display: flex;
     /* height: 140px; */
     /* display: flex; */
     /* justify-content: space-evenly; */
-    padding: 5px;
-    margin: 0 40px;
+    /* padding: 5px; */
+    /* margin: 0 40px; */
 }
 .quickSceneComponent{
     /* width: 130px; */
     background-color: rgb(61, 61, 61);
-    display: inline-block;
+    display: flex;
+    /* width: 150px; */
+    height: 35px;
+    justify-content: center;
+    align-items: center;
     margin: 5px 10px;
-    padding: 10px;
+    /* padding: 5px 5px 0px 5px; */
     border: solid 1px rgb(155, 155, 155);
     border-radius: 10px;
 }
@@ -53,7 +64,11 @@
     font-family: 'Montserrat', sans-serif;
     color: white;
     font-size: 16px;
-    margin-bottom: 5px;
+    margin: 0 4px 5px 4px;
+}
+.quickScenePic{
+    top: 8px;
+    position: relative;
 }
 
 

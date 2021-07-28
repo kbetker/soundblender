@@ -6,6 +6,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import "../UserPage/userPage.css"
 import "../Scene/Scene.css"
 import "./CollectionPage.css"
+import buttonOff from "../SoundModule/images/Button_Off.png"
 // import collection_img from "../UserPage/collectionIcon.png"
 // import new_collection_img from "../UserPage/newCollectionIcon.png"
 // import mySoundPlay from "../UserPage/mySoundPlay.png"
@@ -236,6 +237,9 @@ function CollectionPage() {
                     <div className="nextScene" onClick={() => changeSceneFunc("right")}><img src={arrowR} draggable="false" alt="sceneRight"></img></div>
                 </div>
             </div>
+
+
+
         </>
 
 
