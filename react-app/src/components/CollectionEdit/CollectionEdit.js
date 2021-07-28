@@ -6,56 +6,79 @@ import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
 import { editUserCollection } from "../../store/collection";
 import "../SceneEdit/SceneEdit.css"
+import { setModalState } from "../../store/modal";
 // import { getUserSounds } from "../../store/sound";
 
-function CollectionEdit() {
+function CollectionEdit({currentCollectionId}) {
     // const dispatch = useDispatch()
-    const { collectionId } = useParams();
+    // const { collectionId } = useParams();
     const history = useHistory();
     const dispatch = useDispatch()
     const redirect = useSelector(state => state.redirectPage.page)
-    const collection = useSelector(state => state.userInfo.info.collections)
+    // const collection = useSelector(state => state.userInfo.info.collections)
+    const allCollections = useSelector(state => state.collection.collection)
+    // const collection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
     const [name, setName] = useState('')
     const [owner_id, setOwner_id] = useState(0)
-    // console.log(collection, "WOOOOWOOOOWOOOOWOOOOWOOOO")
     useEffect(()=>{
-        const collectionToEdit = collection.find(collection => collection.id === parseInt(collectionId))
+        const collectionToEdit = allCollections?.collection.find(collection => collection.id === parseInt(currentCollectionId))
         setName(collectionToEdit?.name)
         setOwner_id(collectionToEdit?.owner_id)
     }, [])
 
-    // console.log("===========>", scenes, "<==========")
-    // const [name, setName] = useState('');
-    // const dispatch = useDispatch()
 
-    const editScene = async () => {
+    const editCollection = async () => {
         const formData = new FormData()
         formData.append("name", name)
         formData.append("owner_id", owner_id)
 
-        const data = await dispatch(editUserCollection(formData, collectionId))
-
+        const data = await dispatch(editUserCollection(formData, currentCollectionId))
         if (data.errors) {
              alert(data.errors);
         } else {
-            history.push(redirect)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
         }
     };
 
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
+
+    // const goToDelete = () => {
+    //     history.push(`/collection/${currentCollectionId}/delete`)
+    // }
+
     const goToDelete = () => {
-        history.push(`/collection/${collectionId}/delete`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState('collectionDelete'))
+        }, 600);
     }
 
-    const goBack = () => {
-    history.push(redirect)
+
+
+    const goHome = () => {
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     return (
-        <>
+        <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
-                <div className="close_new_sound" onClick={goBack}>X</div>
+                <div className="close_new_sound" onClick={goHome}>X</div>
 
-                <label>Scene Name</label>
+                <label>Collection Name</label>
                 <input type="text"
                     name="name"
                     onChange={(e) => setName(e.target.value)}
@@ -64,15 +87,15 @@ function CollectionEdit() {
                 ></input>
 
 
-                <button onClick={() => editScene()} className="new_sound_submit">Update</button>
+                <button onClick={() => editCollection()} className="new_sound_submit">Update</button>
                 <button className="scene_delete_button" onClick={(e) => goToDelete(e)} >Delete</button>
 
             </div>
 
-            <div className="black_backer"></div>
-            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
+            {/* <div className="black_backer"></div> */}
+            {/* <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
 
-        </>
+        </div>
     )
 }
 export default CollectionEdit

@@ -1,7 +1,7 @@
 // import logo from './images/logo.svg';
 import './SoundModule.css';
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import sliderBackground from "./images/sliderBackground.png"
@@ -12,6 +12,7 @@ import btnPlaying_img from "./images/PlayBtn.png"
 import btnStopping_img from "./images/Both_btn.png"
 import btnStopped_img from "./images/Stop_Btn.png"
 import gear from '../UserPage/Gear.png'
+import { setModalState } from '../../store/modal';
 
 
 function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
@@ -22,19 +23,21 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const knobPOS = useRef(0)
     const leftMarker = useRef()
     const soundVolume = useRef(0)
-
+    const dispatch = useDispatch()
     const [btnPlaying, setBtnPlaying] = useState(false)
     const [btnStopping, setBtnStopping] = useState(false)
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
     const [redLightOn, setRedLightOn] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
+    const modal = useSelector(state => state.modal.modal)
 
-
+    const setModalFunc = async (modalState) => {
+        await dispatch(setModalState(modalState))
+    }
 
     function setVolume() {
         soundVolume.current = knobPOS.current
-        // console.log(knobPOS.current)
         let vol = soundVolume.current
         if (vol <= 0) vol = 0;
         if (vol >= 100) vol = 100;
@@ -45,7 +48,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     let homeBtn;
     let logoutBtn;
 
-    useEffect(()=>{
+    useEffect(() => {
         gearBtn = document.querySelector('.gears')
         homeBtn = document.querySelector('.logOut')
         logoutBtn = document.querySelector('.goHome')
@@ -68,9 +71,9 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 })
             }
 
-            gearBtn.addEventListener("click", (e)=>{clearInterval(fadeInToTarget)})
-            homeBtn.addEventListener("click", (e)=>{clearInterval(fadeInToTarget)})
-            logoutBtn.addEventListener("click", (e)=>{clearInterval(fadeInToTarget)})
+            gearBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
+            homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
+            logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
 
             let fadeInToTarget = setInterval(() => {
                 knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
@@ -80,6 +83,15 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                     clearInterval(fadeInToTarget)
                 }
             }, 10)
+
+            // slightly improves the gap when looping. Inspired by Laxmikant: https://stackoverflow.com/users/2034794/laxmikant-dange
+            // actually not seeing much of a difference - may mess with this later .......
+            // mySound.current.ontimeupdate = function () {
+            //     if ((mySound.current.currentTime / mySound.current.duration) > 0.9 && mySoundObj.is_looped) {
+            //         mySound.current.currentTime = 0;
+            //         mySound.current.play()
+            //     }
+            // }
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
                 clearInterval(fadeInToTarget)
@@ -118,7 +130,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 }
             }, 10)
 
-            const handleFadoutInterval = () =>{
+            const handleFadoutInterval = () => {
                 if (!isPlaying.current) {
                     return;
                 } else {
@@ -128,12 +140,12 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 }
             }
 
-            gearBtn.addEventListener("click", (e)=>{handleFadoutInterval()})
-            homeBtn.addEventListener("click", (e)=>{handleFadoutInterval()})
-            logoutBtn.addEventListener("click", (e)=>{handleFadoutInterval()})
+            gearBtn.addEventListener("click", (e) => { handleFadoutInterval() })
+            homeBtn.addEventListener("click", (e) => { handleFadoutInterval() })
+            logoutBtn.addEventListener("click", (e) => { handleFadoutInterval() })
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
-               handleFadoutInterval()
+                handleFadoutInterval()
             })
         }
 
@@ -154,7 +166,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     })
 
 
-    // console.log(currentscene)
     function addToClientX() {
         let sum = 0
         for (let i = 1; i < parseInt(currentscene.current); i++) {
@@ -162,6 +173,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
         }
         return sum
     }
+
 
     useEffect(() => {
         let leftMarkerPos = leftMarker?.current?.getBoundingClientRect().left
@@ -179,10 +191,8 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             function knobIsDragging(e) {
                 e.preventDefault();
                 xDiff = Xold - (e.clientX + addToClientX());
-                // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
                 Xold = (e.clientX + addToClientX());
                 knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX()) / 2
-                // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos + addToClientX())
                 setVolume()
                 if ((e.clientX + addToClientX()) <= 20 + leftMarkerPos) {
                     stopDrag()
@@ -213,14 +223,14 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
     return (
         <>
-             <div className="soundModule_wrapper" style={{ border: `1px solid ${color}`, order: `${mySoundObj.arrangement}`}}>
-            {/* <div className="soundModule_wrapper" style={{ border: `1px solid grey` }}> */}
+            <div className="soundModule_wrapper" style={{ border: `1px solid ${color}`, order: `${mySoundObj.arrangement}` }}>
+                {/* <div className="soundModule_wrapper" style={{ border: `1px solid grey` }}> */}
                 <div className="title">
                     {mySoundObj.name}
                     {editMode &&
-                        <Link to={`/category-sound/${categoryId}/${mySoundObj.id}`}>
+                        <div onClick={()=> setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{display: 'inline-block'}}>
                             <img src={gear} className="soundEditGear" draggable="false" alt=""></img>
-                        </Link>
+                        </div>
                     }
                 </div>
                 <div className="slider_and_controls">

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import HomePage from "../HomePage";
+import { setModalState } from "../../store/modal";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
   // const user = useSelector(state => state.session.user)
   const [username, setUsername] = useState("");
+  const modal = useSelector(state => state.modal)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -19,17 +21,24 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
-      if (data.errors){
-        // console.log(data.errors)
+      if (data.errors) {
         setErrors(data.errors)
       } else {
-        // console.log(data)
-        // debugger
-        history.push(`/users/${data.id}`)
+        await dispatch(setModalState(''))
+        await history.push(`/users/${data.id}`)
       }
 
     }
   };
+
+  useEffect(() => {
+    let theForm = document.getElementById("theForm")
+    if (theForm) {
+      theForm.classList.add("blurIn")
+    }
+  }, [])
+
+
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -47,16 +56,17 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-//   if (user) {
-//     return <Redirect to="/" />;
-//   }
+  const goHome = () => {
+    let theForm = document.getElementById("theForm")
+    theForm.classList.remove("blurIn")
+    setTimeout(() => {
+      dispatch(setModalState(''))
+    }, 500);
+  }
 
-const goHome = () => {
-    history.push("/")
-}
   return (
-      <>
-    <form onSubmit={onSignUp} className="new_sound_form">
+    <div className="formEffect" id="theForm">
+      <form onSubmit={onSignUp} className="new_sound_form">
         <div className="close_new_sound" onClick={goHome}>X</div>
         <div className="formTitle">Sign Up</div>
         {errors && errors.map((err, i) => <div className="logInErrors">{err}</div>)}
@@ -99,12 +109,11 @@ const goHome = () => {
           className="new_sound_input"
         ></input>
 
-      <button type="submit" className="new_sound_submit">Sign Up</button>
-    </form>
+        <button type="submit" className="new_sound_submit">Sign Up</button>
+      </form>
       <div className="black_backer"></div>
-      <HomePage></HomePage>
 
-    </>
+    </div>
   );
 };
 

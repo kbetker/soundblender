@@ -6,13 +6,20 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
 import { getUserSounds } from "../../store/sound";
+import { setModalState } from "../../store/modal";
 
-function SoundForm() {
+function AddSoundToCategory({currentCategoryId}) {
     const dispatch = useDispatch()
-    const { catId }  = useParams();
+    // const { catId }  = useParams();
     const history = useHistory();
     const redirect = useSelector(state => state.redirectPage.page)
-    const sounds = useSelector(state => state.newSound.sounds)
+    const allSounds = useSelector(state => state.newSound.sounds)
+    const sounds = allSounds?.sounds.sort(function(a, b){
+        if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
+        if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+        return 0
+    })
+
     const user = useSelector(state => state.session.user)
     const [soundId, setSoundId] = useState(0);
 
@@ -27,29 +34,44 @@ function SoundForm() {
 
 
     const addSound = async () => {
-        const data = await fetch(`/api/categories/${catId}/${soundId}/addsound`, {
+        const data = await fetch(`/api/categories/${currentCategoryId}/${soundId}/addsound`, {
             method: "POST",
         });
 
         if(data.errors){
             alert(data.errors)
         } else {
-            history.push(redirect)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
         }
-
     }
 
-    const goBack = () => {
-        history.push(redirect)
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
+
+    const goHome = () => {
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     return (
-        <>
-        <div className="new_sound_form" >
-            <div className="close_new_sound" onClick={goBack}>X</div>
+        <div className="formEffect" id="theForm">
+        <div className="new_sound_form">
+            <div className="close_new_sound" onClick={goHome}>X</div>
             <div>Add Sound</div>
             <select onChange={(e) => setSoundId(e.target.value)} value={soundId} className="new_sound_input">
-                {sounds?.sounds.map(sound =>
+                     <option>--Select Sound--</option>
+                {sounds?.map(sound =>
                     <option value={sound.id}>{sound.name}</option>
                 )}
             </select>
@@ -58,10 +80,10 @@ function SoundForm() {
             <button onClick={() => addSound()} className="category_button">Submit</button>
         </div>
 
-        <div className="black_backer"></div>
-        <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
+        {/* <div className="black_backer"></div>
+        <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
 
-        </>
+        </div>
     )
 }
-export default SoundForm
+export default AddSoundToCategory

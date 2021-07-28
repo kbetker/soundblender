@@ -9,7 +9,6 @@ body{
     /* overflow-x: scroll; */
     /* margin: 0 40px; */
     height: 90vh;
-
     /* background-color: indianred; */
 }
 .newSceneGear{
@@ -78,7 +77,8 @@ body{
     /* background-color: indigo; */
     /* width: 100vw; */
     overflow-x: hidden;
-
+    /* margin-bottom: 35px; */
+    padding-top: 35px;
     /* background-color: red; */
 }
 .scenePage{
@@ -92,10 +92,11 @@ body{
 .sceneContainer{
     /* width: 100vw; */
     padding: 20px;
-    border: 1px solid rgb(187, 187, 187);
+    border-top: 2px solid rgb(187, 187, 187);
+    /* border-bottom: 1px solid rgb(187, 187, 187); */
     height: 80vh;
-    border-radius: 10px;
-    box-shadow: 0 0 8px black inset;
+    border-radius: 50px;
+    /* box-shadow: 0 0 8px black inset; */
     background-color: rgb(42, 42, 42);
     position: relative;
     /* overflow-y: scroll;
@@ -112,17 +113,18 @@ body{
 .noScenesContainer{
     /* width: 100vw; */
     padding: 20px;
-    border: 1px solid rgb(187, 187, 187);
-    height: 80vh;
+    /* border: 1px solid rgb(187, 187, 187); */
+    border-top: 2px solid rgb(187, 187, 187);
+    height: 75vh;
     border-radius: 10px;
-    box-shadow: 0 0 8px black inset;
+    /* box-shadow: 0 0 8px black inset; */
     background-color: rgb(42, 42, 42);
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* overflow-y: scroll;
-    box-sizing: border-box; */
+    overflow: hidden;
+    /* box-sizing: border-box; */
 }
 
 
@@ -131,7 +133,7 @@ body{
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
     color: white;
-    margin-bottom: 30px;
+    margin: 25px 0 10px 10px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -139,6 +141,8 @@ body{
 .eachScene{
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 80px;
+    /* background-color: red; */
 }
 .nextScene,.prevScene{
     background-color: black;

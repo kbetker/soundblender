@@ -15,9 +15,19 @@ collection_routes = Blueprint('collections', __name__)
 
 @collection_routes.route('/<int:id>')
 @login_required
-def user(id):
+def getOneCollection(id):
     collection = Collection.query.get(id)
     return collection.to_dict();
+
+
+@collection_routes.route('/all/<int:id>')
+@login_required
+def getAllCollections(id):
+    # collections = Collection.query.get(id)
+    collections = Collection.query.filter(Collection.owner_id == id)
+    return  {"collection": [collection.to_dict() for collection in collections ]}
+    # return collection.to_dict();
+
 
 
 
@@ -33,8 +43,10 @@ def addCollection():
         )
     db.session.add(newCollection)
     db.session.commit()
-    print(newCollection.to_dict())
-    return newCollection.to_dict()
+    # print(newCollection.to_dict(), "================== wat =====================")
+    allCollections = Collection.query.filter(Collection.owner_id == data['owner_id'])
+    return  {"collection": [collection.to_dict() for collection in allCollections ]}
+    # return newCollection.to_dict()
 
 
 @collection_routes.route("/<int:collectionId>/edit", methods=["PUT"])
@@ -49,12 +61,16 @@ def edit_category(collectionId):
     collectionToEdit.owner_id=data['owner_id']
 
     db.session.commit()
-    return {"Collection": "updated"}
+    allCollections = Collection.query.filter(Collection.owner_id == data['owner_id'])
+    return  {"collection": [collection.to_dict() for collection in allCollections ]}
+    # return {"Collection": "updated"}
 
 
-@collection_routes.route('/<int:collectionId>/delete', methods=["DELETE"])
+@collection_routes.route('/<int:collectionId>/<int:userId>/delete', methods=["DELETE"])
 # @login_required
-def deleteuserCollection(collectionId):
+def deleteuserCollection(collectionId, userId):
     Collection.query.filter(Collection.id == collectionId).delete()
     db.session.commit()
-    return  {"collection": "deleted"}
+    allCollections = Collection.query.filter(Collection.owner_id == userId)
+    return  {"collection": [collection.to_dict() for collection in allCollections ]}
+    # return  {"collection": "deleted"}

@@ -1,47 +1,98 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { getUserCollection } from "../../store/collection"
-import { setEditMode } from "../../store/editMode"
 // import { getUserSounds } from "../../store/sound";
 import "../UserPage/userPage.css"
 import "../Scene/Scene.css"
 import "./CollectionPage.css"
+import buttonOff from "../SoundModule/images/Button_Off.png"
 // import collection_img from "../UserPage/collectionIcon.png"
 // import new_collection_img from "../UserPage/newCollectionIcon.png"
 // import mySoundPlay from "../UserPage/mySoundPlay.png"
-import homepageLogo from "../HomePage/homepageLogo.gif"
-import logoAnimation from "../HomePage/logoAnimationGreen.gif"
-import gear from "../UserPage/Gear.png"
 import { logout } from "../../store/session";
+import { setRedirectFunc } from "../../store/redirect";
+import { getAllUserCollection } from "../../store/collection";
+import { getUserCollection } from "../../store/collection"
+import { setEditMode } from "../../store/editMode"
+import { setModalState } from "../../store/modal";
+import { getUserSounds } from "../../store/sound";
+import { getUserInfo } from "../../store/userPage";
+
+import SoundEditForm from "../SoundEditForm/SoundEditForm";
+import SoundDelete from "../SoundDelete";
+import AddSoundToCategory from "../AddSoundToCategory"
+import CategorySound from "../CategorySound/CategorySound";
+import CategoryEdit from "../CategoryEdit"
+import CategoryNew from "../CategoryNew"
+import CategoryDelete from "../CategoryDelete"
+import SceneNew from "../SceneNew/SceneNew";
+import SceneEdit from "../SceneEdit"
+import SceneDelete from "../SceneDelete"
+
+import logoAnimation from "../HomePage/logoAnimationGreen.gif"
+import homepageLogo from "../HomePage/homepageLogo.gif"
+import gear from "../UserPage/Gear.png"
 import Scene from "../Scene"
-import { useRef } from "react";
 import arrowR from "./arrowR.png"
 import arrowL from "./arrowL.png"
-import { setRedirectFunc } from "../../store/redirect";
 
 function CollectionPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { collectionId } = useParams();
-    // const windoWith = useRef(window.innerWidth)
     const [windoWith, setWindowWidth] = useState(window.innerWidth)
     const currentScene = useRef("1")
+    const user = useSelector(state => state.session.user)
+    const modal = useSelector(state => state.modal.modal)
 
     useEffect(() => {
-        dispatch(getUserCollection(collectionId))
-    }, [dispatch, collectionId]);
+        dispatch(getUserInfo(user.id))
+    }, [dispatch, user.id, modal]);
+
+    useEffect(() => {
+        dispatch(getUserSounds(user.id))
+    }, [dispatch, user.id]);
+
+    useEffect(() => {
+        dispatch(getAllUserCollection(user.id))
+    }, [dispatch, user.id, modal])
+
+    useEffect(()=>{
+        if(modal === "sceneFocus"){
+            currentScene.current = `${sceneLength + 1}`
+            dispatch(setModalState(''))
+            setTimeout(() => {
+                changeSceneFunc()
+            }, 530);
+        }
+    }, [modal])
 
     useEffect(() => {
         dispatch(setRedirectFunc(`/collection/${collectionId}`))
     }, [dispatch, collectionId])
 
-    const collection = useSelector(state => state.collection)
-    const sceneLength = collection?.collection?.scenes?.length
-    const editMode = useSelector(state => state.editMode.editMode)
-    const user = useSelector(state => state.session.user)
 
-    // if(collection.collection?.scenes.length === 0)history.push(`/scenes/${collection.collection?.id}/new`)
+    const getIdAt0 = () => {
+        let getNums = modal.split('-')
+        return parseInt(getNums[0])
+    }
+
+    const getIdAt1 = () => {
+        let getNums = modal.split("-")
+        return parseInt(getNums[1])
+    }
+
+    const allCollections = useSelector(state => state.collection.collection)
+    const collectionToSort = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
+    const collection = collectionToSort?.scenes.sort(function(a, b){
+        if (a.id < b.id){return -1}
+        if (a.id > b.id){return 1}
+        return 0
+    })
+    const sceneLength = collection?.length
+    const editMode = useSelector(state => state.editMode.editMode)
+
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -51,26 +102,24 @@ function CollectionPage() {
 
     const goHome = () => {
         dispatch(setEditMode(false))
-        history.push(`/users/${user.id}`) //to do - change to current user
+        history.push(`/users/${user.id}`)
     }
 
     const editModeFunc = (e) => {
         e.preventDefault()
         editMode ? dispatch(setEditMode(false)) : dispatch(setEditMode(true))
-
-    }
-
-    if(collection.collection?.scenes[0]?.categories.length === 0){
-        dispatch(setEditMode(true))
     }
 
     function changeSceneFunc(direction) {
+
         function changeScene() {
-            let currentDiv = document.getElementById(currentScene.current)
-            if (currentDiv) {
-                currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+
+                let currentDiv = document.getElementById(currentScene.current)
+                if (currentDiv) {
+                    currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+                }
             }
-        }
+
 
         if (direction === "none") { // "none" is passed when resizing the window so the current scene will stay in view
             changeScene()
@@ -81,12 +130,14 @@ function CollectionPage() {
                 currentScene.current = `${parseInt(currentScene.current) + 1}`
             }
             changeScene()
-        } else { // "left" is the only other argument
+        } else if (direction === "left") {
             if (parseInt(currentScene.current) - 1 <= 0) { // loops to end
                 currentScene.current = `${sceneLength}`
             } else {
                 currentScene.current = `${parseInt(currentScene.current) - 1}`
             }
+            changeScene()
+        } else {
             changeScene()
         }
     }
@@ -96,9 +147,34 @@ function CollectionPage() {
         changeSceneFunc("none")
     })
 
+    // useEffect(()=>{
+    //     if(modal !== ''){
+    //             changeSceneFunc(modal)
+    //     }
+    // }, [modal])
+
     return (
         <>
-            <div className="userPageContainer">
+            {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
+            {modal.endsWith("addSoundToCategory") && <AddSoundToCategory currentCategoryId={getIdAt1()} />}
+
+            {modal.endsWith("editSound") && <SoundEditForm currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
+            {modal.endsWith("soundDelete") && <SoundDelete currentSoundId={getIdAt0()} />}
+
+            {modal.endsWith("categoryEdit") && <CategoryEdit currentCategoryId={getIdAt1()} />}
+            {modal.endsWith("categoryNew") && <CategoryNew currentSceneId={getIdAt0()} />}
+            {modal.endsWith("categoryDelete") && <CategoryDelete currentCategoryId={getIdAt1()} />}
+
+            {modal.endsWith("sceneNew") && <SceneNew currentCollectionId={getIdAt0()} />}
+            {modal.endsWith("sceneEdit") && <SceneEdit currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
+            {modal.endsWith("sceneDelete") && <SceneDelete currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
+
+
+
+
+            {/* {modal === "collectionDelete" && <CollectionDelete currentCollectionId={currentCollectionId} />}
+            {modal === "collectionNew" && <CollectionNew currentCollectionId={currentCollectionId} />} */}
+            <div className={modal === "" ? "userPageContainer modalEffect" : "userPageContainer modalEffect darkblur"}>
                 <div className="blackBar"></div>
                 <div className="userPageHeader">
 
@@ -106,7 +182,7 @@ function CollectionPage() {
                         <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
                         <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
-                    <div className="collectionName">{collection.collection?.name}</div>
+                    <div className="collectionName">{collection?.name}</div>
                     <div className="collectionNav">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div> | </div>
@@ -134,14 +210,14 @@ function CollectionPage() {
 
 
 
-                            {collection.collection?.scenes?.length === 0 &&
+                            {collection?.length === 0 &&
                                 <div>
                                     <div className="noScenesContainer" style={{ width: `${window.innerWidth - 122}px` }} id={1}>
                                         <div className="sceneName">
                                             <div>
-                                                <Link to={`/scenes/${collection.collection?.id}/new`} className="firstScene">
+                                                <div onClick={() => dispatch(setModalState(`${collectionId}-sceneNew`))} className="firstScene">
                                                     Click here to add a scene
-                                                </Link>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="eachScene">
@@ -152,7 +228,7 @@ function CollectionPage() {
 
 
 
-                            {collection?.collection?.scenes.map((scene, index) =>
+                            {collection?.map((scene, index) =>
                                 <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
                             )}
                         </div>
@@ -161,6 +237,9 @@ function CollectionPage() {
                     <div className="nextScene" onClick={() => changeSceneFunc("right")}><img src={arrowR} draggable="false" alt="sceneRight"></img></div>
                 </div>
             </div>
+
+
+
         </>
 
 

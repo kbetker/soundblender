@@ -24,7 +24,7 @@
 }
 .userPageContainer{
     display: grid;
-    grid-template-rows: 15px 50px 86vh;
+    grid-template-rows: 15px 50px 80vh;
 }
 .blackBar{
     height: 15px;
@@ -60,6 +60,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
+    min-height: 100vh;
 }
 .contentContainer{
     width: 90%;
@@ -143,7 +144,7 @@
 }}
 
 
-a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
+.contentLink,a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
     width: 90px;
     display: flex;
     margin: 6px 8px;
@@ -156,7 +157,7 @@ a.contentLink,a.contentLink:active,a.contentLink:visited,a.contentLink:active{
     text-decoration: none;
     position: relative;
 }
-a.contentLink:hover{
+a.contentLink:hover,.contentLink:hover{
     filter: brightness(1.2);
 }
 

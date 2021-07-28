@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
-import HomePage from "../HomePage";
+// import HomePage from "../HomePage";
+import { setModalState } from "../../store/modal";
 
 
 const LoginForm = () => {
     const dispatch = useDispatch();
     // const user = useSelector(state => state.session.user)
+    const modal = useSelector(state => state.modal)
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
+    // const theForm = useRef()
 
     const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
+
         if (data.errors) {
-            // console.log(data.errors)
             setErrors(data.errors);
         } else {
-        await history.push(`/users/${data.id}`)
+         await dispatch(setModalState(''))
+            await history.push(`/users/${data.id}`)
     }
     };
 
@@ -32,17 +36,25 @@ const LoginForm = () => {
         setPassword(e.target.value);
     };
 
-    // if (user) {
-    //     return <Redirect to="/" />;
-    // }
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
 
     const goHome = () => {
-        history.push("/")
+        // history.push("/")
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     return (
-        <>
-            <form onSubmit={(e) => onLogin(e)} className="new_sound_form" style={{ top: "225px" }}>
+        <div className="formEffect" id="theForm">
+            <form onSubmit={(e) => onLogin(e)}  className="new_sound_form" style={{ top: "225px" }}>
                 <div className="close_new_sound" onClick={goHome}>X</div>
 
                 <div className="formTitle">Log In</div>
@@ -68,10 +80,10 @@ const LoginForm = () => {
                 />
                 <button type="submit" className="new_sound_submit">Login</button>
 
+            {/* <div className="black_backer"></div> */}
+            {/* <HomePage></HomePage> */}
             </form>
-            <div className="black_backer"></div>
-            <HomePage></HomePage>
-        </>
+        </div>
     );
 };
 

@@ -8,11 +8,11 @@ import { editCategoryFunc } from "../../store/category"
 import "../SoundForm/Sound.css"
 import { getCategoryFunc } from "../../store/category";
 import CategoryColors from "./categoryColors";
+import { setModalState } from "../../store/modal";
 // import { getUserSounds } from "../../store/sound";
 
-function SoundForm() {
+function CategoryEdit({currentCategoryId}) {
     const dispatch = useDispatch()
-    const { catId }  = useParams();
     const history = useHistory();
     // const user = useSelector(state => state.session.user)
     const redirect = useSelector(state => state.redirectPage.page)
@@ -32,32 +32,35 @@ function SoundForm() {
 
     useEffect(()=>{
         async function setAttributes(){
-            const data = await dispatch(getCategoryFunc(catId))
+            const data = await dispatch(getCategoryFunc(currentCategoryId))
             setName(data.name)
             setColor(data.color)
             setArrangement(data.arrangement)
           }
           setAttributes()
-    }, [dispatch, catId])
+    }, [dispatch, currentCategoryId])
 
 
 
 
     const editCategory = async (e) => {
         e.preventDefault();
-        // console.log(name, color, arrangement)
         const formData = new FormData();
         formData.append("name", name);
         formData.append("arrangement", arrangement);
         formData.append("color", color);
 
         // setImageLoading(true);
-        const data = await dispatch(editCategoryFunc(formData, catId))
+        const data = await dispatch(editCategoryFunc(formData, currentCategoryId))
 
         if(data.errors){
             alert(data.errors)
         } else {
-            history.push(redirect)
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
+            setTimeout(() => {
+                dispatch(setModalState(''))
+            }, 500);
         }
 
     }
@@ -67,12 +70,20 @@ function SoundForm() {
     //     setSound_url(file);
     // }
 
-    const goBack = () => {
-        history.push(redirect)
+    const goHome = () => {
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(''))
+        }, 500);
     }
 
     const goToDelete = () => {
-        history.push(`/category/${catId}/delete`)
+        let theForm = document.getElementById("theForm")
+        theForm.classList.remove("blurIn")
+        setTimeout(() => {
+            dispatch(setModalState(`NaN-${currentCategoryId}-categoryDelete`))
+        }, 500);
     }
 
     useEffect(()=>{
@@ -86,10 +97,17 @@ function SoundForm() {
         }
     }, [color])
 
+    useEffect(()=>{
+        let theForm = document.getElementById("theForm")
+        if (theForm){
+            theForm.classList.add("blurIn")
+        }
+    }, [])
+
     return (
-        <>
+        <div className="formEffect" id="theForm">
         <div className="category_form" style={{border: `1px solid ${color}`}}>
-            <div className="close_category" onClick={goBack}>X</div>
+            <div className="close_category" onClick={goHome}>X</div>
             <label>Edit Name</label>
             <input type="text"
                 name="name"
@@ -128,10 +146,10 @@ function SoundForm() {
             <button className="category_delete_button" onClick={(e) => goToDelete(e)}  style={{border: `1px solid ${color}`}}>Delete</button>
 
         </div>
-        <div className="black_backer"></div>
-        <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div>
+        {/* <div className="black_backer"></div>
+        <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
 
-        </>
+        </div>
     )
 }
-export default SoundForm
+export default CategoryEdit

@@ -22,19 +22,16 @@ function SoundModulePreview({ mySoundObj, color }) {
     const knobPOS = useRef(0)
     const leftMarker = useRef()
     const soundVolume = useRef(0)
-    // console.log(mySoundObj)
     const [btnPlaying, setBtnPlaying] = useState(false)
     const [btnStopping, setBtnStopping] = useState(false)
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
-    // console.log(mySoundObj)
     const [redLightOn, setRedLightOn] = useState(false)
 
     const editMode = useSelector(state => state.editMode.editMode)
 
     function setVolume() {
         soundVolume.current = knobPOS.current
-        // console.log(knobPOS.current)
         let vol = soundVolume.current
         if (vol <= 0) vol = 0;
         if (vol >= 100) vol = 100;
@@ -143,7 +140,6 @@ function SoundModulePreview({ mySoundObj, color }) {
     })
 
 
-    // console.log(currentscene)
 
 
     useEffect(() => {
@@ -162,16 +158,14 @@ function SoundModulePreview({ mySoundObj, color }) {
             function knobIsDragging(e) {
                 e.preventDefault();
                 xDiff = Xold - (e.clientX);
-                // console.log(e.clientX, addToClientX(), "WTFWTFWTFWTFWFT")
                 Xold = (e.clientX);
-                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos) / 2
-                // console.log(knob.current.getBoundingClientRect().left - leftMarkerPos)
+                knobPOS.current = (knob.current.getBoundingClientRect().left - leftMarkerPos - 90) / 2
                 setVolume()
-                if ((e.clientX) <= 20 + leftMarkerPos) {
+                if ((e.clientX) <= 120 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `-2px`;
                 }
-                else if ((e.clientX) > 260 + leftMarkerPos) {
+                else if ((e.clientX) > 360 + leftMarkerPos) {
                     stopDrag()
                     theKnob.style.left = `197px`;
                 }

@@ -48,7 +48,7 @@ def deleteuserSound(soundId):
     db.session.commit()
     Sound.query.filter(Sound.id == soundId).delete()
     db.session.commit()
-    return  {"sound": "deleted"}
+    return {"deleted": soundId}
 
 
 
@@ -119,8 +119,10 @@ def edit_sound(soundId):
 
 
     db.session.commit()
+    allSounds = Sound.query.filter(Sound.owner_id == data['owner_id'])
+    return  {"sounds": [sound.to_dict() for sound in allSounds ]}
     # print(soundToEdit.to_dict())
-    return {"cool": "Beings"}
+    # return {"cool": "Beings"}
     # else:
     #
 

@@ -8,6 +8,7 @@ import editMode from "./editMode";
 import redirectPage from "./redirect";
 import category from "./category";
 import scene from "./scene"
+import modalReducer from "./modal";
 
 const rootReducer = combineReducers({
     session,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     editMode,
     redirectPage,
     category,
-    scene
+    scene,
+    modal: modalReducer
 });
 
 

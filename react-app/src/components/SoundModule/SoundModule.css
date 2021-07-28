@@ -31,6 +31,9 @@ body{
   }
 
   .title{
+    /* display: flex; */
+    /* width: 372px; */
+    /* justify-content: space-between; */
     align-self: flex-end;
   }
 

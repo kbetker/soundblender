@@ -19,13 +19,14 @@ body{
     animation-iteration-count:infinite;
     animation-timing-function: linear;
 }
+
 .animated_background {
     /* background-size: cover; */
     margin: 0;
     padding: 0;
     /* width: 100vh; */
-    min-width: 1920px;
-    min-height: 1385px;
+    /* min-width: 1920px; */
+    height: 120vh;
 
     /* min-height: 100vh; */
     image-rendering: pixelated;
@@ -42,7 +43,7 @@ body{
     top: -250px;
     /* left: -115px; */
     /* width: 130vw; */
-    min-height: 1385px;
+    height: 140vh;
 }
 
 .formTitle{
@@ -112,7 +113,7 @@ body{
 a.homeLinks,a.homeLinks:active,a.homeLinks:visited,a.homeLinks:active,.demoHomeLink{
     color: white;
     text-decoration: none;
-    margin: 0 5px;
+    margin: 0 15px;
     border-bottom: 1px solid rgb(0, 0, 0);
 }
 a.homeLinks:hover{
