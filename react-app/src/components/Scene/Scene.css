@@ -77,7 +77,7 @@ body{
     /* background-color: indigo; */
     /* width: 100vw; */
     overflow-x: hidden;
-    margin-bottom: 35px;
+    /* margin-bottom: 35px; */
     padding-top: 35px;
     /* background-color: red; */
 }
@@ -133,7 +133,7 @@ body{
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
     color: white;
-    margin-bottom: 10px;
+    margin: 25px 0 10px 10px;
     position: relative;
     display: flex;
     justify-content: space-between;

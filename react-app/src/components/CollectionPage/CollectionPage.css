@@ -33,14 +33,16 @@
 
 
 .quickSceneContainer{
-    background-color: rgb(61, 61, 61);
-    min-height: 45px;
-    position:fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid rgb(204, 204, 204);
+    /* background-color: rgb(61, 61, 61); */
+    height: 35px;
+    position: absolute;
+    top: -23px;
+    left: 40px;
+    width: 95%;
+    /* border-bottom: 1px solid rgb(204, 204, 204); */
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     /* height: 140px; */
     /* display: flex; */
     /* justify-content: space-evenly; */
