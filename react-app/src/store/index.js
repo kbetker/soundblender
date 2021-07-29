@@ -8,6 +8,7 @@ import editMode from "./editMode";
 import redirectPage from "./redirect";
 import category from "./category";
 import scene from "./scene"
+import quickscene from "./quickscene"
 import modalReducer from "./modal";
 
 const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     redirectPage,
     category,
     scene,
-    modal: modalReducer
+    modal: modalReducer,
+    quickscene,
 });
 
 

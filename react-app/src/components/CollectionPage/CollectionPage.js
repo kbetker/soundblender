@@ -29,6 +29,7 @@ import CategoryDelete from "../CategoryDelete"
 import SceneNew from "../SceneNew/SceneNew";
 import SceneEdit from "../SceneEdit"
 import SceneDelete from "../SceneDelete"
+import QuickSceneNew from "../QuickSceneNew/QuickSceneNew";
 
 import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import homepageLogo from "../HomePage/homepageLogo.gif"
@@ -58,8 +59,8 @@ function CollectionPage() {
         dispatch(getAllUserCollection(user.id))
     }, [dispatch, user.id, modal])
 
-    useEffect(()=>{
-        if(modal === "sceneFocus"){
+    useEffect(() => {
+        if (modal === "sceneFocus") {
             currentScene.current = `${sceneLength + 1}`
             dispatch(setModalState(''))
             setTimeout(() => {
@@ -84,15 +85,14 @@ function CollectionPage() {
     }
 
     const allCollections = useSelector(state => state.collection.collection)
-    const collectionToSort = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
-    const collection = collectionToSort?.scenes.sort(function(a, b){
-        if (a.id < b.id){return -1}
-        if (a.id > b.id){return 1}
+    const currentCollection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
+    const sortedScenes = currentCollection?.scenes.sort(function (a, b) {
+        if (a.id < b.id) { return -1 }
+        if (a.id > b.id) { return 1 }
         return 0
     })
-    const sceneLength = collection?.length
+    const sceneLength = sortedScenes?.length
     const editMode = useSelector(state => state.editMode.editMode)
-
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -113,13 +113,11 @@ function CollectionPage() {
     function changeSceneFunc(direction) {
 
         function changeScene() {
-
-                let currentDiv = document.getElementById(currentScene.current)
-                if (currentDiv) {
-                    currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
-                }
+            let currentDiv = document.getElementById(currentScene.current)
+            if (currentDiv) {
+                currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
             }
-
+        }
 
         if (direction === "none") { // "none" is passed when resizing the window so the current scene will stay in view
             changeScene()
@@ -153,6 +151,28 @@ function CollectionPage() {
     //     }
     // }, [modal])
 
+    function getAllSounds(){
+        let theSound = {}
+
+        sortedScenes.map((collection) => {
+            for(let i = 0; i < collection.categories.length; i++){
+                let categories = collection.categories[i]
+                for(let j = 0; j < categories.sounds.length; j++){
+                    let soundName = categories.sounds[j].name;
+                    let soundId = categories.sounds[j].id
+                        if(!(soundName in theSound)){
+                            theSound[soundName] = soundId
+                        }
+                    }
+                }
+            })
+           return theSound;
+    }
+
+    if(sortedScenes){
+        getAllSounds()
+    }
+
     return (
         <>
             {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
@@ -169,6 +189,9 @@ function CollectionPage() {
             {modal.endsWith("sceneEdit") && <SceneEdit currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
             {modal.endsWith("sceneDelete") && <SceneDelete currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
 
+            {modal.endsWith("quickSceneNew") && <QuickSceneNew currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} />}
+
+
 
 
 
@@ -182,7 +205,7 @@ function CollectionPage() {
                         <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
                         <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
-                    <div className="collectionName">{collection?.name}</div>
+                    <div className="collectionName">{currentCollection?.name}</div>
                     <div className="collectionNav">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div> | </div>
@@ -210,7 +233,7 @@ function CollectionPage() {
 
 
 
-                            {collection?.length === 0 &&
+                            {sortedScenes?.length === 0 &&
                                 <div>
                                     <div className="noScenesContainer" style={{ width: `${window.innerWidth - 122}px` }} id={1}>
                                         <div className="sceneName">
@@ -228,8 +251,9 @@ function CollectionPage() {
 
 
 
-                            {collection?.map((scene, index) =>
+                            {sortedScenes?.map((scene, index) =>
                                 <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
+
                             )}
                         </div>
                     </div>

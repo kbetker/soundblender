@@ -100,6 +100,20 @@ body{
     margin: 0 20px;
   }
 
+  .quicksceneEditGear{
+    width: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px black;
+    border-radius: 20px;
+    filter: brightness(0.8);
+    margin-left: 8px;
+    position: relative;
+    top: -2px;
+    animation:clockwise 14s linear infinite;
+    cursor: pointer;
+}
+
+
 
   .soundEditGear{
     /* position: absolute; */
@@ -114,7 +128,7 @@ body{
     animation:clockwise 14s linear infinite;
     cursor: pointer;
 }
-.soundEditGear:hover{
+.soundEditGear:hover,.quicksceneEditGear:hover{
     filter: brightness(1);
 
 }

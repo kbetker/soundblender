@@ -7,6 +7,7 @@ import "../CollectionPage/CollectionPage.css"
 import { useHistory, useParams } from "react-router-dom"
 import { setModalState } from "../../store/modal"
 import buttonOff from "../SoundModule/images/Button_Off.png"
+import QuickScene from "../QuickScene"
 
 function Scene({ scene, id, currentscene }) {
     const scenes = scene?.categories
@@ -21,6 +22,10 @@ function Scene({ scene, id, currentscene }) {
     const newCategory = () => dispatch(setModalState(`${sceneId}categoryNew`))
     const newScene = () => dispatch(setModalState(`${collectionId}-sceneNew`))
 
+    const addQuickScene = () =>{
+        dispatch(setModalState(`${scene.id}-quickSceneNew`))
+    }
+
     return (
         // <div className="ScenePageBody"> This div i up one in Categories
         <>
@@ -29,39 +34,27 @@ function Scene({ scene, id, currentscene }) {
 
             <div className="sceneContainer" style={{ width: `${window.innerWidth - 122}px` }} id={id}>
 
-                         {/* <div className="quickSceneContainer">
+                <div className="quickSceneContainer">
 
                     <div className="quickSceneComponent">
                         <div className="quickSceneTitle">Stop All</div>
                         <img src={buttonOff} className="quickScenePic"></img>
                     </div>
 
-                    <div className="quickSceneComponent">
-                        <div className="quickSceneTitle">QuickScene 2</div>
-                        <img src={buttonOff} className="quickScenePic"></img>
+                    {scene.quickscenes.map(scene =>
+                        <QuickScene scene={scene} key={scene.id} />
+                    )}
+                    {editMode &&
+                    <div onClick={()=>addQuickScene()} className="quickSceneComponent hover">
+                        <img src={gear} className="quicksceneEditGear"></img>
+                        <div className="quickSceneTitle">Add QuickScene</div>
+                        {/* <img src={buttonOff} className="quickScenePic"></img> */}
                     </div>
-
-                    <div className="quickSceneComponent">
-                        <div className="quickSceneTitle">QuickScene 3</div>
-                        <img src={buttonOff} className="quickScenePic"></img>
-                    </div>
-
-                    <div className="quickSceneComponent">
-                        <div className="quickSceneTitle">QuickScene 4</div>
-                        <img src={buttonOff} className="quickScenePic"></img>
-                    </div>
-                    <div className="quickSceneComponent">
-                        <div className="quickSceneTitle">QuickScene 5</div>
-                        <img src={buttonOff} className="quickScenePic"></img>
-                    </div>
-                    <div className="quickSceneComponent">
-                        <div className="quickSceneTitle">QuickScene 6</div>
-                        <img src={buttonOff} className="quickScenePic"></img>
-                    </div>
+                    }
 
 
 
-                </div> */}
+                </div>
 
 
 

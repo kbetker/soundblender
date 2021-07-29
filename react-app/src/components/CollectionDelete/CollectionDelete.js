@@ -14,7 +14,6 @@ function CollectionDelete({currentCollectionId}) {
     const redirect = useSelector(state => state.redirectPage.page)
     const collections = useSelector(state => state.collection.collection.collection)
     const collectionToEdit = collections.find(el => el.id === currentCollectionId)
-    // console.log(collectionToEdit.scenes, "<==============")
 
     const goHome = () => {
         let theForm = document.getElementById("theForm")

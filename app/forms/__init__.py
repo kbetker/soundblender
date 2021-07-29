@@ -4,3 +4,4 @@ from .sound_form import NewSound
 from .category_form import NewCategory
 from .scene_form import NewScene
 from .collection_form import NewCollection
+from .quickscene_form import NewQuickScene
