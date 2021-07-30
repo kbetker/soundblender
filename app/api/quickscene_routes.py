@@ -59,14 +59,44 @@ def addSoundRelation(quicksceneId, soundId):
 
 
 
-@quickscene_routes.route('/<int:qsId>/<int:soundId>/delete', methods=["DELETE"])
+# @quickscene_routes.route('/<int:qsId>/<int:soundId>/delete', methods=["DELETE"])
+# # @login_required
+# def deleteQsRelation(qsId, soundId):
+#     sound = Sound.query.get(soundId)
+#     quickscene = QuickScene.query.get(qsId)
+#     quickscene.sounds.remove(sound)
+#     db.session.commit()
+#     return  {"Removed?": "Maybe??"}
+
+
+@quickscene_routes.route('/<int:qsId>/delete', methods=["DELETE"])
 # @login_required
-def deleteQsRelation(qsId, soundId):
-    sound = Sound.query.get(soundId)
-    quickscene = QuickScene.query.get(qsId)
-    quickscene.sounds.remove(sound)
+def deleteQsRelation(qsId):
+    quickScene = QuickScene.query.get(qsId)
+    sounds = [s.id for s in quickScene.sounds]
+    for sound in sounds:
+        quickScene.sounds.remove(Sound.query.get(sound))
     db.session.commit()
-    return  {"Removed?": "Maybe??"}
+    QuickScene.query.filter(QuickScene.id == qsId).delete()
+    db.session.commit()
+    return  {"category": "deleted"}
+
+
+
+
+
+
+
+
+
+
+@quickscene_routes.route('/<int:qsId>/delete', methods=["DELETE"])
+@login_required
+def deleteQuickScene(qsId):
+    QuickScene.query.filter(QuickScene.id == qsId).delete()
+    db.session.commit()
+    return  {"category": "deleted"}
+
 
 
 @quickscene_routes.route("/<int:qsId>/edit", methods=["PUT"])

@@ -27,21 +27,21 @@ export const deleteQuickScene = (data) => ({
 
 
 
-export const deleteQuickSceneFunc = (catId) => async (dispatch) => {
-    // const response = await fetch(`/api/categories/${catId}/delete`, {method: "DELETE"});
-    // const data = await response.json();
-    // dispatch(deleteQuickScene(data))
-    // return data;
+export const deleteQuickSceneFunc = (qsId, soundsArray) => async (dispatch) => {
+    const response = await fetch(`/api/quickscenes/${qsId}/delete`, {method: "DELETE"});
+    const data = await response.json();
+    dispatch(deleteQuickScene(data))
+    return data
 }
 
 
 
-export const getQuickSceneFunc = (catId) => async (dispatch) => {
-    // const response = await fetch(`/api/categories/${catId}`);
-    // const data = await response.json();
-    // dispatch(getQuickScene(data))
-    // return data;
-}
+// export const getQuickSceneFunc = (catId) => async (dispatch) => {
+//     // const response = await fetch(`/api/categories/${catId}`);
+//     // const data = await response.json();
+//     // dispatch(getQuickScene(data))
+//     // return data;
+// }
 
 export const editQuicksceneFunc = (formData, qsId, soundArray, oldSoundArray) => async (dispatch) => {
     console.log(`FormData:${formData}, qsId:${qsId}, soundARRAY:${soundArray}, oldSOundArray:${oldSoundArray}`)

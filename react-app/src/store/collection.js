@@ -33,9 +33,27 @@ export const deleteCollection = (collection) => ({
     payload: collection
 })
 
+// export const deleteQuickSceneFunc = (qsId, soundsArray) => async (dispatch) => {
+//     console.log(`${qsId} <==QSID`, soundsArray, "WAAAAAAT")
+
+//     const deleteQSrelations = await Promise.all(soundsArray.map(async soundId => {
+//         const response = await fetch(`/api/quickscenes/${qsId}/${soundId}/delete`, { method: "DELETE" });
+//         return response.json();
+//     }))
+
+//     const response = await fetch(`/api/quickscenes/${qsId}/delete`, {method: "DELETE"});
+//     const data = await response.json();
+//     dispatch(deleteQuickScene(data))
+//     return [deleteQSrelations, data];
+// }
+
+
+
+
+
+
 
 export const deleteUserCollection = (collectionId, userId, scenesAray) => async (dispatch) => {
-
     // delete all categories
     const categoryDelete = await Promise.all(scenesAray.map(async scene => {
         await Promise.all(scene.categories.map(async cat => {
@@ -44,7 +62,16 @@ export const deleteUserCollection = (collectionId, userId, scenesAray) => async 
         }))
     }))
 
-    //delete all scenes
+    //delete all quickscenes
+      const quickSceneDelete = await Promise.all(scenesAray.map(async scene => {
+        await Promise.all(scene.quickscenes.map(async qs => {
+            const response = await fetch(`/api/quickscenes/${qs.id}/delete`, { method: "DELETE" });
+            return response.json();
+        }))
+    }))
+
+
+    // delete all scenes
     const sceneDelete = await Promise.all(scenesAray.map(async el => {
         const response = await fetch(`/api/scenes/${el.id}/delete`, { method: "DELETE" });
         return response.json();
@@ -57,6 +84,7 @@ export const deleteUserCollection = (collectionId, userId, scenesAray) => async 
     const collection = await response.json();
     dispatch(deleteCollection(collection))
     return [categoryDelete, sceneDelete, collection];
+    return quickSceneDelete
 }
 
 

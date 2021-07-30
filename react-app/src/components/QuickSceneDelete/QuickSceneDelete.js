@@ -20,7 +20,7 @@ function QuickSceneDelete({currentQuickscene}) {
 
     const deleteSound = (e) => {
         e.preventDefault();
-        const data = dispatch(deleteQuickSceneFunc(currentQuickscene))
+        const data = dispatch(deleteQuickSceneFunc(currentQuickscene, soundsArray))
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {

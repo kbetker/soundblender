@@ -13,6 +13,8 @@ function SceneDelete(ids) {
     // const user = useSelector(state => state.session.user)
     // const redirect = useSelector(state => state.redirectPage.page)
     const [categoriesArray, setCategoriesArray] = useState()
+    const [quickSceneArray, setQuickSceneArray] = useState()
+
 
 
     const collections = useSelector(state => state.collection.collection.collection)
@@ -21,6 +23,7 @@ function SceneDelete(ids) {
         let collectionScenes = collections?.find((el) => el.id === ids.currentCollectionId)
         let sceneToEdit = collectionScenes.scenes.find((el) => el.id === ids.currentSceneId)
         setCategoriesArray(sceneToEdit.categories)
+        setQuickSceneArray(sceneToEdit.quickscenes)
     }, [])
 
 
@@ -38,7 +41,7 @@ function SceneDelete(ids) {
 
     const deleteScene = (e) => {
         e.preventDefault();
-        const data = dispatch(deleteUserScene(ids.currentSceneId, categoriesArray))
+        const data = dispatch(deleteUserScene(ids.currentSceneId, categoriesArray, quickSceneArray))
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {
