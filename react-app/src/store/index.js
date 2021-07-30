@@ -9,6 +9,7 @@ import redirectPage from "./redirect";
 import category from "./category";
 import scene from "./scene"
 import quickscene from "./quickscene"
+import quicksceneSounds from "./quickscene_sounds";
 import modalReducer from "./modal";
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     scene,
     modal: modalReducer,
     quickscene,
+    quicksceneSounds,
 });
 
 

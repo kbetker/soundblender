@@ -4,7 +4,7 @@ import Categories from "../Categories/Categories"
 import "./Scene.css"
 import gear from "../UserPage/Gear.png"
 import "../CollectionPage/CollectionPage.css"
-import { useHistory, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { setModalState } from "../../store/modal"
 import buttonOff from "../SoundModule/images/Button_Off.png"
 import QuickScene from "../QuickScene"
@@ -14,9 +14,12 @@ function Scene({ scene, id, currentscene }) {
     const sceneId = scene?.id
     const editMode = useSelector(state => state.editMode.editMode)
     const { collectionId } = useParams()
-    // const dispatch = useDispatch()
-    const history = useHistory()
     const dispatch = useDispatch()
+    const sortedQuickScenes = scene.quickscenes.sort((soundA, soundB) => {
+        if (soundA.id < soundB.id){return -1}
+        if (soundA.id > soundB.id){return 1}
+        return 0
+    })
 
     const editScene = () => dispatch(setModalState(`${sceneId}-${collectionId}-sceneEdit`))
     const newCategory = () => dispatch(setModalState(`${sceneId}categoryNew`))
@@ -41,8 +44,8 @@ function Scene({ scene, id, currentscene }) {
                         <img src={buttonOff} className="quickScenePic"></img>
                     </div>
 
-                    {scene.quickscenes.map(scene =>
-                        <QuickScene scene={scene} key={scene.id} />
+                    {sortedQuickScenes.map(quickScene =>
+                        <QuickScene quickScene={quickScene} scene={scene} key={`${quickScene.id}-QuickScene`} />
                     )}
                     {editMode &&
                     <div onClick={()=>addQuickScene()} className="quickSceneComponent hover">

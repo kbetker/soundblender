@@ -59,6 +59,31 @@ def addSoundRelation(quicksceneId, soundId):
 
 
 
+@quickscene_routes.route('/<int:qsId>/<int:soundId>/delete', methods=["DELETE"])
+# @login_required
+def deleteQsRelation(qsId, soundId):
+    sound = Sound.query.get(soundId)
+    quickscene = QuickScene.query.get(qsId)
+    quickscene.sounds.remove(sound)
+    db.session.commit()
+    return  {"Removed?": "Maybe??"}
+
+
+@quickscene_routes.route("/<int:qsId>/edit", methods=["PUT"])
+# @login_required
+def edit_category(qsId):
+
+    form = NewQuickScene()
+    data = form.data
+
+    quicksceneToEdit = QuickScene.query.filter(QuickScene.id == qsId).first()
+    quicksceneToEdit.name=data['name']
+
+    db.session.commit()
+    return {"cool": "Beings"}
+
+
+
 
 
 
@@ -84,11 +109,12 @@ def addSoundRelation(quicksceneId, soundId):
 #     return  {"collection": [collection.to_dict() for collection in allCollections ]}
 
 
-@quickscene_routes.route('/<int:collectionId>/<int:userId>/delete', methods=["DELETE"])
-# @login_required
-def deleteuserCollection(collectionId, userId):
-    Collection.query.filter(Collection.id == collectionId).delete()
-    db.session.commit()
-    allCollections = Collection.query.filter(Collection.owner_id == userId)
-    return  {"collection": [collection.to_dict() for collection in allCollections ]}
-    # return  {"collection": "deleted"}
+
+
+# @quickscene_routes.route('/<int:collectionId>/<int:userId>/delete', methods=["DELETE"])
+# # @login_required
+# def deleteuserCollection(collectionId, userId):
+#     Collection.query.filter(Collection.id == collectionId).delete()
+#     db.session.commit()
+#     allCollections = Collection.query.filter(Collection.owner_id == userId)
+#     return  {"collection": [collection.to_dict() for collection in allCollections ]}

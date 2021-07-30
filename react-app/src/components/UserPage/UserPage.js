@@ -74,9 +74,9 @@ function UserPage() {
 
     const sounds = useSelector(state => state.newSound.sounds)
     const user = useSelector(state => state.session)
-    const sortedSounds = sounds?.sounds?.sort(function(a, b){
-        if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
-        if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+    const sortedSounds = sounds?.sounds?.sort((soundA, soundB) => {
+        if (soundA.name.toLowerCase() < soundB.name.toLowerCase()){return -1}
+        if (soundA.name.toLowerCase() > soundB.name.toLowerCase()){return 1}
         return 0
     })
 

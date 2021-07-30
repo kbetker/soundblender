@@ -30,6 +30,8 @@ import SceneNew from "../SceneNew/SceneNew";
 import SceneEdit from "../SceneEdit"
 import SceneDelete from "../SceneDelete"
 import QuickSceneNew from "../QuickSceneNew/QuickSceneNew";
+import QuickSceneEdit from "../QuickSceneEdit";
+import QuickSceneDelete from "../QuickSceneDelete";
 
 import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import homepageLogo from "../HomePage/homepageLogo.gif"
@@ -91,6 +93,7 @@ function CollectionPage() {
         if (a.id > b.id) { return 1 }
         return 0
     })
+
     const sceneLength = sortedScenes?.length
     const editMode = useSelector(state => state.editMode.editMode)
 
@@ -169,9 +172,19 @@ function CollectionPage() {
            return theSound;
     }
 
-    if(sortedScenes){
-        getAllSounds()
+
+    function getCurrentQS(){
+        let sceneId = getIdAt0()
+        let quickSceneId = getIdAt1()
+        let currentScene = sortedScenes.find(scene => scene.id === sceneId)
+        let currentQuickSCene = currentScene.quickscenes.find((qs) => qs.id === quickSceneId)
+        // console.log(currentQuickSCene, "CURRENT QUICKSCENE <================")
+        return currentQuickSCene
     }
+
+    // if(sortedScenes){
+    //     getAllSounds()
+    // }
 
     return (
         <>
@@ -190,6 +203,9 @@ function CollectionPage() {
             {modal.endsWith("sceneDelete") && <SceneDelete currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
 
             {modal.endsWith("quickSceneNew") && <QuickSceneNew currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} />}
+            {modal.endsWith("quickSceneEdit") && <QuickSceneEdit currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} currentQuickscene={getCurrentQS()}/>}
+            {modal.endsWith("quickSceneDelete") && <QuickSceneDelete currentQuickscene={getIdAt0()}/>}
+
 
 
 
