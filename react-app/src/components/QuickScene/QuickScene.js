@@ -1,11 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "../CollectionPage/CollectionPage.css"
 import { setModalState } from "../../store/modal"
 import buttonOff from "../SoundModule/images/Button_Off.png"
 import gear from "../UserPage/Gear.png"
-import { setEditMode } from "../../store/editMode"
-import { editQuickscene } from "../../store/quickscene"
+import { setQuickSceneButton } from "../../store/quickSceneButton"
 
 
 
@@ -14,12 +13,23 @@ import { editQuickscene } from "../../store/quickscene"
 
 function QuickScene( props ) {
     const dispatch = useDispatch()
-
+    // const [soundArray, setSoundArray] = useState([])
+    const sounds = props.quickScene.sounds
     function setModalFunc(){
         dispatch(setModalState(`${props.scene.id}-${props.quickScene.id}quickSceneEdit`))
     }
 
+function qsButtonClick(){
+    let currentSoundArray = []
+    sounds.map(sound => currentSoundArray.push(sound.id))
+    // setSoundArray(currentSoundArray)
+    console.log(currentSoundArray, "<==========================")
+    dispatch(setQuickSceneButton(currentSoundArray))
+    setTimeout(() => {
+        dispatch(setQuickSceneButton(''))
+    }, 100);
 
+}
 
 
     const editMode = useSelector(state => state.editMode.editMode)
@@ -31,7 +41,7 @@ function QuickScene( props ) {
                             <img src={gear} className="quicksceneEditGear" onClick={() => setModalFunc()} draggable="false" alt=""></img>
                 }
                 <div className="quickSceneTitle">{props.quickScene.name}</div>
-                <img src={buttonOff} className="quickScenePic"></img>
+                <img src={buttonOff} onClick={() => qsButtonClick()} className="quickScenePic"></img>
             </div>
         </>
     )
