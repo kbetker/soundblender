@@ -112,15 +112,17 @@
 }
 .soundsForQuickScene{
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: normal;
     display: inline-block;
-    border: 1px solid grey;
+    border: 2px solid grey;
     margin: 3px;
     padding: 5px;
     border-radius: 5px;
     color: white;
     background-color: rgb(33, 32, 32);
     cursor: pointer;
+    box-sizing: border-box;
     /* transition: all 0.2s linear; */
 }
 
@@ -129,10 +131,16 @@
     margin: 5px
 }
 
-.soundsForQuickScene:hover, .soundQS_Clicked{
-    background-color: rgb(165, 165, 165);
+.soundsForQuickScene:hover{
+    background-color: rgb(184, 184, 184);
     color: black;
 }
+.soundQS_Clicked{
+    background-color: rgb(143, 143, 143);
+    color: black;
+    border: 2px solid rgb(0, 255, 0);
+}
+
 .soundsForQuickScene:active{
     background-color: rgb(116, 116, 116);
 }

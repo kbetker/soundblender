@@ -154,26 +154,38 @@ function CollectionPage() {
     //     }
     // }, [modal])
 
-    function getAllSounds(){
+    function getAllSounds() {
         let theSound = {}
+        let sceneId = getIdAt0()
+        let currentScene = sortedScenes.find(scene => scene.id === sceneId)
+        let cats = currentScene.categories
 
-        sortedScenes.map((collection) => {
-            for(let i = 0; i < collection.categories.length; i++){
-                let categories = collection.categories[i]
-                for(let j = 0; j < categories.sounds.length; j++){
-                    let soundName = categories.sounds[j].name;
-                    let soundId = categories.sounds[j].id
-                        if(!(soundName in theSound)){
-                            theSound[soundName] = soundId
-                        }
-                    }
+        cats.map(category => {
+            for (let i = 0; i < category.sounds.length; i++) {
+                let soundName = category.sounds[i].name
+                let soundId = category.sounds[i].id
+                if (!(soundName in theSound)) {
+                    theSound[soundName] = soundId
                 }
-            })
-           return theSound;
+            }
+        })
+        // sortedScenes.map((collection) => {
+        //     for(let i = 0; i < collection.categories.length; i++){
+        //         let categories = collection.categories[i]
+        //         for(let j = 0; j < categories.sounds.length; j++){
+        //             let soundName = categories.sounds[j].name;
+        //             let soundId = categories.sounds[j].id
+        //                 if(!(soundName in theSound)){
+        //                     theSound[soundName] = soundId
+        //                 }
+        //             }
+        //         }
+        //     })
+        return theSound;
     }
 
 
-    function getCurrentQS(){
+    function getCurrentQS() {
         let sceneId = getIdAt0()
         let quickSceneId = getIdAt1()
         let currentScene = sortedScenes.find(scene => scene.id === sceneId)
@@ -203,8 +215,8 @@ function CollectionPage() {
             {modal.endsWith("sceneDelete") && <SceneDelete currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
 
             {modal.endsWith("quickSceneNew") && <QuickSceneNew currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} />}
-            {modal.endsWith("quickSceneEdit") && <QuickSceneEdit currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} currentQuickscene={getCurrentQS()}/>}
-            {modal.endsWith("quickSceneDelete") && <QuickSceneDelete currentQuickscene={getIdAt0()}/>}
+            {modal.endsWith("quickSceneEdit") && <QuickSceneEdit currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} currentQuickscene={getCurrentQS()} />}
+            {modal.endsWith("quickSceneDelete") && <QuickSceneDelete currentQuickscene={getIdAt0()} />}
 
 
 
