@@ -1,5 +1,6 @@
 const ADD_LIGHT = "ADD_LIGHT";
 const REMOVE_LIGHT = "REMOVE_LIGHT";
+const CLEAR_LIGHTS = "CLEAR_LIGHTS"
 
 
 // action creators
@@ -13,12 +14,21 @@ export const remove_stop_light = ( stopLight ) => ({
     payload: stopLight
 })
 
+export const clear_lights = ( ) => ({
+    type: CLEAR_LIGHTS,
+
+})
+
 export const addStopLight = (stopLight) => async (dispatch) => {
     dispatch(add_stop_light(stopLight))
 }
 
 export const removeStopLight = (stopLight) => async (dispatch) => {
     dispatch(remove_stop_light(stopLight))
+}
+
+export const clearLights = () => async (dispatch) => {
+    dispatch(clear_lights())
 }
 
 
@@ -35,6 +45,8 @@ export default function stopLight(state = initialState, action) {
             let i = newObj.indexOf(action.payload)
             if(i > -1) newObj.splice(i, 1);
             return newObj
+        case CLEAR_LIGHTS:
+            return []
         default:
             return state;
     }

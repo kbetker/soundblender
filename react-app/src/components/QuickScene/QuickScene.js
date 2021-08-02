@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import "../CollectionPage/CollectionPage.css"
 import { setModalState } from "../../store/modal"
 import buttonOff from "../SoundModule/images/Button_Off.png"
+import buttonOn from "../SoundModule/images/button_press.png"
 import gear from "../UserPage/Gear.png"
 import { setQuickSceneButton } from "../../store/quickSceneButton"
 
@@ -13,6 +14,10 @@ import { setQuickSceneButton } from "../../store/quickSceneButton"
 
 function QuickScene( props ) {
     const dispatch = useDispatch()
+    const [stopLight, setStopLight] = useState(false)
+    const stopAllImg = document.getElementById(`btn-${props.quickScene.id}`)
+    if (stopAllImg) stopAllImg.addEventListener("mousedown", () => {setStopLight(true)})
+    if (stopAllImg) stopAllImg.addEventListener("mouseup", () => {setStopLight(false)})
     // const [soundArray, setSoundArray] = useState([])
     const sounds = props.quickScene.sounds
     function setModalFunc(){
@@ -30,12 +35,12 @@ function qsButtonClick(){
 
     return (
         <>
-            <div className="quickSceneComponent">
+            <div className="quickSceneComponent" id={`btn-${props.quickScene.id}`}>
                 {editMode &&
                             <img src={gear} className="quicksceneEditGear" onClick={() => setModalFunc()} draggable="false" alt=""></img>
                 }
                 <div className="quickSceneTitle">{props.quickScene.name}</div>
-                <img src={buttonOff} onClick={() => qsButtonClick()} className="quickScenePic"></img>
+                <img src={stopLight ? buttonOn : buttonOff} onClick={() => qsButtonClick()} className="quickScenePic" draggable={false}></img>
             </div>
         </>
     )

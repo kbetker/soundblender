@@ -33,7 +33,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const [redLightOn, setRedLightOn] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
     // const modal = useSelector(state => state.modal.modal)
-    // const wtf = useRef([])
     const qsButton = useSelector(state => state.qsButton.qsButton)
     const stopAllDiv = document.getElementById('quickScenePic')
 
@@ -112,17 +111,16 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
 
-
-        function fadeOut() {
-            if (btnStopping) return;
+        function fadeOut(divisor = 1) {
             if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
             if (knobPOS.current > 98) knobPOS.current = 98;
+            console.log(mySoundObj.id, "FADE OUT")
             setBtnStopping(true)
             setBtnPlaying(false)
 
 
             let fadeOutToZero = setInterval(() => {
-                knobPOS.current = knobPOS.current - (mySoundObj.fade_speed * 0.01)
+                knobPOS.current = knobPOS.current - ((mySoundObj.fade_speed * 0.01) / divisor)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
                 setVolume()
                 if (knobPOS.current <= 0) {
@@ -164,13 +162,14 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 fadeIn();
                 mySound.current.play()
                 mySound.current.loop = mySoundObj.is_looped;
+                console.log("STOP BUTTON STOP NO NODSO FDOSIF HOIDSHB OIFHDSOI FDSH FIODSHF OISDH OIHDSOI FHODSIFH SDH FIDHS IHSD: FHDS:H F:SDH :FDSHF :IHSD: HFDSIH FODS:H F:DSHF :DSH FIHDSI HF:SDH F:DSHF O:DSH F:IDHS IF:H :FHDSI FHDSH FIDSH FOH:DS HF HDOS FH:")
 
             })
         }
 
         if (stopBtn.current) {
             stopBtn.current.addEventListener("click", (e) => {
-                fadeOut();
+                fadeOut(2);
             })
         }
 
@@ -193,12 +192,11 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 fadeOut()
         }
         if (qsButton.includes("stop") && isPlaying.current) {
-            console.log("+!_!+!_!+!_!+!_!+!_!+!_!+!_!+!_!+!_!+!_!+!_!+!_!+!_!+")
             quickSceneStop()
         }
 
 
-         })
+         }) // end of fade in/out useEffect
 
 
     function addToClientX() {

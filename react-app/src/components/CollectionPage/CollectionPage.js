@@ -18,6 +18,7 @@ import { setEditMode } from "../../store/editMode"
 import { setModalState } from "../../store/modal";
 import { getUserSounds } from "../../store/sound";
 import { getUserInfo } from "../../store/userPage";
+import { clearLights } from "../../store/stopAllLights";
 
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
 import SoundDelete from "../SoundDelete";
@@ -105,6 +106,7 @@ function CollectionPage() {
 
     const goHome = () => {
         dispatch(setEditMode(false))
+        dispatch(clearLights())
         history.push(`/users/${user.id}`)
     }
 
