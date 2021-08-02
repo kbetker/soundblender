@@ -114,7 +114,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
         function fadeOut(divisor = 1) {
             if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
             if (knobPOS.current > 98) knobPOS.current = 98;
-            console.log(mySoundObj.id, "FADE OUT")
             setBtnStopping(true)
             setBtnPlaying(false)
 
@@ -162,7 +161,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 fadeIn();
                 mySound.current.play()
                 mySound.current.loop = mySoundObj.is_looped;
-                console.log("STOP BUTTON STOP NO NODSO FDOSIF HOIDSHB OIFHDSOI FDSH FIODSHF OISDH OIHDSOI FHODSIFH SDH FIDHS IHSD: FHDS:H F:SDH :FDSHF :IHSD: HFDSIH FODS:H F:DSHF :DSH FIHDSI HF:SDH F:DSHF O:DSH F:IDHS IF:H :FHDSI FHDSH FIDSH FOH:DS HF HDOS FH:")
 
             })
         }
