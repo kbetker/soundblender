@@ -22,13 +22,7 @@ function QuickScene( props ) {
 function qsButtonClick(){
     let currentSoundArray = []
     sounds.map(sound => currentSoundArray.push(sound.id))
-    // setSoundArray(currentSoundArray)
-    console.log(currentSoundArray, "<==========================")
     dispatch(setQuickSceneButton(currentSoundArray))
-    setTimeout(() => {
-        dispatch(setQuickSceneButton(''))
-    }, 100);
-
 }
 
 

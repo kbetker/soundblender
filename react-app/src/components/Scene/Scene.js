@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom"
 import { setModalState } from "../../store/modal"
 import buttonOff from "../SoundModule/images/Button_Off.png"
 import QuickScene from "../QuickScene"
+import { setQuickSceneButton } from "../../store/quickSceneButton"
 
 function Scene({ scene, id, currentscene }) {
     const scenes = scene?.categories
@@ -29,6 +30,15 @@ function Scene({ scene, id, currentscene }) {
         dispatch(setModalState(`${scene.id}-quickSceneNew`))
     }
 
+    // function qsButtonClick(){
+    //     let currentSoundArray = []
+    //     sounds.map(sound => currentSoundArray.push(sound.id))
+    //     dispatch(setQuickSceneButton("stop"))
+    // }
+    async function stopAllSounds(){
+        await dispatch(setQuickSceneButton(["stop"]))
+    }
+
     return (
         // <div className="ScenePageBody"> This div i up one in Categories
         <>
@@ -39,9 +49,9 @@ function Scene({ scene, id, currentscene }) {
 
                 <div className="quickSceneContainer">
 
-                    <div className="quickSceneComponent">
+                    <div className="quickSceneComponent" onClick={()=> stopAllSounds()}>
                         <div className="quickSceneTitle">Stop All</div>
-                        <img src={buttonOff} className="quickScenePic"></img>
+                        <img src={buttonOff} className="quickScenePic" id="quickScenePic" alt="" draggable={false}></img>
                     </div>
 
                     {sortedQuickScenes.map(quickScene =>
