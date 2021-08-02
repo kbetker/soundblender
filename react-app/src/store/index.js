@@ -12,6 +12,7 @@ import quickscene from "./quickscene"
 import quicksceneSounds from "./quickscene_sounds";
 import modalReducer from "./modal";
 import qsButton from "./quickSceneButton";
+import stopLight from "./stopAllLights";
 
 const rootReducer = combineReducers({
     session,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     quickscene,
     quicksceneSounds,
     qsButton,
+    stopLight,
 });
 
 
