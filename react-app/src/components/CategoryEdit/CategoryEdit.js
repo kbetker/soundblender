@@ -1,30 +1,18 @@
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage"
-import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import { editCategoryFunc } from "../../store/category"
-// import { getUserInfo } from "../../store/userPage";
-import "../SoundForm/Sound.css"
 import { getCategoryFunc } from "../../store/category";
-import CategoryColors from "./categoryColors";
 import { setModalState } from "../../store/modal";
-// import { getUserSounds } from "../../store/sound";
+import CategoryColors from "./categoryColors";
+import "../FauxUserPage/FauxUserPage.css"
+import "../SoundForm/Sound.css"
 
 function CategoryEdit({currentCategoryId}) {
     const dispatch = useDispatch()
-    const history = useHistory();
-    // const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
     const category = useSelector(state => state.category.category)
 
 
-    // const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(catId))
 
-
-    // const [owner_id, setId] = useState(user?.id);
-    // const [is_public, setIs_public] = useState(false);
-    // const [sound_url, setSound_url] = useState(soundToEdit?.sound_url);
     const [name, setName] = useState(category?.name);
     const [color, setColor] = useState(category?.color);
     const [arrangement, setArrangement] = useState(category?.arrangement);

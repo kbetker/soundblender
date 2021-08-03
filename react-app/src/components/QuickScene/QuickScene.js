@@ -8,10 +8,6 @@ import gear from "../UserPage/Gear.png"
 import { setQuickSceneButton } from "../../store/quickSceneButton"
 
 
-
-{/* <div onClick={()=> setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{display: 'inline-block'}}>
-</div> */}
-
 function QuickScene( props ) {
     const dispatch = useDispatch()
     const [stopLight, setStopLight] = useState(false)
@@ -40,7 +36,7 @@ function qsButtonClick(){
                             <img src={gear} className="quicksceneEditGear" onClick={() => setModalFunc()} draggable="false" alt=""></img>
                 }
                 <div className="quickSceneTitle">{props.quickScene.name}</div>
-                <img src={stopLight ? buttonOn : buttonOff} onClick={() => qsButtonClick()} className="quickScenePic" draggable={false}></img>
+                <img src={stopLight ? buttonOn : buttonOff} onClick={() => qsButtonClick()} className="quickScenePic" alt="" draggable={false}></img>
             </div>
         </>
     )

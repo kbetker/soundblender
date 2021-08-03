@@ -1,17 +1,13 @@
 import React, { useEffect } from "react"
-import FauxUserPage from "../FauxUserPage";
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import { deleteUserCollection } from "../../store/collection";
 import { setModalState } from "../../store/modal";
 import "../SoundForm/Sound.css"
 
 function CollectionDelete({currentCollectionId}) {
     const dispatch = useDispatch()
-    const { collectionId } = useParams();
-    const history = useHistory();
+
     const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
     const collections = useSelector(state => state.collection.collection.collection)
     const collectionToEdit = collections.find(el => el.id === currentCollectionId)
 
@@ -53,8 +49,6 @@ function CollectionDelete({currentCollectionId}) {
                 <label>Are you sure?</label>
                 <button type="submit" className="delete_sound_submit">Yes. Delete.</button>
             </form>
-            {/* <div className="black_backer"></div>
-            <div className="fauxUserPageContainer"><FauxUserPage></FauxUserPage></div> */}
         </div>
 
 

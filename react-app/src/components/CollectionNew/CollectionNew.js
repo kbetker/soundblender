@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react"
-// import FauxUserPage from "../FauxUserPage"
-import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
-import "../SoundForm/Sound.css"
 import { newUserCollection } from "../../store/collection";
 import { setModalState } from "../../store/modal";
-// import { getUserSounds } from "../../store/sound";
+import "../SoundForm/Sound.css"
+import "../FauxUserPage/FauxUserPage.css"
 
 function CollectionNew() {
-    // const dispatch = useDispatch()
-    // const { collectionId } = useParams();
-
-    // const history = useHistory();
-    // const redirect = useSelector(state => state.redirectPage.page)
-
     const user = useSelector(state => state.session.user)
     const [name, setName] = useState('');
     const dispatch = useDispatch()
@@ -54,7 +45,6 @@ function CollectionNew() {
         <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
                 <div className="close_new_sound" onClick={goHome}>X</div>
-
                 <label>Collection Name</label>
                 <input type="text"
                     name="name"
@@ -63,14 +53,8 @@ function CollectionNew() {
                     className="new_sound_input"
                     placeholder="Name"
                 ></input>
-
-
                 <button onClick={() => addCollection()} className="category_button">Add Collection</button>
             </div>
-
-            {/* <div className="black_backer"></div>
-            <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
-
         </div>
     )
 }

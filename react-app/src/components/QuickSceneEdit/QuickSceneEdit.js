@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import "../SoundForm/Sound.css"
 // import { newUserCollection } from "../../store/collection";
-import { deleteQuickScene, editQuicksceneFunc } from "../../store/quickscene"
+import { editQuicksceneFunc } from "../../store/quickscene"
 import { setModalState } from "../../store/modal";
 import { setQuickSceneArray } from "../../store/quickscene_sounds";
 
@@ -66,6 +66,7 @@ function QuickSceneNew( props ) {
         let newSoundObj = soundObj
         let soundEl = document.getElementById(`${id}-soundEl`)
 
+        console.log(soundEl, "<=================")
         if(!(name in newSoundObj)){
             newSoundObj[name] = id
             soundEl.classList.add("soundQS_Clicked")
@@ -77,6 +78,7 @@ function QuickSceneNew( props ) {
         setSoundObj(soundObj)
     }
 
+    // Gets all sounds associated with this QuickScene
     useEffect(()=>{
         let newSoundObj = soundObj;
         let oldSoundArry = [];
@@ -84,9 +86,11 @@ function QuickSceneNew( props ) {
 
         for(let i = 0; i < sounds.length; i++){
             let soundEl = document.getElementById(`${sounds[i].id}-soundEl`)
+                if(soundEl !== null){
                 oldSoundArry.push(sounds[i].id)
                 newSoundObj[sounds[i].name] = sounds[i].id;
                 soundEl.classList.add("soundQS_Clicked");
+            }
 
     }
 

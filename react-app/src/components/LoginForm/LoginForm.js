@@ -1,20 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
-// import HomePage from "../HomePage";
 import { setModalState } from "../../store/modal";
 
 
 const LoginForm = () => {
     const dispatch = useDispatch();
-    // const user = useSelector(state => state.session.user)
-    const modal = useSelector(state => state.modal)
+    // const modal = useSelector(state => state.modal)
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
-    // const theForm = useRef()
 
     const onLogin = async (e) => {
         e.preventDefault();

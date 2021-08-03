@@ -45,7 +45,6 @@ function SoundModulePreview({ mySoundObj, color }) {
         closePreview = document.querySelector('.close_soundPreview')
     })
 
-
     useEffect(() => {
         function fadeIn() {
             if (isPlaying.current) return;
@@ -71,7 +70,7 @@ function SoundModulePreview({ mySoundObj, color }) {
                 }
             }, 10)
 
-            closePreview.addEventListener("click", (e)=>{clearInterval(fadeInToTarget)})
+           closePreview.addEventListener("click", (e)=>{clearInterval(fadeInToTarget)});
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
                 clearInterval(fadeInToTarget)

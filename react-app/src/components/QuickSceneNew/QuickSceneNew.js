@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import "../SoundForm/Sound.css"
 // import { newUserCollection } from "../../store/collection";
 import { newQuickSceneFunc } from "../../store/quickscene"

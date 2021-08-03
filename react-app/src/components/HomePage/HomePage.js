@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import "./HomePage.css"
 import background from "./background_animation-greyscale-Black_Background.gif"
 import logoGif from "./logoAnimationGreen.gif"

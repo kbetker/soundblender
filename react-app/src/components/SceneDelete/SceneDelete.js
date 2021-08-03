@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage";
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import { deleteUserScene } from "../../store/scene";
 import { setModalState } from "../../store/modal";
 import "../SoundForm/Sound.css"
 
 function SceneDelete(ids) {
     const dispatch = useDispatch()
-    // const { sceneId } = useParams();
-    // const history = useHistory();
-    // const user = useSelector(state => state.session.user)
-    // const redirect = useSelector(state => state.redirectPage.page)
     const [categoriesArray, setCategoriesArray] = useState()
     const [quickSceneArray, setQuickSceneArray] = useState()
 
@@ -25,9 +19,6 @@ function SceneDelete(ids) {
         setCategoriesArray(sceneToEdit.categories)
         setQuickSceneArray(sceneToEdit.quickscenes)
     }, [])
-
-
-
 
 
 

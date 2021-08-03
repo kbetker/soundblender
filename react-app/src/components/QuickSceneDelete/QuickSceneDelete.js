@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
-import FauxUserPage from "../FauxUserPage"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import { deleteQuickSceneFunc } from "../../store/quickscene";
 import { setModalState } from "../../store/modal";
 import "../SoundForm/Sound.css"

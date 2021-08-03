@@ -2,7 +2,6 @@
 import './SoundModule.css';
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import sliderBackground from "./images/sliderBackground.png"
 import slider_GreyMiddle from "./images/slider_GreyMiddle.png"
@@ -12,6 +11,7 @@ import btnPlaying_img from "./images/PlayBtn.png"
 import btnStopping_img from "./images/Both_btn.png"
 import btnStopped_img from "./images/Stop_Btn.png"
 import gear from '../UserPage/Gear.png'
+
 import { setModalState } from '../../store/modal';
 import { setQuickSceneButton } from '../../store/quickSceneButton';
 import { addStopLight } from '../../store/stopAllLights';
@@ -31,10 +31,9 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
     const [redLightOn, setRedLightOn] = useState(false)
+    // const [stopPressed, setStopPressed] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
-    // const modal = useSelector(state => state.modal.modal)
     const qsButton = useSelector(state => state.qsButton.qsButton)
-    const stopAllDiv = document.getElementById('quickScenePic')
 
     const setModalFunc = async (modalState) => {
         await dispatch(setModalState(modalState))
@@ -87,6 +86,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
             logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
             stopAllBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
+
 
 
             fadeInToTarget = setInterval(() => {
@@ -157,17 +157,18 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
         if (playBtn.current) {
             playBtn.current.addEventListener("click", (e) => {
+                if(!editMode){
                 mySound.current.volume = 0
                 fadeIn();
                 mySound.current.play()
                 mySound.current.loop = mySoundObj.is_looped;
-
+            }
             })
         }
 
         if (stopBtn.current) {
             stopBtn.current.addEventListener("click", (e) => {
-                fadeOut(2);
+                if(!editMode)fadeOut(2);
             })
         }
 

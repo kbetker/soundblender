@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Categories from "../Categories/Categories"
 import "./Scene.css"
@@ -23,26 +23,31 @@ function Scene({ scene, id, currentscene }) {
     const { collectionId } = useParams()
     const dispatch = useDispatch()
     const sortedQuickScenes = scene.quickscenes.sort((soundA, soundB) => {
-        if (soundA.id < soundB.id){return -1}
-        if (soundA.id > soundB.id){return 1}
+        if (soundA.id < soundB.id) { return -1 }
+        if (soundA.id > soundB.id) { return 1 }
         return 0
     })
-
     const editScene = () => dispatch(setModalState(`${sceneId}-${collectionId}-sceneEdit`))
     const newCategory = () => dispatch(setModalState(`${sceneId}categoryNew`))
     const newScene = () => dispatch(setModalState(`${collectionId}-sceneNew`))
     const [stopLight, setStopLight] = useState(false)
     const stopAllImg = document.getElementById("quickScenePic")
-    if (stopAllImg) stopAllImg.addEventListener("mousedown", () => {setStopLight(true)})
-    if (stopAllImg) stopAllImg.addEventListener("mouseup", () => {setStopLight(false)})
+    if (stopAllImg) stopAllImg.addEventListener("mousedown", () => { setStopLight(true) })
+    if (stopAllImg) stopAllImg.addEventListener("mouseup", () => { setStopLight(false) })
 
-    const addQuickScene = () =>{
+    const addQuickScene = () => {
         dispatch(setModalState(`${scene.id}-quickSceneNew`))
     }
 
-    async function stopAllSounds(){
+    async function stopAllSounds() {
         await dispatch(setQuickSceneButton(["stop"]))
     }
+
+    // document.addEventListener('keydown', (e) => {
+    //     if(e.key === 's'){
+    //         stopAllSounds()
+    //     }
+    // })
 
     return (
         // <div className="ScenePageBody"> This div i up one in Categories
@@ -54,25 +59,26 @@ function Scene({ scene, id, currentscene }) {
 
                 <div className="quickSceneContainer">
 
-                    <div className="quickSceneComponent" onClick={()=> stopAllBtnLight.length > 0 && stopAllSounds()}>
-                        <div className="quickSceneTitle">Stop All</div>
-                        <img src={
-                            stopAllBtnLight.length > 0 && !stopLight ? buttonOn
-                            : stopAllBtnLight.length > 0 && stopLight ? buttonPress
-                            : buttonOff
+                    {id === "1" &&
+                        <div className="quickSceneComponent" onClick={() => stopAllBtnLight.length > 0 && stopAllSounds()}>
+                            <div className="quickSceneTitle">Stop All</div>
+                            <img src={
+                                stopAllBtnLight.length > 0 && !stopLight ? buttonOn
+                                    : stopAllBtnLight.length > 0 && stopLight ? buttonPress
+                                        : buttonOff
 
                             } className="quickScenePic" id="quickScenePic" alt="" draggable={false}></img>
-                    </div>
-
+                        </div>
+                    }
                     {sortedQuickScenes.map(quickScene =>
                         <QuickScene quickScene={quickScene} scene={scene} key={`${quickScene.id}-QuickScene`} />
                     )}
                     {editMode &&
-                    <div onClick={()=>addQuickScene()} className="quickSceneComponent hover">
-                        <img src={gear} className="quicksceneEditGear"></img>
-                        <div className="quickSceneTitle">Add QuickScene</div>
-                        {/* <img src={buttonOff} className="quickScenePic"></img> */}
-                    </div>
+                        <div onClick={() => addQuickScene()} className="quickSceneComponent hover">
+                            <img src={gear} className="quicksceneEditGear" alt=""></img>
+                            <div className="quickSceneTitle">Add QuickScene</div>
+                            {/* <img src={buttonOff} className="quickScenePic"></img> */}
+                        </div>
                     }
 
 

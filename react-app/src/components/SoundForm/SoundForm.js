@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
 import "./Sound.css"
-import FauxUserPage from "../FauxUserPage";
 import loading from "./loader.png"
 import { setModalState } from "../../store/modal"
 
 function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-    const history = useHistory();
 
     const [soundLoading, setSoundLoading] = useState(false);
     const [sound_url, setSound_url] = useState(null);
@@ -80,7 +77,7 @@ function SoundForm() {
 
          {soundLoading &&
          <div className="black_fronter_backer">
-             <img src={loading} className="loading"></img>
+             <img src={loading} className="loading" alt="loading"></img>
          </div>}
 
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">

@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Link } from "react-router-dom";
-// import { getUserSounds } from "../../store/sound";
+import { useParams, useHistory } from "react-router-dom";
 import "../UserPage/userPage.css"
 import "../Scene/Scene.css"
 import "./CollectionPage.css"
-import buttonOff from "../SoundModule/images/Button_Off.png"
-// import collection_img from "../UserPage/collectionIcon.png"
-// import new_collection_img from "../UserPage/newCollectionIcon.png"
-// import mySoundPlay from "../UserPage/mySoundPlay.png"
+
 import { logout } from "../../store/session";
 import { setRedirectFunc } from "../../store/redirect";
 import { getAllUserCollection } from "../../store/collection";
-import { getUserCollection } from "../../store/collection"
 import { setEditMode } from "../../store/editMode"
 import { setModalState } from "../../store/modal";
 import { getUserSounds } from "../../store/sound";
@@ -150,11 +145,6 @@ function CollectionPage() {
         changeSceneFunc("none")
     })
 
-    // useEffect(()=>{
-    //     if(modal !== ''){
-    //             changeSceneFunc(modal)
-    //     }
-    // }, [modal])
 
     function getAllSounds() {
         let theSound = {}
@@ -171,18 +161,6 @@ function CollectionPage() {
                 }
             }
         })
-        // sortedScenes.map((collection) => {
-        //     for(let i = 0; i < collection.categories.length; i++){
-        //         let categories = collection.categories[i]
-        //         for(let j = 0; j < categories.sounds.length; j++){
-        //             let soundName = categories.sounds[j].name;
-        //             let soundId = categories.sounds[j].id
-        //                 if(!(soundName in theSound)){
-        //                     theSound[soundName] = soundId
-        //                 }
-        //             }
-        //         }
-        //     })
         return theSound;
     }
 

@@ -10,7 +10,7 @@ function SceneEdit(ids) {
     const dispatch = useDispatch()
     const collections = useSelector(state => state.collection.collection.collection)
     const [name, setName] = useState('')
-    const [theme, setTheme] = useState('')
+    // const [theme, setTheme] = useState('')
     const [collection_id, setCollection_id] = useState(0)
 
     useEffect(()=>{
@@ -18,7 +18,7 @@ function SceneEdit(ids) {
         let sceneToEdit = collectionScenes.scenes.find((el) => el.id === ids.currentSceneId)
         // console.log(sceneToEdit.categories, "WTFWTFWTFWTFWTF")
         setName(sceneToEdit?.name)
-        setTheme(sceneToEdit?.theme)
+        // setTheme(sceneToEdit?.theme)
         setCollection_id(ids.currentCollectionId)
     }, [])
 

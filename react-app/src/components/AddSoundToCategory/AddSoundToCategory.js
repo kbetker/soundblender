@@ -1,18 +1,13 @@
 
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage"
 import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
 import { getUserSounds } from "../../store/sound";
 import { setModalState } from "../../store/modal";
 
 function AddSoundToCategory({currentCategoryId}) {
     const dispatch = useDispatch()
-    // const { catId }  = useParams();
-    const history = useHistory();
-    const redirect = useSelector(state => state.redirectPage.page)
     const allSounds = useSelector(state => state.newSound.sounds)
     const sounds = allSounds?.sounds.sort(function(a, b){
         if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
