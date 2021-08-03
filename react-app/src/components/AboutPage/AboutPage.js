@@ -36,8 +36,8 @@ function HomePage(){
                     SoundBlender is a customizable soundboard where users can create audio environments to enhance roleplaying games, murder mysteries, or any other type of interactive story telling. Be sure to check out my GitHub link below for more information on this site, or LinkedIn for more information about me!
                     </div>
                     <div className="imageContainer">
-                        <a href="https://github.com/kbetker/soundblender" target="_blank"><img src={github} className="linkedImages"></img></a>
-                        <a href="https://www.linkedin.com/in/kevin-betker-878505128/" target="_blank"><img src={linkedin} className="linkedImages"></img></a>
+                        <a href="https://github.com/kbetker/soundblender" rel="noopener noreferrer" target="_blank"><img src={github} className="linkedImages" alt="GitHub Logo"></img></a>
+                        <a href="https://www.linkedin.com/in/kevin-betker-878505128/" rel="noopener noreferrer" target="_blank"><img src={linkedin} className="linkedImages" alt="LinkedIn Logo"></img></a>
                     </div>
                     <div className="about-links-container">
                         {user ?

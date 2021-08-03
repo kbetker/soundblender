@@ -8,7 +8,11 @@ import editMode from "./editMode";
 import redirectPage from "./redirect";
 import category from "./category";
 import scene from "./scene"
+import quickscene from "./quickscene"
+import quicksceneSounds from "./quickscene_sounds";
 import modalReducer from "./modal";
+import qsButton from "./quickSceneButton";
+import stopLight from "./stopAllLights";
 
 const rootReducer = combineReducers({
     session,
@@ -19,7 +23,11 @@ const rootReducer = combineReducers({
     redirectPage,
     category,
     scene,
-    modal: modalReducer
+    modal: modalReducer,
+    quickscene,
+    quicksceneSounds,
+    qsButton,
+    stopLight,
 });
 
 

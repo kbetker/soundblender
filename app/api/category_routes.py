@@ -23,7 +23,7 @@ def addSoundRelation(catId, soundId):
     category = Category.query.get(catId)
     category.sounds.append(sound)
     db.session.commit()
-    return  {"Removed?": "Maybe??"}
+    return  {"This": "Works"}
 
 
 

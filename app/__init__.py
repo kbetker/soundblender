@@ -12,6 +12,7 @@ from .api.auth_routes import auth_routes
 from .api.collection_routes import collection_routes
 from .api.category_routes import categories_routes
 from .api.scene_routes import scene_routes
+from .api.quickscene_routes import quickscene_routes
 
 from .seeds import seed_commands
 
@@ -39,6 +40,7 @@ app.register_blueprint(sound_routes, url_prefix='/api/sound')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(collection_routes, url_prefix='/api/collections')
+app.register_blueprint(quickscene_routes, url_prefix='/api/quickscenes')
 db.init_app(app)
 Migrate(app, db)
 

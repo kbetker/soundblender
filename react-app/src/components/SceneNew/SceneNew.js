@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage"
+import { useDispatch } from "react-redux"
 import "../FauxUserPage/FauxUserPage.css"
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import "../SoundForm/Sound.css"
 import { addNewScene } from "../../store/scene";
 import { setModalState } from "../../store/modal";
 
-// import { getUserSounds } from "../../store/sound";
 
 function SceneNew({currentCollectionId}) {
-    // const history = useHistory();
-    // const redirect = useSelector(state => state.redirectPage.page)
+
     const [name, setName] = useState('');
     const dispatch = useDispatch()
 

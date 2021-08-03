@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { setModalState } from "../../store/modal";
-import FauxUserPage from "../FauxUserPage";
 import "../SoundDelete/SoundDelete.css"
 
 
 const CategorySound = (ids) => {
-    const history = useHistory();
-    // console.log(ids.currentCategoryId, ids.currentSoundId, "<===================================")
-    // const {catId, soundId} = useParams();
-    const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
     const dispatch = useDispatch()
 
     const removeSound = async (e) => {
@@ -26,7 +19,6 @@ const CategorySound = (ids) => {
             setTimeout(() => {
                 dispatch(setModalState(''))
             }, 500);
-
         }
     };
 

@@ -2,7 +2,6 @@
 import './SoundModule.css';
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import sliderBackground from "./images/sliderBackground.png"
 import slider_GreyMiddle from "./images/slider_GreyMiddle.png"
@@ -12,8 +11,11 @@ import btnPlaying_img from "./images/PlayBtn.png"
 import btnStopping_img from "./images/Both_btn.png"
 import btnStopped_img from "./images/Stop_Btn.png"
 import gear from '../UserPage/Gear.png'
-import { setModalState } from '../../store/modal';
 
+import { setModalState } from '../../store/modal';
+import { setQuickSceneButton } from '../../store/quickSceneButton';
+import { addStopLight } from '../../store/stopAllLights';
+import { removeStopLight } from '../../store/stopAllLights';
 
 function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const mySound = useRef();
@@ -29,8 +31,9 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
     const [redLightOn, setRedLightOn] = useState(false)
+    // const [stopPressed, setStopPressed] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
-    const modal = useSelector(state => state.modal.modal)
+    const qsButton = useSelector(state => state.qsButton.qsButton)
 
     const setModalFunc = async (modalState) => {
         await dispatch(setModalState(modalState))
@@ -47,12 +50,18 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     let gearBtn;
     let homeBtn;
     let logoutBtn;
+    let stopAllBtn;
 
     useEffect(() => {
         gearBtn = document.querySelector('.gears')
         homeBtn = document.querySelector('.logOut')
         logoutBtn = document.querySelector('.goHome')
+        stopAllBtn = document.querySelector(".quickSceneComponent")
     })
+
+
+    let fadeInToTarget; // this is the setInterval
+
 
 
     useEffect(() => {
@@ -65,6 +74,8 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             setBtnPlaying(true)
             isPlaying.current = true
 
+            dispatch(addStopLight(mySoundObj.id))
+
             if (!mySoundObj.is_looped) {
                 mySound.current.addEventListener('ended', (event) => {
                     fadeOut();
@@ -74,8 +85,11 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             gearBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
             homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
             logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
+            stopAllBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
 
-            let fadeInToTarget = setInterval(() => {
+
+
+            fadeInToTarget = setInterval(() => {
                 knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
                 setVolume()
@@ -83,15 +97,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                     clearInterval(fadeInToTarget)
                 }
             }, 10)
-
-            // slightly improves the gap when looping. Inspired by Laxmikant: https://stackoverflow.com/users/2034794/laxmikant-dange
-            // actually not seeing much of a difference - may mess with this later .......
-            // mySound.current.ontimeupdate = function () {
-            //     if ((mySound.current.currentTime / mySound.current.duration) > 0.9 && mySoundObj.is_looped) {
-            //         mySound.current.currentTime = 0;
-            //         mySound.current.play()
-            //     }
-            // }
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
                 clearInterval(fadeInToTarget)
@@ -106,8 +111,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
 
-        function fadeOut() {
-            if (btnStopping) return;
+        function fadeOut(divisor = 1) {
             if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
             if (knobPOS.current > 98) knobPOS.current = 98;
             setBtnStopping(true)
@@ -115,7 +119,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
             let fadeOutToZero = setInterval(() => {
-                knobPOS.current = knobPOS.current - (mySoundObj.fade_speed * 0.01)
+                knobPOS.current = knobPOS.current - ((mySoundObj.fade_speed * 0.01) / divisor)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
                 setVolume()
                 if (knobPOS.current <= 0) {
@@ -127,6 +131,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                     mySound.current.pause()
                     mySound.current.currentTime = 0;
                     isPlaying.current = false
+                    dispatch(removeStopLight(mySoundObj.id))
                 }
             }, 10)
 
@@ -152,18 +157,45 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
         if (playBtn.current) {
             playBtn.current.addEventListener("click", (e) => {
+                if(!editMode){
+                mySound.current.volume = 0
                 fadeIn();
                 mySound.current.play()
                 mySound.current.loop = mySoundObj.is_looped;
+            }
             })
         }
 
         if (stopBtn.current) {
             stopBtn.current.addEventListener("click", (e) => {
-                fadeOut();
+                if(!editMode)fadeOut(2);
             })
         }
-    })
+
+        // ===========  Handles the QuickSCene ================
+        async function quickScenePlay() {
+            await dispatch(setQuickSceneButton([]))
+            mySound.current.volume = 0
+            fadeIn()
+            mySound.current.play()
+            mySound.current.loop = mySoundObj.is_looped;
+        }
+        if (qsButton.includes(mySoundObj.id)) {
+            quickScenePlay()
+        }
+
+
+        // ===========  Handles the Stop All ================
+        async function quickSceneStop() {
+            await dispatch(setQuickSceneButton([]))
+                fadeOut()
+        }
+        if (qsButton.includes("stop") && isPlaying.current) {
+            quickSceneStop()
+        }
+
+
+         }) // end of fade in/out useEffect
 
 
     function addToClientX() {
@@ -213,10 +245,12 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             }
             theKnob.onmousedown = mouseDown;
         }
-    }, [])
+    })
 
 
-
+    // useEffect(()=>{
+    //     if(qsButton.includes(mySoundObj.id)) fadeIn();
+    // },[qsButton])
 
 
 
@@ -228,7 +262,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 <div className="title">
                     {mySoundObj.name}
                     {editMode &&
-                        <div onClick={()=> setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{display: 'inline-block'}}>
+                        <div onClick={() => setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{ display: 'inline-block' }}>
                             <img src={gear} className="soundEditGear" draggable="false" alt=""></img>
                         </div>
                     }

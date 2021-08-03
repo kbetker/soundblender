@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
-import FauxUserPage from "../FauxUserPage"
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux"
 import { deleteUserSound } from "../../store/sound";
 import "../SoundForm/Sound.css"
 import "./SoundDelete.css"
@@ -10,10 +8,7 @@ import { setModalState } from "../../store/modal";
 
 function SoundDelete({currentSoundId}) {
     const dispatch = useDispatch()
-    // const { soundId } = useParams();
-    const history = useHistory();
-    const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
+
 
     const goHome = () => {
         let theForm = document.getElementById("theForm")

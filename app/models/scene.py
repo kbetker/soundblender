@@ -16,5 +16,6 @@ class Scene(db.Model):
             "name": self.name,
             "theme": self.theme,
             "collection_id": self.collection_id,
-            "categories": [c.to_dict() for c in self.categories]
+            "categories": [c.to_dict() for c in self.categories],
+            "quickscenes": [q.to_dict() for q in self.quickscenes]
         }

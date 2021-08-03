@@ -6,13 +6,6 @@ from app.forms import NewCollection
 collection_routes = Blueprint('collections', __name__)
 
 
-# @user_routes.route('/')
-# @login_required
-# def users():
-#     users = User.query.all()
-#     return {"users": [user.to_dict() for user in users]}
-
-
 @collection_routes.route('/<int:id>')
 @login_required
 def getOneCollection(id):
@@ -23,10 +16,8 @@ def getOneCollection(id):
 @collection_routes.route('/all/<int:id>')
 @login_required
 def getAllCollections(id):
-    # collections = Collection.query.get(id)
     collections = Collection.query.filter(Collection.owner_id == id)
     return  {"collection": [collection.to_dict() for collection in collections ]}
-    # return collection.to_dict();
 
 
 
@@ -43,10 +34,8 @@ def addCollection():
         )
     db.session.add(newCollection)
     db.session.commit()
-    # print(newCollection.to_dict(), "================== wat =====================")
     allCollections = Collection.query.filter(Collection.owner_id == data['owner_id'])
     return  {"collection": [collection.to_dict() for collection in allCollections ]}
-    # return newCollection.to_dict()
 
 
 @collection_routes.route("/<int:collectionId>/edit", methods=["PUT"])

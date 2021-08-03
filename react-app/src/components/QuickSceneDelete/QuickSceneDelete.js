@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteUserScene } from "../../store/scene";
+import { deleteQuickSceneFunc } from "../../store/quickscene";
 import { setModalState } from "../../store/modal";
 import "../SoundForm/Sound.css"
+import "../SoundDelete/SoundDelete.css"
 
-function SceneDelete(ids) {
+function QuickSceneDelete({currentQuickscene}) {
+    const soundsArray = useSelector(state => state.quicksceneSounds.qsarray)
     const dispatch = useDispatch()
-    const [categoriesArray, setCategoriesArray] = useState()
-    const [quickSceneArray, setQuickSceneArray] = useState()
-
-
-
-    const collections = useSelector(state => state.collection.collection.collection)
-
-    useEffect(()=>{
-        let collectionScenes = collections?.find((el) => el.id === ids.currentCollectionId)
-        let sceneToEdit = collectionScenes.scenes.find((el) => el.id === ids.currentSceneId)
-        setCategoriesArray(sceneToEdit.categories)
-        setQuickSceneArray(sceneToEdit.quickscenes)
-    }, [])
-
-
-
     const goHome = () => {
         let theForm = document.getElementById("theForm")
         theForm.classList.remove("blurIn")
@@ -30,9 +16,9 @@ function SceneDelete(ids) {
         }, 500);
     }
 
-    const deleteScene = (e) => {
+    const deleteSound = (e) => {
         e.preventDefault();
-        const data = dispatch(deleteUserScene(ids.currentSceneId, categoriesArray, quickSceneArray))
+        const data = dispatch(deleteQuickSceneFunc(currentQuickscene, soundsArray))
         if (data.errors) { //to do - make a better error handler(all forms)
             alert(data.errors)
         } else {
@@ -47,20 +33,35 @@ function SceneDelete(ids) {
     useEffect(()=>{
         let theForm = document.getElementById("theForm")
         if (theForm){
+            let theForm = document.getElementById("theForm")
+            theForm.classList.remove("blurIn")
             setTimeout(() => {
                 theForm.classList.add("blurIn")
+
             }, 10);
+
+
+
         }
     }, [])
 
     return (
         <div className="formEffect" id="theForm">
-            <form onSubmit={(e) => deleteScene(e)} className="delete_sound_form">
+            <form onSubmit={(e) => deleteSound(e)} className="delete_sound_form">
                 <div className="close_new_sound" onClick={goHome}>X</div>
-                <label>Are you sure?</label>
+                <div>Are you sure?</div>
+                <div style={{fontSize: "16px"}}>This will remove sounds and delete this Category. However,
+               Sounds will still remain in your library</div>
                 <button type="submit" className="delete_sound_submit">Yes. Delete.</button>
             </form>
+            {/* <div className="black_backer"></div>
+            <div className="fauxUserPageContainer"><FauxUserPage></FauxUserPage></div> */}
         </div>
+
+
+
+
     )
+
 }
-export default SceneDelete
+export default QuickSceneDelete

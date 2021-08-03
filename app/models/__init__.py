@@ -5,3 +5,5 @@ from .category import Category
 from .scene import Scene
 from .sound import Sound
 from .joined_sound_cat import joined_snds_cats
+from .quickscene import QuickScene
+from .quickscene_sound import quickscene_sounds

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
-import FauxUserPage from "../FauxUserPage"
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux"
 import { deleteCategoryFunc } from "../../store/category";
 import { setModalState } from "../../store/modal";
 import "../SoundForm/Sound.css"

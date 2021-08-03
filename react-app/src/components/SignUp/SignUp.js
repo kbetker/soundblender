@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import HomePage from "../HomePage";
 import { setModalState } from "../../store/modal";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-  // const user = useSelector(state => state.session.user)
   const [username, setUsername] = useState("");
-  const modal = useSelector(state => state.modal)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");

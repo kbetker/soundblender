@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react"
-import FauxUserPage from "../FauxUserPage"
 import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
 import { editUserSound } from "../../store/sound"
 import "../SoundForm/Sound.css"
 import { setModalState } from "../../store/modal";
 
 function SoundEditForm({currentSoundId}) {
     const dispatch = useDispatch()
-    const { soundId } = useParams();
-    const history = useHistory();
     const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
     const sounds = useSelector(state => state.newSound.sounds)
     const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(currentSoundId))
 

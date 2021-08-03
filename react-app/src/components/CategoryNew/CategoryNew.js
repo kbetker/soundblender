@@ -1,23 +1,14 @@
 
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage"
 import "../FauxUserPage/FauxUserPage.css"
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux"
 import { newCategoryFunc } from "../../store/category"
-// import { getUserInfo } from "../../store/userPage";
 import "../SoundForm/Sound.css"
 import { setModalState } from "../../store/modal";
-// import { getCategoryFunc } from "../../store/category";
 import CategoryColors from "../CategoryEdit/categoryColors";
-// import { getUserSounds } from "../../store/sound";
 
 function SoundForm({currentSceneId}) {
     const dispatch = useDispatch()
-    // const { sceneId }  = useParams();
-    const history = useHistory();
-    const user = useSelector(state => state.session.user)
-    const redirect = useSelector(state => state.redirectPage.page)
     const [name, setName] = useState('');
     const [color, setColor] = useState('white');
     const [arrangement, setArrangement] = useState(0);

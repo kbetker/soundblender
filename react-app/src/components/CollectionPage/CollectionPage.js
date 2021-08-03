@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Link } from "react-router-dom";
-// import { getUserSounds } from "../../store/sound";
+import { useParams, useHistory } from "react-router-dom";
 import "../UserPage/userPage.css"
 import "../Scene/Scene.css"
 import "./CollectionPage.css"
-import buttonOff from "../SoundModule/images/Button_Off.png"
-// import collection_img from "../UserPage/collectionIcon.png"
-// import new_collection_img from "../UserPage/newCollectionIcon.png"
-// import mySoundPlay from "../UserPage/mySoundPlay.png"
+
 import { logout } from "../../store/session";
 import { setRedirectFunc } from "../../store/redirect";
 import { getAllUserCollection } from "../../store/collection";
-import { getUserCollection } from "../../store/collection"
 import { setEditMode } from "../../store/editMode"
 import { setModalState } from "../../store/modal";
 import { getUserSounds } from "../../store/sound";
 import { getUserInfo } from "../../store/userPage";
+import { clearLights } from "../../store/stopAllLights";
 
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
 import SoundDelete from "../SoundDelete";
@@ -29,6 +25,9 @@ import CategoryDelete from "../CategoryDelete"
 import SceneNew from "../SceneNew/SceneNew";
 import SceneEdit from "../SceneEdit"
 import SceneDelete from "../SceneDelete"
+import QuickSceneNew from "../QuickSceneNew/QuickSceneNew";
+import QuickSceneEdit from "../QuickSceneEdit";
+import QuickSceneDelete from "../QuickSceneDelete";
 
 import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import homepageLogo from "../HomePage/homepageLogo.gif"
@@ -58,8 +57,8 @@ function CollectionPage() {
         dispatch(getAllUserCollection(user.id))
     }, [dispatch, user.id, modal])
 
-    useEffect(()=>{
-        if(modal === "sceneFocus"){
+    useEffect(() => {
+        if (modal === "sceneFocus") {
             currentScene.current = `${sceneLength + 1}`
             dispatch(setModalState(''))
             setTimeout(() => {
@@ -84,15 +83,15 @@ function CollectionPage() {
     }
 
     const allCollections = useSelector(state => state.collection.collection)
-    const collectionToSort = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
-    const collection = collectionToSort?.scenes.sort(function(a, b){
-        if (a.id < b.id){return -1}
-        if (a.id > b.id){return 1}
+    const currentCollection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
+    const sortedScenes = currentCollection?.scenes.sort(function (a, b) {
+        if (a.id < b.id) { return -1 }
+        if (a.id > b.id) { return 1 }
         return 0
     })
-    const sceneLength = collection?.length
-    const editMode = useSelector(state => state.editMode.editMode)
 
+    const sceneLength = sortedScenes?.length
+    const editMode = useSelector(state => state.editMode.editMode)
 
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -102,6 +101,7 @@ function CollectionPage() {
 
     const goHome = () => {
         dispatch(setEditMode(false))
+        dispatch(clearLights())
         history.push(`/users/${user.id}`)
     }
 
@@ -113,13 +113,11 @@ function CollectionPage() {
     function changeSceneFunc(direction) {
 
         function changeScene() {
-
-                let currentDiv = document.getElementById(currentScene.current)
-                if (currentDiv) {
-                    currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
-                }
+            let currentDiv = document.getElementById(currentScene.current)
+            if (currentDiv) {
+                currentDiv.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
             }
-
+        }
 
         if (direction === "none") { // "none" is passed when resizing the window so the current scene will stay in view
             changeScene()
@@ -147,11 +145,38 @@ function CollectionPage() {
         changeSceneFunc("none")
     })
 
-    // useEffect(()=>{
-    //     if(modal !== ''){
-    //             changeSceneFunc(modal)
-    //     }
-    // }, [modal])
+
+    function getAllSounds() {
+        let theSound = {}
+        let sceneId = getIdAt0()
+        let currentScene = sortedScenes.find(scene => scene.id === sceneId)
+        let cats = currentScene.categories
+
+        cats.map(category => {
+            for (let i = 0; i < category.sounds.length; i++) {
+                let soundName = category.sounds[i].name
+                let soundId = category.sounds[i].id
+                if (!(soundName in theSound)) {
+                    theSound[soundName] = soundId
+                }
+            }
+        })
+        return theSound;
+    }
+
+
+    function getCurrentQS() {
+        let sceneId = getIdAt0()
+        let quickSceneId = getIdAt1()
+        let currentScene = sortedScenes.find(scene => scene.id === sceneId)
+        let currentQuickSCene = currentScene.quickscenes.find((qs) => qs.id === quickSceneId)
+        // console.log(currentQuickSCene, "CURRENT QUICKSCENE <================")
+        return currentQuickSCene
+    }
+
+    // if(sortedScenes){
+    //     getAllSounds()
+    // }
 
     return (
         <>
@@ -169,6 +194,12 @@ function CollectionPage() {
             {modal.endsWith("sceneEdit") && <SceneEdit currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
             {modal.endsWith("sceneDelete") && <SceneDelete currentSceneId={getIdAt0()} currentCollectionId={getIdAt1()} />}
 
+            {modal.endsWith("quickSceneNew") && <QuickSceneNew currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} />}
+            {modal.endsWith("quickSceneEdit") && <QuickSceneEdit currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} currentQuickscene={getCurrentQS()} />}
+            {modal.endsWith("quickSceneDelete") && <QuickSceneDelete currentQuickscene={getIdAt0()} />}
+
+
+
 
 
 
@@ -182,7 +213,7 @@ function CollectionPage() {
                         <img className="userPageLogo" src={homepageLogo} alt="" draggable="false"></img>
                         <img className="userPageLogo-anim" src={logoAnimation} alt="" draggable="false"></img>
                     </div>
-                    <div className="collectionName">{collection?.name}</div>
+                    <div className="collectionName">{currentCollection?.name}</div>
                     <div className="collectionNav">
                         <div className="logOut" onClick={onLogout}>Log Out</div>
                         <div> | </div>
@@ -210,7 +241,7 @@ function CollectionPage() {
 
 
 
-                            {collection?.length === 0 &&
+                            {sortedScenes?.length === 0 &&
                                 <div>
                                     <div className="noScenesContainer" style={{ width: `${window.innerWidth - 122}px` }} id={1}>
                                         <div className="sceneName">
@@ -228,8 +259,9 @@ function CollectionPage() {
 
 
 
-                            {collection?.map((scene, index) =>
+                            {sortedScenes?.map((scene, index) =>
                                 <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
+
                             )}
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-from app.models import Category
+# from app.models import Category
 from .db import db
 
 
@@ -17,6 +17,8 @@ class Sound(db.Model):
     is_looped = db.Column(db.Boolean)
 
     categories = db.relationship("Category", secondary ="joined_snds_cats", back_populates="sounds")
+    quickscenes = db.relationship("QuickScene", secondary ="quickscene_sounds", back_populates="sounds")
+
     owner = db.relationship("User", backref="sounds")
 
 

@@ -9,6 +9,7 @@ class Collection(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     owner = db.relationship("User", backref="collections", uselist=False)
+    scene = db.relationship("Scene", backref="collections")
 
     def to_dict(self):
         return {

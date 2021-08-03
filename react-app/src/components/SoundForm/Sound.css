@@ -1,7 +1,8 @@
-.new_sound_form,.close_new_sound,.new_sound_input,.new_sound_submit,.visible_button,.select_image{
+.new_sound_form,.close_new_sound,.new_sound_input,.new_sound_submit,.visible_button,.select_image,.quickScene_form{
     animation-name: colorChange;
     animation-iteration-count:infinite;
     margin: 10px 0;
+    animation-timing-function: linear;
 }
 #theForm{
     width: 100vw;
@@ -87,6 +88,72 @@
     /* top: 10%; */
     z-index: 100;
 }
+
+.quickScene_form{
+    display: flex;
+    flex-direction: column;
+    /* height: 500px; */
+    width: 650px;
+    justify-content: space-evenly;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: rgb(216, 216, 216);
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    /* margin: 10px auto; */
+    background-color: rgb(58, 58, 58);
+    border-radius: 8px;
+    border: 1px solid rgb(0, 255, 0);
+    animation-duration: 10s;
+    /* position:absolute; */
+    left: 40%;
+    /* top: 10%; */
+    z-index: 100;
+}
+.soundsForQuickScene{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    display: inline-block;
+    border: 2px solid grey;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(33, 32, 32);
+    cursor: pointer;
+    box-sizing: border-box;
+    /* transition: all 0.2s linear; */
+}
+
+.soundsForQuickScene:active{
+    padding: 3px;
+    margin: 5px
+}
+
+.soundsForQuickScene:hover{
+    background-color: rgb(184, 184, 184);
+    color: black;
+}
+.soundQS_Clicked{
+    background-color: rgb(143, 143, 143);
+    color: black;
+    border: 2px solid rgb(0, 255, 0);
+}
+
+.soundsForQuickScene:active{
+    background-color: rgb(116, 116, 116);
+}
+
+.quickSceneSoundContainer{
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding: 5px 0;
+    margin: 8px 0;
+}
+
+
+
 .close_new_sound{
     position: absolute;
     color: red;

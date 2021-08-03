@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from "react"
-import FauxUserPage from "../FauxUserPage"
-import "../FauxUserPage/FauxUserPage.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
-import "../SoundForm/Sound.css"
 import { editUserCollection } from "../../store/collection";
-import "../SceneEdit/SceneEdit.css"
 import { setModalState } from "../../store/modal";
-// import { getUserSounds } from "../../store/sound";
+import "../SoundForm/Sound.css"
+import "../FauxUserPage/FauxUserPage.css"
+import "../SceneEdit/SceneEdit.css"
 
 function CollectionEdit({currentCollectionId}) {
-    // const dispatch = useDispatch()
-    // const { collectionId } = useParams();
-    const history = useHistory();
+
     const dispatch = useDispatch()
-    const redirect = useSelector(state => state.redirectPage.page)
-    // const collection = useSelector(state => state.userInfo.info.collections)
     const allCollections = useSelector(state => state.collection.collection)
-    // const collection = allCollections?.collection.find((el) => el.id === parseInt(collectionId))
     const [name, setName] = useState('')
     const [owner_id, setOwner_id] = useState(0)
     useEffect(()=>{
@@ -77,7 +69,6 @@ function CollectionEdit({currentCollectionId}) {
         <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
                 <div className="close_new_sound" onClick={goHome}>X</div>
-
                 <label>Collection Name</label>
                 <input type="text"
                     name="name"
@@ -85,16 +76,9 @@ function CollectionEdit({currentCollectionId}) {
                     value={name}
                     className="new_sound_input"
                 ></input>
-
-
                 <button onClick={() => editCollection()} className="new_sound_submit">Update</button>
                 <button className="scene_delete_button" onClick={(e) => goToDelete(e)} >Delete</button>
-
             </div>
-
-            {/* <div className="black_backer"></div> */}
-            {/* <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
-
         </div>
     )
 }

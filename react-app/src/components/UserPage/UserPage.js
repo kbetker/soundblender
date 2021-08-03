@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getUserInfo } from "../../store/userPage"
 import { getUserSounds } from "../../store/sound";
 import "./userPage.css"
@@ -16,7 +16,6 @@ import { setRedirectFunc } from "../../store/redirect";
 import { setModalState } from "../../store/modal"
 import SoundForm from "../SoundForm/SoundForm";
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
-import SoundModulePreview from "../SoundModulePreview/SoundModulePreview";
 import SoundPreview from "../SoundPreview/SoundPreview";
 import SoundDelete from "../SoundDelete";
 import CollectionEdit from "../CollectionEdit"
@@ -29,7 +28,6 @@ import { getAllUserCollection } from "../../store/collection";
 
 
 function UserPage() {
-    // const [user, setUser] = useState({});
     const { id } = useParams();
     const modal = useSelector(state => state.modal.modal)
     const dispatch = useDispatch()
@@ -74,14 +72,14 @@ function UserPage() {
 
     const sounds = useSelector(state => state.newSound.sounds)
     const user = useSelector(state => state.session)
-    const sortedSounds = sounds?.sounds?.sort(function(a, b){
-        if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
-        if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+    const sortedSounds = sounds?.sounds?.sort((soundA, soundB) => {
+        if (soundA.name.toLowerCase() < soundB.name.toLowerCase()){return -1}
+        if (soundA.name.toLowerCase() > soundB.name.toLowerCase()){return 1}
         return 0
     })
 
     useEffect(()=>{
-        if(user?.user?.id != id){
+        if(user?.user?.id !== id){
             history.push(`/users/${user.user.id}`)
         }
     }, [user])

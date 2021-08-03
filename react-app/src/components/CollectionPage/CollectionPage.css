@@ -73,7 +73,13 @@
     position: relative;
 }
 
+.hover{
+    cursor: pointer;
+  }
+  .hover:hover{
+    background-color: rgb(94, 94, 94);
 
+  }
 
 @media screen and (max-width: 1125px) {
     .hideSmall{

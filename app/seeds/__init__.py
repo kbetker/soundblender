@@ -5,6 +5,7 @@ from .scenes import seed_scenes, undo_scenes
 # from .joined_snds_cats import seed_joined_snds_cats, undo_joined_snds_cats
 from .collections import seed_collections, undo_collections
 from .categories import seed_categories, undo_categories
+from .quickscenes import seed_quickscenes, undo_quickscenes
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -18,6 +19,7 @@ def seed():
     seed_scenes()
     seed_sounds()
     seed_categories()
+    seed_quickscenes()
     # seed_joined_snds_cats()
     # Add other seed functions here
 
@@ -25,6 +27,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     # undo_joined_snds_cats()
+    seed_quickscenes()
     undo_categories()
     undo_sounds()
     undo_scenes()
