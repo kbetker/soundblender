@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
 import "./Sound.css"
 import loading from "./loader.png"
@@ -8,6 +9,7 @@ import { setModalState } from "../../store/modal"
 function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const history = useHistory();
 
     const [soundLoading, setSoundLoading] = useState(false);
     const [sound_url, setSound_url] = useState(null);
@@ -77,11 +79,13 @@ function SoundForm() {
 
          {soundLoading &&
          <div className="black_fronter_backer">
-             <img src={loading} className="loading" alt="loading"></img>
+             <img src={loading} className="loading"></img>
          </div>}
 
         <form onSubmit={(e) => newSound(e)} className="new_sound_form">
             <div className="close_new_sound" onClick={goHome}>X</div>
+            <div className="formSplit">
+                <div className="formLeft">
             <label>Name Your Sound</label>
             <input type="text"
                 name="name"
@@ -126,7 +130,7 @@ function SoundForm() {
                     checked={is_looped}
                     onChange={(e) => { setIs_looped(e.target.checked) }} />
             </label>
-
+            </div>
             <div className="upload_buttons">
                 <div className="visible_button">Choose Sound</div>
                 <input
@@ -138,6 +142,10 @@ function SoundForm() {
             </div>
 
             <button type="submit" className="new_sound_submit">Submit</button>
+            <div className="formRight">
+
+            </div>
+            </div>
         </form>
         <div className="black_backer"></div>
         {/* <FauxUserPage></FauxUserPage> */}
