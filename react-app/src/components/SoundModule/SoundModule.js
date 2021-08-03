@@ -31,6 +31,9 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const [btnStopped, setBtnStopped] = useState(true)
     const isPlaying = useRef(false)
     const [redLightOn, setRedLightOn] = useState(false)
+
+    const fadeInToTarget = useRef('')
+
     // const [stopPressed, setStopPressed] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
     const qsButton = useSelector(state => state.qsButton.qsButton)
@@ -60,8 +63,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     })
 
 
-    let fadeInToTarget; // this is the setInterval
-
 
 
     useEffect(() => {
@@ -82,29 +83,29 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 })
             }
 
-            gearBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
-            homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
-            logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
-            stopAllBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget) })
+            gearBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
+            homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
+            logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
+            // stopAllBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
 
 
 
-            fadeInToTarget = setInterval(() => {
+            fadeInToTarget.current = setInterval(() => {
                 knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
                 setVolume()
                 if (knobPOS.current >= mySoundObj.target_volume * 10 || knobPOS.current >= 98) {
-                    clearInterval(fadeInToTarget)
+                    clearInterval(fadeInToTarget.current)
                 }
             }, 10)
 
             knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
-                clearInterval(fadeInToTarget)
+                clearInterval(fadeInToTarget.current)
             })
 
             if (stopBtn.current) {
                 stopBtn.current.addEventListener("click", (e) => {
-                    clearInterval(fadeInToTarget)
+                    clearInterval(fadeInToTarget.current)
                 })
             }
         }
@@ -157,12 +158,12 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
         if (playBtn.current) {
             playBtn.current.addEventListener("click", (e) => {
-                if(!editMode){
+                if(!editMode)
                 mySound.current.volume = 0
                 fadeIn();
                 mySound.current.play()
                 mySound.current.loop = mySoundObj.is_looped;
-            }
+
             })
         }
 
@@ -186,12 +187,14 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
         // ===========  Handles the Stop All ================
-        async function quickSceneStop() {
-            await dispatch(setQuickSceneButton([]))
-                fadeOut()
-        }
+        // async function quickSceneStop() {
+        //     await dispatch(setQuickSceneButton([]))
+        //         fadeOut()
+        // }
         if (qsButton.includes("stop") && isPlaying.current) {
-            quickSceneStop()
+            clearInterval(fadeInToTarget.current)
+            dispatch(setQuickSceneButton([]))
+            fadeOut()
         }
 
 

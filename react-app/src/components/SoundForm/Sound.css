@@ -102,21 +102,21 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     color: rgb(216, 216, 216);
-    padding: 20px;
+    /* padding: 20px; */
     /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); */
-    margin: 10px auto;
+    /* margin: 10px auto; */
     background-color: rgb(58, 58, 58);
     border-radius: 8px;
     /* border: 1px solid rgb(0, 255, 0); */
     animation-duration: 10s;
     /* position:absolute; */
-    left: 40%;
+    /* left: 40%; */
     /* top: 10%; */
     z-index: 100;
 }
 .formSplit{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* height: 500px; */
     justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
@@ -212,6 +212,7 @@
     cursor: pointer;
     font-weight: 600;
     animation-duration: 14s;
+    z-index: 200;
 }
 
 .new_sound_input{

@@ -19,9 +19,9 @@ function SoundForm() {
     const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
 
-    useEffect(()=>{
+    useEffect(() => {
         let theForm = document.getElementById("theForm")
-        if (theForm){
+        if (theForm) {
             theForm.classList.add("blurIn")
         }
     }, [])
@@ -45,7 +45,7 @@ function SoundForm() {
         formData.append("is_looped", is_looped);
 
         const data = await dispatch(addSound(formData))
-        if(data.errors){
+        if (data.errors) {
             setArrangement(false)
             alert(data.errors)
             setSoundLoading(false)
@@ -77,78 +77,81 @@ function SoundForm() {
     return (
         <div className="formEffect" id="theForm">
 
-         {soundLoading &&
-         <div className="black_fronter_backer">
-             <img src={loading} className="loading"></img>
-         </div>}
+            {soundLoading &&
+                <div className="black_fronter_backer">
+                    <img src={loading} className="loading"></img>
+                </div>}
 
-        <form onSubmit={(e) => newSound(e)} className="new_sound_form">
-            <div className="close_new_sound" onClick={goHome}>X</div>
-            <div className="formSplit">
-                <div className="formLeft">
-            <label>Name Your Sound</label>
-            <input type="text"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                className="new_sound_input"
-            ></input>
-            <label>Target Volume <span className="note">( 0 - 10 )</span></label>
-            <input
-                type="number"
-                name="Volume"
-                onChange={(e) => setTarget_volume(e.target.value)}
-                value={target_volume}
-                className="new_sound_input"
-            ></input>
-            <label>Fade In/Out
-                {/* <span className="note">(in seconds)</span> */}
-            </label>
-            <input
-                type="number"
-                name="username"
-                onChange={(e) => setFade_speed(e.target.value)}
-                value={fade_speed}
-                placeholder="User Name"
-                className="new_sound_input"
-            ></input>
+            <form onSubmit={(e) => newSound(e)} className="new_sound_form">
+                <div className="close_new_sound" onClick={goHome}>X</div>
+                <div className="formSplit">
+                    <div className="formLeft">
+                        <label>Name Your Sound</label>
+                        <input type="text"
+                            name="name"
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            className="new_sound_input"
+                        ></input>
+                        <label>Target Volume <span className="note">( 0 - 10 )</span></label>
+                        <input
+                            type="number"
+                            name="Volume"
+                            onChange={(e) => setTarget_volume(e.target.value)}
+                            value={target_volume}
+                            className="new_sound_input"
+                        ></input>
+                        <label>Fade In/Out
+                            {/* <span className="note">(in seconds)</span> */}
+                        </label>
+                        <input
+                            type="number"
+                            name="username"
+                            onChange={(e) => setFade_speed(e.target.value)}
+                            value={fade_speed}
+                            placeholder="User Name"
+                            className="new_sound_input"
+                        ></input>
 
-            <label>Arrangement</label>
-            <input
-                type="number"
-                name="username"
-                onChange={(e) => setArrangement(e.target.value)}
-                value={arrangement}
-                className="new_sound_input"
-            ></input>
+                        <label>Arrangement</label>
+                        <input
+                            type="number"
+                            name="username"
+                            onChange={(e) => setArrangement(e.target.value)}
+                            value={arrangement}
+                            className="new_sound_input"
+                        ></input>
 
-            <label>
-                Looped?:
-                <input
-                    name="isGoing"
-                    type="checkbox"
-                    checked={is_looped}
-                    onChange={(e) => { setIs_looped(e.target.checked) }} />
-            </label>
-            </div>
-            <div className="upload_buttons">
-                <div className="visible_button">Choose Sound</div>
-                <input
-                    type="file"
-                    accept="audio/*"
-                    onChange={updateImage}
-                    className="select_image"
-                />
-            </div>
+                        <label>
+                            Looped?:
+                            <input
+                                name="isGoing"
+                                type="checkbox"
+                                checked={is_looped}
+                                onChange={(e) => { setIs_looped(e.target.checked) }} />
+                        </label>
+                    </div>
+                    <div className="upload_buttons">
+                        <div className="visible_button">Choose Sound</div>
+                        <input
+                            type="file"
+                            accept="audio/*"
+                            onChange={updateImage}
+                            className="select_image"
+                        />
+                    </div>
 
-            <button type="submit" className="new_sound_submit">Submit</button>
-            <div className="formRight">
+                    <button type="submit" className="new_sound_submit">Submit</button>
 
-            </div>
-            </div>
-        </form>
-        <div className="black_backer"></div>
-        {/* <FauxUserPage></FauxUserPage> */}
+                    <div className="formLeft">
+                        wat
+                    </div>
+
+
+                </div>
+            </form>
+            <div className="black_backer"></div>
+            {/* <FauxUserPage></FauxUserPage> */}
 
         </div>
     )
