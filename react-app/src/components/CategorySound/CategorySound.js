@@ -54,7 +54,7 @@ const CategorySound = (ids) => {
 
     return (
         <div className="formEffect" id="theForm">
-            <div className="new_sound_form" style={{top: "225px"}}>
+            <div className="standard_form" style={{top: "225px"}}>
                 {/* <div>  //to-do beetter error hanlding
         {errors.map((error) => (
           <div>{error}</div>

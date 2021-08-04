@@ -27,13 +27,13 @@ function qsButtonClick(){
 }
 
 //Key Bind Function
-// useEffect(() => {
-//     document.addEventListener('keydown', (e) => {
-//         if(e.key === "l") {
-//             qsButtonClick()
-//         }
-//     })
-// }, [])
+useEffect(() => {
+    document.addEventListener('keydown', (e) => {
+        if(e.key === "l") {
+            qsButtonClick()
+        }
+    })
+}, [])
 
     const editMode = useSelector(state => state.editMode.editMode)
 

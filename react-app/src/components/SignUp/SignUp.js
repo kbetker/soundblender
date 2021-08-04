@@ -63,7 +63,7 @@ const SignUpForm = () => {
 
   return (
     <div className="formEffect" id="theForm">
-      <form onSubmit={onSignUp} className="new_sound_form">
+      <form onSubmit={onSignUp} className="standard_form">
         <div className="close_new_sound" onClick={goHome}>X</div>
         <div className="formTitle">Sign Up</div>
         {errors && errors.map((err, i) => <div className="logInErrors">{err}</div>)}

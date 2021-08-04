@@ -1,4 +1,4 @@
-.new_sound_form,.close_new_sound,.new_sound_input,.new_sound_submit,.visible_button,.select_image,.quickScene_form{
+.standard_form,.new_sound_form,.close_new_sound,.new_sound_input,.new_sound_submit,.visible_button,.select_image,.quickScene_form{
     animation-name: colorChange;
     animation-iteration-count:infinite;
     margin: 10px 0;
@@ -71,10 +71,10 @@
 
 }
 
-/* .new_sound_form{
+.standard_form{
     display: flex;
     flex-direction: column;
-    width: 610px;
+    width: 300px;
     justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
@@ -88,7 +88,7 @@
     animation-duration: 10s;
     left: 40%;
     z-index: 100;
-} */
+}
 
 /* position:absolute; */
 /* height: 500px; */
@@ -109,7 +109,7 @@
     /* padding: 20px; */
     /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); */
     /* margin: 10px auto; */
-    background-color: rgb(58, 58, 58);
+    /* background-color: rgb(58, 58, 58); */
     border-radius: 8px;
     /* border: 1px solid rgb(0, 255, 0); */
     animation-duration: 10s;
@@ -129,13 +129,40 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
     margin: 10px auto;
     background-color: rgb(58, 58, 58);
-    border-radius: 8px;
+    /* border-radius: 8px; */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     border: 1px solid rgb(0, 255, 0);
     animation-duration: 10s;
     /* position:absolute; */
     left: 40%;
     /* top: 10%; */
     z-index: 100;
+}
+#currentMidiDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 66px;
+
+    /* background-color: red; */
+}
+
+.midiInputText{
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.midiInputContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(89, 89, 89);
+    height: 150px;
+    border: 1px solid green;
+
 }
 .formSide{
     width: 300px;
@@ -244,6 +271,8 @@
     background-color: rgb(104, 103, 103);
     color: rgb(216, 216, 216);
     border: 1px solid rgb(0, 255, 0);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     animation-duration: 6s;
     z-index: 9000;
 }

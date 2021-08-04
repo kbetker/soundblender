@@ -19,30 +19,24 @@ function SoundForm() {
     const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
     const [is_midi, setIs_midi] = useState(false)
+    const [play_stop_button, setPlay_stop_button] = useState(false)
+    const [volume_control, setVolume_control] = useState(false)
+
     const [currentMidiInput, setCurrentMidiInput] = useState('0')
-    // const currentMidiDiv = useRef("")
-    let wtf = "wtf dude djflkda flkdans l"
 
     navigator.requestMIDIAccess().then(access => {
         const devicesInput = access.inputs.values();
-        const deveicesOutput = access.outputs.values();
-        for(let input of devicesInput){
+        // const deveicesOutput = access.outputs.values();
+        for (let input of devicesInput) {
             input.onmidimessage = onMidiMesage;
-            // console.log(input)
         }
-        for(let output of deveicesOutput){
-            // console.log(output)
-            output.send([176, 23, 127])
-        }
+        // for (let output of deveicesOutput) { Not doing anything with output at this time
+        //     // console.log(output)
+        //     output.send([176, 23, 127])
+        // }
     })
 
-    let currentDiv;
-
-    useEffect(()=>{
-        currentDiv = document.getElementById("currentMidiDiv")
-    }, [])
-
-    function onMidiMesage(message){
+    function onMidiMesage(message) {
         setCurrentMidiInput(`${message.data[1]}`)
     }
 
@@ -70,6 +64,9 @@ function SoundForm() {
         formData.append("fade_speed", fade_speed);
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
+        formData.append("is_midi", is_midi);
+        formData.append("play_stop_button", play_stop_button);
+        formData.append("volume_control", volume_control);
 
         const data = await dispatch(addSound(formData))
         if (data.errors) {
@@ -134,7 +131,7 @@ function SoundForm() {
                         </label>
                         <input
                             type="number"
-                            name="username"
+                            name="fade speed"
                             onChange={(e) => setFade_speed(e.target.value)}
                             value={fade_speed}
                             placeholder="User Name"
@@ -144,7 +141,7 @@ function SoundForm() {
                         <label>Arrangement</label>
                         <input
                             type="number"
-                            name="username"
+                            name="arrangement"
                             onChange={(e) => setArrangement(e.target.value)}
                             value={arrangement}
                             className="new_sound_input"
@@ -178,22 +175,40 @@ function SoundForm() {
                             />
                         </div>
 
-                        <button type="submit" className="new_sound_submit">Submit</button>
                     </div>
+
+
+
                     {is_midi &&
-                    <div className="formSide">
-                        <div>MIDI Control Number</div>
-                        <div id="currentMidiDiv">{currentMidiInput}</div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                        <div className="formSide">
+                            <div>Play/Stop Button#</div>
+                            <input
+                                type="number"
+                                name="play_stop_button"
+                                onChange={(e) => setPlay_stop_button(e.target.value)}
+                                value={play_stop_button}
+                                className="new_sound_input"
+                            ></input>
+
+                            <div>Volume Control#</div>
+                            <input
+                                type="number"
+                                name="volume_control"
+                                onChange={(e) => setVolume_control(e.target.value)}
+                                value={volume_control}
+                                className="new_sound_input"
+                            ></input>
+                            <div className="midiInputText">Press the button or slide the volume control on your MIDI device to see the output's number. Assign that number to the inputs above accordingly.</div>
+                            <div className="midiInputContainer">
+                                <div>Current MIDI Input#</div>
+                                <div id="currentMidiDiv">{currentMidiInput}</div>
+                            </div>
+                        </div>
                     }
 
                 </div>
+                {is_midi && <div style={{fontSize: "19px"}}>**NOTE** Target Volume/Fade In/Out will be ignored when using MIDI</div>}
+                <button type="submit" className="new_sound_submit">Submit</button>
             </form>
             <div className="black_backer"></div>
             {/* <FauxUserPage></FauxUserPage> */}

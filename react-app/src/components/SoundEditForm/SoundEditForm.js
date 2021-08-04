@@ -77,7 +77,7 @@ function SoundEditForm({currentSoundId}) {
             <div className="formContainer">
                 {errors && errors.map((err, i) => <div className="errors">{err}</div>)}
                 {/* <div className="errors">{errors[0]}</div> */}
-                <form onSubmit={(e) => newSound(e)} className="new_sound_form">
+                <form onSubmit={(e) => newSound(e)} className="standard_form">
                     <div className="close_new_sound" onClick={goHome}>X</div>
                     <label>EDIT Your Sound</label>
                     <input type="text"

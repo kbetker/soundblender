@@ -5,3 +5,5 @@ from wtforms.validators import DataRequired
 class NewQuickScene(FlaskForm):
     name = StringField("Name")
     scene_id = IntegerField("SceneId")
+    is_midi = BooleanField("use MIDI?")
+    control_num = IntegerField("Control Number")

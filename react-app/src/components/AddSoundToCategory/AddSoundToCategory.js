@@ -61,7 +61,7 @@ function AddSoundToCategory({currentCategoryId}) {
 
     return (
         <div className="formEffect" id="theForm">
-        <div className="new_sound_form">
+        <div className="standard_form">
             <div className="close_new_sound" onClick={goHome}>X</div>
             <div>Add Sound</div>
             <select onChange={(e) => setSoundId(e.target.value)} value={soundId} className="new_sound_input">

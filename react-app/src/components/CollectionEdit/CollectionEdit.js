@@ -67,7 +67,7 @@ function CollectionEdit({currentCollectionId}) {
 
     return (
         <div className="formEffect" id="theForm">
-            <div className="new_sound_form" >
+            <div className="standard_form" >
                 <div className="close_new_sound" onClick={goHome}>X</div>
                 <label>Collection Name</label>
                 <input type="text"

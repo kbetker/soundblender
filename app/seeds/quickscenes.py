@@ -5,10 +5,10 @@ def seed_quickscenes():
     #Me
     sounds = Sound.query.all()
 
-    quickScene1 = QuickScene(name="QuickScene1", scene_id=1)
+    quickScene1 = QuickScene(name="QuickScene1", scene_id=1, is_midi=False, control_num=0)
     quickScene1.sounds.extend(sounds[0:3])
 
-    quickScene2 = QuickScene(name="QuickScene2", scene_id=1)
+    quickScene2 = QuickScene(name="QuickScene2", scene_id=1, is_midi=False, control_num=0)
     quickScene2.sounds.extend(sounds[4:6])
 
     db.session.add(quickScene1)
