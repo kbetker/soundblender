@@ -67,7 +67,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     useEffect(() => {
         document.addEventListener('keydown', (e) => {
             if (isPlaying.current ) {
-                console.log(editMode)
                 setStopKeyPress(e.key)
             } else {
                 setKeyPress(e.key)

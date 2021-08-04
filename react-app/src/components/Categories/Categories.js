@@ -1,6 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import SoundModule from "../SoundModule"
+import SoundModuleMIDI from "../SoundModuleMIDI"
 import "../CollectionPage/CollectionPage.css"
 import "../UserPage/userPage.css"
 import gear from "../UserPage/Gear.png"
@@ -33,7 +34,11 @@ function Categories({ category, currentscene }) {
             </div>
             <div className="soundModulewrapper">
                 {category.sounds.map(mySoundObj =>
+                <>{mySoundObj.is_midi ?
+                    <SoundModuleMIDI mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModuleMIDI>
+                    :
                     <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModule>
+                   }</>
                 )}
             </div>
              {editMode &&

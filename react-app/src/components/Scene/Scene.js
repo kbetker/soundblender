@@ -1,19 +1,21 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Categories from "../Categories/Categories"
-import "./Scene.css"
-import gear from "../UserPage/Gear.png"
-import "../CollectionPage/CollectionPage.css"
 import { useParams } from "react-router-dom"
-import { setModalState } from "../../store/modal"
+
+import Categories from "../Categories/Categories"
+import QuickScene from "../QuickScene"
+
+import gear from "../UserPage/Gear.png"
 import buttonOff from "../SoundModule/images/Button_Off.png"
 import buttonOn from "../SoundModule/images/button_press.png"
 import buttonPress from "../SoundModule/images/button_press2.png"
 
-
-
-import QuickScene from "../QuickScene"
+import { setModalState } from "../../store/modal"
 import { setQuickSceneButton } from "../../store/quickSceneButton"
+import { midiControl } from "../../store/midiKeyPress"
+
+import "./Scene.css"
+import "../CollectionPage/CollectionPage.css"
 
 function Scene({ scene, id, currentscene }) {
     const scenes = scene?.categories
@@ -49,12 +51,22 @@ function Scene({ scene, id, currentscene }) {
     //     }
     // })
 
+    //=============  listening for MIDI Input ===================
+    useEffect(() => {
+        navigator.requestMIDIAccess().then(access => {
+            const devicesInput = access.inputs.values();
+            for (let input of devicesInput) {
+                input.onmidimessage = onMidiMesage;
+            }
+        })
+
+        function onMidiMesage(message) {
+            dispatch(midiControl([message.data[1], message.data[2], scene.id]))
+        }
+    }, [])
+
     return (
-        // <div className="ScenePageBody"> This div i up one in Categories
         <>
-
-
-
             <div className="sceneContainer" style={{ width: `${window.innerWidth - 122}px` }} id={id}>
 
                 <div className="quickSceneContainer">

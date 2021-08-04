@@ -66,7 +66,6 @@ function QuickSceneNew( props ) {
         let newSoundObj = soundObj
         let soundEl = document.getElementById(`${id}-soundEl`)
 
-        console.log(soundEl, "<=================")
         if(!(name in newSoundObj)){
             newSoundObj[name] = id
             soundEl.classList.add("soundQS_Clicked")

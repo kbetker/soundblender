@@ -1,0 +1,6 @@
+.midiTitle{
+  display: flex;
+  width: 370px;
+  /* background-color: red; */
+  justify-content: space-between;
+}
