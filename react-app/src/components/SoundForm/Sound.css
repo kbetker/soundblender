@@ -12,6 +12,10 @@
     justify-content: center;
     align-items: center;
 }
+.looped_midi{
+    display: flex;
+    justify-content: space-between;
+}
 
 .black_backer{
     background-color: rgba(0, 0, 0, 0.5);
@@ -52,7 +56,7 @@
     color: rgb(255, 0, 0);
     /* background-color: gold; */
     width: 300px;
-    padding: 2px 20px;
+    padding: px 20px;
     position: absolute;
     top: 50px;
     margin-left: 50px;
@@ -118,11 +122,10 @@
     display: flex;
     flex-direction: row;
     /* height: 500px; */
-    justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     color: rgb(216, 216, 216);
-    padding: 20px;
+    /* padding: 20px; */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
     margin: 10px auto;
     background-color: rgb(58, 58, 58);
@@ -134,8 +137,13 @@
     /* top: 10%; */
     z-index: 100;
 }
-.formLeft{
+.formSide{
     width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
 
 }
 

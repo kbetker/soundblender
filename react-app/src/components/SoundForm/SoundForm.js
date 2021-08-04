@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { addSound } from "../../store/sound"
@@ -18,6 +18,33 @@ function SoundForm() {
     const [fade_speed, setFade_speed] = useState(1);
     const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
+    const [is_midi, setIs_midi] = useState(false)
+    const [currentMidiInput, setCurrentMidiInput] = useState('0')
+    // const currentMidiDiv = useRef("")
+    let wtf = "wtf dude djflkda flkdans l"
+
+    navigator.requestMIDIAccess().then(access => {
+        const devicesInput = access.inputs.values();
+        const deveicesOutput = access.outputs.values();
+        for(let input of devicesInput){
+            input.onmidimessage = onMidiMesage;
+            // console.log(input)
+        }
+        for(let output of deveicesOutput){
+            // console.log(output)
+            output.send([176, 23, 127])
+        }
+    })
+
+    let currentDiv;
+
+    useEffect(()=>{
+        currentDiv = document.getElementById("currentMidiDiv")
+    }, [])
+
+    function onMidiMesage(message){
+        setCurrentMidiInput(`${message.data[1]}`)
+    }
 
     useEffect(() => {
         let theForm = document.getElementById("theForm")
@@ -84,8 +111,9 @@ function SoundForm() {
 
             <form onSubmit={(e) => newSound(e)} className="new_sound_form">
                 <div className="close_new_sound" onClick={goHome}>X</div>
+
                 <div className="formSplit">
-                    <div className="formLeft">
+                    <div className="formSide">
                         <label>Name Your Sound</label>
                         <input type="text"
                             name="name"
@@ -121,32 +149,49 @@ function SoundForm() {
                             value={arrangement}
                             className="new_sound_input"
                         ></input>
+                        <div className="looped_midi">
+                            <label>
+                                Looped?:
+                                <input
+                                    name="isLooped"
+                                    type="checkbox"
+                                    checked={is_looped}
+                                    onChange={(e) => { setIs_looped(e.target.checked) }} />
+                            </label>
+                            <label>
+                                Use MIDI?:
+                                <input
+                                    name="isMidi"
+                                    type="checkbox"
+                                    checked={is_midi}
+                                    onChange={(e) => { setIs_midi(e.target.checked) }} />
+                            </label>
+                        </div>
 
-                        <label>
-                            Looped?:
+                        <div className="upload_buttons">
+                            <div className="visible_button">Choose Sound</div>
                             <input
-                                name="isGoing"
-                                type="checkbox"
-                                checked={is_looped}
-                                onChange={(e) => { setIs_looped(e.target.checked) }} />
-                        </label>
-                    </div>
-                    <div className="upload_buttons">
-                        <div className="visible_button">Choose Sound</div>
-                        <input
-                            type="file"
-                            accept="audio/*"
-                            onChange={updateImage}
-                            className="select_image"
-                        />
-                    </div>
+                                type="file"
+                                accept="audio/*"
+                                onChange={updateImage}
+                                className="select_image"
+                            />
+                        </div>
 
-                    <button type="submit" className="new_sound_submit">Submit</button>
-
-                    <div className="formLeft">
-                        wat
+                        <button type="submit" className="new_sound_submit">Submit</button>
                     </div>
-
+                    {is_midi &&
+                    <div className="formSide">
+                        <div>MIDI Control Number</div>
+                        <div id="currentMidiDiv">{currentMidiInput}</div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    }
 
                 </div>
             </form>

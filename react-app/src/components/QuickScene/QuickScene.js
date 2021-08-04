@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "../CollectionPage/CollectionPage.css"
 import { setModalState } from "../../store/modal"
@@ -26,6 +26,14 @@ function qsButtonClick(){
     dispatch(setQuickSceneButton(currentSoundArray))
 }
 
+//Key Bind Function
+// useEffect(() => {
+//     document.addEventListener('keydown', (e) => {
+//         if(e.key === "l") {
+//             qsButtonClick()
+//         }
+//     })
+// }, [])
 
     const editMode = useSelector(state => state.editMode.editMode)
 

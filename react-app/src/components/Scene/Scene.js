@@ -61,7 +61,7 @@ function Scene({ scene, id, currentscene }) {
 
                     {id === "1" &&
                         <div className="quickSceneComponent" onClick={() => stopAllBtnLight.length > 0 && stopAllSounds()}>
-                            <div className="quickSceneTitle">Stop All</div>
+                            <div className="quickSceneTitle">&#40;S&#41;top All</div>
                             <img src={
                                 stopAllBtnLight.length > 0 && !stopLight ? buttonOn
                                     : stopAllBtnLight.length > 0 && stopLight ? buttonPress
