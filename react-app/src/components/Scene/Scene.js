@@ -17,11 +17,12 @@ import { midiControl } from "../../store/midiKeyPress"
 import "./Scene.css"
 import "../CollectionPage/CollectionPage.css"
 
-function Scene({ scene, id, currentscene }) {
+function Scene({ scene, id, currentscene, currentCollection }) {
     const scenes = scene?.categories
     const sceneId = scene?.id
     const editMode = useSelector(state => state.editMode.editMode)
     const stopAllBtnLight = useSelector(state => state.stopLight)
+    const midiState = useSelector(state => state.midiState)
     const { collectionId } = useParams()
     const dispatch = useDispatch()
     const sortedQuickScenes = scene.quickscenes.sort((soundA, soundB) => {
@@ -53,17 +54,11 @@ function Scene({ scene, id, currentscene }) {
 
     //=============  listening for MIDI Input ===================
     useEffect(() => {
-        navigator.requestMIDIAccess().then(access => {
-            const devicesInput = access.inputs.values();
-            for (let input of devicesInput) {
-                input.onmidimessage = onMidiMesage;
-            }
-        })
-
-        function onMidiMesage(message) {
-            dispatch(midiControl([message.data[1], message.data[2], scene.id]))
+        if(currentCollection.stop_all === midiState[0] && midiState[1] === 0){
+            stopAllSounds()
         }
-    }, [])
+    }, [midiState])
+
 
     return (
         <>

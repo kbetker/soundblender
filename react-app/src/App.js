@@ -26,6 +26,7 @@ import CollectionNew from "./components/CollectionNew"
 import CollectionEdit from "./components/CollectionEdit"
 import CollectionDelete from "./components/CollectionDelete";
 import AboutPage from "./components/AboutPage";
+import MIDI from "./components/MIDI/MIDI";
 
 function App() {
     // const [authenticated, setAuthenticated] = useState(false);
@@ -45,7 +46,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            {/* <NavBar /> */}
+            <MIDI />
             <Switch>
                 {/* =================== About ================================== */}
                 <Route path="/about" exact={true}>

@@ -118,6 +118,9 @@ def edit_sound(soundId):
     soundToEdit.fade_speed=data['fade_speed']
     soundToEdit.arrangement=data['arrangement']
     soundToEdit.is_looped=data['is_looped']
+    soundToEdit.is_midi=data['is_midi']
+    soundToEdit.play_stop_button=data['play_stop_button']
+    soundToEdit.volume_control=data['volume_control']
 
 
     db.session.commit()

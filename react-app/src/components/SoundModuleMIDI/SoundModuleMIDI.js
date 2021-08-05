@@ -66,32 +66,67 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
 
     })
 
+    // useEffect(()=>{
+    //     dispatch(midiControl([0, 0, 0]))
+    //     isPlaying.current = false
+    // }, [])
+
 
 
     useEffect(() => {
-        if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 127 && isPlaying.current === false) {
-            dispatch(midiControl(0))
-            mySound.current.loop = mySoundObj.is_looped;
-            mySound.current.play()
-            mySound.current.volume = 0
-            setRedLightOn(true)
-            setBtnStopped(false)
-            setBtnPlaying(true)
-            isPlaying.current = true
-            console.log(midiState, "PLAY")
-        } else if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 127 && isPlaying.current === true) {
-            dispatch(midiControl(0))
-            setRedLightOn(false)
-            setBtnPlaying(false)
-            setBtnStopped(true)
-            setBtnStopping(false)
+       async function playSound(){
+            console.log("INSED THE playSound()   +_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+!+_")
+             isPlaying.current = true
+            await dispatch(midiControl([0, 0]))
+             mySound.current.loop = mySoundObj.is_looped;
+             mySound.current.play()
+            // mySound.current.volume = 0
+            await setVolume()
+            await setRedLightOn(true)
+            await setBtnStopped(false)
+            await setBtnPlaying(true)
+        }
+
+        async function stopSound(){
+            console.log("INSED THE stopSound()   +_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+!+_")
+            await dispatch(midiControl([0, 0]))
+            await setRedLightOn(false)
+            await setBtnPlaying(false)
+            await setBtnStopped(true)
+            await setBtnStopping(false)
             mySound.current.pause()
             mySound.current.currentTime = 0;
             isPlaying.current = false
-            console.log(midiState, "STOP")
-            dispatch(removeStopLight(mySoundObj.id))
+            await dispatch(removeStopLight(mySoundObj.id))
+        }
+
+        // console.log(mySoundObj.name, "isPlaying:", isPlaying, "MIDI State:", midiState)
+        if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 0 && isPlaying.current === false) {
+            console.log(mySoundObj.name, " ================================================ Inside the PLAY buttons ================================================ ")
+            playSound();
+        } else if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 0 && isPlaying.current === true) {
+            console.log(mySoundObj.name, " ================================================ Inside the STOP buttons ================================================ ")
+
+            stopSound()
+        }
+
+        if (playBtn.current) {
+            playBtn.current.addEventListener("click", (e) => {
+                if(!isPlaying.current){
+                playSound();
+            }
+            })
+        }
+
+        if (stopBtn.current) {
+            stopBtn.current.addEventListener("click", (e) => {
+                if(isPlaying.current){
+                stopSound()
+            }
+            })
         }
     })
+
 
 
     useEffect(() => {
@@ -100,7 +135,7 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
             knob.current.style.left = `${knobPOS.current * 0.61}%`;
             setVolume()
         }
-    })
+    }, [midiState])
 
 
     return (
@@ -123,7 +158,7 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
                     <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>
                         <div ref={leftMarker}></div>
                         <div id={`knob_line--container-${mySoundObj.id}`} className="knob_line--container">
-                            <div ref={knob} className="slider__knob" draggable="true" style={{ backgroundImage: `url(${slider_GreyMiddle})` }}>
+                            <div ref={knob} className="slider__knob" draggable="false" style={{ backgroundImage: `url(${slider_GreyMiddle})`, cursor: "not-allowed" }}>
                                 <div className="knob_color" style={{ backgroundColor: `${color}` }}></div>
                             </div>
                         </div>

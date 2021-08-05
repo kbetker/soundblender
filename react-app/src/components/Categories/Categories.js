@@ -15,6 +15,12 @@ function Categories({ category, currentscene }) {
     const history = useHistory()
     const dispatch = useDispatch()
 
+    let sounds = category.sounds.sort((soundA, soundB) => {
+        if (soundA.name.toLowerCase() < soundB.name.toLowerCase()) { return -1 }
+        if (soundA.name.toLowerCase() > soundB.name.toLowerCase()) { return 1 }
+        return 0
+    })
+
     const editCategory = async () => {
         // await dispatch(setEditMode(false))
         // history.push(`/category/${category.id}/edit`)
@@ -33,9 +39,9 @@ function Categories({ category, currentscene }) {
                 {editMode && <img src={gear} className="categoryEditGear" draggable="false" alt="" onClick={editCategory}></img>}
             </div>
             <div className="soundModulewrapper">
-                {category.sounds.map(mySoundObj =>
+                {sounds.map(mySoundObj =>
                 <>{mySoundObj.is_midi ?
-                    <SoundModuleMIDI mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModuleMIDI>
+                    <SoundModuleMIDI mySoundObj={mySoundObj} color={category.color} key={`midiSoundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModuleMIDI>
                     :
                     <SoundModule mySoundObj={mySoundObj} color={category.color} key={`soundKey-${mySoundObj.id}`} currentscene={currentscene} categoryId={category.id}></SoundModule>
                    }</>

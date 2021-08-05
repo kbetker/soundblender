@@ -64,15 +64,15 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
         stopAllBtn = document.querySelector(".quickSceneComponent")
     })
 
-    useEffect(() => {
-        document.addEventListener('keydown', (e) => {
-            if (isPlaying.current ) {
-                setStopKeyPress(e.key)
-            } else {
-                setKeyPress(e.key)
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     document.addEventListener('keydown', (e) => {
+    //         if (isPlaying.current ) {
+    //             setStopKeyPress(e.key)
+    //         } else {
+    //             setKeyPress(e.key)
+    //         }
+    //     })
+    // }, [])
 
 
 
@@ -124,6 +124,8 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
         function fadeOut(divisor = 1) {
+            console.log("WHAAAAAAAAt")
+            if (btnStopping) return;
             if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
             if (knobPOS.current > 98) knobPOS.current = 98;
             setBtnStopping(true)
@@ -206,20 +208,14 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             clearInterval(fadeInToTarget.current)
             dispatch(setQuickSceneButton([]))
             fadeOut()
+        } else if(qsButton.includes("stop") && !isPlaying.current){
+            dispatch(setQuickSceneButton([]))
         }
         if (stopKeyPress === "s") {
             clearInterval(fadeInToTarget.current)
             setStopKeyPress('')
             fadeOut()
         }
-        if(parseInt(keyPress) === mySoundObj.id){
-            mySound.current.volume = 0
-            setKeyPress('')
-            fadeIn();
-            mySound.current.play()
-            mySound.current.loop = mySoundObj.is_looped;
-        }
-
 
 
     }) // end of fade in/out useEffect

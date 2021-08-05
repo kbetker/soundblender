@@ -14,6 +14,7 @@ import { setModalState } from "../../store/modal";
 import { getUserSounds } from "../../store/sound";
 import { getUserInfo } from "../../store/userPage";
 import { clearLights } from "../../store/stopAllLights";
+import { midiControl } from "../../store/midiKeyPress";
 
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
 import SoundDelete from "../SoundDelete";
@@ -178,6 +179,8 @@ function CollectionPage() {
     //     getAllSounds()
     // }
 
+
+
     return (
         <>
             {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
@@ -260,7 +263,7 @@ function CollectionPage() {
 
 
                             {sortedScenes?.map((scene, index) =>
-                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
+                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene} currentCollection={currentCollection}></Scene>
 
                             )}
                         </div>

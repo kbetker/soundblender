@@ -9,6 +9,7 @@ import { setModalState } from "../../store/modal"
 function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const midiState = useSelector(state => state.midiState)
     const history = useHistory();
 
     const [soundLoading, setSoundLoading] = useState(false);
@@ -24,21 +25,13 @@ function SoundForm() {
 
     const [currentMidiInput, setCurrentMidiInput] = useState('0')
 
-    navigator.requestMIDIAccess().then(access => {
-        const devicesInput = access.inputs.values();
-        // const deveicesOutput = access.outputs.values();
-        for (let input of devicesInput) {
-            input.onmidimessage = onMidiMesage;
-        }
-        // for (let output of deveicesOutput) { Not doing anything with output at this time
-        //     // console.log(output)
-        //     output.send([176, 23, 127])
-        // }
-    })
-
-    function onMidiMesage(message) {
-        setCurrentMidiInput(`${message.data[1]}`)
+    useEffect(() => {
+        if(midiState[1] > 0 && !undefined){
+        setCurrentMidiInput(`${midiState[0]}`)
     }
+    }, [midiState])
+
+
 
     useEffect(() => {
         let theForm = document.getElementById("theForm")
@@ -207,10 +200,10 @@ function SoundForm() {
                     }
 
                 </div>
-                {is_midi && <div style={{fontSize: "19px"}}>**NOTE** Target Volume/Fade In/Out will be ignored when using MIDI</div>}
+                {is_midi && <div className="disclaimer">**NOTE** Target Volume/Fade In/Out will be ignored when using MIDI</div>}
                 <button type="submit" className="new_sound_submit">Submit</button>
             </form>
-            <div className="black_backer"></div>
+            {/* <div className="black_backer"></div> */}
             {/* <FauxUserPage></FauxUserPage> */}
 
         </div>

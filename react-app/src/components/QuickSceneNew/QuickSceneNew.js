@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import "../SoundForm/Sound.css"
 // import { newUserCollection } from "../../store/collection";
 import { newQuickSceneFunc } from "../../store/quickscene"
@@ -14,9 +14,10 @@ function QuickSceneNew(props) {
     const [name, setName] = useState('');
     const [is_midi, setIs_midi] = useState(false);
     const [control_num, setControl_num] = useState(0);
-
     const [currentMidiInput, setCurrentMidiInput] = useState('0')
     const [soundObj, setSoundObj] = useState({})
+
+    const midiState = useSelector(state => state.midiState)
     const dispatch = useDispatch()
 
     const addCollection = async () => {
@@ -68,19 +69,12 @@ function QuickSceneNew(props) {
         setSoundObj(soundObj)
     }
 
-
-
-
-    navigator.requestMIDIAccess().then(access => {
-        const devicesInput = access.inputs.values();
-        for (let input of devicesInput) {
-            input.onmidimessage = onMidiMesage;
-        }
-    })
-
-    function onMidiMesage(message) {
-        setCurrentMidiInput(`${message.data[1]}`)
+    useEffect(() => {
+        if(midiState[1] > 0 && !undefined){
+        setCurrentMidiInput(`${midiState[0]}`)
     }
+    }, [midiState])
+
 
 
     return (

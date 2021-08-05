@@ -16,6 +16,8 @@ function QuickScene( props ) {
     if (stopAllImg) stopAllImg.addEventListener("mouseup", () => {setStopLight(false)})
     // const [soundArray, setSoundArray] = useState([])
     const sounds = props.quickScene.sounds
+    const midiState = useSelector(state => state.midiState)
+
     function setModalFunc(){
         dispatch(setModalState(`${props.scene.id}-${props.quickScene.id}quickSceneEdit`))
     }
@@ -27,13 +29,19 @@ function qsButtonClick(){
 }
 
 //Key Bind Function
+// useEffect(() => {
+//     document.addEventListener('keydown', (e) => {
+//         if(e.key === "l") {
+//             qsButtonClick()
+//         }
+//     })
+// }, [])
+
 useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-        if(e.key === "l") {
-            qsButtonClick()
-        }
-    })
-}, [])
+    if (midiState[0] === props.quickScene.control_num) {
+        qsButtonClick()
+    }
+})
 
     const editMode = useSelector(state => state.editMode.editMode)
 

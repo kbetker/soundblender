@@ -296,6 +296,14 @@
     border: 1px solid rgb(0, 255, 0);
     animation-duration: 7s;
 }
+.disclaimer{
+    font-size: 19px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    margin: 0;
+    max-width: 680px;
+    /* width: 600px; */
+}
 
 .select_image{
     font-family: 'Montserrat', sans-serif;
