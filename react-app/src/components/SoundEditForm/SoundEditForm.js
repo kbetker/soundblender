@@ -84,7 +84,6 @@ function SoundEditForm({currentSoundId}) {
     }
 
     const goToDelete = () => {
-        // console.log(currentSoundId, "CURRENT SOUND ID!!!!!!!!!!!")
         let theForm = document.getElementById("theForm")
         theForm.classList.remove("blurIn")
         setTimeout(() => {

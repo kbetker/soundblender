@@ -122,7 +122,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
 
 
         function fadeOut(divisor = 1) {
-            console.log("WHAAAAAAAAt")
             if (btnStopping) return;
             if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
             if (knobPOS.current > 98) knobPOS.current = 98;

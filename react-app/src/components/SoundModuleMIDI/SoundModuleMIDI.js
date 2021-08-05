@@ -98,7 +98,6 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
             await dispatch(removeStopLight(mySoundObj.id))
         }
 
-        // console.log(mySoundObj.name, "isPlaying:", isPlaying, "MIDI State:", midiState)
         if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 0 && isPlaying.current === false) {
             playSound();
         } else if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 0 && isPlaying.current === true) {

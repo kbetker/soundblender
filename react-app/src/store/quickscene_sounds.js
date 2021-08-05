@@ -7,7 +7,6 @@ export const qsArray = ( qsArray ) => ({
 })
 
 export const setQuickSceneArray = (what) => async (dispatch) => {
-    // console.log(what, "wut dis??????????????")
     dispatch(qsArray(what))
 }
 
