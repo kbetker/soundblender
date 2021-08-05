@@ -75,7 +75,6 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
 
     useEffect(() => {
         async function playSound() {
-            console.log("INSED THE playSound()   +_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+!+_")
             isPlaying.current = true
             await dispatch(midiControl([0, 0]))
             mySound.current.loop = mySoundObj.is_looped;
@@ -88,7 +87,6 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
         }
 
         async function stopSound() {
-            console.log("INSED THE stopSound()   +_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+!+_")
             await dispatch(midiControl([0, 0]))
             await setRedLightOn(false)
             await setBtnPlaying(false)
@@ -102,11 +100,8 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
 
         // console.log(mySoundObj.name, "isPlaying:", isPlaying, "MIDI State:", midiState)
         if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 0 && isPlaying.current === false) {
-            console.log(mySoundObj.name, " ================================================ Inside the PLAY buttons ================================================ ")
             playSound();
         } else if (midiState[0] === mySoundObj.play_stop_button && midiState[1] === 0 && isPlaying.current === true) {
-            console.log(mySoundObj.name, " ================================================ Inside the STOP buttons ================================================ ")
-
             stopSound()
         }
 

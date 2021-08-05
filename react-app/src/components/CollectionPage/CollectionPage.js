@@ -172,13 +172,9 @@ function CollectionPage() {
         let quickSceneId = getIdAt1()
         let currentScene = sortedScenes.find(scene => scene.id === sceneId)
         let currentQuickSCene = currentScene.quickscenes.find((qs) => qs.id === quickSceneId)
-        // console.log(currentQuickSCene, "CURRENT QUICKSCENE <================")
         return currentQuickSCene
     }
 
-    // if(sortedScenes){
-    //     getAllSounds()
-    // }
 
 
 

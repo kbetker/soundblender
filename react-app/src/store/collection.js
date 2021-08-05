@@ -34,7 +34,6 @@ export const deleteCollection = (collection) => ({
 })
 
 // export const deleteQuickSceneFunc = (qsId, soundsArray) => async (dispatch) => {
-//     console.log(`${qsId} <==QSID`, soundsArray, "WAAAAAAT")
 
 //     const deleteQSrelations = await Promise.all(soundsArray.map(async soundId => {
 //         const response = await fetch(`/api/quickscenes/${qsId}/${soundId}/delete`, { method: "DELETE" });
