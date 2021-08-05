@@ -74,12 +74,12 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
 
 
     useEffect(() => {
-       async function playSound(){
+        async function playSound() {
             console.log("INSED THE playSound()   +_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+!+_")
-             isPlaying.current = true
+            isPlaying.current = true
             await dispatch(midiControl([0, 0]))
-             mySound.current.loop = mySoundObj.is_looped;
-             mySound.current.play()
+            mySound.current.loop = mySoundObj.is_looped;
+            mySound.current.play()
             // mySound.current.volume = 0
             await setVolume()
             await setRedLightOn(true)
@@ -87,7 +87,7 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
             await setBtnPlaying(true)
         }
 
-        async function stopSound(){
+        async function stopSound() {
             console.log("INSED THE stopSound()   +_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+_!+!+_")
             await dispatch(midiControl([0, 0]))
             await setRedLightOn(false)
@@ -112,17 +112,17 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
 
         if (playBtn.current) {
             playBtn.current.addEventListener("click", (e) => {
-                if(!isPlaying.current){
-                playSound();
-            }
+                if (!isPlaying.current) {
+                    playSound();
+                }
             })
         }
 
         if (stopBtn.current) {
             stopBtn.current.addEventListener("click", (e) => {
-                if(isPlaying.current){
-                stopSound()
-            }
+                if (isPlaying.current) {
+                    stopSound()
+                }
             })
         }
     })
@@ -144,15 +144,17 @@ function SoundModuleMIDI({ mySoundObj, color, currentscene, categoryId }) {
                 {/* <div className="soundModule_wrapper" style={{ border: `1px solid grey` }}> */}
                 <div className="title">
                     <div className="midiTitle">
-                        <div>MIDI</div>
+                        <div>MIDI
+                            {editMode &&
+                                <div onClick={() => setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{ display: 'inline-block' }}>
+                                    <img src={gear} className="soundEditGear" draggable="false" alt=""></img>
+                                </div>
+                            }
+                        </div>
                         <div>{mySoundObj.name}</div>
                     </div>
 
-                    {editMode &&
-                        <div onClick={() => setModalFunc(`${mySoundObj.id}-${categoryId}-categorySound`)} style={{ display: 'inline-block' }}>
-                            <img src={gear} className="soundEditGear" draggable="false" alt=""></img>
-                        </div>
-                    }
+
                 </div>
                 <div className="slider_and_controls">
                     <div className="slider__container" style={{ backgroundImage: `url(${sliderBackground})` }}>

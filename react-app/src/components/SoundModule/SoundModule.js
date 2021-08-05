@@ -97,7 +97,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             gearBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
             homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
             logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
-            // stopAllBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
 
 
 
@@ -194,15 +193,11 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             mySound.current.play()
             mySound.current.loop = mySoundObj.is_looped;
         }
-        if (qsButton.includes(mySoundObj.id)) {
+        if (qsButton.includes(mySoundObj.id) && !isPlaying.current) {
             quickScenePlay()
         }
 
         // ===========  Handles the Stop All ================
-        // async function quickSceneStop() {
-        //     await dispatch(setQuickSceneButton([]))
-        //         fadeOut()
-        // }
 
         if (qsButton.includes("stop") && isPlaying.current) {
             clearInterval(fadeInToTarget.current)

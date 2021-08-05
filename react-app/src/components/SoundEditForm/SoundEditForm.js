@@ -189,7 +189,7 @@ function SoundEditForm({currentSoundId}) {
                     }
 
                 </div>
-                {is_midi && <div className="disclaimer">**NOTE** Target Volume/Fade In/Out will be ignored when using MIDI</div>}
+                {is_midi && <div className="disclaimer">**NOTE** Target Volume, Fade In/Out, and Sounds associate with QuickScenes will be ignored when using MIDI</div>}
                 <button type="submit" className="new_sound_submit">Submit</button>
             </form>
                 {/* <div className="black_backer"></div>

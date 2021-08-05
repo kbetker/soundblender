@@ -38,7 +38,7 @@ function qsButtonClick(){
 // }, [])
 
 useEffect(() => {
-    if (midiState[0] === props.quickScene.control_num) {
+    if (midiState[0] > 0 && midiState[0] === props.quickScene.control_num) {
         qsButtonClick()
     }
 })
