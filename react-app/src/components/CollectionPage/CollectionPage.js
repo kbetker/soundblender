@@ -29,6 +29,7 @@ import SceneDelete from "../SceneDelete"
 import QuickSceneNew from "../QuickSceneNew/QuickSceneNew";
 import QuickSceneEdit from "../QuickSceneEdit";
 import QuickSceneDelete from "../QuickSceneDelete";
+import CollectionEdit from "../CollectionEdit/CollectionEdit";
 
 import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import homepageLogo from "../HomePage/homepageLogo.gif"
@@ -200,6 +201,9 @@ function CollectionPage() {
             {modal.endsWith("quickSceneNew") && <QuickSceneNew currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} />}
             {modal.endsWith("quickSceneEdit") && <QuickSceneEdit currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} currentQuickscene={getCurrentQS()} />}
             {modal.endsWith("quickSceneDelete") && <QuickSceneDelete currentQuickscene={getIdAt0()} />}
+
+            {modal.endsWith("collectionEdit") && <CollectionEdit currentCollectionId={getIdAt0()} />}
+
 
 
 

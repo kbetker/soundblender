@@ -79,13 +79,12 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     useEffect(() => {
         function fadeIn() {
             if (isPlaying.current) return;
+            isPlaying.current = true
             if (knobPOS.current < 0) knobPOS.current = 0; // helps some glitchy animation
             if (knobPOS.current > 98) knobPOS.current = 98;
             setRedLightOn(true)
             setBtnStopped(false)
             setBtnPlaying(true)
-            isPlaying.current = true
-
             dispatch(addStopLight(mySoundObj.id))
 
             if (!mySoundObj.is_looped) {
@@ -194,7 +193,10 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             mySound.current.loop = mySoundObj.is_looped;
         }
         if (qsButton.includes(mySoundObj.id) && !isPlaying.current) {
+            // isPlaying.current = true;
             quickScenePlay()
+        } else if (qsButton.includes(mySoundObj.id) && isPlaying.current){
+            dispatch(setQuickSceneButton([]))
         }
 
         // ===========  Handles the Stop All ================

@@ -26,9 +26,9 @@ function SoundForm() {
     const [currentMidiInput, setCurrentMidiInput] = useState('0')
 
     useEffect(() => {
-        if(midiState[1] > 0 && !undefined){
-        setCurrentMidiInput(`${midiState[0]}`)
-    }
+        if (midiState[1] > 0 && !undefined) {
+            setCurrentMidiInput(`${midiState[0]}`)
+        }
     }, [midiState])
 
 

@@ -42,6 +42,10 @@ function Scene({ scene, id, currentscene, currentCollection }) {
         dispatch(setModalState(`${scene.id}-quickSceneNew`))
     }
 
+    const editCollection = () => {
+        dispatch(setModalState(`${currentCollection.id}-collectionEdit`))
+    }
+
     async function stopAllSounds() {
         await dispatch(setQuickSceneButton(["stop"]))
     }
@@ -68,7 +72,7 @@ function Scene({ scene, id, currentscene, currentCollection }) {
 
                     {id === "1" &&
                         <div className="quickSceneComponent" onClick={() => stopAllBtnLight.length > 0 && stopAllSounds()}>
-                            <div className="quickSceneTitle">&#40;S&#41;top All</div>
+                            <div className="quickSceneTitle">{editMode && <img src={gear} onClick={()=>editCollection()} className="quicksceneEditGear" style={{top: "3px"}} alt=""></img>}&#40;S&#41;top All </div>
                             <img src={
                                 stopAllBtnLight.length > 0 && !stopLight ? buttonOn
                                     : stopAllBtnLight.length > 0 && stopLight ? buttonPress

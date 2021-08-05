@@ -52,6 +52,10 @@ def edit_category(collectionId):
 
     collectionToEdit = Collection.query.filter(Collection.id == collectionId).first()
     collectionToEdit.name=data['name']
+    collectionToEdit.is_midi=data['is_midi']
+    collectionToEdit.stop_all=data['stop_all']
+    collectionToEdit.scene_left=data['scene_left']
+    collectionToEdit.scene_right=data['scene_right']
     collectionToEdit.owner_id=data['owner_id']
 
     db.session.commit()

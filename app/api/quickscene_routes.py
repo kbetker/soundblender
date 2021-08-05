@@ -112,6 +112,8 @@ def edit_category(qsId):
 
     quicksceneToEdit = QuickScene.query.filter(QuickScene.id == qsId).first()
     quicksceneToEdit.name=data['name']
+    quicksceneToEdit.is_midi=data['is_midi']
+    quicksceneToEdit.control_num=data['control_num']
 
     db.session.commit()
     return {"cool": "Beings"}

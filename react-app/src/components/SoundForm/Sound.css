@@ -71,7 +71,7 @@
 
 }
 
-.standard_form{
+.standard_form,.top_rounded_form{
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -79,21 +79,64 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     color: rgb(216, 216, 216);
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
     margin: 10px auto;
     background-color: rgb(58, 58, 58);
-    border-radius: 8px;
+    cursor: pointer;
     border: 1px solid rgb(0, 255, 0);
     animation-duration: 10s;
     left: 40%;
     z-index: 100;
 }
 
+.standard_form{
+    border-radius: 15px;;
+}
+.top_rounded_form{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.collectionMidiDisplay{
+    display: flex;
+    /* background-color: red; */
+    justify-content: space-between;
+    border-top: solid 1px rgb(0, 0, 0);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.quickSceneMidiDisplay{
+    display: flex;
+    /* background-color: red; */
+    justify-content: space-evenly;
+    border-top: solid 1px rgb(0, 0, 0);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.collectionMidiInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
 /* position:absolute; */
 /* height: 500px; */
 /* top: 10%; */
-
+.currentMIDI_COLLECTION{
+    background-color: rgb(70, 70, 70);
+    width: 120px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    border: solid 1px green;
+    margin: 5px
+}
 
 
 
@@ -118,6 +161,7 @@
     /* top: 10%; */
     z-index: 100;
 }
+
 .formSplit{
     display: flex;
     flex-direction: row;
@@ -146,6 +190,10 @@
     font-size: 66px;
 
     /* background-color: red; */
+}
+.collectionMidiInpu{
+    display: flex;
+    flex-direction: column;
 }
 
 .midiInputText{
@@ -187,7 +235,8 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
     /* margin: 10px auto; */
     background-color: rgb(58, 58, 58);
-    border-radius: 8px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     border: 1px solid rgb(0, 255, 0);
     animation-duration: 10s;
     /* position:absolute; */
@@ -195,6 +244,26 @@
     /* top: 10%; */
     z-index: 100;
 }
+
+
+.smaller_form{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    justify-content: space-evenly;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: rgb(216, 216, 216);
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    background-color: rgb(58, 58, 58);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 1px solid rgb(0, 255, 0);
+    animation-duration: 10s;
+    z-index: 100;
+}
+
 .soundsForQuickScene{
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
@@ -242,8 +311,8 @@
 .close_new_sound{
     position: absolute;
     color: red;
-    top: 3px;
-    right: 6px;
+    top: 9px;
+    right: 9px;
     cursor: pointer;
     font-weight: 600;
     animation-duration: 14s;
@@ -264,18 +333,40 @@
     animation-iteration-count:infinite;
 }
 
-.new_sound_submit{
+.delete_button{
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    background-color: rgb(39, 39, 39);
+    color: rgb(240, 130, 130);
+    border: 1px solid rgb(1, 170, 15);
+    z-index: 9000;
+    margin: 10px 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+}
+
+.new_sound_submit,.submit_notRounded,.top_rounded_submit {
     height: 50px;
     font-family: 'Montserrat', sans-serif;
     font-size: 28px;
     background-color: rgb(104, 103, 103);
     color: rgb(216, 216, 216);
     border: 1px solid rgb(0, 255, 0);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+
     animation-duration: 6s;
     z-index: 9000;
 }
+.new_sound_submit{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.top_rounded_submit{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
 
 .visible_button{
     width: 200px;
