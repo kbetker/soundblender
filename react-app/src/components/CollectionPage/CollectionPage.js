@@ -14,6 +14,7 @@ import { setModalState } from "../../store/modal";
 import { getUserSounds } from "../../store/sound";
 import { getUserInfo } from "../../store/userPage";
 import { clearLights } from "../../store/stopAllLights";
+import { midiControl } from "../../store/midiKeyPress";
 
 import SoundEditForm from "../SoundEditForm/SoundEditForm";
 import SoundDelete from "../SoundDelete";
@@ -28,6 +29,7 @@ import SceneDelete from "../SceneDelete"
 import QuickSceneNew from "../QuickSceneNew/QuickSceneNew";
 import QuickSceneEdit from "../QuickSceneEdit";
 import QuickSceneDelete from "../QuickSceneDelete";
+import CollectionEdit from "../CollectionEdit/CollectionEdit";
 
 import logoAnimation from "../HomePage/logoAnimationGreen.gif"
 import homepageLogo from "../HomePage/homepageLogo.gif"
@@ -178,6 +180,8 @@ function CollectionPage() {
     //     getAllSounds()
     // }
 
+
+
     return (
         <>
             {modal.endsWith("categorySound") && <CategorySound currentCategoryId={getIdAt1()} currentSoundId={getIdAt0()} />}
@@ -197,6 +201,9 @@ function CollectionPage() {
             {modal.endsWith("quickSceneNew") && <QuickSceneNew currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} />}
             {modal.endsWith("quickSceneEdit") && <QuickSceneEdit currentSceneId={getIdAt0()} currentCollectionSounds={getAllSounds()} currentQuickscene={getCurrentQS()} />}
             {modal.endsWith("quickSceneDelete") && <QuickSceneDelete currentQuickscene={getIdAt0()} />}
+
+            {modal.endsWith("collectionEdit") && <CollectionEdit currentCollectionId={getIdAt0()} />}
+
 
 
 
@@ -260,7 +267,7 @@ function CollectionPage() {
 
 
                             {sortedScenes?.map((scene, index) =>
-                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene}></Scene>
+                                <Scene scene={scene} key={`sceneKey-${scene.id}`} id={`${index + 1}`} currentscene={currentScene} currentCollection={currentCollection}></Scene>
 
                             )}
                         </div>

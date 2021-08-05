@@ -10,6 +10,7 @@ function SoundEditForm({currentSoundId}) {
     const user = useSelector(state => state.session.user)
     const sounds = useSelector(state => state.newSound.sounds)
     const soundToEdit = sounds?.sounds.find(sound => sound.id === parseInt(currentSoundId))
+    const midiState = useSelector(state => state.midiState)
 
     const sound_url = soundToEdit?.sound_url
     const [name, setName] = useState(soundToEdit?.name);
@@ -17,6 +18,13 @@ function SoundEditForm({currentSoundId}) {
     const [fade_speed, setFade_speed] = useState(soundToEdit?.fade_speed);
     const [arrangement, setArrangement] = useState(soundToEdit?.arrangement);
     const [is_looped, setIs_looped] = useState(soundToEdit?.is_looped);
+    const [is_midi, setIs_midi] = useState(soundToEdit?.is_midi)
+    const [play_stop_button, setPlay_stop_button] = useState(soundToEdit?.play_stop_button)
+    const [volume_control, setVolume_control] = useState(soundToEdit?.volume_control)
+
+    const [currentMidiInput, setCurrentMidiInput] = useState('0')
+
+
     const [errors, setErrors] = useState([])
 
     useEffect(()=>{
@@ -27,6 +35,14 @@ function SoundEditForm({currentSoundId}) {
             }, 10);
         }
     }, [])
+
+
+
+    useEffect(() => {
+        if(midiState[1] > 0 && !undefined){
+        setCurrentMidiInput(`${midiState[0]}`)
+    }
+    }, [midiState])
 
 
     const newSound = async (e) => {
@@ -40,6 +56,10 @@ function SoundEditForm({currentSoundId}) {
         formData.append("fade_speed", fade_speed);
         formData.append("arrangement", arrangement);
         formData.append("is_looped", is_looped);
+        formData.append("is_midi", is_midi);
+        formData.append("play_stop_button", play_stop_button);
+        formData.append("volume_control", volume_control);
+
 
         const data = await dispatch(editUserSound(formData, currentSoundId))
         if (data.errors) {
@@ -78,55 +98,102 @@ function SoundEditForm({currentSoundId}) {
                 {errors && errors.map((err, i) => <div className="errors">{err}</div>)}
                 {/* <div className="errors">{errors[0]}</div> */}
                 <form onSubmit={(e) => newSound(e)} className="new_sound_form">
-                    <div className="close_new_sound" onClick={goHome}>X</div>
-                    <label>EDIT Your Sound</label>
-                    <input type="text"
-                        name="name"
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                        className="new_sound_input"
-                    ></input>
-                    <label>Target Volume <span className="note">( 0 - 10 )</span></label>
-                    <input
-                        type="number"
-                        name="Volume"
-                        onChange={(e) => setTarget_volume(e.target.value)}
-                        value={target_volume}
-                        className="new_sound_input"
-                    ></input>
-                    <label>Fade In/Out <span className="note">(in seconds)</span></label>
-                    <input
-                        type="number"
-                        name="username"
-                        onChange={(e) => setFade_speed(e.target.value)}
-                        value={fade_speed}
-                        placeholder="User Name"
-                        className="new_sound_input"
-                    ></input>
+                <div className="close_new_sound" onClick={goHome}>X</div>
 
-                    <label>Arrangement</label>
-                    <input
-                        type="number"
-                        name="username"
-                        onChange={(e) => setArrangement(e.target.value)}
-                        value={arrangement}
-                        className="new_sound_input"
-                    ></input>
-
-                    <label>
-                        Looped?:
+                <div className="formSplit">
+                    <div className="formSide">
+                        <label>Name Your Sound</label>
+                        <input type="text"
+                            name="name"
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            className="new_sound_input"
+                        ></input>
+                        <label>Target Volume <span className="note">( 0 - 10 )</span></label>
                         <input
-                            name="isGoing"
-                            type="checkbox"
-                            checked={is_looped}
-                            onChange={(e) => { setIs_looped(e.target.checked) }} />
-                    </label>
+                            type="number"
+                            name="Volume"
+                            onChange={(e) => setTarget_volume(e.target.value)}
+                            value={target_volume}
+                            className="new_sound_input"
+                        ></input>
+                        <label>Fade In/Out
+                            {/* <span className="note">(in seconds)</span> */}
+                        </label>
+                        <input
+                            type="number"
+                            name="fade speed"
+                            onChange={(e) => setFade_speed(e.target.value)}
+                            value={fade_speed}
+                            placeholder="User Name"
+                            className="new_sound_input"
+                        ></input>
+
+                        <label>Arrangement</label>
+                        <input
+                            type="number"
+                            name="arrangement"
+                            onChange={(e) => setArrangement(e.target.value)}
+                            value={arrangement}
+                            className="new_sound_input"
+                        ></input>
+                        <div className="looped_midi">
+                            <label>
+                                Looped?:
+                                <input
+                                    name="isLooped"
+                                    type="checkbox"
+                                    checked={is_looped}
+                                    onChange={(e) => { setIs_looped(e.target.checked) }} />
+                            </label>
+                            <label>
+                                Use MIDI?:
+                                <input
+                                    name="isMidi"
+                                    type="checkbox"
+                                    checked={is_midi}
+                                    onChange={(e) => { setIs_midi(e.target.checked) }} />
+                            </label>
+                        </div>
 
 
-                    <button type="submit" className="new_sound_submit">Submit</button>
-                    <button className="new_sound_submit" onClick={() => goToDelete()}>Delete</button>
+                    </div>
 
-                </form>
+
+
+                    {is_midi &&
+                        <div className="formSide">
+                            <div>Play/Stop Button#</div>
+                            <input
+                                type="number"
+                                name="play_stop_button"
+                                onChange={(e) => setPlay_stop_button(e.target.value)}
+                                value={play_stop_button}
+                                className="new_sound_input"
+                            ></input>
+
+                            <div>Volume Control#</div>
+                            <input
+                                type="number"
+                                name="volume_control"
+                                onChange={(e) => setVolume_control(e.target.value)}
+                                value={volume_control}
+                                className="new_sound_input"
+                            ></input>
+                            <div className="midiInputText">Press the button or slide the volume control on your MIDI device to see the output's number. Assign that number to the inputs above accordingly.</div>
+                            <div className="midiInputContainer">
+                                <div>Current MIDI Input#</div>
+                                <div id="currentMidiDiv">{currentMidiInput}</div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                {is_midi && <div className="disclaimer">**NOTE** Target Volume, Fade In/Out, and Sounds associate with QuickScenes will be ignored when using MIDI</div>}
+                <button type="submit" className="submit_notRounded">Submit</button>
+                <button className="delete_button" onClick={() => goToDelete()}>Delete</button>
+
+            </form>
                 {/* <div className="black_backer"></div>
             <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
             </div>

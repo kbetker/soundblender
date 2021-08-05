@@ -87,7 +87,10 @@ def new_sound():
             target_volume=data['target_volume'],
             fade_speed=data['fade_speed'],
             arrangement=data['arrangement'],
-            is_looped=data['is_looped']
+            is_looped=data['is_looped'],
+            is_midi=data['is_midi'],
+            play_stop_button=data['play_stop_button'],
+            volume_control=data['volume_control']
         )
     db.session.add(newSound)
     db.session.commit()
@@ -95,7 +98,6 @@ def new_sound():
     return newSound.to_dict()
     # else:
     #     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
 
 
 
@@ -116,6 +118,9 @@ def edit_sound(soundId):
     soundToEdit.fade_speed=data['fade_speed']
     soundToEdit.arrangement=data['arrangement']
     soundToEdit.is_looped=data['is_looped']
+    soundToEdit.is_midi=data['is_midi']
+    soundToEdit.play_stop_button=data['play_stop_button']
+    soundToEdit.volume_control=data['volume_control']
 
 
     db.session.commit()

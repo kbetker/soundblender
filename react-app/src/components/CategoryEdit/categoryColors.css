@@ -18,13 +18,13 @@
     color: rgb(216, 216, 216);
     padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    margin: 10px auto;
+    /* margin: 10px auto; */
     background-color: rgb(58, 58, 58);
     border-radius: 8px;
     /* border: 1px solid rgb(0, 255, 0); */
     position:absolute;
-    left: 30%;
-    top: 10%;
+    /* left: 30%; */
+    /* top: 10%; */
     z-index: 100;
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "../CollectionPage/CollectionPage.css"
 import { setModalState } from "../../store/modal"
@@ -16,6 +16,8 @@ function QuickScene( props ) {
     if (stopAllImg) stopAllImg.addEventListener("mouseup", () => {setStopLight(false)})
     // const [soundArray, setSoundArray] = useState([])
     const sounds = props.quickScene.sounds
+    const midiState = useSelector(state => state.midiState)
+
     function setModalFunc(){
         dispatch(setModalState(`${props.scene.id}-${props.quickScene.id}quickSceneEdit`))
     }
@@ -26,6 +28,20 @@ function qsButtonClick(){
     dispatch(setQuickSceneButton(currentSoundArray))
 }
 
+//Key Bind Function
+// useEffect(() => {
+//     document.addEventListener('keydown', (e) => {
+//         if(e.key === "l") {
+//             qsButtonClick()
+//         }
+//     })
+// }, [])
+
+useEffect(() => {
+    if (midiState[0] > 0 && midiState[0] === props.quickScene.control_num) {
+        qsButtonClick()
+    }
+}, [midiState])
 
     const editMode = useSelector(state => state.editMode.editMode)
 

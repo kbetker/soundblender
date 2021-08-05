@@ -69,6 +69,7 @@ function SceneEdit(ids) {
     return (
         <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
+                <div className="top_rounded_form" >
                 <div className="close_new_sound" onClick={goHome}>X</div>
 
                 <label>Scene Name</label>
@@ -79,8 +80,8 @@ function SceneEdit(ids) {
                     className="new_sound_input"
                 ></input>
 
-
-                <button onClick={() => editScene()} className="new_sound_submit">Update</button>
+            </div>
+                <button onClick={() => editScene()} className="submit_notRounded">Update</button>
                 <button className="scene_delete_button" onClick={(e) => goToDelete(e)} >Delete</button>
 
             </div>

@@ -39,6 +39,8 @@ def addQuickScene(sceneId):
     # if form.validate_on_submit():
     newQuickScene= QuickScene(
             name=data['name'],
+            is_midi=data['is_midi'],
+            control_num=data['control_num'],
             scene_id=sceneId,
         )
     db.session.add(newQuickScene)
@@ -47,6 +49,8 @@ def addQuickScene(sceneId):
     quickScene = QuickScene.query.filter(QuickScene.name == data['name']).first()
 
     return quickScene.to_dict()
+
+
 
 @quickscene_routes.route('/<int:quicksceneId>/<int:soundId>/addquickscene', methods=["POST"])
 @login_required
@@ -108,6 +112,8 @@ def edit_category(qsId):
 
     quicksceneToEdit = QuickScene.query.filter(QuickScene.id == qsId).first()
     quicksceneToEdit.name=data['name']
+    quicksceneToEdit.is_midi=data['is_midi']
+    quicksceneToEdit.control_num=data['control_num']
 
     db.session.commit()
     return {"cool": "Beings"}

@@ -54,7 +54,7 @@ const CategorySound = (ids) => {
 
     return (
         <div className="formEffect" id="theForm">
-            <div className="new_sound_form" style={{top: "225px"}}>
+            <div className="standard_form">
                 {/* <div>  //to-do beetter error hanlding
         {errors.map((error) => (
           <div>{error}</div>
@@ -62,10 +62,10 @@ const CategorySound = (ids) => {
       </div> */}
                 <div className="close_new_sound" onClick={goHome}  style={{top: "-13px"}}>X</div>
                 {/* <div className="formTitle">Edit Sound</div> */}
-                <button onClick={editSound} className="new_sound_submit">Edit Sound</button>
+                <button onClick={editSound} className="top_rounded_submit">Edit Sound</button>
 
                 {/* <div className="formTitle">Remove Sound</div> */}
-                <button onClick={removeSound} className="new_sound_submit" style={{fontSize: "24px"}}>Remove From Category</button>
+                <button onClick={removeSound} className="scene_delete_button" style={{fontSize: "24px"}}>Remove From Category</button>
             </div>
 
         </div>

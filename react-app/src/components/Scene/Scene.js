@@ -1,25 +1,28 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Categories from "../Categories/Categories"
-import "./Scene.css"
-import gear from "../UserPage/Gear.png"
-import "../CollectionPage/CollectionPage.css"
 import { useParams } from "react-router-dom"
-import { setModalState } from "../../store/modal"
+
+import Categories from "../Categories/Categories"
+import QuickScene from "../QuickScene"
+
+import gear from "../UserPage/Gear.png"
 import buttonOff from "../SoundModule/images/Button_Off.png"
 import buttonOn from "../SoundModule/images/button_press.png"
 import buttonPress from "../SoundModule/images/button_press2.png"
 
-
-
-import QuickScene from "../QuickScene"
+import { setModalState } from "../../store/modal"
 import { setQuickSceneButton } from "../../store/quickSceneButton"
+import { midiControl } from "../../store/midiKeyPress"
 
-function Scene({ scene, id, currentscene }) {
+import "./Scene.css"
+import "../CollectionPage/CollectionPage.css"
+
+function Scene({ scene, id, currentscene, currentCollection }) {
     const scenes = scene?.categories
     const sceneId = scene?.id
     const editMode = useSelector(state => state.editMode.editMode)
     const stopAllBtnLight = useSelector(state => state.stopLight)
+    const midiState = useSelector(state => state.midiState)
     const { collectionId } = useParams()
     const dispatch = useDispatch()
     const sortedQuickScenes = scene.quickscenes.sort((soundA, soundB) => {
@@ -39,6 +42,10 @@ function Scene({ scene, id, currentscene }) {
         dispatch(setModalState(`${scene.id}-quickSceneNew`))
     }
 
+    const editCollection = () => {
+        dispatch(setModalState(`${currentCollection.id}-collectionEdit`))
+    }
+
     async function stopAllSounds() {
         await dispatch(setQuickSceneButton(["stop"]))
     }
@@ -49,19 +56,23 @@ function Scene({ scene, id, currentscene }) {
     //     }
     // })
 
+    //=============  listening for MIDI Input ===================
+    useEffect(() => {
+        if(currentCollection.stop_all === midiState[0] && midiState[1] === 0){
+            stopAllSounds()
+        }
+    }, [midiState])
+
+
     return (
-        // <div className="ScenePageBody"> This div i up one in Categories
         <>
-
-
-
             <div className="sceneContainer" style={{ width: `${window.innerWidth - 122}px` }} id={id}>
 
                 <div className="quickSceneContainer">
 
                     {id === "1" &&
                         <div className="quickSceneComponent" onClick={() => stopAllBtnLight.length > 0 && stopAllSounds()}>
-                            <div className="quickSceneTitle">Stop All</div>
+                            <div className="quickSceneTitle">{editMode && <img src={gear} onClick={()=>editCollection()} className="quicksceneEditGear" style={{top: "3px"}} alt=""></img>}&#40;S&#41;top All </div>
                             <img src={
                                 stopAllBtnLight.length > 0 && !stopLight ? buttonOn
                                     : stopAllBtnLight.length > 0 && stopLight ? buttonPress

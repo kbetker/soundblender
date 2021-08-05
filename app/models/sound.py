@@ -15,6 +15,10 @@ class Sound(db.Model):
     fade_speed = db.Column(db.Integer)
     arrangement= db.Column(db.Integer)
     is_looped = db.Column(db.Boolean)
+    is_midi = db.Column(db.Boolean)
+    play_stop_button= db.Column(db.Integer)
+    volume_control= db.Column(db.Integer)
+
 
     categories = db.relationship("Category", secondary ="joined_snds_cats", back_populates="sounds")
     quickscenes = db.relationship("QuickScene", secondary ="quickscene_sounds", back_populates="sounds")
@@ -32,5 +36,9 @@ class Sound(db.Model):
             "target_volume": self.target_volume,
             "fade_speed": self.fade_speed,
             "arrangement": self.arrangement,
-            "is_looped": self.is_looped
+            "is_looped": self.is_looped,
+            "is_midi": self.is_midi,
+            "play_stop_button": self.play_stop_button,
+            "volume_control": self.volume_control
+
         }

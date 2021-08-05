@@ -51,7 +51,7 @@ const LoginForm = () => {
 
     return (
         <div className="formEffect" id="theForm">
-            <form onSubmit={(e) => onLogin(e)}  className="new_sound_form" style={{ top: "225px" }}>
+            <form onSubmit={(e) => onLogin(e)}  className="standard_form" style={{ top: "225px" }}>
                 <div className="close_new_sound" onClick={goHome}>X</div>
 
                 <div className="formTitle">Log In</div>
