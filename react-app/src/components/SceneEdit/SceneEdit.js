@@ -16,9 +16,7 @@ function SceneEdit(ids) {
     useEffect(()=>{
         let collectionScenes = collections?.find((el) => el.id === ids.currentCollectionId)
         let sceneToEdit = collectionScenes.scenes.find((el) => el.id === ids.currentSceneId)
-        // console.log(sceneToEdit.categories, "WTFWTFWTFWTFWTF")
         setName(sceneToEdit?.name)
-        // setTheme(sceneToEdit?.theme)
         setCollection_id(ids.currentCollectionId)
     }, [])
 
@@ -28,8 +26,6 @@ function SceneEdit(ids) {
             theForm.classList.add("blurIn")
         }
     }, [])
-    // const [name, setName] = useState('');
-    // const dispatch = useDispatch()
 
     const editScene = async () => {
         const formData = new FormData()
