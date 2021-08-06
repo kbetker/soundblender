@@ -16,6 +16,9 @@ function CollectionNew() {
     const [scene_right, setScene_right] = useState(0);
     const [currentMidiInput, setCurrentMidiInput] = useState('0')
 
+    const [errorsBackend, setErrorsBackend] = useState([]);
+    const [errorsFrontEnd, setErrorsFrontEnd] = useState([]);
+    const [showErrs, setShowErrs] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -26,8 +29,20 @@ function CollectionNew() {
         formData.append("stop_all", stop_all)
         formData.append("scene_left", scene_left)
         formData.append("scene_right", scene_right)
-
         formData.append("owner_id", user.id)
+
+        setErrorsFrontEnd([])
+        let newArr = []
+
+        if(name === "") {
+            newArr.push("name: ** Field required **")
+        } else  if (name.length > 40){
+            newArr.push("name: ** Must be 40 characters or less ** ")
+        }
+
+        setErrorsFrontEnd(newArr)
+
+        if(newArr.length === 0){
         const data = await dispatch(newUserCollection(formData))
         if (data.errors) {
             alert(data.errors);
@@ -38,6 +53,9 @@ function CollectionNew() {
                 dispatch(setModalState(''))
             }, 500);
         }
+        } else {
+            setShowErrs(true)
+        }
     };
 
     useEffect(() => {
@@ -46,6 +64,13 @@ function CollectionNew() {
             theForm.classList.add("blurIn")
         }
     }, [])
+
+
+    useEffect(()=>{
+        setShowErrs(false)
+    }, [name])
+
+
 
     const goHome = () => {
         let theForm = document.getElementById("theForm")
@@ -66,8 +91,10 @@ function CollectionNew() {
     return (
         <div className="formEffect" id="theForm">
             <div className="new_sound_form" >
-                <div className="standard_form">
+                <div className="top_rounded_form">
                     <div className="close_new_sound" onClick={goHome}>X</div>
+                    {errorsBackend && showErrs && errorsBackend.map((err, i) => <div className="logInErrors">{err}</div>)}
+                    {errorsFrontEnd && showErrs && errorsFrontEnd.map((err, i) => <div className="logInErrors">{err}</div>)}
                     <label>Collection Name</label>
                     <input type="text"
                         name="name"

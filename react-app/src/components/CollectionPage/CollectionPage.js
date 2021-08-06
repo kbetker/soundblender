@@ -158,8 +158,13 @@ function CollectionPage() {
             for (let i = 0; i < category.sounds.length; i++) {
                 let soundName = category.sounds[i].name
                 let soundId = category.sounds[i].id
+                let midi = category.sounds[i].is_midi
                 if (!(soundName in theSound)) {
-                    theSound[soundName] = soundId
+                    if (midi) {
+                        theSound[`*${soundName}-MIDI*`] = soundId
+                    } else {
+                        theSound[soundName] = soundId
+                    }
                 }
             }
         })

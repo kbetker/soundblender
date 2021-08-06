@@ -9,10 +9,20 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
-        raise ValidationError("User is already registered.")
+        raise ValidationError("already in use")
+
+def password_matches(form, field):
+    print("Checking if meets requirement")
+    password = field.data
+    # email = form.data['email']
+    # user = User.query.filter(User.email == email).first()
+    if len(password) < 5:
+        raise ValidationError("Must be more than 5 characters")
+
+
 
 
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired(), password_matches])

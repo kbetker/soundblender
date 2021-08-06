@@ -10,7 +10,10 @@ function SoundForm() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const midiState = useSelector(state => state.midiState)
-    const history = useHistory();
+    const [errorsBackend, setErrorsBackend] = useState([]);
+    const [errorsFrontEnd, setErrorsFrontEnd] = useState([]);
+    const [showErrs, setShowErrs] = useState(false)
+
 
     const [soundLoading, setSoundLoading] = useState(false);
     const [sound_url, setSound_url] = useState(null);
@@ -20,8 +23,8 @@ function SoundForm() {
     const [arrangement, setArrangement] = useState(0);
     const [is_looped, setIs_looped] = useState(true);
     const [is_midi, setIs_midi] = useState(false)
-    const [play_stop_button, setPlay_stop_button] = useState(false)
-    const [volume_control, setVolume_control] = useState(false)
+    const [play_stop_button, setPlay_stop_button] = useState(0)
+    const [volume_control, setVolume_control] = useState(0)
 
     const [currentMidiInput, setCurrentMidiInput] = useState('0')
 
@@ -61,22 +64,56 @@ function SoundForm() {
         formData.append("play_stop_button", play_stop_button);
         formData.append("volume_control", volume_control);
 
-        const data = await dispatch(addSound(formData))
-        if (data.errors) {
-            setArrangement(false)
-            alert(data.errors)
-            setSoundLoading(false)
-        } else {
-            setSoundLoading(false)
-            let theForm = document.getElementById("theForm")
-            theForm.classList.remove("blurIn")
-            setTimeout(() => {
-                dispatch(setModalState(''))
-            }, 500);
 
-            // await history.push(`/users/${user.id}`)
+        setErrorsFrontEnd([])
+        let newArr = []
+
+        if(name === "") {
+            newArr.push("name: ** Field required **")
+        } else  if (name.length > 30){
+            newArr.push("name: ** Must be 30 characters or less **")
+        }
+
+        if (target_volume < 0){
+            newArr.push("target volume: ** Cannot be below 0 **")
+        } else if (target_volume > 10) {
+            newArr.push("target volume: ** Must be between 0-10. Sorry it doesn't go to 11 **")
+        }
+
+        if (fade_speed < 0){
+            newArr.push("fade speed: ** Cannot be below 0 **")
+        } else if (fade_speed > 3000) {
+            newArr.push("fade speed: ** Over 3000???? No! **")
+        }
+
+        setErrorsFrontEnd(newArr)
+
+        if(newArr.length === 0){
+            setShowErrs(false)
+            const data = await dispatch(addSound(formData))
+            if (data.errors) {
+                // setArrangement(false) Why this Kevin?? Why???
+                setErrorsBackend(data.errors)
+                setSoundLoading(false)
+            } else {
+                setSoundLoading(false)
+                let theForm = document.getElementById("theForm")
+                theForm.classList.remove("blurIn")
+                setTimeout(() => {
+                    dispatch(setModalState(''))
+                }, 500);
+            }
+        } else {
+            setShowErrs(true)
+            setSoundLoading(false)
         }
     }
+
+    useEffect(()=>{
+        setShowErrs(false)
+    }, [sound_url, name, target_volume, fade_speed, arrangement, is_looped, is_midi, play_stop_button, volume_control])
+
+
 
     const updateImage = (e) => {
         const file = e.target.files[0];
@@ -104,6 +141,8 @@ function SoundForm() {
 
                 <div className="formSplit">
                     <div className="formSide">
+                {errorsBackend && showErrs && errorsBackend.map((err, i) => <div className="logInErrors">{err}</div>)}
+                {errorsFrontEnd && showErrs && errorsFrontEnd.map((err, i) => <div className="logInErrors">{err}</div>)}
                         <label>Name Your Sound</label>
                         <input type="text"
                             name="name"
