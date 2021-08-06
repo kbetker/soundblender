@@ -264,7 +264,7 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             }
             theKnob.onmousedown = mouseDown;
         }
-    })
+    }, [])
 
 
     // useEffect(()=>{
