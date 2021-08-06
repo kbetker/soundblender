@@ -17,6 +17,9 @@
     /* padding: 2px 20px; */
     /* z-index: 999; */
 }
+.hidden{
+    display: none;
+}
 
 .errs{
     background-color: red;

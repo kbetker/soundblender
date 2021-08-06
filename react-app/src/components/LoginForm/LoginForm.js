@@ -8,22 +8,50 @@ import { setModalState } from "../../store/modal";
 const LoginForm = () => {
     const dispatch = useDispatch();
     // const modal = useSelector(state => state.modal)
-    const [errors, setErrors] = useState([]);
+    const [errorsBackend, setErrorsBackend] = useState([]);
+    const [errorsFrontEnd, setErrorsFrontEnd] = useState([]);
+    const [showErrs, setShowErrs] = useState(false)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
 
     const onLogin = async (e) => {
         e.preventDefault();
-        const data = await dispatch(login(email, password));
+        setErrorsFrontEnd([])
+        let newArr = []
 
-        if (data.errors) {
-            setErrors(data.errors);
+        if(email === "") {
+            newArr.push("email: Field required")
+        } else  if (!email.includes("@") || !email.includes("@")){
+            newArr.push("email: Must be valid")
+        }
+        if (password === ""){
+            newArr.push("password: Field required")
+        } else if (password.length < 5) {
+            newArr.push("password: Must be more than 5 characters")
+        }
+
+        setErrorsFrontEnd(newArr)
+
+        if(newArr.length === 0) {
+            setShowErrs(false)
+            const data = await dispatch(login(email, password));
+            if (data.errors) {
+                setErrorsBackend(data.errors);
+            } else {
+             await dispatch(setModalState(''))
+                await history.push(`/users/${data.id}`)
+            }
         } else {
-         await dispatch(setModalState(''))
-            await history.push(`/users/${data.id}`)
-    }
+            setShowErrs(true)
+        }
     };
+
+    useEffect(()=>{
+        setShowErrs(false)
+    }, [email, password])
+
+
 
     const updateEmail = (e) => {
         setEmail(e.target.value);
@@ -51,11 +79,13 @@ const LoginForm = () => {
 
     return (
         <div className="formEffect" id="theForm">
-            <form onSubmit={(e) => onLogin(e)}  className="standard_form" style={{ top: "225px" }}>
+            <div className="new_sound_form" >
+            <div className="top_rounded_form">
                 <div className="close_new_sound" onClick={goHome}>X</div>
 
                 <div className="formTitle">Log In</div>
-              {errors && errors.map((err, i) => <div className="logInErrors">{err}</div>)}
+              {errorsBackend && showErrs && errorsBackend.map((err, i) => <div className="logInErrors">{err}</div>)}
+              {errorsFrontEnd && showErrs && errorsFrontEnd.map((err, i) => <div className="logInErrors">{err}</div>)}
                 <label>Email</label>
                 <input
                     name="email"
@@ -75,11 +105,11 @@ const LoginForm = () => {
                     onChange={updatePassword}
                     className="new_sound_input"
                 />
-                <button type="submit" className="new_sound_submit">Login</button>
-
             {/* <div className="black_backer"></div> */}
             {/* <HomePage></HomePage> */}
-            </form>
+                </div>
+                <button onClick={(e)=> onLogin(e)} className="new_sound_submit">Login</button>
+            </div>
         </div>
     );
 };

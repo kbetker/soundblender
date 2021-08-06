@@ -119,10 +119,11 @@ function QuickSceneNew(props) {
                     <div className="quickSceneSoundContainer">
                         {theSounds.length === 0 && <div style={{ fontSize: "18px" }}>There are currently now sounds in this collection. You can still add a QuickScene and add sounds later.</div>}
                         {theSounds.map(el =>
-                            <div onClick={() => addQuickScene(el[0], el[1])} className={`soundsForQuickScene`} key={`${el[1]}`} id={`${el[1]}-soundEl`}>
+                            <div onClick={() => addQuickScene(el[0], el[1])} className={`soundsForQuickScene`} key={`${el[1]}-soundKey`} id={`${el[1]}-soundEl`}>
                                 {`${el[0]}`}
                             </div>
                         )}
+                        <div style={{fontSize: "19px", margin: "10px"}}>**NOTE** Sounds using MIDI will be ignored by QuickScene</div>
                     </div>
                     <label>QuickScene Name</label>
                     <input type="text"
@@ -164,7 +165,8 @@ function QuickSceneNew(props) {
                     }
 
                 </div>
-                <button onClick={() => updateQuickScene()} className="category_button">Update QuickScene</button>
+
+                <button onClick={() => updateQuickScene()} className="submit_notRounded">Update QuickScene</button>
                 <button onClick={() => goToDelete()} className="scene_delete_button">Delete QuickScene</button>
 
             </div>
