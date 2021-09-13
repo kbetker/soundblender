@@ -1,33 +1,34 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import "./HomePage.css"
+import LogoutButton from "../auth/LogoutButton"
+import { useDispatch, useSelector } from 'react-redux'
+import LoginForm from "../LoginForm"
+import SignUpForm from '../SignUp/SignUp'
+import { login } from '../../store/session'
+import { setModalState } from '../../store/modal'
+
 import background from "./background_animation-greyscale-Black_Background.gif"
 import logoGif from "./logoAnimationGreen.gif"
 import logo from "./homepageLogo.png"
-import LogoutButton from "../auth/LogoutButton"
-import { useDispatch, useSelector } from 'react-redux'
 import dmBackground from "./dm.jpg"
-import { login } from '../../store/session'
-import LoginForm from "../LoginForm"
-import SignUpForm from '../SignUp/SignUp'
-import { setModalState } from '../../store/modal'
 
 function HomePage() {
     const user = useSelector(state => state.session.user)
     const modal = useSelector(state => state.modal.modal)
     const dispatch = useDispatch()
     const history = useHistory()
-    // const [modal, setModal] = useState('')
-    // dispatch(setModalState(''))
+
     const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login('demo@aa.io', 'password'));
         if (data.errors) {
-            alert(data.errors);
+            alert(data.errors); //todo
         } else {
             await history.push(`/users/${data.id}`)
         }
     };
+
     const setModalFunc = async (modalState) => {
         await dispatch(setModalState(modalState))
     }
@@ -36,7 +37,7 @@ function HomePage() {
         <>
             {modal === "login" && <LoginForm />}
             {modal === "signup" && <SignUpForm />}
-            <div className={modal === "login" ? "modalEffect darkblur" : "modalEffect"}>
+            <div className={modal === "login" || modal === "signup" ? "modalEffect darkblur" : "modalEffect"}>
                 <div className="homepage_wrapper">
                     <div>
 
