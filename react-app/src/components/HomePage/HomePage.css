@@ -136,7 +136,7 @@ a.homeLinks:hover{
     color: rgb(0, 255, 0);
 }
 
-@media screen and (max-width:1190px) {
+@media screen and (max-width:1300px) {
     .home-links-container{
         margin-top: 70px;
     }

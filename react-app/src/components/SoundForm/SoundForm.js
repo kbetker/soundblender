@@ -64,7 +64,7 @@ function SoundForm() {
         formData.append("play_stop_button", play_stop_button);
         formData.append("volume_control", volume_control);
 
-
+        //resets errors
         setErrorsFrontEnd([])
         let newArr = []
 
@@ -89,12 +89,15 @@ function SoundForm() {
         setErrorsFrontEnd(newArr)
 
         if(newArr.length === 0){
-            setShowErrs(false)
+            // setShowErrs(false)
             const data = await dispatch(addSound(formData))
             if (data.errors) {
+                console.log([data.errors])
                 // setArrangement(false) Why this Kevin?? Why???
-                setErrorsBackend(data.errors)
+                setErrorsBackend([data.errors])
                 setSoundLoading(false)
+                setShowErrs(true)
+                return
             } else {
                 setSoundLoading(false)
                 let theForm = document.getElementById("theForm")
