@@ -25,18 +25,17 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
     const knobPOS = useRef(0)
     const leftMarker = useRef()
     const soundVolume = useRef(0)
-    const dispatch = useDispatch()
+    const isPlaying = useRef(false)
+
     const [btnPlaying, setBtnPlaying] = useState(false)
     const [btnStopping, setBtnStopping] = useState(false)
     const [btnStopped, setBtnStopped] = useState(true)
-    const isPlaying = useRef(false)
     const [redLightOn, setRedLightOn] = useState(false)
     const [stopKeyPress, setStopKeyPress] = useState('')
-    const [keyPress, setKeyPress] = useState('')
+    const dispatch = useDispatch()
 
     const fadeInToTarget = useRef('')
 
-    // const [stopPressed, setStopPressed] = useState(false)
     const editMode = useSelector(state => state.editMode.editMode)
     const qsButton = useSelector(state => state.qsButton.qsButton)
 
@@ -64,17 +63,6 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
         stopAllBtn = document.querySelector(".quickSceneComponent")
     })
 
-    // useEffect(() => {
-    //     document.addEventListener('keydown', (e) => {
-    //         if (isPlaying.current ) {
-    //             setStopKeyPress(e.key)
-    //         } else {
-    //             setKeyPress(e.key)
-    //         }
-    //     })
-    // }, [])
-
-
 
     useEffect(() => {
         function fadeIn() {
@@ -87,18 +75,20 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
             setBtnPlaying(true)
             dispatch(addStopLight(mySoundObj.id))
 
+            // if loop is false, calls fade out when sound ends
             if (!mySoundObj.is_looped) {
                 mySound.current.addEventListener('ended', (event) => {
                     fadeOut();
                 })
             }
 
+            //stops fading in when clicking edit, home, or logout button
             gearBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
             homeBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
             logoutBtn.addEventListener("click", (e) => { clearInterval(fadeInToTarget.current) })
 
 
-
+            //the acutal fading part
             fadeInToTarget.current = setInterval(() => {
                 knobPOS.current = knobPOS.current + (mySoundObj.fade_speed * 0.01)
                 knob.current.style.left = `${knobPOS.current * 0.8}%`;
@@ -108,7 +98,8 @@ function SoundModule({ mySoundObj, color, currentscene, categoryId }) {
                 }
             }, 10)
 
-            knob.current.addEventListener("mousedown", (e) => { // stops fading if you click on knob
+            // stops fading if you click on knob
+            knob.current.addEventListener("mousedown", (e) => {
                 clearInterval(fadeInToTarget.current)
             })
 

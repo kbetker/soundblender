@@ -7,15 +7,15 @@ import "../SoundForm/Sound.css"
 import { setModalState } from "../../store/modal";
 import CategoryColors from "../CategoryEdit/categoryColors";
 
-function SoundForm({currentSceneId}) {
+function SoundForm({ currentSceneId }) {
     const dispatch = useDispatch()
     const [name, setName] = useState('');
     const [color, setColor] = useState('white');
     const [arrangement, setArrangement] = useState(0);
 
-    useEffect(()=>{
+    useEffect(() => {
         let theForm = document.getElementById("theForm")
-        if (theForm){
+        if (theForm) {
             theForm.classList.add("blurIn")
         }
     }, [])
@@ -32,7 +32,7 @@ function SoundForm({currentSceneId}) {
         // setImageLoading(true);
         const data = await dispatch(newCategoryFunc(formData))
 
-        if(data.errors){
+        if (data.errors) {
             alert(data.errors)
         } else {
             let theForm = document.getElementById("theForm")
@@ -52,50 +52,54 @@ function SoundForm({currentSceneId}) {
         }, 500);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const colors = document.querySelectorAll(".color")
-        if(colors){
-           for(let i = 0; i < colors.length; i++){
-                colors[i].addEventListener("click", (e)=>{
+        if (colors) {
+            for (let i = 0; i < colors.length; i++) {
+                colors[i].addEventListener("click", (e) => {
                     setColor(e.target.id)
                 })
-           }
+            }
         }
     }, [color])
 
     return (
         <div className="formEffect" id="theForm">
-        <div className="category_form" style={{border: `1px solid ${color}`}}>
-            <div className="close_category" onClick={goHome}>X</div>
-            <label>Name</label>
-            <input type="text"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                className="category_input"
-                style={{border: `1px solid ${color}`}}
-            ></input>
+            <div className="category_form" style={{ border: `1px solid ${color}` }}>
+                <div className="close_category" onClick={goHome}>X</div>
+                <div className="labelAndInput">
+                    <label>Name</label>
+                    <input type="text"
+                        name="name"
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        className="category_input"
+                        style={{ border: `1px solid ${color}` }}
+                    ></input>
+                </div>
 
-            <label>Arrangement</label>
-            <input
-                type="number"
-                name="username"
-                onChange={(e) => setArrangement(e.target.value)}
-                value={arrangement}
-                className="category_input"
-                style={{border: `1px solid ${color}`}}
-            ></input>
+                <div className="labelAndInput">
+                    <label>Arrangement</label>
+                    <input
+                        type="number"
+                        name="username"
+                        onChange={(e) => setArrangement(e.target.value)}
+                        value={arrangement}
+                        className="category_input"
+                        style={{ border: `1px solid ${color}` }}
+                    ></input>
+                </div>
 
-            <label> Color: {color} </label>
+                <div className="labelAndInput">
+                    <label> Color: {color} </label>
+                    <CategoryColors></CategoryColors>
+                </div>
 
 
-                <CategoryColors></CategoryColors>
+                <button onClick={(e) => newCategory(e)} className="category_button" style={{ border: `1px solid ${color}` }}>Submit</button>
 
-
-            <button onClick={(e) => newCategory(e)} className="category_button"  style={{border: `1px solid ${color}`}}>Submit</button>
-
-        </div>
-        {/* <div className="black_backer"></div>
+            </div>
+            {/* <div className="black_backer"></div>
         <div className="fauxUserPage"><FauxUserPage></FauxUserPage></div> */}
 
         </div>

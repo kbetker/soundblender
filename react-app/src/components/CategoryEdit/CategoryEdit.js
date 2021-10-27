@@ -94,8 +94,10 @@ function CategoryEdit({currentCategoryId}) {
 
     return (
         <div className="formEffect" id="theForm">
-        <div className="category_form" style={{border: `1px solid ${color}`}}>
+        <div className="category_formEdit" style={{border: `1px solid ${color}`}}>
             <div className="close_category" onClick={goHome}>X</div>
+
+            <div className="labelAndInput">
             <label>Edit Name</label>
             <input type="text"
                 name="name"
@@ -104,7 +106,9 @@ function CategoryEdit({currentCategoryId}) {
                 className="category_input"
                 style={{border: `1px solid ${color}`}}
             ></input>
+            </div>
 
+            <div className="labelAndInput">
             <label>Arrangement</label>
             <input
                 type="number"
@@ -114,10 +118,10 @@ function CategoryEdit({currentCategoryId}) {
                 className="category_input"
                 style={{border: `1px solid ${color}`}}
             ></input>
+            </div>
 
+            <div className="labelAndInput">
             <label> Color: {color} </label>
-
-
                 <CategoryColors></CategoryColors>
 
                 {/* <input
@@ -127,6 +131,7 @@ function CategoryEdit({currentCategoryId}) {
                 value={color}
                 className="new_sound_input"
             ></input> */}
+            </div>
 
 
 
