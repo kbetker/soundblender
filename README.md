@@ -27,5 +27,3 @@ Scenes would then have Categories within. You may wish to separate the Music fil
 
 
 
-
-[![Temp Test](https://www.youtube.com/watch?v=-wPg1tNEWmo&t=31856s/0.jpg)](https://www.youtube.com/watch?v=-wPg1tNEWmo&t=31856s)
