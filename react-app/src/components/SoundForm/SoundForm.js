@@ -200,7 +200,16 @@ function SoundForm() {
                             </label>
                         </div>
 
-                        <div className="upload_buttons">
+
+                        <label>Sound URL</label>
+                        <input type="text"
+                            name="name"
+                            onChange={(e) => setSound_url(e.target.value)}
+                            value={sound_url}
+                            className="new_sound_input"
+                        ></input>
+
+                        {/* <div className="upload_buttons">
                             <div className="visible_button">Choose Sound</div>
                             <input
                                 type="file"
@@ -208,7 +217,7 @@ function SoundForm() {
                                 onChange={updateImage}
                                 className="select_image"
                             />
-                        </div>
+                        </div> */}
 
                     </div>
 

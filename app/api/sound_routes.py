@@ -60,27 +60,28 @@ def deleteuserSound(soundId):
 @sound_routes.route("", methods=["POST"])
 @login_required
 def new_sound():
-    if "sound_url" not in request.files:
-        return {"errors": "image required"}, 400
+    ####### AWS Temporarily Disabled ##############
+    # if "sound_url" not in request.files:
+    #     return {"errors": "image required"}, 400
 
-    sound = request.files["sound_url"]
+    # sound = request.files["sound_url"]
 
-    if not allowed_file(sound.filename):
-        return {"errors": "File type not permitted. Must be a .wav or .mp3."}, 400
+    # if not allowed_file(sound.filename):
+    #     return {"errors": "File type not permitted. Must be a .wav or .mp3."}, 400
 
-    sound.filename = get_unique_filename(sound.filename)
+    # sound.filename = get_unique_filename(sound.filename)
 
-    upload = upload_file_to_s3(sound)
+    # upload = upload_file_to_s3(sound)
     form = NewSound()
     data = form.data
     print(data, "++++++++++++++++++++++++++++++ WAT ++++++++++++++++++++++++++++++")
 
-    if "url" not in upload:
-        return upload, 400
-    url = upload["url"]
+    # if "url" not in upload:
+    #     return upload, 400
+    # url = upload["url"]
     # if form.validate_on_submit():
     newSound = Sound(
-            sound_url=url,
+            sound_url=data['sound_url'],
             name=data['name'],
             owner_id=data['owner_id'],
             is_public=data['is_public'],

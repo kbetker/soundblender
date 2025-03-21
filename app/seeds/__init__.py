@@ -15,11 +15,11 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    seed_collections()
-    seed_scenes()
+    # seed_collections()
+    # seed_scenes()
     seed_sounds()
-    seed_categories()
-    seed_quickscenes()
+    # seed_categories()
+    # seed_quickscenes()
     # seed_joined_snds_cats()
     # Add other seed functions here
 
@@ -27,11 +27,11 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     # undo_joined_snds_cats()
-    seed_quickscenes()
-    undo_categories()
+    # seed_quickscenes()
+    # undo_categories()
     undo_sounds()
-    undo_scenes()
-    undo_collections()
+    # undo_scenes()
+    # undo_collections()
     undo_users()
 
     # Add other undo functions here
