@@ -1,3 +1,28 @@
+# to get started:
+pipenv shell
+flask run
+
+# if mac goes to sleep/crashes while running:
+
+$ brew services stop postgresql
+#adjust below  path accordingly to your machine
+$ rm /usr/local/var/postgres/postmaster.pid
+$ brew services start postgresql
+
+# local sounds
+2) Go to the root folder that you want to serve you files and type:
+http-server ./
+3) Read the output of the terminal, something kinda http://localhost:8080 will appear.
+Everything on there will be allowed to be got. Example
+background: url('http://localhost:8080/waw.png');
+
+https://www.npmjs.com/package/http-server
+
+
+
+
+restart computer
+
 ![SoundblenderLogo](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/animatedLogoGithub2.gif)
 
 ### SoundBlender - By Kevin Betker | Have a listen here => [SoundBlender](https://soundblender.herokuapp.com/)
@@ -24,7 +49,3 @@ Inside the Collection, you would then create a Scene. An example of a Scene coul
 Scenes would then have Categories within. You may wish to separate the Music files from Ambience or group music files according to genre.
 
 ![CreateCategory](http://kevinbetker.com/App_Academy/soundblender/githubStuffs/createCategories.gif)
-
-
-
-

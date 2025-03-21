@@ -10,19 +10,18 @@ def seed_sounds():
 
     #demo sounds
     # Music Category.Id=1
-    sound1 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/A%20New%20Day.mp3", name="A New Day", owner_id=1, is_public=False, target_volume=6, fade_speed=50, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound2 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Battlefield%20Gulch.mp3", name="BattleField Gulch", owner_id=1, is_public=False, target_volume=7, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound3 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Colosseum.mp3", name="Colosseum", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound4 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Cthulhu%20Dormant.wav", name="Cthulhu Dormant", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound5 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Cthulhu%20Rescinds.wav", name="Cthulhu Rescinds", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound6 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Dragonborn%20A.mp3", name="Dragonborn A", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound7 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Dragonborn%20B.mp3", name="Dragonborn B", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound8 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Emotional%20Atmos%20C.mp3", name="Emotional Atmos", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound9 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Heroes%20Sacrifice%20.mp3", name="Heroes Sacrifice", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound10 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Orc%20Enclave.mp3", name="Orc Enclave", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound11= Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Stand%20and%20Fight.mp3", name="Stand and Fight", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound12= Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Suspense%20Bass.wav", name="Suspense Bass", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
-    sound13 = Sound(sound_url="https://kevinbetker.com/App_Academy/soundblender/AlltheMP3s/thunderLoop.mp3", name="Thunder", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound1 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/A%20New%20Day.mp3", name="Calm Night", owner_id=1, is_public=False, target_volume=6, fade_speed=50, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound2 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Battlefield%20Gulch.mp3", name="Suspense 1", owner_id=1, is_public=False, target_volume=7, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound3 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Colosseum.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound4 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Cthulhu%20Dormant.wav", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound5 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Cthulhu%20Rescinds.wav", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound6 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Dragonborn%20A.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound7 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Dragonborn%20B.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound8 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Emotional%20Atmos%20C.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound9 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Heroes%20Sacrifice%20.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound10 = Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Orc%20Enclave.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound11= Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Stand%20and%20Fight.mp3", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
+    sound12= Sound(sound_url="https://kevinbetker.com/dnd/jacobGroup/session0/Suspense%20Bass.wav", name="Suspense 2", owner_id=1, is_public=False, target_volume=5, fade_speed=10, arrangement=0, is_looped=True, is_midi=False, play_stop_button=0, volume_control=0)
 
 
     # # User 2 sounds
@@ -85,7 +84,7 @@ def seed_sounds():
     db.session.add(sound10)
     db.session.add(sound11)
     db.session.add(sound12)
-    db.session.add(sound13)
+    # db.session.add(sound13)
     # db.session.add(sound14)
     # db.session.add(sound15)
     # db.session.add(sound16)
