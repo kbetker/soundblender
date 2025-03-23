@@ -47,6 +47,11 @@ function CollectionPage() {
     const user = useSelector(state => state.session.user)
     const modal = useSelector(state => state.modal.modal)
 
+          const wat = useSelector(state => state)
+    const watwat =JSON.stringify(wat)
+    console.log(wat)
+    // console.log("!?>?!>!?>!?>!?>!?>!?>!?>!>!?!>?!>?!>?!>!?>")
+
     useEffect(() => {
         dispatch(getUserInfo(user.id))
     }, [dispatch, user.id, modal]);
